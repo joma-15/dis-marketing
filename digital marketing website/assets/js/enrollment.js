@@ -1,5 +1,3 @@
-import { FormData } from "undici-types";
-
 //direct the link depending on the selected value
 function PlanChoose() {
   console.log("the planchoose function is being triggered");
@@ -20,7 +18,6 @@ function PlanChoose() {
   // }
   window.location.href = "Plans.html";
 }
-
 
 function openClientModal() {
   const groupModal = bootstrap.Modal.getInstance(
@@ -198,37 +195,95 @@ function saveOnClick() {
 //   console.warn('No data found in the local storage')
 // }
 //for payment click
-async function submitOnClick(event) {
-  console.log("the function is trigger");
-  event.preventDefault();
+// async function submitOnClick(event) {
+//   console.log("the function is trigger");
+//   event.preventDefault();
 
-  const localStorageData = getData(); //get the data from the local storage
+//   const localStorageData = getData(); //get the data from the local storage
+//   if (localStorageData) {
+//     await submitData(localStorageData);
+//     alert("the data was submitted successfully");
+//     console.log("the data has been sent to the database");
+//     window.location.href = "index.html";
+//   }
+// }
+
+async function submitOnClick(event) {
+  event.preventDefault();
+  console.log("the function is triggered");
+
+  // 1️⃣ Get localStorage data
+  const localStorageData = getData();
   if (localStorageData) {
     await submitData(localStorageData);
-    alert("the data was submitted successfully");
-    console.log("the data has been sent to the database");
-    window.location.href = "index.html";
+    console.log("The form data has been sent to Google Form / DB");
   }
+
+  // 2️⃣ Handle file upload
+  const fileInput = document.getElementById("screenshot");
+  const file = fileInput.files[0];
+
+  if (file) {
+    try {
+      const formData = new FormData();
+      formData.append("proofImage", file);
+
+      const res = await fetch("http://localhost:3000/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (res.ok) {
+        alert("The data was submitted successfully");
+        window.location.href = "index.html";
+
+        console.log("File uploaded:", res);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // 3️⃣ Redirect after success
 }
+
+//showpayment details
+function showPaymentDetails() {
+  const methods = document.querySelectorAll(".payment-info");
+  methods.forEach((m) => (m.style.display = "none"));
+
+  const selected = document.getElementById("paymentSelect").value;
+  document.getElementById(selected).style.display = "block";
+}
+
+function copyText(text) {
+  navigator.clipboard.writeText(text);
+  alert("Copied to clipboard!");
+}
+
+window.showPaymentDetails = showPaymentDetails;
+window.copyText = copyText;
+window.submitOnClick = submitOnClick;
 
 //for sending proof of payment to the gmail
-function sendProofPayment() {
-  const payment = document.getElementById("paymentForm");
+// function sendProofPayment() {
+//   const payment = document.getElementById("paymentForm");
 
-  payment.addEventListener("submit", async (e) => {
-    e.preventDefault();
+//   payment.addEventListener("submit", async (e) => {
+//     e.preventDefault();
 
-    const fileInput = document.getElementById("screenshot");
-    const file = fileInput.files[0]; 
+//     const fileInput = document.getElementById("screenshot");
+//     const file = fileInput.files[0];
 
-    const formData = new FormData(); 
-    formData.append("proofImage", file);
+//     const formData = new FormData();
+//     formData.append("proofImage", file);
 
-    //send the file to the backend
-     const res = await fetch("http://localhost:3000/upload", {
-      method: "POST", 
-      body: formData
-     });
-  });
-}
+//     //send the file to the backend
+//     const res = await fetch("http://localhost:3000/upload", {
+//       method: "POST",
+//       body: formData,
+//     });
 
+//     console.log("the data is being submitted : ", res);
+//   });
+// }w

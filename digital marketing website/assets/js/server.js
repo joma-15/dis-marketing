@@ -1,57 +1,56 @@
-import nodemailer from "nodemailer";
-import dotenv from "dotenv";
 import express from "express";
 import multer from "multer";
+import nodemailer from "nodemailer";
+import dotenv from "dotenv";
 
-function sendEmail() {
-  const app = express();
-  dotenv.config();
+dotenv.config(); // load env variables first
 
-  //setup storage
-  const upload = multer({ dest: "uploads/" }); //the file will go there
+const app = express();
 
-  //this is the one who will send the gmail
+// setup storage (make sure "uploads" folder exists in your project root)
+const upload = multer({ dest: "uploads/" });
 
-  const transporter = nodemailer.createTransport({
-    host: "smtp.sendgrid.net",
-    port: 587,
-    secure: false,
-    auth: {
-      user: "apikey",
-      pass: process.env.SENDGRID_API_KEY,
-    },
-  });
+// configure transporter (SendGrid)
+const transporter = nodemailer.createTransport({
+  host: "smtp.sendgrid.net",
+  port: 587,
+  secure: false,
+  auth: {
+    user: "apikey", // always literally "apikey"
+    pass: process.env.SENDGRID_API_KEY, // must be in your .env
+  },
+});
 
-  app.post("/upload", upload.single("proofImage"), async (req, res) => {
-    try {
-      const mailOptions = {
-        from: "no reply '<adelzarajhonmarcel@gmail.com>'",
-        to: "adelzarajhonmarcel@gmail.com",
-        subject: "New Proof of Payment",
-        text: "A user has uploaded a proof of payment.",
-        attachments: [
-          {
-            filename: req.file.originalname,
-            path: req.file.path,
-          },
-        ],
-      };
-      await transporter.sendMail(mailOptions);
-
-      res.json({ message: "File uploaded and emailed successfully!" });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: "Something went wrong" });
+// route to handle file upload + email
+app.post("/upload", upload.single("proofImage"), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: "No file uploaded" });
     }
-  });
 
-  //start live server
-  // app.listen(3000, () => {
-  //     console.log('server is currently running at http://localhost:3000');
-  // })
+    const mailOptions = {
+      from: "adelzarajhonmarcel@gmail.com", // must be verified sender in SendGrid
+      to: "adelzarajhonmarcel@gmail.com",
+      subject: "New Proof of Payment",
+      text: "A user has uploaded a proof of payment.",
+      attachments: [
+        {
+          filename: req.file.originalname,
+          path: req.file.path,
+        },
+      ],
+    };
 
-  app.listen(3000, () => {
-    console.log("the server is currently running");
-  });
-}
-sendEmail();
+    await transporter.sendMail(mailOptions);
+
+    res.json({ message: "File uploaded and emailed successfully!" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+});
+
+// start server
+app.listen(3000, () => {
+  console.log("Server running on http://localhost:3000");
+});

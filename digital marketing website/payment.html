@@ -39,9 +39,18 @@
         <h5>Send to GCash</h5>
         <p><strong>Name: </strong>Divinia Insurance</p>
         <p>
-          <strong>Number:</strong> 09958205788
+          <strong>Number1:</strong> 09958205788
           <button
             onclick="copyText('09958205788')"
+            class="btn btn-sm btn-outline-primary"
+          >
+            Copy
+          </button>
+        </p>
+        <p>
+          <strong>Number2:</strong> 09177761278
+          <button
+            onclick="copyText('09177761278')"
             class="btn btn-sm btn-outline-primary"
           >
             Copy
@@ -114,39 +123,10 @@
               required
             />
           </div>
-          <button class="btn btn-success" type="submit">
-            Submit Receipt
-          </button>
+          <button class="btn btn-success" type="submit">Submit Receipt</button>
         </form>
       </div>
     </div>
-
-    <script>
-      function showPaymentDetails() {
-        const methods = document.querySelectorAll(".payment-info");
-        methods.forEach((m) => (m.style.display = "none"));
-
-        const selected = document.getElementById("paymentSelect").value;
-        document.getElementById(selected).style.display = "block";
-      }
-
-      function copyText(text) {
-        navigator.clipboard.writeText(text);
-        alert("Copied to clipboard!");
-      }
-
-      async function sendEmail() {
-        const emailAddress = "adelantarjhonmarcel@gmail.com";
-
-        try {
-          //fetch data from the email js api
-          const data = fetch("email/js");
-          console.log("the data has been fetch successfully", data);
-        } catch (error) {
-          console.log("An errored has been occured");
-        }
-      }
-    </script>
     <script src="assets/js/enrollment.js"></script>
   </body>
 </html>
