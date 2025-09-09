@@ -208,76 +208,117 @@ function saveOnClick() {
 //   }
 // }
 
-document.getElementById("paymentForm").addEventListener("submit", submitOnClick); 
+// Add event listener for the submit button instead of form submission
+document.addEventListener("DOMContentLoaded", function () {
+  const submitBtn = document.getElementById("submitReceiptBtn");
+  if (submitBtn) {
+    submitBtn.addEventListener("click", submitOnClick);
+  }
+});
 
 async function submitOnClick(event) {
   event.preventDefault();
   console.log("the function is triggered");
 
-  // 1️⃣ Get localStorage data
-  const localStorageData = getData();
-  if (localStorageData) {
-    await submitData(localStorageData);
-    console.log("The form data has been sent to Google Form / DB");
-  }
-
-  // 2️⃣ Handle file upload
+  // Validate form fields first
+  const amount = document.getElementById("amount").value;
+  const reference = document.getElementById("reference").value;
   const fileInput = document.getElementById("screenshot");
   const file = fileInput.files[0];
 
-  if (file) {
-    try {
-      const formData = new FormData();
-      formData.append("proofImage", file);
+  if (!amount || !reference || !file) {
+    alert("Please fill in all fields and select a file");
+    return;
+  }
 
-      const res = await fetch("http://localhost:3000/upload", {
-        method: "POST",
-        body: formData,
-      });
+  // Show loading state
+  const submitBtn = document.getElementById("submitReceiptBtn");
+  const originalText = submitBtn.textContent;
+  submitBtn.textContent = "Submitting...";
+  submitBtn.disabled = true;
 
-      if (res.ok) {
-        alert("The data was submitted successfully");
-        window.location.href = "index.html";
-
-        console.log("File uploaded:", res);
-      }
-    } catch (error) {
-      console.log(error);
+  try {
+    // 1️⃣ Get localStorage data
+    const localStorageData = getData();
+    if (localStorageData) {
+      await submitData(localStorageData);
+      console.log("The form data has been sent to Google Form / DB");
     }
-  } 
+
+    // 2️⃣ Handle file upload
+    const formData = new FormData();
+    formData.append("proofImage", file);
+    formData.append("amount", amount);
+    formData.append("reference", reference);
+
+    const res = await fetch("http://localhost:3000/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (res.ok) {
+      const result = await res.json();
+      alert("Payment proof submitted successfully!");
+      console.log("File uploaded:", result);
+
+      // Clear form
+      document.getElementById("paymentForm").reset();
+
+      // Redirect after successful submission
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 1000);
+    } else {
+      throw new Error(`Upload failed with status: ${res.status}`);
+    }
+  } catch (error) {
+    console.log("ENTERED CATCH BLOCK ✅"); // sanity check
+    console.error("Raw error object:", error);
+    console.error("Error name:", error?.name);
+    console.error("Error message:", error?.message);
+    console.error("Error stack:", error?.stack);
+    alert(
+      "Failed to submit payment proof.\n\n" +
+        (error?.message || "Unknown error")
+    );
+  } finally {
+    // Reset button state
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
+  }
 }
 
-  // async function submitProofOnclick(event){
-  //   e.preventDefault(); 
-  //   console.log('try to submit proof of payment to email'); 
+// async function submitProofOnclick(event){
+//   e.preventDefault();
+//   console.log('try to submit proof of payment to email');
 
-  //   const fileInput = document.getElementById("screenshot"); 
-  //   const file = fileInput.files[0]; 
+//   const fileInput = document.getElementById("screenshot");
+//   const file = fileInput.files[0];
 
-  //   //check if file exist to the database
-  //   if (file) {
-  //     try {
-  //     const formData = new FormData();
-  //     formData.append("proofImage", file);
+//   //check if file exist to the database
+//   if (file) {
+//     try {
+//     const formData = new FormData();
+//     formData.append("proofImage", file);
 
-  //     const res = await fetch("http://localhost:3000/upload", {
-  //       method: "POST",
-  //       body: formData,
-  //     });
+//     const res = await fetch("http://localhost:3000/upload", {
+//       method: "POST",
+//       body: formData,
+//     });
 
-  //     if (res.ok) {
-  //       alert("The data was submitted successfully");
-  //       window.location.href = "index.html";
+//     if (res.ok) {
+//       alert("The data was submitted successfully");
+//       window.location.href = "index.html";
 
-  //       console.log("File uploaded:", res);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  //   }
-  // }
+//       console.log("File uploaded:", res);
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+//   }
+// }
 
-  // 3️⃣ Redirect after success
+// 3️⃣ Redirect after success
 
 //showpayment details
 function showPaymentDetails() {
