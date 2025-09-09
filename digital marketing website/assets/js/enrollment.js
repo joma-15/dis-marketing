@@ -208,6 +208,8 @@ function saveOnClick() {
 //   }
 // }
 
+document.getElementById("paymentForm").addEventListener("submit", submitOnClick); 
+
 async function submitOnClick(event) {
   event.preventDefault();
   console.log("the function is triggered");
@@ -242,10 +244,40 @@ async function submitOnClick(event) {
     } catch (error) {
       console.log(error);
     }
-  }
+  } 
+}
+
+  // async function submitProofOnclick(event){
+  //   e.preventDefault(); 
+  //   console.log('try to submit proof of payment to email'); 
+
+  //   const fileInput = document.getElementById("screenshot"); 
+  //   const file = fileInput.files[0]; 
+
+  //   //check if file exist to the database
+  //   if (file) {
+  //     try {
+  //     const formData = new FormData();
+  //     formData.append("proofImage", file);
+
+  //     const res = await fetch("http://localhost:3000/upload", {
+  //       method: "POST",
+  //       body: formData,
+  //     });
+
+  //     if (res.ok) {
+  //       alert("The data was submitted successfully");
+  //       window.location.href = "index.html";
+
+  //       console.log("File uploaded:", res);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  //   }
+  // }
 
   // 3️⃣ Redirect after success
-}
 
 //showpayment details
 function showPaymentDetails() {
