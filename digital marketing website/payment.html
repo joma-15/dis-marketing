@@ -3,42 +3,78 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Payment Method</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <style>
-      .payment-info {
-        display: none;
-      }
-    </style>
+    <title>Divinia Insurance - Payment Portal</title>
+    <link rel="stylesheet" href="assets/css/payment.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </head>
-  <body class="bg-light">
-    <div class="container py-5">
-      <h2 class="text-center mb-4">Choose Your Payment Method</h2>
+  <body>
+    <!-- Global Back Button -->
+    <button class="back-button-global" onclick="history.back()">⬅ Back</button>
 
-      <!-- Payment Options -->
-      <div class="row justify-content-center mb-4">
-        <div class="col-md-4">
-          <select
-            class="form-select"
-            id="paymentSelect"
-            onchange="showPaymentDetails()"
-          >
-            <option selected disabled>Select a payment method</option>
-            <option value="gcash">GCash</option>
-            <option value="bpi">BPI</option>
-            <option value="bdo">BDO</option>
-          </select>
-        </div>
+    <div class="container">
+      <!-- Steps -->
+      <div class="steps">
+        <div class="step active">1. Select Method</div>
+        <div class="step">2. Enter Details</div>
+        <div class="step">3. Send Proof</div>
       </div>
 
-      <!-- Payment Info -->
-      <div id="gcash" class="payment-info card p-4 mb-4">
-        <h5>Send to GCash</h5>
-        <p><strong>Name: </strong>Divinia Insurance</p>
+      <!-- Step 1 -->
+      <div class="card step-content" id="step1">
+        <h2>Select Payment Method</h2>
+        <div class="payment-methods">
+          <div class="method-card" onclick="selectMethod(this, 'GCash')">
+            📱 GCash
+          </div>
+          <div class="method-card" onclick="selectMethod(this, 'BDO')">
+            🏦 BDO
+          </div>
+          <div class="method-card" onclick="selectMethod(this, 'BPI')">
+            🏦 BPI
+          </div>
+        </div>
+        <br />
+        <button class="btn btn-next" onclick="nextStep(1)">Next →</button>
+      </div>
+
+      <!-- Step 2 (Dynamic) -->
+      <div class="card step-content" id="step2" style="display: none">
+        <button class="back-button-local" onclick="prevStep(2)">⬅ Back</button>
+        <h2 class="text-center" id="step2Title">💳 Send Payment</h2>
+
+        <!-- Account Selection -->
+        <div class="form-group">
+          <label id="accountLabel" for="accountSelect">Select Account</label>
+          <select
+            id="accountSelect"
+            onchange="showAccount()"
+            class="styled-select"
+          >
+            <option value="">-- Select an option --</option>
+          </select>
+        </div>
+
+        <!-- Display Selected + Copy -->
+        <div id="accountBox" style="display: none; margin-top: 10px">
+          <span id="selectedAccount" style="font-weight: bold"></span>
+          <button onclick="copyAccount()">📋 Copy</button>
+        </div>
+
+        <!-- Instructions -->
+        <div class="instruction-box">
+          <h3>📝 Instructions</h3>
+          <ol id="instructionList"></ol>
+        </div>
+
+        <button class="btn btn-next" onclick="nextStep(2)">Next →</button>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="card step-content" id="step3" style="display: none">
+        <button class="back-button-local" onclick="prevStep(3)">⬅ Back</button>
+        <h2>Send Proof of Payment</h2>
         <p>
+<<<<<<< HEAD
           <strong>Number1:</strong> 09958205788
           <button
             onclick="copyText('09958205788')"
@@ -130,5 +166,204 @@
       </div>
     </div>
     <script src="assets/js/enrollment.js"></script>
+=======
+          Please send your proof of payment through one of the following
+          options:
+        </p>
+        <div class="btn-send btn-gmail" id="gmail">
+          <img
+            src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg"
+            alt="Gmail"
+          />
+          Send via Gmail
+        </div>
+        <div
+          href="https://www.facebook.com/divinia.insurance"
+          target="_blank"
+          class="btn-send btn-facebook"
+          onclick="openModal()"
+        >
+          <img
+            src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg"
+            alt="Facebook"
+          />
+          Send via Facebook
+        </div>
+        <br />
+      </div>
+    </div>
+
+    <!-- Custom Modal -->
+    <div id="facebookModal" class="custom-modal">
+      <div class="custom-modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <div class="modal-header">
+          <h2>📘 Feature Unavailable</h2>
+        </div>
+        <div class="modal-body">
+          This feature is currently not available right now. We're currently
+          working on that.
+        </div>
+        <div class="modal-footer">
+          <button class="modal-ok-btn" onclick="closeModal()">OK</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      let selectedMethod = "";
+
+      // Accounts + Instructions for each method
+      const paymentData = {
+        GCash: {
+          title: "📱 Send Payment via GCash",
+          label: "📱 Choose GCash Number",
+          accounts: [
+            { value: "09958205788", label: "0995-8205-788" },
+            { value: "09177761278", label: "0917-7761-278" },
+          ],
+          instructions: [
+            "Select the GCash number you want to send to.",
+            "Copy the number above and go to your GCash app.",
+            "Enter the amount and confirm the payment (please pay the exact amount).",
+            "Take a screenshot of your payment confirmation and go back to this website.",
+            "Click the Next button and send your proof of payment via 📧 Gmail or 📘 Facebook Messenger.",
+          ],
+        },
+        BDO: {
+          title: "🏦 Send Payment via BDO",
+          label: "🏦 Choose BDO Account",
+          accounts: [
+            { value: "005960232783", label: "5960-2327-83 (Savings)" },
+          ],
+          instructions: [
+            "Select the BDO account you want to send to.",
+            "Copy the account number and log in to your BDO app or online banking.",
+            "Transfer the exact payment amount.",
+            "Take a screenshot of your transaction confirmation.",
+            "Click Next and send your proof of payment via 📧 Gmail or 📘 Facebook Messenger.",
+          ],
+        },
+        BPI: {
+          title: "🏦 Send Payment via our Local bank account",
+          label: "🏦 Choose LOLC_BANK Account",
+          accounts: [
+            {
+              value: "00801004679",
+              label: "008-01-00467-9 (Divinia A. Segui)",
+            },
+          ],
+          instructions: [
+            "Copy the account number and log in to your LOLC app or online banking.",
+            "Transfer the exact payment amount.",
+            "Take a screenshot of your transaction confirmation.",
+            "Click Next and send your proof of payment via 📧 Gmail or 📘 Facebook Messenger.",
+          ],
+        },
+      };
+
+      function nextStep(step) {
+        if (step === 1 && !selectedMethod) {
+          alert("Please select a payment method first.");
+          return;
+        }
+
+        document.getElementById("step" + step).style.display = "none";
+        document.getElementById("step" + (step + 1)).style.display = "block";
+
+        // If entering Step 2, populate dynamically
+        if (step === 1) {
+          loadPaymentData(selectedMethod);
+        }
+
+        const steps = document.querySelectorAll(".step");
+        steps[step].classList.add("active");
+      }
+
+      function prevStep(step) {
+        document.getElementById("step" + step).style.display = "none";
+        document.getElementById("step" + (step - 1)).style.display = "block";
+      }
+
+      function selectMethod(el, method) {
+        document
+          .querySelectorAll(".method-card")
+          .forEach((card) => card.classList.remove("active"));
+        el.classList.add("active");
+        selectedMethod = method;
+      }
+
+      function loadPaymentData(method) {
+        const data = paymentData[method];
+
+        document.getElementById("step2Title").textContent = data.title;
+        document.getElementById("accountLabel").textContent = data.label;
+
+        const select = document.getElementById("accountSelect");
+        select.innerHTML = '<option value="">-- Select an option --</option>';
+        data.accounts.forEach((acc) => {
+          select.innerHTML += `<option value="${acc.value}">${acc.label}</option>`;
+        });
+
+        const instructionList = document.getElementById("instructionList");
+        instructionList.innerHTML = "";
+        data.instructions.forEach((text) => {
+          instructionList.innerHTML += `<li>${text}</li>`;
+        });
+
+        document.getElementById("accountBox").style.display = "none";
+      }
+
+      function showAccount() {
+        const select = document.getElementById("accountSelect");
+        const selectedAccount = document.getElementById("selectedAccount");
+        const accountBox = document.getElementById("accountBox");
+
+        if (select.value) {
+          selectedAccount.textContent = select.value;
+          accountBox.style.display = "block";
+        } else {
+          accountBox.style.display = "none";
+        }
+      }
+
+      function copyAccount() {
+        const account = document.getElementById("selectedAccount").textContent;
+        navigator.clipboard.writeText(account).then(() => {
+          alert("✅ Copied: " + account);
+        });
+      }
+
+      window.sendProofPaymentGmail =  function () {
+        if (!selectedMethod) {
+          alert("Please complete all fields before sending.");
+          return;
+        }
+
+        const email = "adelzarajhonmarcel@gmail.com";
+        const subject = "Proof of Payment";
+        let body = `Hello,\n\nPlease attached your proof of payment here.\n\nPayment Method: ${selectedMethod}\n\nThank you.`;
+
+        window.location.href = `mailto:${email}?subject=${encodeURIComponent(
+          subject
+        )}&body=${encodeURIComponent(body)}`;
+      }
+
+      function openModal() {
+        document.getElementById("facebookModal").style.display = "block";
+      }
+      function closeModal() {
+        document.getElementById("facebookModal").style.display = "none";
+      }
+
+      // Close modal if clicked outside content
+      window.onclick = function (event) {
+        const modal = document.getElementById("facebookModal");
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      };
+    </script>
+     <script src="assets/js/enroll.js"></script>
+>>>>>>> main
   </body>
 </html>

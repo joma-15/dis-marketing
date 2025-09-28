@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JSONP Test</title>
+</head>
+<body>
+  <h1>JSONP Test</h1>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 1️⃣ Define the callback
+      window.testCallback = function(data) {
+        alert("JSONP Response: " + JSON.stringify(data));
+      };
+
+      // 2️⃣ Inject JSONP script
+      const script = document.createElement("script");
+      script.src = "https://script.google.com/macros/s/AKfycby2IxhY_MeP0_5k4V8W3z9b07N02L9OiqS1XitPTb4QRuYeQve_rwXobScCz2JTt9PB/exec?password=test&referral=AFF-123456&callback=testCallback";
+      document.body.appendChild(script);
+    });
+  </script>
+</body>
+</html>

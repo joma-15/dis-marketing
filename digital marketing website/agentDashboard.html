@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #001f3f, #003366, #004080);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    header {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #66ccff;
+    }
+    .welcome {
+      font-size: 1.3rem;
+      margin: 20px;
+      text-align: center;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      padding: 20px;
+      max-width: 800px;
+      width: 95%;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card h2 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+    .card p {
+      font-size: 2.2rem;
+      font-weight: bold;
+      margin: 5px 0 0;
+    }
+
+    /* Scrollable table container */
+    .table-container {
+      max-height: 400px; /* Bigger height for desktop */
+      overflow-y: auto;
+      width: 95%;
+      max-width: 1000px;
+      margin-bottom: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1rem;
+    }
+    th, td {
+      padding: 15px; /* Bigger padding for better readability */
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    th {
+      background-color: rgba(255, 255, 255, 0.15);
+      font-weight: bold;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(5px);
+    }
+    tr:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    @media (max-width: 600px) {
+      .table-container {
+        max-height: 300px; /* Slightly smaller height on mobile */
+      }
+      table, th, td {
+        font-size: 14px;
+        padding: 10px;
+      }
+    }
+    #loadingPopup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.85);
+      color: white;
+      padding: 20px 40px;
+      border-radius: 10px;
+      font-size: 18px;
+      box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Agent Portal</div>
+    <nav>
+      <a href="agentlogin.html">Logout</a>
+    </nav>
+  </header>
+
+  <div class="welcome" id="welcomeMessage">Welcome, Agent</div>
+
+  <div class="card">
+    <div>
+      <h2>Total Invited Clients</h2>
+      <p id="totalClients">0</p>
+    </div>
+    <span style="font-size: 2.5rem;">👥</span>
+  </div>
+  <div id="loadingPopup">⏳ Loading, please wait...</div>
+  <div class="table-container">
+    <table id="clientsTable">
+      <thead>
+        <tr>
+          <th>Client Name</th>
+          <th>Type of Client</th>
+          <th>Selected Plan</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <script src="assets/js/agentlogin.js"></script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+   /*for payment page*/
+      body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #003366, #28a745); /* Navy + Green */
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 60px auto;
+      padding: 20px;
+    }
+
+    /* Global back button */
+    .back-button-global {
+      top: 10px;
+      left: 10px;
+      background: #004080;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      margin-bottom: 20px;
+      animation: fadeIn 0.5s ease;
+      position: relative; /* for local back button positioning */
+    }
+
+    /* Local back button (inside card) */
+    .back-button-local {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #808000;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #003366;
+    }
+
+    /* Steps Indicator */
+    .steps {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+    }
+
+    .step {
+      flex: 1;
+      text-align: center;
+      font-weight: bold;
+      padding: 10px;
+      border-bottom: 4px solid #ccc;
+      color: #000;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+
+    .step.active {
+      border-color: #28a745;
+      text-decoration: none;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    /* Form groups */
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 6px;
+      color: #003366;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="file"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+
+    input[type="file"] {
+      background: #f9f9f9;
+      cursor: pointer;
+    }
+
+    small {
+      display: block;
+      margin-top: 5px;
+      color: #666;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease;
+      text-align: center;
+    }
+
+    .btn-next {
+      background: linear-gradient(45deg, #003366, #28a745);
+      color: white;
+      width: 100%;
+    }
+
+    .btn-prev {
+      background: #ddd;
+      color: #003366;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    /* Payment Method Cards */
+    .payment-methods {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .method-card {
+      padding: 20px;
+      border: 2px solid #eee;
+      border-radius: 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: #fafafa;
+      font-weight: bold;
+      color: #003366;
+    }
+
+    .method-card:hover {
+      border-color: #003366;
+      transform: translateY(-3px);
+    }
+
+    .method-card.active {
+      border-color: #28a745;
+      background: #e9f9f0;
+    }
+
+    /* Gmail + Facebook buttons */
+    .btn-send {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      margin: 10px 0;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .btn-gmail {
+      background: #d14836;
+    }
+
+    .btn-gmail:hover {
+      background: #b93727;
+    }
+
+    .btn-facebook {
+      background: #1877f2;
+    }
+
+    .btn-facebook:hover {
+      background: #145dbf;
+    }
+
+    .btn-send img {
+      width: 22px;
+      height: 22px;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(15px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .text-center {
+    text-align: center;
+  }
+  .styled-select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background: #f9f9f9;
+    outline: none;
+  }
+  .styled-select:focus {
+    border-color: #0077ff;
+    box-shadow: 0 0 6px rgba(0, 119, 255, 0.4);
+  }
+  .qr-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    display: inline-block;
+  }
+  .qr-box img {
+    max-width: 220px;
+    margin-top: 10px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+  }
+  .instruction-box {
+    margin-top: 25px;
+    background: #f5f7fa;
+    padding: 18px;
+    border-left: 6px solid #0077ff;
+    border-radius: 12px;
+  }
+  .instruction-box h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+  }
+  .instruction-box ol {
+    padding-left: 20px;
+  }
+  .instruction-box li {
+    margin-bottom: 10px;
+    font-size: 15px;
+  }
+
+
+  
+ /* Modal Background */
+.custom-modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.5); /* semi-transparent */
+  backdrop-filter: blur(3px);
+  transition: all 0.3s ease;
+}
+
+/* Modal Box */
+.custom-modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  animation: slideDown 0.4s ease;
+  font-family: Arial, sans-serif;
+}
+
+/* Slide down animation */
+@keyframes slideDown {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Close button */
+.close-btn {
+  float: right;
+  font-size: 25px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.close-btn:hover {
+  color: #007bff;
+}
+
+/* Modal header */
+.modal-header h2 {
+  margin: 0;
+  color: #333;
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+/* Modal body */
+.modal-body {
+  margin: 15px 0;
+  color: #555;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* Footer button */
+.modal-footer {
+  text-align: center;
+}
+.modal-ok-btn {
+  background-color: #1877f2; /* Facebook blue */
+  color: #fff;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.modal-ok-btn:hover {
+  background-color: #145dbf;
+}

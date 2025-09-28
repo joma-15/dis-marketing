@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading Popup Example</title>
+  <style>
+    #loadingPopup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.85);
+      color: white;
+      padding: 20px 40px;
+      border-radius: 10px;
+      font-size: 18px;
+      box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <button id="loadData">Fetch Data</button>
+  <div id="loadingPopup">⏳ Loading, please wait...</div>
+
+  <script>
+    const loadingPopup = document.getElementById("loadingPopup");
+    const button = document.getElementById("loadData");
+
+    async function fetchWithLoader() {
+      const startTime = Date.now();
+      loadingPopup.style.display = "block"; // Show popup
+
+      try {
+        // ✅ Simulate slow database fetch (3 seconds)
+        const data = await new Promise(resolve => {
+          setTimeout(() => resolve({ message: "✅ Data fetched successfully!" }), 3000);
+        });
+
+        console.log(data.message); // Print result
+        alert(data.message); // Show to user
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        // ✅ Ensure popup stays for at least 500ms to avoid flicker
+        const elapsed = Date.now() - startTime;
+        const remaining = Math.max(0, 500 - elapsed);
+        setTimeout(() => {
+          loadingPopup.style.display = "none"; // Hide popup
+        }, remaining);
+      }
+    }
+
+    button.addEventListener("click", fetchWithLoader);
+  </script>
+</body>
+</html>

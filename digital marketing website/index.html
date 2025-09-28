@@ -25,6 +25,59 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css" />
+
+    <style>
+      /* Extra styles for Affiliate card */
+      .affiliate-card {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .affiliate-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      }
+      .affiliate-img {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 15px;
+        animation: bounce 2s infinite;
+      }
+      @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+      }
+      .affiliate-card h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: #007bff;
+      }
+      .affiliate-card p {
+        font-size: 0.95rem;
+        color: #555;
+      }
+      .affiliate-card .arrow {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #007bff;
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        transition: transform 0.3s ease;
+      }
+      .affiliate-card:hover .arrow {
+        transform: translateX(8px);
+      }
+    </style>
   </head>
   <body>
     <!-- Preloader -->
@@ -51,7 +104,7 @@
     <!-- Drawer -->
     <aside class="drawer" id="drawer">
       <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="fs-5 text-primary">Navigation</h2>
+        <h2 class="fs-5 text-primary drawernav">Navigation</h2>
         <button id="closeDrawer" class="fs-3">&times;</button>
       </div>
       <nav class="drawer-nav">
@@ -130,51 +183,41 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="section-padding">
+    <section id="contact" class="section-padding py-5">
       <div class="container">
-        <div class="card-custom">
+        <div class="card-custom text-center">
           <h2 class="section-title text-center">Contact Us</h2>
           <div class="row mt-4">
-            <div class="col-md-6 mb-4">
+            <div class="col-md-6 mb-4 text-start">
               <h5><i class="fas fa-map-marker-alt"></i> Address</h5>
               <p>
-                building 3rd flr. rm. 304, Mataas-na-Lupa, lipa city, batangas
+                building 3rd flr. rm. 304, Mataas-na-Lupa, Lipa City, Batangas
               </p>
+
               <h5><i class="fas fa-phone"></i> Phone</h5>
               <p>+63 921 492 6302</p>
+
               <h5><i class="fas fa-envelope"></i> Email</h5>
               <p>divine_segui@yahoo.com</p>
             </div>
-            <div class="col-md-6">
-              <form>
-                <div class="mb-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Your Name"
-                    required
+
+            <!-- Affiliate CTA -->
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+              <a href="agentlogin.html" class="affiliate-card">
+                <div class="affiliate-content">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/3126/3126647.png"
+                    alt="Affiliate Gift"
+                    class="affiliate-img"
                   />
+                  <h3>🎁 Be an Affiliate</h3>
+                  <p>
+                    Join our affiliate program and unlock exciting rewards while
+                    helping others secure their future.
+                  </p>
+                  <span class="arrow">→</span>
                 </div>
-                <div class="mb-3">
-                  <input
-                    type="email"
-                    class="form-control"
-                    placeholder="Your Email"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <textarea
-                    class="form-control"
-                    rows="4"
-                    placeholder="Your Message"
-                    required
-                  ></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary w-100">
-                  Send Message
-                </button>
-              </form>
+              </a>
             </div>
           </div>
         </div>
@@ -348,4 +391,3 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
-</html>

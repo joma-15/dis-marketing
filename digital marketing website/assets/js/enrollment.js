@@ -99,7 +99,6 @@ function saveToLocalStorage(formdata) {
   console.log(formdata);
   if (formdata) {
     localStorage.setItem("data", JSON.stringify(formdata));
-    window.location.href = "payment.html"; //saved the data to this page
   } else {
     console.error(
       "An error has been occured while saving the data to the localstorage"
@@ -114,7 +113,6 @@ function getData() {
 
   if (formData) {
     const parseData = JSON.parse(formData);
-    console.log(parseData);
     // console.log(selectedPlan);
     localStorage.removeItem("data"); //clear the data after extracting
     // localStorage.removeItem(('selectedPlan'))
@@ -124,42 +122,43 @@ function getData() {
 }
 
 async function submitData(data) {
+  console.log('the submit data to db has been triggered');
   const formUrl =
-    "https://docs.google.com/forms/d/e/1FAIpQLScVcBDaGA9Rj93kd6K0GzDkm9ymkbz-rLjOKpFqE6DAzdKE1w/formResponse";
+    // "https://docs.google.com/forms/d/e/1FAIpQLScVcBDaGA9Rj93kd6K0GzDkm9ymkbz-rLjOKpFqE6DAzdKE1w/formResponse";
+    "https://docs.google.com/forms/d/e/1FAIpQLScQmnDQfzBud88VDwXSRxZb_Kj3Qeh0WVpCnv297P4I0QkJHg/formResponse";
   const params = new URLSearchParams();
 
-  // if (!data || !data.birthDate || !data.birthDate.year) {
-  //   console.log('the birday year is missing try again');
-  //   return;
-  // }
-
   // Map your data to Google Form fields (verify these entry IDs)
-  const formFields = {
-    "entry.118683267": localStorage.getItem("selectedPlan"),
-    "entry.328719651": data.fullName,
-    "entry.1226942228_year": data.birthDate.year,
-    "entry.1226942228_month": data.birthDate.month,
-    "entry.1226942228_day": data.birthDate.day,
-    "entry.1564645568": data.address,
-    "entry.1830843199": data.email,
-    "entry.113235889": data.gender,
-    "entry.1003466199": data.civilStatus,
-    "entry.526372370": data.condition,
-    "entry.2137808509": data.plan,
-    "entry.579757869": "Pending",
-  };
+  // const formFields = {
+  //   "entry.118683267": localStorage.getItem("selectedPlan"),
+  //   "entry.328719651": data.fullName,
+  //   "entry.1226942228_year": data.birthDate.year,
+  //   "entry.1226942228_month": data.birthDate.month,
+  //   "entry.1226942228_day": data.birthDate.day,
+  //   "entry.1564645568": data.address,
+  //   "entry.1830843199": data.email,
+  //   "entry.113235889": data.gender,
+  //   "entry.1003466199": data.civilStatus,
+  //   "entry.526372370": data.condition,
+  //   "entry.2137808509": data.plan,
+  //   "entry.579757869": "Pending",
+  // };
 
-  // //  Map your data to Google Form fields (verify these entry IDs)
-  //     params.append('entry.118683267', "hello world");
-  //     params.append('entry.328719651', data.fullName);         // Full name
-  //     params.append('entry.1226942228_year', data.birthDate.year);  // Year
-  //     params.append('entry.1226942228_month', data.birthDate.month); // Month
-  //     params.append('entry.1226942228_day', data.birthDate.day);    // Day
-  //     params.append('entry.1564645568', data.address);         // Address
-  //     params.append('entry.1830843199', data.email);             // Email
-  //     params.append('entry.113235889', data.gender);           // Gender
-  //     params.append('entry.1003466199', data.civilStatus);     // Civil Status
-  //     params.append('entry.579757869', "Pending");
+  const formFields = {
+    "entry.807207221": localStorage.getItem("selectedPlan"),
+    "entry.1368872495": data.fullName,
+    "entry.265391803": data.address,
+    "entry.21286280": data.email,
+    "entry.914829469": data.gender,
+    "entry.1102795712": data.civilStatus,
+    "entry.962982325": data.condition,
+    "entry.354268935": data.plan,
+    "entry.277015241_year": data.birthDate.year,
+    "entry.277015241_month": data.birthDate.month,
+    "entry.277015241_day": data.birthDate.day,
+    "entry.597664781": "Pending",
+    "entry.118563215": "tiyo dado",
+  };
 
   for (const [key, value] of Object.entries(formFields)) {
     params.append(key, value);
@@ -173,7 +172,8 @@ async function submitData(data) {
       mode: "no-cors",
       body: params,
     });
-    console.log("Data has been sent successfully");
+    console.log("Data has been sent successfully", response.text);
+    alert("the data has been submitted successfully");
   } catch (error) {
     alert("an error occured sending the data");
     console.error("An error occured " + error);
@@ -182,31 +182,15 @@ async function submitData(data) {
 
 //for form click
 function saveOnClick() {
-  const data = extractData();
-  if (data) {
-    saveToLocalStorage(data); //save the data to the local storage
-  }
+  document.getElementById("save-info").addEventListener("click", () => {
+    const data = extractData();
+
+    if (data) {
+      saveToLocalStorage(data);
+    }
+  });
 }
-
-// const localStorageData = getData(); //get the data from the local storage
-// if (localStorageData) {
-//   submitData(localStorageData);//submit the data to the database
-// }else{
-//   console.warn('No data found in the local storage')
-// }
-//for payment click
-// async function submitOnClick(event) {
-//   console.log("the function is trigger");
-//   event.preventDefault();
-
-//   const localStorageData = getData(); //get the data from the local storage
-//   if (localStorageData) {
-//     await submitData(localStorageData);
-//     alert("the data was submitted successfully");
-//     console.log("the data has been sent to the database");
-//     window.location.href = "index.html";
-//   }
-// }
+saveOnClick();
 
 // Add event listener for the submit button instead of form submission
 document.addEventListener("DOMContentLoaded", function () {
@@ -217,9 +201,9 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 async function submitOnClick(event) {
-  event.preventDefault();
   console.log("the function is triggered");
 
+<<<<<<< HEAD
   // Validate form fields first
   const amount = document.getElementById("amount").value;
   const reference = document.getElementById("reference").value;
@@ -360,3 +344,12 @@ window.submitOnClick = submitOnClick;
 //     console.log("the data is being submitted : ", res);
 //   });
 // }w
+=======
+  // 1️⃣ Get localStorage data
+  const localStorageData = getData();
+  if (localStorageData) {
+    await submitData(localStorageData);
+    console.log("The form data has been sent to Google Form / DB");
+  }
+}
+>>>>>>> main

@@ -17,10 +17,31 @@
     ></script>
 
     <style>
+      body {
+        background: linear-gradient(
+          135deg,
+          #003366,
+          #28a745
+        ); /* Navy + Green */
+      }
+
+      /* Global back button */
+      .back-button-global {
+        top: 10px;
+        left: 10px;
+        background: #004080;
+        color: rgb(233, 226, 226);
+        border: none;
+        padding: 8px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        z-index: 1000;
+      }
       .our-services {
         padding: 60px 0;
       }
       .plans {
+        color: white;
         font-size: 2rem;
         font-weight: 700;
         margin-bottom: 30px;
@@ -95,9 +116,94 @@
       .others-textbox {
         display: none;
       }
+
+      /* Modal tweaks for a professional look */
+      .modal-content {
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        border: none;
+        overflow: hidden;
+      }
+
+      .modal-header {
+        background: linear-gradient(135deg, #003366, #28a745);
+        color: #fff;
+        font-weight: 600;
+        font-size: 1.2rem;
+        border-bottom: none;
+      }
+
+      .modal-title {
+        font-weight: 700;
+      }
+
+      .modal-body {
+        padding: 2rem;
+        background: #f8f9fa;
+        color: #222;
+      }
+
+      .modal-footer {
+        border-top: none;
+        padding: 1rem 2rem;
+        background: #f1f3f5;
+        justify-content: flex-end;
+      }
+
+      /* Buttons inside modal */
+      .modal-footer .btn-primary {
+        background: #003366;
+        border: none;
+        padding: 0.6rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+
+      .modal-footer .btn-primary:hover {
+        background: #002244;
+      }
+
+      .modal-footer .btn-secondary {
+        background: #6c757d;
+        border: none;
+        padding: 0.6rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 500;
+      }
+
+      /* Form inputs styling */
+      .form-control,
+      .form-select {
+        border-radius: 8px;
+        border: 1px solid #ced4da;
+        padding: 0.5rem 0.75rem;
+      }
+
+      .form-check-input {
+        accent-color: #003366;
+      }
+
+      /* Others textbox styling */
+      .others-textbox {
+        display: none;
+        margin-top: 0.5rem;
+      }
+
+      /* Checkbox labels */
+      .form-check-label {
+        margin-left: 0.3rem;
+      }
+
+      .btn-primary {
+        background-color: #003366;
+      }
     </style>
   </head>
   <body>
+    <!--Global Back Button -->
+    <button class="back-button-global" onclick="history.back()">Back</button>
+
     <div id="services" class="our-services section">
       <div class="container">
         <!-- 40,000 Health Plans Section -->
@@ -120,6 +226,7 @@
                   src="assets/images/about-left-image.png"
                   class="card-img-top"
                   alt="Service Image"
+                  loading="lazy"
                 />
               </div>
               <div class="card-body">
@@ -154,6 +261,7 @@
                   src="assets/images/about-left-image.png"
                   class="card-img-top"
                   alt="Service Image"
+                  loading="lazy"
                 />
               </div>
               <div class="card-body">
@@ -196,6 +304,7 @@
                   src="assets/images/about-left-image.png"
                   class="card-img-top"
                   alt="Service Image"
+                  loading="lazy"
                 />
               </div>
               <div class="card-body">
@@ -230,6 +339,7 @@
                   src="assets/images/about-left-image.png"
                   class="card-img-top"
                   alt="Service Image"
+                  loading="lazy"
                 />
               </div>
               <div class="card-body">
@@ -273,6 +383,7 @@
                   src="assets/images/about-left-image.png"
                   class="card-img-top"
                   alt="Service Image"
+                  loading="lazy"
                 />
               </div>
               <div class="card-body">
@@ -307,6 +418,7 @@
                   src="assets/images/about-left-image.png"
                   class="card-img-top"
                   alt="Service Image"
+                  loading="lazy"
                 />
               </div>
               <div class="card-body">
@@ -350,6 +462,7 @@
                   src="assets/images/about-left-image.png"
                   class="card-img-top"
                   alt="Service Image"
+                  loading="lazy"
                 />
               </div>
               <div class="card-body">
@@ -384,6 +497,7 @@
                   src="assets/images/about-left-image.png"
                   class="card-img-top"
                   alt="Service Image"
+                  loading="lazy"
                 />
               </div>
               <div class="card-body">
@@ -413,6 +527,8 @@
             tabindex="-1"
             aria-labelledby="conditionModalLabel"
             aria-hidden="true"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
           >
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
@@ -467,6 +583,7 @@
                         class="form-check-input"
                         type="checkbox"
                         id="diabetes"
+                        required
                       />
                       <label class="form-check-label" for="diabetes"
                         >Asthma</label
@@ -572,6 +689,8 @@
             tabindex="-1"
             aria-labelledby="clientDetailsModalLabel"
             aria-hidden="true"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
           >
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
@@ -626,7 +745,12 @@
                     <!-- Birthdate -->
                     <div class="mb-3">
                       <label class="form-label">Birthdate</label>
-                      <input type="date" class="form-control" id="bday" required />
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="bday"
+                        required
+                      />
                     </div>
 
                     <!-- Address -->
@@ -695,6 +819,17 @@
                         <option>Separated</option>
                       </select>
                     </div>
+
+                    <!-- Referred By -->
+                    <div class="mb-3">
+                      <label class="form-label">Referred By (you can leave this blank optional)</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Name of person or source"
+                        id="referredBy"
+                      />
+                    </div>
                   </form>
                 </div>
 
@@ -706,14 +841,9 @@
                   >
                     Cancel
                   </button>
-                  <a href="payment.html">
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                    onclick="saveOnClick()";                  >
+                  <button type="button" class="btn btn-primary" id="user-info">
                     Next
                   </button>
-                </a>
                 </div>
               </div>
             </div>
@@ -731,7 +861,6 @@
             checklist.classList.toggle("d-none", radio.value !== "with");
           });
         });
-
       // Show/hide text input if 'Others' is checked
       document
         .getElementById("otherCondition")
@@ -740,6 +869,6 @@
           textBox.style.display = this.checked ? "block" : "none";
         });
     </script>
-    <script src="assets/js/enrollment.js" type="module"></script>
+    <script src="assets/js/enroll.js" type="module"></script>
   </body>
 </html>
