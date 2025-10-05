@@ -74,103 +74,10 @@
         <button class="back-button-local" onclick="prevStep(3)">⬅ Back</button>
         <h2>Send Proof of Payment</h2>
         <p>
-<<<<<<< HEAD
-          <strong>Number1:</strong> 09958205788
-          <button
-            onclick="copyText('09958205788')"
-            class="btn btn-sm btn-outline-primary"
-          >
-            Copy
-          </button>
-        </p>
-        <p>
-          <strong>Number2:</strong> 09177761278
-          <button
-            onclick="copyText('09177761278')"
-            class="btn btn-sm btn-outline-primary"
-          >
-            Copy
-          </button>
-        </p>
-      </div>
-
-      <div id="bpi" class="payment-info card p-4 mb-4">
-        <h5>Send to LOLC</h5>
-        <p><strong>Name: </strong>Divinia Insurance</p>
-        <p>
-          <strong>Account Number:</strong> 008-01-00467-9
-          <button
-            onclick="copyText(' 008-01-00467-9')"
-            class="btn btn-sm btn-outline-primary"
-          >
-            Copy
-          </button>
-        </p>
-      </div>
-
-      <div id="bdo" class="payment-info card p-4 mb-4">
-        <h5>Send to BDO</h5>
-        <p><strong>Name: </strong> Divinia Insurance</p>
-        <p>
-          <strong>Account Number:</strong> 005960232783
-          <button
-            onclick="copyText('005960232783')"
-            class="btn btn-sm btn-outline-primary"
-          >
-            Copy
-          </button>
-        </p>
-      </div>
-
-      <!-- Receipt Upload Form -->
-      <div class="card p-4">
-        <h5 class="mb-3">Upload Your Payment Receipt</h5>
-        <form id="paymentForm">
-          <div class="mb-3">
-            <label for="amount" class="form-label">Amount Sent (₱):</label>
-            <input
-              type="number"
-              class="form-control"
-              id="amount"
-              name="amount"
-              required
-            />
-          </div>
-          <div class="mb-3">
-            <label for="reference" class="form-label">Reference Number:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="reference"
-              name="reference"
-              required
-            />
-          </div>
-          <div class="mb-3">
-            <label for="screenshot" class="form-label"
-              >Upload Screenshot:</label
-            >
-            <input
-              type="file"
-              class="form-control"
-              id="screenshot"
-              name="screenshot"
-              accept="image/*"
-              required
-            />
-          </div>
-          <button type="button" class="btn btn-success" id="submitReceiptBtn">
-            Submit Receipt
-          </button>
-        </form>
-      </div>
-    </div>
-    <script src="assets/js/enrollment.js"></script>
-=======
           Please send your proof of payment through one of the following
           options:
         </p>
-        <div class="btn-send btn-gmail" id="gmail">
+        <div class="btn-send btn-gmail" id="gmail" onclick="sendProofPaymentGmail()">
           <img
             src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg"
             alt="Gmail"
@@ -178,8 +85,6 @@
           Send via Gmail
         </div>
         <div
-          href="https://www.facebook.com/divinia.insurance"
-          target="_blank"
           class="btn-send btn-facebook"
           onclick="openModal()"
         >
@@ -209,6 +114,7 @@
         </div>
       </div>
     </div>
+
     <script>
       let selectedMethod = "";
 
@@ -270,7 +176,6 @@
         document.getElementById("step" + step).style.display = "none";
         document.getElementById("step" + (step + 1)).style.display = "block";
 
-        // If entering Step 2, populate dynamically
         if (step === 1) {
           loadPaymentData(selectedMethod);
         }
@@ -333,7 +238,8 @@
         });
       }
 
-      window.sendProofPaymentGmail =  function () {
+      // ✅ Gmail direct compose
+      function sendProofPaymentGmail() {
         if (!selectedMethod) {
           alert("Please complete all fields before sending.");
           return;
@@ -341,21 +247,25 @@
 
         const email = "adelzarajhonmarcel@gmail.com";
         const subject = "Proof of Payment";
-        let body = `Hello,\n\nPlease attached your proof of payment here.\n\nPayment Method: ${selectedMethod}\n\nThank you.`;
+        const body = `Hello,\n\nPlease attach your proof of payment here.\n\nPayment Method: ${selectedMethod}\n\nThank you.`;
 
-        window.location.href = `mailto:${email}?subject=${encodeURIComponent(
-          subject
-        )}&body=${encodeURIComponent(body)}`;
+        // Open Gmail compose in a new tab
+        window.open(
+          `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(
+            subject
+          )}&body=${encodeURIComponent(body)}`,
+          "_blank"
+        );
       }
 
       function openModal() {
         document.getElementById("facebookModal").style.display = "block";
       }
+
       function closeModal() {
         document.getElementById("facebookModal").style.display = "none";
       }
 
-      // Close modal if clicked outside content
       window.onclick = function (event) {
         const modal = document.getElementById("facebookModal");
         if (event.target === modal) {
@@ -363,7 +273,7 @@
         }
       };
     </script>
-     <script src="assets/js/enroll.js"></script>
->>>>>>> main
+
+    <script src="assets/js/enroll.js"></script>
   </body>
 </html>
