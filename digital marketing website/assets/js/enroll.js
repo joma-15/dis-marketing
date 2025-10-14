@@ -54,6 +54,8 @@ function extractData() {
       'input[name="gender"]:checked'
     )?.value;
     const civilStatus = document.getElementById("civil-status")?.value;
+    const payment = document.getElementById("payment-option")
+    .options[document.getElementById("payment-option").selectedIndex].text;
     let plan =
       document.querySelector(".card-title")?.innerText.trim() ?? "50K Plan";
     const condition = checkedConditions();
@@ -68,7 +70,7 @@ function extractData() {
       !address ||
       !email ||
       !gender ||
-      !civilStatus
+      !civilStatus 
     ) {
       alert("Please complete all fields");
       return null;
@@ -94,6 +96,7 @@ function extractData() {
       condition,
       plan,
       civilStatus,
+      payment, 
       referral,
     };
     //localstorage for persistent data
@@ -122,6 +125,7 @@ async function sendIntoExcel(data) {
     "entry.277015241_month": data.birthDate.month,
     "entry.277015241_day": data.birthDate.day,
     "entry.597664781": "Pending",
+    "entry.232079207": data.payment,
     "entry.118563215": data.referral,
   };
 

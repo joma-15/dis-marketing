@@ -1117,7 +1117,6 @@
                     <div class="mb-3">
                       <label class="form-label">Payment Option</label>
                       <select class="form-select" id="payment-option" required>
-    
                       </select>
                     </div>
 
@@ -1206,6 +1205,8 @@
               option.selected = true;
             }
             payment.appendChild(option);
+            const p = payment.options[payment.selectedIndex].text; 
+            console.log("you selected the following : ", p);
           })
         });
       });
