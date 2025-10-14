@@ -198,6 +198,120 @@
       .btn-primary {
         background-color: #003366;
       }
+
+      /*for the pricing modal*/
+      /* Custom modal styles */
+      .modal-backdrop.show {
+        background-color: rgba(0, 0, 0, 0.6);
+      }
+
+      /* Custom Modal */
+      .custom-modal .modal-content {
+        border-radius: 25px;
+        padding: 30px 20px;
+        text-align: center;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        border: none;
+        animation: fadeIn 0.3s ease-out;
+      }
+
+      /* Modal Header */
+      .custom-modal .modal-header {
+        border-bottom: none;
+        padding-bottom: 0;
+        justify-content: flex-start;
+      }
+
+      .back-btn {
+        background: transparent;
+        border: none;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #007bff;
+        transition: color 0.3s;
+      }
+
+      .back-btn:hover {
+        color: #0056b3;
+        text-decoration: underline;
+      }
+
+      /* Modal Body */
+      .custom-modal .modal-body {
+        font-size: 1.2rem;
+        color: #333;
+        margin: 20px 0;
+        line-height: 1.5;
+      }
+
+      /* Proceed Button */
+      .proceed-btn {
+        background: linear-gradient(90deg, #007bff, #00c6ff);
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        padding: 12px 40px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        transition: all 0.3s;
+        box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+      }
+
+      .proceed-btn:hover {
+        background: linear-gradient(90deg, #0056b3, #0096c7);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 86, 179, 0.5);
+      }
+
+      /* Fade In Animation */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* --- Card Plan Buttons Responsive Design --- */
+      .card-body .btn.Preferred-plan {
+        margin: 5px;
+        border-radius: 10px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        background: linear-gradient(135deg, #003366, #007bff);
+        border: none;
+        box-shadow: 0 4px 12px rgba(0, 64, 128, 0.3);
+      }
+
+      .card-body .btn.Preferred-plan:hover {
+        background: linear-gradient(135deg, #002244, #0056b3);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 64, 128, 0.4);
+      }
+
+      /* Mobile styling for buttons */
+      @media (max-width: 576px) {
+        .card-body .btn.Preferred-plan {
+          display: block;
+          width: 100%;
+          margin: 8px 0;
+          font-size: 1rem;
+          padding: 0.8rem;
+          border-radius: 12px;
+        }
+      }
+
+      /* Tablet-friendly adjustments */
+      @media (min-width: 577px) and (max-width: 991px) {
+        .card-body .btn.Preferred-plan {
+          width: 48%;
+          margin: 5px 1%;
+          padding: 0.7rem;
+        }
+      }
     </style>
   </head>
   <body>
@@ -237,14 +351,27 @@
                   Insurance<br />
                   -Ward Room
                 </p>
-                <button
+                <a
                   href="#"
                   class="btn btn-primary Preferred-plan"
                   data-bs-toggle="modal"
-                  data-bs-target="#conditionModal"
+                  data-bs-target="#modernConfirmationModal"
+                  >Quarterly</a
                 >
-                  Buy
-                </button>
+                <a
+                  href="#"
+                  class="btn btn-primary Preferred-plan"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modernConfirmationModal"
+                  >Semi-Annually</a
+                >
+                <a
+                  href="#"
+                  class="btn btn-primary Preferred-plan"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modernConfirmationModal"
+                  >Annually</a
+                >
               </div>
             </div>
           </div>
@@ -276,8 +403,22 @@
                   href="#"
                   class="btn btn-primary Preferred-plan"
                   data-bs-toggle="modal"
-                  data-bs-target="#conditionModal"
-                  >Buy</a
+                  data-bs-target="#modernConfirmationModal"
+                  >Quarterly</a
+                >
+                <a
+                  href="#"
+                  class="btn btn-primary Preferred-plan"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modernConfirmationModal"
+                  >Semi-Annually</a
+                >
+                <a
+                  href="#"
+                  class="btn btn-primary Preferred-plan"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modernConfirmationModal"
+                  >Annually</a
                 >
               </div>
             </div>
@@ -319,9 +460,22 @@
                   href="#"
                   class="btn btn-primary Preferred-plan"
                   data-bs-toggle="modal"
-                  data-bs-target="#conditionModal"
-                  id="plans"
-                  >Buy</a
+                  data-bs-target="#modernConfirmationModal"
+                  >Quarterly</a
+                >
+                <a
+                  href="#"
+                  class="btn btn-primary Preferred-plan"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modernConfirmationModal"
+                  >Semi-Annually</a
+                >
+                <a
+                  href="#"
+                  class="btn btn-primary Preferred-plan"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modernConfirmationModal"
+                  >Annually</a
                 >
               </div>
             </div>
@@ -354,9 +508,22 @@
                   href="#"
                   class="btn btn-primary Preferred-plan"
                   data-bs-toggle="modal"
-                  data-bs-target="#conditionModal"
-                  id="plans"
-                  >Buy</a
+                  data-bs-target="#modernConfirmationModal"
+                  >Quarterly</a
+                >
+                <a
+                  href="#"
+                  class="btn btn-primary Preferred-plan"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modernConfirmationModal"
+                  >Semi-Annually</a
+                >
+                <a
+                  href="#"
+                  class="btn btn-primary Preferred-plan"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modernConfirmationModal"
+                  >Annually</a
                 >
               </div>
             </div>
@@ -398,9 +565,22 @@
                   href="#"
                   class="btn btn-primary Preferred-plan"
                   data-bs-toggle="modal"
-                  data-bs-target="#conditionModal"
-                  id="plans"
-                  >Buy</a
+                  data-bs-target="#modernConfirmationModal"
+                  >Quarterly</a
+                >
+                <a
+                  href="#"
+                  class="btn btn-primary Preferred-plan"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modernConfirmationModal"
+                  >Semi-Annually</a
+                >
+                <a
+                  href="#"
+                  class="btn btn-primary Preferred-plan"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modernConfirmationModal"
+                  >Annually</a
                 >
               </div>
             </div>
@@ -433,9 +613,22 @@
                   href="#"
                   class="btn btn-primary Preferred-plan"
                   data-bs-toggle="modal"
-                  data-bs-target="#conditionModal"
-                  id="plans"
-                  >Buy</a
+                  data-bs-target="#modernConfirmationModal"
+                  >Quarterly</a
+                >
+                <a
+                  href="#"
+                  class="btn btn-primary Preferred-plan"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modernConfirmationModal"
+                  >Semi-Annually</a
+                >
+                <a
+                  href="#"
+                  class="btn btn-primary Preferred-plan"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modernConfirmationModal"
+                  >Annually</a
                 >
               </div>
             </div>
@@ -477,9 +670,22 @@
                   href="#"
                   class="btn btn-primary Preferred-plan"
                   data-bs-toggle="modal"
-                  data-bs-target="#conditionModal"
-                  id="plans"
-                  >Buy</a
+                  data-bs-target="#modernConfirmationModal"
+                  >Quarterly</a
+                >
+                <a
+                  href="#"
+                  class="btn btn-primary Preferred-plan"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modernConfirmationModal"
+                  >Semi-Annually</a
+                >
+                <a
+                  href="#"
+                  class="btn btn-primary Preferred-plan"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modernConfirmationModal"
+                  >Annually</a
                 >
               </div>
             </div>
@@ -512,10 +718,88 @@
                   href="#"
                   class="btn btn-primary Preferred-plan"
                   data-bs-toggle="modal"
-                  data-bs-target="#conditionModal"
-                  id="plans"
-                  >Buy</a
+                  data-bs-target="#modernConfirmationModal"
+                  >Quarterly</a
                 >
+                <a
+                  href="#"
+                  class="btn btn-primary Preferred-plan"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modernConfirmationModal"
+                  >Semi-Annually</a
+                >
+                <a
+                  href="#"
+                  class="btn btn-primary Preferred-plan"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modernConfirmationModal"
+                  >Annually</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Modern Confirmation Modal -->
+          <div
+            class="modal fade"
+            id="modernConfirmationModal"
+            tabindex="-1"
+            aria-labelledby="modernConfirmationLabel"
+            aria-hidden="true"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+          >
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content border-0 shadow-lg rounded-4">
+                <!-- Modal Header -->
+                <div
+                  class="modal-header bg-primary text-white border-0 rounded-top-4"
+                >
+                  <div class="d-flex align-items-center">
+                    <i class="bi bi-shield-check me-2 fs-4"></i>
+                    <h5 class="modal-title mb-0" id="modernConfirmationLabel">
+                      Confirm Your Selection
+                    </h5>
+                  </div>
+                  <button
+                    type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body text-center py-4">
+                  <h6 class="fw-semibold mb-3">
+                    Pre-existing Condition Notice
+                  </h6>
+                  <p class="text-muted mb-4" id="selected-plan-text">
+                    Please confirm if you wish to proceed with your selected
+                    plan.
+                  </p>
+                  <p id="plan-select" class="fw-semibold text-primary"></p>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer border-0 justify-content-center pb-4">
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary px-4"
+                    data-bs-dismiss="modal"
+                  >
+                    <i class="bi bi-x-circle me-1"></i> Cancel
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary px-4"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modernConfirmationModal"
+                    id="proceedConditionButton"
+                  >
+                    <i class="bi bi-check2-circle me-1"></i> Proceed
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -822,7 +1106,9 @@
 
                     <!-- Referred By -->
                     <div class="mb-3">
-                      <label class="form-label">Referred By (you can leave this blank optional)</label>
+                      <label class="form-label"
+                        >Referred By (you can leave this blank optional)</label
+                      >
                       <input
                         type="text"
                         class="form-control"
@@ -868,6 +1154,20 @@
           const textBox = document.getElementById("otherText");
           textBox.style.display = this.checked ? "block" : "none";
         });
+      document.querySelectorAll(".Preferred-plan").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          const plan = e.currentTarget.textContent.trim(); // "Quarterly", etc.
+          console.log("Selected plan:", plan);
+
+          let price = "";
+          const selectedPlan = document.getElementById("plan-select");
+
+          if (plan == "Quarterly") {
+            price = "20 thousand pesos";
+          }
+          selectedPlan.innerHTML = `you selected ${plan} which cost ${price} do you want to continue?`;
+        });
+      });
     </script>
     <script src="assets/js/enroll.js" type="module"></script>
   </body>
