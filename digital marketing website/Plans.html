@@ -312,6 +312,10 @@
           padding: 0.7rem;
         }
       }
+      .plan-des,
+      .price-des {
+        color: red;
+      }
     </style>
   </head>
   <body>
@@ -778,7 +782,12 @@
                     Please confirm if you wish to proceed with your selected
                     plan.
                   </p>
-                  <p id="plan-select" class="fw-semibold text-primary"></p>
+                  <p class="fw-semibold text-primary">
+                    you selected
+                    <span id="plan-select" class="plan-des"></span> which cost
+                    <span id="price-select" class="price-des"></span> do you
+                    want to continue?
+                  </p>
                 </div>
 
                 <!-- Modal Footer -->
@@ -794,7 +803,7 @@
                     type="button"
                     class="btn btn-primary px-4"
                     data-bs-toggle="modal"
-                    data-bs-target="#modernConfirmationModal"
+                    data-bs-target="#conditionModal"
                     id="proceedConditionButton"
                   >
                     <i class="bi bi-check2-circle me-1"></i> Proceed
@@ -1104,6 +1113,14 @@
                       </select>
                     </div>
 
+                    <!-- Civil Status -->
+                    <div class="mb-3">
+                      <label class="form-label">Payment Option</label>
+                      <select class="form-select" id="payment-option" required>
+    
+                      </select>
+                    </div>
+
                     <!-- Referred By -->
                     <div class="mb-3">
                       <label class="form-label"
@@ -1154,6 +1171,7 @@
           const textBox = document.getElementById("otherText");
           textBox.style.display = this.checked ? "block" : "none";
         });
+      //add text to the confirmation modal
       document.querySelectorAll(".Preferred-plan").forEach((btn) => {
         btn.addEventListener("click", (e) => {
           const plan = e.currentTarget.textContent.trim(); // "Quarterly", etc.
@@ -1161,11 +1179,34 @@
 
           let price = "";
           const selectedPlan = document.getElementById("plan-select");
+          const selectedPrice = document.getElementById("price-select");
 
           if (plan == "Quarterly") {
             price = "20 thousand pesos";
+          } else if (plan == "Semi-Annually") {
+            price = "30 thousand pesos";
+          } else if (plan == "Annually") {
+            price = "40 thousand pesos";
           }
-          selectedPlan.innerHTML = `you selected ${plan} which cost ${price} do you want to continue?`;
+
+          selectedPlan.innerHTML = plan;
+          selectedPrice.innerHTML = price;
+
+          //create the element of payment and select the selected type of payment
+          const payment = document.getElementById("payment-option");
+          const types = ["Quarterly", "Semi-Annually", "Annually"]; 
+          payment.innerHTML = "";
+
+          types.forEach(type => {
+            const option = document.createElement("option"); 
+            option.value = type; 
+            option.textContent =type; 
+
+            if (selectedPlan.textContent === type) {
+              option.selected = true;
+            }
+            payment.appendChild(option);
+          })
         });
       });
     </script>
