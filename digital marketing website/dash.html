@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Divinia Insurance Company</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <style>
+      /* Extra styles for Affiliate card */
+      .affiliate-card {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .affiliate-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      }
+      .affiliate-img {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 15px;
+        animation: bounce 2s infinite;
+      }
+      @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+      }
+      .affiliate-card h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: #007bff;
+      }
+      .affiliate-card p {
+        font-size: 0.95rem;
+        color: #555;
+      }
+      .affiliate-card .arrow {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #007bff;
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        transition: transform 0.3s ease;
+      }
+      .affiliate-card:hover .arrow {
+        transform: translateX(8px);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Preloader -->
+    <div id="preloader">
+      <img
+        src="assets/images/dis logo.png"
+        alt="digital marketing logo"
+        loading="lazy"
+      />
+    </div>
+
+    <!-- Navbar -->
+    <nav
+      class="navbar fixed-top d-flex justify-content-between align-items-center"
+    >
+      <button id="openDrawer" class="drawer-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="text-end">
+        <img src="assets/images/dis.png" alt="company logo" />
+      </div>
+    </nav>
+
+    <!-- Drawer -->
+    <aside class="drawer" id="drawer">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="fs-5 text-primary drawernav">Navigation</h2>
+        <button id="closeDrawer" class="fs-3">&times;</button>
+      </div>
+      <nav class="drawer-nav">
+        <a href="#home"><i class="fas fa-home"></i> Home</a>
+        <a
+          id="services"
+          href="#services"
+          data-bs-toggle="modal"
+          data-bs-target="#insuranceModal"
+          ><i class="fas fa-cogs"></i> Services</a
+        >
+        <a data-bs-toggle="modal" data-bs-target="#insuranceModal" id="tools"
+          ><i class="fas fa-tools"></i> Tools</a
+        >
+        <a href="#about"><i class="fas fa-info-circle"></i> About</a>
+        <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+      </nav>
+    </aside>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+      <div>
+        <div class="hero-text">
+          <h1>Welcome To DIS</h1>
+          <p>"One Place. Endless Possibilities"</p>
+        </div>
+        <img src="assets/images/Banner-right-image.png" alt="company image" />
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding">
+      <div class="container">
+        <div class="row g-4">
+          <!-- About Us Card -->
+          <div class="col-lg-6">
+            <div class="card-custom h-90">
+              <h2 class="section-title">About Us</h2>
+              <p class="about-text">
+                "At Divinia Insurance Services (DIS All Care Marketing), we make
+                life simple by offering everything in one place—from Life,
+                Non-Life, and HMO insurance to wellness, home essentials, and
+                admin support. One stop. Endless possibilities."
+              </p>
+              <a href="about.html" class="btn btn-outline-primary mt-3"
+                >See More</a
+              >
+            </div>
+          </div>
+
+          <!-- Vision & Mission stacked -->
+          <div class="col-lg-6">
+            <div class="mb-4">
+              <div class="card-custom h-100">
+                <h3 class="section-title">Vision</h3>
+                <p class="about-text">
+                  To inspire and guide individuals toward living with clarity,
+                  intention, and purpose—unlocking their full potential and
+                  transforming their lives.
+                </p>
+              </div>
+            </div>
+            <div>
+              <div class="card-custom h-100">
+                <h3 class="section-title">Mission</h3>
+                <p class="about-text">
+                  To create a business where every individual lives with
+                  purpose, fulfilment, and direction—empowered to make a
+                  meaningful impact in their own lives and others'.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding py-5">
+      <div class="container">
+        <div class="card-custom text-center">
+          <h2 class="section-title text-center">Contact Us</h2>
+          <div class="row mt-4">
+            <div class="col-md-6 mb-4 text-start">
+              <h5><i class="fas fa-map-marker-alt"></i> Address</h5>
+              <p>
+                building 3rd flr. rm. 304, Mataas-na-Lupa, Lipa City, Batangas
+              </p>
+
+              <h5><i class="fas fa-phone"></i> Phone</h5>
+              <p>+63 921 492 6302</p>
+
+              <h5><i class="fas fa-envelope"></i> Email</h5>
+              <p>divine_segui@yahoo.com</p>
+            </div>
+
+            <!-- Affiliate CTA -->
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+              <a href="agentlogin.html" class="affiliate-card">
+                <div class="affiliate-content">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/3126/3126647.png"
+                    alt="Affiliate Gift"
+                    class="affiliate-img"
+                  />
+                  <h3>🎁 Be an Affiliate</h3>
+                  <p>
+                    Join our affiliate program and unlock exciting rewards while
+                    helping others secure their future.
+                  </p>
+                  <span class="arrow">→</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Nav (mobile only) -->
+    <div class="bottom-nav">
+      <a href="#home"><i class="fas fa-home"></i>Home</a>
+      <a
+        href="#services"
+        data-bs-toggle="modal"
+        data-bs-target="#insuranceModal"
+        id="navServices"
+        ><i class="fas fa-cogs"></i>Services</a
+      >
+      <a data-bs-toggle="modal" id="navTools" data-bs-target="#insuranceModal"
+        ><i class="fas fa-tools"></i> Tools</a
+      >
+      <a href="#about"><i class="fas fa-info-circle"></i>About</a>
+      <a href="#contact"><i class="fas fa-envelope"></i>Contact</a>
+    </div>
+
+    <!-- Insurance Modal -->
+    <div
+      class="modal fade"
+      id="insuranceModal"
+      tabindex="-1"
+      aria-labelledby="insuranceModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title" id="insuranceModalLabel">
+              Select Insurance Type
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-center">
+            <div class="d-grid gap-3">
+              <button
+                class="btn btn-outline-primary btn-lg"
+                id="hmoBtn"
+                data-bs-toggle="modal"
+                data-bs-target="#philcareModal"
+              >
+                <i class="fas fa-hospital"></i> HMO
+              </button>
+              <button
+                class="btn btn-outline-success btn-lg"
+                id="lifeBtn"
+                data-bs-toggle="modal"
+                data-bs-target="#notAvailableModal"
+              >
+                <i class="fas fa-heart"></i> Life
+              </button>
+              <button
+                class="btn btn-outline-warning btn-lg"
+                id="nonlifeBtn"
+                data-bs-toggle="modal"
+                data-bs-target="#notAvailableModal"
+              >
+                <i class="fas fa-car"></i> Nonlife
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Philcare Shop Modal  -->
+    <div
+      class="modal fade"
+      id="philcareModal"
+      tabindex="-1"
+      aria-labelledby="philcareModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title" id="philcareModalLabel">PhilCare</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-center">
+            <img
+              src="assets/images/philcare logo.png"
+              alt="PhilCare Logo"
+              class="img-fluid mb-3 border border-primary border-2"
+              style="max-height: 200px"
+            />
+            <p class="mt-3">Welcome to PhilCare – Healthcare Made Smarter.</p>
+          </div>
+          <div class="modal-footer">
+            <div class="d-flex gap-3">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <a id="proceedBtn"
+                ><button type="button" class="btn btn-primary">
+                  Proceed
+                </button></a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Not Available Modal -->
+    <div
+      class="modal fade"
+      id="notAvailableModal"
+      tabindex="-1"
+      aria-labelledby="notAvailableModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+          <div class="modal-header bg-danger text-white">
+            <h5 class="modal-title" id="notAvailableModalLabel">
+              Service Unavailable
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-center">
+            <i class="fas fa-exclamation-triangle fa-4x text-warning mb-3"></i>
+            <h4 class="fw-bold">Oops! 🚧</h4>
+            <p class="mt-2">
+              This service is <strong>not currently available</strong> right
+              now. Please check back again later — we’re working on something
+              exciting!
+            </p>
+          </div>
+          <div class="modal-footer justify-content-center">
+            <button
+              type="button"
+              class="btn btn-outline-danger"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Drawer toggle scripts -->
+    <script src="assets/js/homepage.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
