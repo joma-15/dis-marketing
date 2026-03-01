@@ -1,279 +1,781 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Divinia Insurance - Payment Portal</title>
-    <link rel="stylesheet" href="assets/css/payment.css" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  </head>
-  <body>
-    <!-- Global Back Button -->
-    <button class="back-button-global" onclick="history.back()">⬅ Back</button>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Divinia Insurance – Payment Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #0a3d2b;
+      --primary-mid: #1a6b47;
+      --accent: #2ecc8b;
+      --accent-light: #d4f7ea;
+      --gold: #e8b84b;
+      --bg: #f4faf7;
+      --card: #ffffff;
+      --text: #1c2e25;
+      --muted: #6b8c7a;
+      --border: #d0e8dc;
+      --danger: #e05252;
+      --gcash-blue: #007dfd;
+      --bdo-red: #c0392b;
+      --bpi-maroon: #5c1a1a;
+    }
 
-    <div class="container">
-      <!-- Steps -->
-      <div class="steps">
-        <div class="step active">1. Select Method</div>
-        <div class="step">2. Enter Details</div>
-        <div class="step">3. Send Proof</div>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Background decoration ── */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -120px; right: -120px;
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(46,204,139,0.12), transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -100px; left: -100px;
+      width: 360px; height: 360px;
+      background: radial-gradient(circle, rgba(10,61,43,0.08), transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Header ── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-mid) 100%);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 32px;
+      box-shadow: 0 4px 24px rgba(10,61,43,0.28);
+    }
+    .brand h1 {
+      font-family: 'Lora', serif;
+      color: white;
+      font-size: 1.6rem;
+      letter-spacing: 3px;
+      text-align: center;
+    }
+    .brand p {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+    .btn-back-header {
+      background: rgba(255,255,255,0.13);
+      border: 1.5px solid rgba(255,255,255,0.28);
+      color: white;
+      font-weight: 600;
+      border-radius: 50px;
+      padding: 8px 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      backdrop-filter: blur(6px);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .btn-back-header:hover { background: rgba(255,255,255,0.24); }
+
+    /* ── Page container ── */
+    .page-wrap {
+      position: relative; z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+    }
+
+    /* ── Progress Steps ── */
+    .steps-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 36px;
+    }
+    .step-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.82rem; font-weight: 600;
+      color: var(--muted);
+      transition: color 0.3s;
+    }
+    .step-item .step-num {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--border);
+      color: var(--muted);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.85rem;
+      transition: all 0.3s;
+    }
+    .step-item.active .step-num {
+      background: linear-gradient(135deg, var(--primary), var(--primary-mid));
+      color: white;
+      box-shadow: 0 4px 14px rgba(10,61,43,0.35);
+    }
+    .step-item.active { color: var(--primary); }
+    .step-item.done .step-num {
+      background: var(--accent);
+      color: white;
+    }
+    .step-connector {
+      width: 48px; height: 2px;
+      background: var(--border);
+      margin: 0 4px;
+      border-radius: 2px;
+      transition: background 0.3s;
+    }
+    .step-connector.done { background: var(--accent); }
+
+    /* ── Card ── */
+    .card {
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 8px 40px rgba(10,61,43,0.1);
+      padding: 36px;
+      animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border: 1.5px solid var(--border);
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-eyebrow {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent-light);
+      color: var(--primary-mid);
+      font-size: 0.72rem; font-weight: 800;
+      padding: 4px 14px; border-radius: 50px;
+      letter-spacing: 0.8px; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .card h2 {
+      font-family: 'Lora', serif;
+      font-size: 1.6rem;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .card .subtitle {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 28px;
+    }
+
+    /* ── Method Cards ── */
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .method-card {
+      border: 2px solid var(--border);
+      border-radius: 18px;
+      padding: 22px 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      background: #fafffe;
+      position: relative;
+      overflow: hidden;
+    }
+    .method-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--accent-light), transparent);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .method-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 8px 24px rgba(46,204,139,0.2); }
+    .method-card:hover::before { opacity: 1; }
+    .method-card.active {
+      border-color: var(--primary-mid);
+      background: var(--accent-light);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px rgba(10,61,43,0.2);
+    }
+    .method-card.active::after {
+      content: '✓';
+      position: absolute; top: 8px; right: 10px;
+      width: 20px; height: 20px;
+      background: var(--primary-mid);
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 800;
+      line-height: 20px;
+    }
+    .method-icon {
+      width: 52px; height: 52px;
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      margin: 0 auto 10px;
+      position: relative; z-index: 1;
+    }
+    .method-label {
+      font-weight: 800; font-size: 0.95rem;
+      color: var(--primary);
+      position: relative; z-index: 1;
+    }
+    .method-sub {
+      font-size: 0.72rem; color: var(--muted);
+      margin-top: 3px;
+      position: relative; z-index: 1;
+    }
+    /* Per-method icon colors */
+    .method-card[data-method="GCash"] .method-icon { background: #e8f2ff; }
+    .method-card[data-method="BDO"]   .method-icon { background: #fdecea; }
+    .method-card[data-method="BPI"]   .method-icon { background: #f5eaea; }
+
+    /* ── Buttons ── */
+    .btn-primary-custom {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-mid));
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 36px;
+      font-size: 0.95rem; font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s;
+      width: 100%;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      box-shadow: 0 6px 20px rgba(10,61,43,0.28);
+    }
+    .btn-primary-custom:hover {
+      background: linear-gradient(135deg, #082e20, #155a38);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(10,61,43,0.38);
+    }
+    .btn-secondary-custom {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: transparent;
+      color: var(--muted);
+      border: 2px solid var(--border);
+      border-radius: 50px;
+      padding: 9px 20px;
+      font-size: 0.85rem; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin-bottom: 20px;
+    }
+    .btn-secondary-custom:hover { border-color: var(--primary-mid); color: var(--primary); }
+
+    /* ── Form elements ── */
+    .form-section { margin-bottom: 22px; }
+    .form-label {
+      display: block;
+      font-size: 0.85rem; font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .styled-select {
+      width: 100%;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 0.92rem;
+      color: var(--text);
+      background: white;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: border-color 0.2s;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b8c7a' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+    }
+    .styled-select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(46,204,139,0.15); }
+
+    /* ── Account Copy Box ── */
+    .account-box {
+      display: none;
+      align-items: center; justify-content: space-between;
+      background: var(--accent-light);
+      border: 1.5px solid var(--accent);
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-top: 10px;
+    }
+    .account-box .acct-number {
+      font-weight: 800; font-size: 1.05rem;
+      color: var(--primary);
+      letter-spacing: 1px;
+    }
+    .btn-copy {
+      background: var(--primary-mid);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 7px 16px;
+      font-size: 0.82rem; font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .btn-copy:hover { background: var(--primary); transform: scale(1.04); }
+
+    /* ── Instruction Box ── */
+    .instruction-box {
+      background: linear-gradient(135deg, #f0f9f4, #e8f5ee);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 22px;
+      margin: 22px 0;
+    }
+    .instruction-box h3 {
+      font-size: 0.9rem; font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .instruction-box ol {
+      padding-left: 0;
+      list-style: none;
+      counter-reset: steps;
+    }
+    .instruction-box ol li {
+      counter-increment: steps;
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 0.87rem; color: var(--text);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(208,232,220,0.5);
+    }
+    .instruction-box ol li:last-child { border-bottom: none; }
+    .instruction-box ol li::before {
+      content: counter(steps);
+      min-width: 24px; height: 24px;
+      background: var(--primary-mid);
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    /* ── Step 3: Proof Buttons ── */
+    .proof-section {
+      display: flex; flex-direction: column; gap: 14px;
+      margin-top: 10px;
+    }
+    .btn-send {
+      display: flex; align-items: center; gap: 16px;
+      padding: 18px 24px;
+      border-radius: 16px;
+      cursor: pointer;
+      font-weight: 700; font-size: 0.95rem;
+      transition: all 0.25s;
+      border: 2px solid transparent;
+    }
+    .btn-send .send-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .btn-send .send-text { flex: 1; }
+    .btn-send .send-text span { display: block; font-size: 0.78rem; font-weight: 500; opacity: 0.75; margin-top: 2px; }
+    .btn-send .arrow { font-size: 1rem; opacity: 0.5; transition: opacity 0.2s, transform 0.2s; }
+    .btn-send:hover .arrow { opacity: 1; transform: translateX(4px); }
+
+    .btn-gmail {
+      background: #fff8f7;
+      border-color: #f0cfc7;
+      color: #c0392b;
+    }
+    .btn-gmail .send-icon { background: #fdecea; }
+    .btn-gmail:hover { background: #fdecea; border-color: #e74c3c; box-shadow: 0 6px 20px rgba(192,57,43,0.15); transform: translateY(-2px); }
+
+    .btn-facebook {
+      background: #f5f8ff;
+      border-color: #ccd9f5;
+      color: #1877f2;
+    }
+    .btn-facebook .send-icon { background: #e8f0ff; }
+    .btn-facebook:hover { background: #e8f0ff; border-color: #1877f2; box-shadow: 0 6px 20px rgba(24,119,242,0.15); transform: translateY(-2px); }
+
+    /* ── Custom Modal ── */
+    .custom-modal {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(10,61,43,0.5);
+      backdrop-filter: blur(6px);
+      z-index: 999;
+      align-items: center; justify-content: center;
+    }
+    .custom-modal.open { display: flex; }
+    .custom-modal-content {
+      background: white;
+      border-radius: 24px;
+      max-width: 400px; width: 90%;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+      animation: modalIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.85); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .custom-modal-header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-mid));
+      padding: 20px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .custom-modal-header h2 { color: white; font-size: 1.1rem; font-weight: 700; }
+    .close-btn {
+      color: rgba(255,255,255,0.7);
+      font-size: 1.4rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+      background: none; border: none;
+    }
+    .close-btn:hover { color: white; }
+    .custom-modal-body {
+      padding: 24px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .custom-modal-footer {
+      padding: 0 24px 24px;
+      display: flex; justify-content: flex-end;
+    }
+    .modal-ok-btn {
+      background: linear-gradient(135deg, var(--primary), var(--primary-mid));
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 28px;
+      font-weight: 700; font-size: 0.9rem;
+      cursor: pointer;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: all 0.2s;
+    }
+    .modal-ok-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(10,61,43,0.3); }
+
+    /* ── Success state ── */
+    .step-content { display: none; }
+    .step-content.visible { display: block; }
+
+    /* ── Responsive ── */
+    @media (max-width: 480px) {
+      header { padding: 12px 16px; }
+      .brand h1 { font-size: 1.3rem; }
+      .card { padding: 24px 20px; }
+      .method-grid { grid-template-columns: 1fr; gap: 10px; }
+      .method-card { padding: 16px 20px; display: flex; align-items: center; gap: 14px; text-align: left; }
+      .method-icon { margin: 0; width: 44px; height: 44px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <button class="btn-back-header" onclick="history.back()">← Back</button>
+  <div class="brand">
+    <h1>DIVINIA</h1>
+    <p>Insurance Payment Portal</p>
+  </div>
+  <div style="width: 88px;"></div>
+</header>
+
+<div class="page-wrap">
+
+  <!-- Progress Steps -->
+  <div class="steps-bar" id="stepsBar">
+    <div class="step-item active" id="stepItem1">
+      <div class="step-num">1</div>
+      <span>Select Method</span>
+    </div>
+    <div class="step-connector" id="conn1"></div>
+    <div class="step-item" id="stepItem2">
+      <div class="step-num">2</div>
+      <span>Enter Details</span>
+    </div>
+    <div class="step-connector" id="conn2"></div>
+    <div class="step-item" id="stepItem3">
+      <div class="step-num">3</div>
+      <span>Send Proof</span>
+    </div>
+  </div>
+
+  <!-- ── Step 1 ── -->
+  <div class="card step-content visible" id="step1">
+    <div class="card-eyebrow">⚡ Step 1 of 3</div>
+    <h2>Payment Method</h2>
+    <p class="subtitle">Choose how you'd like to complete your payment.</p>
+
+    <div class="method-grid">
+      <div class="method-card" data-method="GCash" onclick="selectMethod(this, 'GCash')">
+        <div class="method-icon">📱</div>
+        <div class="method-label">GCash</div>
+        <div class="method-sub">E-Wallet</div>
       </div>
-
-      <!-- Step 1 -->
-      <div class="card step-content" id="step1">
-        <h2>Select Payment Method</h2>
-        <div class="payment-methods">
-          <div class="method-card" onclick="selectMethod(this, 'GCash')">
-            📱 GCash
-          </div>
-          <div class="method-card" onclick="selectMethod(this, 'BDO')">
-            🏦 BDO
-          </div>
-          <div class="method-card" onclick="selectMethod(this, 'BPI')">
-            🏦 BPI
-          </div>
-        </div>
-        <br />
-        <button class="btn btn-next" onclick="nextStep(1)">Next →</button>
+      <div class="method-card" data-method="BDO" onclick="selectMethod(this, 'BDO')">
+        <div class="method-icon">🏦</div>
+        <div class="method-label">BDO</div>
+        <div class="method-sub">Bank Transfer</div>
       </div>
-
-      <!-- Step 2 (Dynamic) -->
-      <div class="card step-content" id="step2" style="display: none">
-        <button class="back-button-local" onclick="prevStep(2)">⬅ Back</button>
-        <h2 class="text-center" id="step2Title">💳 Send Payment</h2>
-
-        <!-- Account Selection -->
-        <div class="form-group">
-          <label id="accountLabel" for="accountSelect">Select Account</label>
-          <select
-            id="accountSelect"
-            onchange="showAccount()"
-            class="styled-select"
-          >
-            <option value="">-- Select an option --</option>
-          </select>
-        </div>
-
-        <!-- Display Selected + Copy -->
-        <div id="accountBox" style="display: none; margin-top: 10px">
-          <span id="selectedAccount" style="font-weight: bold"></span>
-          <button onclick="copyAccount()">📋 Copy</button>
-        </div>
-
-        <!-- Instructions -->
-        <div class="instruction-box">
-          <h3>📝 Instructions</h3>
-          <ol id="instructionList"></ol>
-        </div>
-
-        <button class="btn btn-next" onclick="nextStep(2)">Next →</button>
+      <div class="method-card" data-method="BPI" onclick="selectMethod(this, 'BPI')">
+        <div class="method-icon">🏛️</div>
+        <div class="method-label">LOLC Bank</div>
+        <div class="method-sub">Local Bank</div>
       </div>
+    </div>
 
-      <!-- Step 3 -->
-      <div class="card step-content" id="step3" style="display: none">
-        <button class="back-button-local" onclick="prevStep(3)">⬅ Back</button>
-        <h2>Send Proof of Payment</h2>
-        <p>
-          Please send your proof of payment through one of the following
-          options:
-        </p>
-        <div class="btn-send btn-gmail" id="gmail" onclick="sendProofPaymentGmail()">
-          <img
-            src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg"
-            alt="Gmail"
-          />
+    <button class="btn-primary-custom" onclick="nextStep(1)">
+      Continue <span>→</span>
+    </button>
+  </div>
+
+  <!-- ── Step 2 ── -->
+  <div class="card step-content" id="step2">
+    <button class="btn-secondary-custom" onclick="prevStep(2)">← Back</button>
+    <div class="card-eyebrow">💳 Step 2 of 3</div>
+    <h2 id="step2Title">Send Payment</h2>
+    <p class="subtitle">Select an account and follow the instructions below.</p>
+
+    <div class="form-section">
+      <label class="form-label" id="accountLabel" for="accountSelect">Select Account</label>
+      <select id="accountSelect" onchange="showAccount()" class="styled-select">
+        <option value="">-- Select an account --</option>
+      </select>
+      <div class="account-box" id="accountBox">
+        <div>
+          <div style="font-size:0.72rem;color:var(--muted);font-weight:600;margin-bottom:2px;">Account Number</div>
+          <div class="acct-number" id="selectedAccount"></div>
+        </div>
+        <button class="btn-copy" onclick="copyAccount()">
+          📋 Copy
+        </button>
+      </div>
+    </div>
+
+    <div class="instruction-box">
+      <h3>📝 How to Pay</h3>
+      <ol id="instructionList"></ol>
+    </div>
+
+    <button class="btn-primary-custom" onclick="nextStep(2)">
+      I've Paid — Next <span>→</span>
+    </button>
+  </div>
+
+  <!-- ── Step 3 ── -->
+  <div class="card step-content" id="step3">
+    <button class="btn-secondary-custom" onclick="prevStep(3)">← Back</button>
+    <div class="card-eyebrow">📎 Step 3 of 3</div>
+    <h2>Send Proof of Payment</h2>
+    <p class="subtitle">Attach your payment screenshot and send it to us through one of the options below.</p>
+
+    <div class="proof-section">
+      <div class="btn-send btn-gmail" id="gmail" onclick="sendProofPaymentGmail()">
+        <div class="send-icon">📧</div>
+        <div class="send-text">
           Send via Gmail
+          <span>Compose an email with your screenshot attached</span>
         </div>
-        <div
-          class="btn-send btn-facebook"
-          onclick="openModal()"
-        >
-          <img
-            src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg"
-            alt="Facebook"
-          />
-          Send via Facebook
+        <span class="arrow">→</span>
+      </div>
+
+      <div class="btn-send btn-facebook" onclick="openModal()">
+        <div class="send-icon">💬</div>
+        <div class="send-text">
+          Send via Facebook Messenger
+          <span>Message us directly on Facebook</span>
         </div>
-        <br />
+        <span class="arrow">→</span>
       </div>
     </div>
+  </div>
 
-    <!-- Custom Modal -->
-    <div id="facebookModal" class="custom-modal">
-      <div class="custom-modal-content">
-        <span class="close-btn" onclick="closeModal()">&times;</span>
-        <div class="modal-header">
-          <h2>📘 Feature Unavailable</h2>
-        </div>
-        <div class="modal-body">
-          This feature is currently not available right now. We're currently
-          working on that.
-        </div>
-        <div class="modal-footer">
-          <button class="modal-ok-btn" onclick="closeModal()">OK</button>
-        </div>
-      </div>
+</div>
+
+<!-- ── Facebook Unavailable Modal ── -->
+<div id="facebookModal" class="custom-modal">
+  <div class="custom-modal-content">
+    <div class="custom-modal-header">
+      <h2>🔧 Feature Unavailable</h2>
+      <button class="close-btn" onclick="closeModal()">×</button>
     </div>
+    <div class="custom-modal-body">
+      This feature is currently not available. We're actively working on Facebook Messenger integration — please use Gmail for now. Thank you for your patience!
+    </div>
+    <div class="custom-modal-footer">
+      <button class="modal-ok-btn" onclick="closeModal()">Got it</button>
+    </div>
+  </div>
+</div>
 
-    <script>
-      let selectedMethod = "";
+<script>
+  let selectedMethod = "";
 
-      // Accounts + Instructions for each method
-      const paymentData = {
-        GCash: {
-          title: "📱 Send Payment via GCash",
-          label: "📱 Choose GCash Number",
-          accounts: [
-            { value: "09958205788", label: "0995-8205-788" },
-            { value: "09177761278", label: "0917-7761-278" },
-          ],
-          instructions: [
-            "Select the GCash number you want to send to.",
-            "Copy the number above and go to your GCash app.",
-            "Enter the amount and confirm the payment (please pay the exact amount).",
-            "Take a screenshot of your payment confirmation and go back to this website.",
-            "Click the Next button and send your proof of payment via 📧 Gmail or 📘 Facebook Messenger.",
-          ],
-        },
-        BDO: {
-          title: "🏦 Send Payment via BDO",
-          label: "🏦 Choose BDO Account",
-          accounts: [
-            { value: "005960232783", label: "5960-2327-83 (Savings)" },
-          ],
-          instructions: [
-            "Select the BDO account you want to send to.",
-            "Copy the account number and log in to your BDO app or online banking.",
-            "Transfer the exact payment amount.",
-            "Take a screenshot of your transaction confirmation.",
-            "Click Next and send your proof of payment via 📧 Gmail or 📘 Facebook Messenger.",
-          ],
-        },
-        BPI: {
-          title: "🏦 Send Payment via our Local bank account",
-          label: "🏦 Choose LOLC_BANK Account",
-          accounts: [
-            {
-              value: "00801004679",
-              label: "008-01-00467-9 (Divinia A. Segui)",
-            },
-          ],
-          instructions: [
-            "Copy the account number and log in to your LOLC app or online banking.",
-            "Transfer the exact payment amount.",
-            "Take a screenshot of your transaction confirmation.",
-            "Click Next and send your proof of payment via 📧 Gmail or 📘 Facebook Messenger.",
-          ],
-        },
-      };
+  const paymentData = {
+    GCash: {
+      title: "GCash Payment",
+      label: "📱 Select GCash Number",
+      accounts: [
+        { value: "09958205788", label: "0995-820-5788" },
+        { value: "09177761278", label: "0917-776-1278" },
+      ],
+      instructions: [
+        "Select a GCash number from the dropdown above.",
+        "Copy the number and open your GCash app.",
+        "Tap <strong>Send Money</strong>, paste the number, and enter the exact amount.",
+        "Confirm the transaction and take a screenshot.",
+        "Click <strong>I've Paid — Next</strong> and send your screenshot via Gmail.",
+      ],
+    },
+    BDO: {
+      title: "BDO Bank Transfer",
+      label: "🏦 Select BDO Account",
+      accounts: [
+        { value: "005960232783", label: "5960-2327-83 (Savings)" },
+      ],
+      instructions: [
+        "Select the BDO account from the dropdown above.",
+        "Copy the account number and open your BDO online banking or app.",
+        "Proceed to <strong>Fund Transfer</strong> and enter the exact amount.",
+        "Confirm the transaction and take a screenshot of the confirmation.",
+        "Click <strong>I've Paid — Next</strong> and send your proof via Gmail.",
+      ],
+    },
+    BPI: {
+      title: "LOLC Bank Transfer",
+      label: "🏛️ Select LOLC Account",
+      accounts: [
+        { value: "00801004679", label: "008-01-00467-9 (Divinia A. Segui)" },
+      ],
+      instructions: [
+        "Note the account number shown above.",
+        "Log in to your LOLC app or online banking portal.",
+        "Go to <strong>Transfer Funds</strong> and enter the exact amount.",
+        "Include your full name as the reference.",
+        "Take a screenshot and send via Gmail in the next step.",
+      ],
+    },
+  };
 
-      function nextStep(step) {
-        if (step === 1 && !selectedMethod) {
-          alert("Please select a payment method first.");
-          return;
-        }
+  function nextStep(step) {
+    if (step === 1 && !selectedMethod) {
+      alert("Please select a payment method first.");
+      return;
+    }
+    document.getElementById("step" + step).classList.remove("visible");
+    document.getElementById("step" + (step + 1)).classList.add("visible");
+    if (step === 1) loadPaymentData(selectedMethod);
+    updateSteps(step + 1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
-        document.getElementById("step" + step).style.display = "none";
-        document.getElementById("step" + (step + 1)).style.display = "block";
+  function prevStep(step) {
+    document.getElementById("step" + step).classList.remove("visible");
+    document.getElementById("step" + (step - 1)).classList.add("visible");
+    updateSteps(step - 1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
-        if (step === 1) {
-          loadPaymentData(selectedMethod);
-        }
+  function updateSteps(current) {
+    for (let i = 1; i <= 3; i++) {
+      const item = document.getElementById("stepItem" + i);
+      item.classList.remove("active", "done");
+      if (i < current) item.classList.add("done");
+      else if (i === current) item.classList.add("active");
+    }
+    for (let i = 1; i <= 2; i++) {
+      const conn = document.getElementById("conn" + i);
+      conn.classList.toggle("done", i < current);
+    }
+  }
 
-        const steps = document.querySelectorAll(".step");
-        steps[step].classList.add("active");
-      }
+  function selectMethod(el, method) {
+    document.querySelectorAll(".method-card").forEach(c => c.classList.remove("active"));
+    el.classList.add("active");
+    selectedMethod = method;
+  }
 
-      function prevStep(step) {
-        document.getElementById("step" + step).style.display = "none";
-        document.getElementById("step" + (step - 1)).style.display = "block";
-      }
+  function loadPaymentData(method) {
+    const data = paymentData[method];
+    document.getElementById("step2Title").textContent = data.title;
+    document.getElementById("accountLabel").textContent = data.label;
 
-      function selectMethod(el, method) {
-        document
-          .querySelectorAll(".method-card")
-          .forEach((card) => card.classList.remove("active"));
-        el.classList.add("active");
-        selectedMethod = method;
-      }
+    const select = document.getElementById("accountSelect");
+    select.innerHTML = '<option value="">-- Select an account --</option>';
+    data.accounts.forEach(acc => {
+      select.innerHTML += `<option value="${acc.value}">${acc.label}</option>`;
+    });
 
-      function loadPaymentData(method) {
-        const data = paymentData[method];
+    const list = document.getElementById("instructionList");
+    list.innerHTML = "";
+    data.instructions.forEach(text => {
+      list.innerHTML += `<li>${text}</li>`;
+    });
 
-        document.getElementById("step2Title").textContent = data.title;
-        document.getElementById("accountLabel").textContent = data.label;
+    document.getElementById("accountBox").style.display = "none";
+  }
 
-        const select = document.getElementById("accountSelect");
-        select.innerHTML = '<option value="">-- Select an option --</option>';
-        data.accounts.forEach((acc) => {
-          select.innerHTML += `<option value="${acc.value}">${acc.label}</option>`;
-        });
+  function showAccount() {
+    const select = document.getElementById("accountSelect");
+    const box = document.getElementById("accountBox");
+    const display = document.getElementById("selectedAccount");
+    if (select.value) {
+      display.textContent = select.value;
+      box.style.display = "flex";
+    } else {
+      box.style.display = "none";
+    }
+  }
 
-        const instructionList = document.getElementById("instructionList");
-        instructionList.innerHTML = "";
-        data.instructions.forEach((text) => {
-          instructionList.innerHTML += `<li>${text}</li>`;
-        });
+  function copyAccount() {
+    const account = document.getElementById("selectedAccount").textContent;
+    navigator.clipboard.writeText(account).then(() => {
+      const btn = document.querySelector(".btn-copy");
+      btn.textContent = "✅ Copied!";
+      setTimeout(() => { btn.innerHTML = "📋 Copy"; }, 2000);
+    });
+  }
 
-        document.getElementById("accountBox").style.display = "none";
-      }
+  function sendProofPaymentGmail() {
+    if (!selectedMethod) { alert("Please complete all steps first."); return; }
+    const email = "adelzarajhonmarcel@gmail.com";
+    const subject = "Proof of Payment";
+    const body = `Hello,\n\nPlease find my proof of payment attached.\n\nPayment Method: ${selectedMethod}\n\nThank you.`;
+    window.open(
+      `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
+      "_blank"
+    );
+  }
 
-      function showAccount() {
-        const select = document.getElementById("accountSelect");
-        const selectedAccount = document.getElementById("selectedAccount");
-        const accountBox = document.getElementById("accountBox");
+  function openModal() {
+    document.getElementById("facebookModal").classList.add("open");
+  }
+  function closeModal() {
+    document.getElementById("facebookModal").classList.remove("open");
+  }
+  window.addEventListener("click", e => {
+    const modal = document.getElementById("facebookModal");
+    if (e.target === modal) closeModal();
+  });
+</script>
 
-        if (select.value) {
-          selectedAccount.textContent = select.value;
-          accountBox.style.display = "block";
-        } else {
-          accountBox.style.display = "none";
-        }
-      }
-
-      function copyAccount() {
-        const account = document.getElementById("selectedAccount").textContent;
-        navigator.clipboard.writeText(account).then(() => {
-          alert("✅ Copied: " + account);
-        });
-      }
-
-      // ✅ Gmail direct compose
-      function sendProofPaymentGmail() {
-        if (!selectedMethod) {
-          alert("Please complete all fields before sending.");
-          return;
-        }
-
-        const email = "adelzarajhonmarcel@gmail.com";
-        const subject = "Proof of Payment";
-        const body = `Hello,\n\nPlease attach your proof of payment here.\n\nPayment Method: ${selectedMethod}\n\nThank you.`;
-
-        // Open Gmail compose in a new tab
-        window.open(
-          `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(
-            subject
-          )}&body=${encodeURIComponent(body)}`,
-          "_blank"
-        );
-      }
-
-      function openModal() {
-        document.getElementById("facebookModal").style.display = "block";
-      }
-
-      function closeModal() {
-        document.getElementById("facebookModal").style.display = "none";
-      }
-
-      window.onclick = function (event) {
-        const modal = document.getElementById("facebookModal");
-        if (event.target === modal) {
-          modal.style.display = "none";
-        }
-      };
-    </script>
-
-    <script src="assets/js/enroll.js"></script>
-  </body>
+<script src="assets/js/enroll.js"></script>
+</body>
 </html>
