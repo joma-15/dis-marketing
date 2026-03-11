@@ -86,21 +86,22 @@
     .hero-right p { color: var(--muted); font-size: 1rem; }
 
     /* ── Plan Type Cards ── */
-    .plan-type-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+    .plan-type-single {
+      display: flex;
+      justify-content: center;
     }
     .plan-type-card {
       background: white;
       border: 2px solid var(--border);
       border-radius: 18px;
-      padding: 22px 20px;
+      padding: 28px 32px;
       cursor: pointer;
       transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
       position: relative;
       overflow: hidden;
       text-align: center;
+      width: 100%;
+      max-width: 260px;
     }
     .plan-type-card::before {
       content: '';
@@ -415,41 +416,17 @@
         <p class="text-uppercase fw-700 mb-2" style="color:var(--accent);letter-spacing:2px;font-size:0.8rem;font-weight:700">Step 1 of 4</p>
         <h2>Choose Your<br/>Coverage Plan</h2>
         <p class="mb-4">Select the plan type that fits your needs. Each category offers tailored benefits and pricing.</p>
-        <div class="plan-type-grid">
 
-          <!-- Individual -->
-          <div class="plan-type-card" data-bs-toggle="modal" data-bs-target="#plansModal_Individual">
-            <div class="arrow-badge"><i class="fa fa-arrow-right"></i></div>
-            <div class="icon-wrap"><i class="fa fa-user"></i></div>
-            <span class="type-label">Individual</span>
-            <span class="type-desc">Perfect for single coverage</span>
-          </div>
-
-          <!-- Family -->
-          <div class="plan-type-card" data-bs-toggle="modal" data-bs-target="#plansModal_Family">
-            <div class="arrow-badge"><i class="fa fa-arrow-right"></i></div>
-            <div class="icon-wrap"><i class="fa fa-people-roof"></i></div>
-            <span class="type-label">Family</span>
-            <span class="type-desc">Coverage for your whole family</span>
-          </div>
-
-          <!-- Senior -->
-          <div class="plan-type-card" data-bs-toggle="modal" data-bs-target="#plansModal_Senior">
-            <div class="arrow-badge"><i class="fa fa-arrow-right"></i></div>
-            <div class="icon-wrap"><i class="fa fa-heart-pulse"></i></div>
-            <span class="type-label">Senior</span>
-            <span class="type-desc">Specialized care for seniors</span>
-          </div>
-
-          <!-- Group -->
+        <!-- Group only — centered single card -->
+        <div class="plan-type-single">
           <div class="plan-type-card" data-bs-toggle="modal" data-bs-target="#plansModal_Group">
             <div class="arrow-badge"><i class="fa fa-arrow-right"></i></div>
             <div class="icon-wrap"><i class="fa fa-building"></i></div>
             <span class="type-label">Group</span>
             <span class="type-desc">Ideal for organizations</span>
           </div>
-
         </div>
+
       </div>
     </div>
   </div>
@@ -462,30 +439,8 @@
 ══════════════════════════════════════════════════════════ -->
 <script>
 const PLAN_DATA = {
-  Individual: [
-    // 60K
-    { tier: '60,000 Health Plans', name: '60K ABL', room: 'Ward',         quarterly: '3,340', semi: '6,240',  annual: '12,000' },
-    { tier: '60,000 Health Plans', name: '60K MBL', room: 'Semi-Private', quarterly: '3,402', semi: '6,678',  annual: '12,600' },
-    // 100K
-    { tier: '100,000 Health Plans', name: '100K ABL', room: 'Ward',         quarterly: '4,860', semi: '9,360',  annual: '18,000' },
-    { tier: '100,000 Health Plans', name: '100K MBL', room: 'Semi-Private', quarterly: '4,860', semi: '9,360', annual: '18,600' },
-    // 120K
-    { tier: '120,000 Health Plans', name: '120K ABL', room: 'Ward',    quarterly: '5,832', semi: '11,232', annual: '21,600' },
-    { tier: '120,000 Health Plans', name: '120K MBL', room: 'Private', quarterly: '5,994', semi: '11,766', annual: '22,200' },
-  ],
-  Family: [
-    { tier: '50,000 Health Plans', name: '50K ABL', room: 'Ward',         quarterly: '1,800',  semi: '3,600', annual: '7,200' },
-  ],
-  Senior: [
-    { tier: '60,000 Health Plans', name: '60K ABL', room: 'Ward',         quarterly: '3,340', semi: '6,240',  annual: '12,000' },
-    { tier: '60,000 Health Plans', name: '60K MBL', room: 'Semi-Private', quarterly: '3,402', semi: '6,678',  annual: '12,600' },
-    { tier: '100,000 Health Plans', name: '100K ABL', room: 'Ward',         quarterly: '4,860', semi: '9,360',  annual: '18,000' },
-    { tier: '100,000 Health Plans', name: '100K MBL', room: 'Semi-Private', quarterly: '4,860', semi: '9,360', annual: '18,600' },
-    { tier: '120,000 Health Plans', name: '120K ABL', room: 'Ward',    quarterly: '5,832', semi: '11,232', annual: '21,600' },
-    { tier: '120,000 Health Plans', name: '120K MBL', room: 'Private', quarterly: '5,994', semi: '11,766', annual: '22,200' },
-  ],
   Group: [
-    { tier: '50,000 Health Plans', name: '50K ABL', room: 'Ward',         quarterly: '1,800',  semi: '3,600', annual: '7,200' },
+    { tier: '50,000 Health Plans', name: '50K ABL', room: 'Ward', quarterly: '1,800', semi: '3,600', annual: '7,200' },
   ],
 };
 
@@ -501,7 +456,7 @@ const BENEFITS = [
 
 
 <!-- ════════════════════════════════════════════════════════
-     PLAN MODALS — one per plan type (generated by JS below)
+     PLAN MODALS — generated by JS below
 ══════════════════════════════════════════════════════════ -->
 <div id="plan-modals-container"></div>
 
@@ -519,9 +474,9 @@ const BENEFITS = [
       <div class="modal-body p-4">
         <p class="text-muted mb-3" style="font-size:0.9rem">Review your selected plan before continuing.</p>
         <div class="confirm-summary">
-          <span class="plan-type-tag" id="conf-plan-type">Individual</span>
-          <div class="plan-name" id="conf-plan-name">60K ABL – Ward</div>
-          <div class="plan-price" id="conf-plan-price">₱4,000</div>
+          <span class="plan-type-tag" id="conf-plan-type">Group</span>
+          <div class="plan-name" id="conf-plan-name">50K ABL – Ward</div>
+          <div class="plan-price" id="conf-plan-price">₱1,800</div>
           <div style="font-size:0.82rem;color:var(--muted);margin-top:4px;" id="conf-plan-period">Quarterly</div>
         </div>
         <p style="font-size:0.85rem;color:var(--muted)"><i class="fa fa-info-circle me-1 text-warning"></i>Pre-existing conditions may affect your coverage terms.</p>
@@ -657,16 +612,10 @@ const BENEFITS = [
 //  Build plan modals dynamically from PLAN_DATA
 // ════════════════════════════════════════════
 const PLAN_ICONS = {
-  Individual: 'fa-user',
-  Family: 'fa-people-roof',
-  Senior: 'fa-heart-pulse',
   Group: 'fa-building'
 };
 
 const PLAN_SUBTITLES = {
-  Individual: 'Single coverage · Tailored for you',
-  Family: 'Coverage for the whole family',
-  Senior: 'Specialized senior care',
   Group: 'Ideal for businesses & organizations'
 };
 
