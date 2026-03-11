@@ -4,362 +4,1531 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Divinia Insurance — One Place. Endless Possibilities.</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
       :root {
-        --bg: #f5f3ef; --bg-alt: #eceae4; --ink: #0e0d0b; --ink-soft: #4a4845;
-        --card: #ffffff; --gold: #c9a84c; --gold-light: #e8c96a;
-        --navy: #0d1b3e; --navy-mid: #1a3060; --accent: #c9a84c;
-        --shadow-sm: 0 2px 12px rgba(14,13,11,.07); --shadow-md: 0 8px 32px rgba(14,13,11,.12);
-        --shadow-lg: 0 20px 60px rgba(14,13,11,.15); --transition: all .35s cubic-bezier(.4,0,.2,1);
+        --bg: #f5f3ef;
+        --bg-alt: #eceae4;
+        --ink: #0e0d0b;
+        --ink-soft: #4a4845;
+        --card: #ffffff;
+        --gold: #c9a84c;
+        --gold-light: #e8c96a;
+        --navy: #0d1b3e;
+        --navy-mid: #1a3060;
+        --accent: #c9a84c;
+        --shadow-sm: 0 2px 12px rgba(14, 13, 11, 0.07);
+        --shadow-md: 0 8px 32px rgba(14, 13, 11, 0.12);
+        --shadow-lg: 0 20px 60px rgba(14, 13, 11, 0.15);
+        --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
       }
       [data-theme="dark"] {
-        --bg: #0d0c0a; --bg-alt: #141210; --ink: #f0ede8; --ink-soft: #9e9b95;
-        --card: #1c1a16; --navy: #e8dcc8; --navy-mid: #c9a84c;
-        --shadow-sm: 0 2px 12px rgba(0,0,0,.3); --shadow-md: 0 8px 32px rgba(0,0,0,.4);
-        --shadow-lg: 0 20px 60px rgba(0,0,0,.5);
+        --bg: #0d0c0a;
+        --bg-alt: #141210;
+        --ink: #f0ede8;
+        --ink-soft: #9e9b95;
+        --card: #1c1a16;
+        --navy: #e8dcc8;
+        --navy-mid: #c9a84c;
+        --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.4);
+        --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
       }
-      *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-      html{scroll-behavior:smooth}
-      body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--ink);transition:background .4s,color .4s;overflow-x:hidden}
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        transition:
+          background 0.4s,
+          color 0.4s;
+        overflow-x: hidden;
+      }
 
       /* PRELOADER */
-      #preloader{position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .7s ease,visibility .7s ease}
-      .preloader-inner{text-align:center}
-      .preloader-ring{width:64px;height:64px;border:3px solid rgba(201,168,76,.2);border-top-color:var(--gold);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 1.2rem}
-      .preloader-logo-text{font-family:"Playfair Display",serif;font-size:1.5rem;font-weight:700;color:var(--gold);letter-spacing:2px}
-      #preloader.fade-out{opacity:0;visibility:hidden}
-      @keyframes spin{to{transform:rotate(360deg)}}
+      #preloader {
+        position: fixed;
+        inset: 0;
+        background: var(--navy);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition:
+          opacity 0.7s ease,
+          visibility 0.7s ease;
+      }
+      .preloader-inner {
+        text-align: center;
+      }
+      .preloader-ring {
+        width: 64px;
+        height: 64px;
+        border: 3px solid rgba(201, 168, 76, 0.2);
+        border-top-color: var(--gold);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 1.2rem;
+      }
+      .preloader-logo-text {
+        font-family: "Playfair Display", serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--gold);
+        letter-spacing: 2px;
+      }
+      #preloader.fade-out {
+        opacity: 0;
+        visibility: hidden;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
 
       /* ══════════════════════════════════════════════
          SIDEBAR
       ══════════════════════════════════════════════ */
-      .sidebar{
-        position:fixed;top:0;left:0;width:270px;height:100vh;
-        background:var(--navy);display:flex;flex-direction:column;
-        padding:0 0 2rem;z-index:1050;
-        transition:left .4s cubic-bezier(.4,0,.2,1);
-        border-right:1px solid rgba(201,168,76,.15);
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 270px;
+        height: 100vh;
+        background: var(--navy);
+        display: flex;
+        flex-direction: column;
+        padding: 0 0 2rem;
+        z-index: 1050;
+        transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border-right: 1px solid rgba(201, 168, 76, 0.15);
       }
-      [data-theme="dark"] .sidebar{background:#0d0c0a;border-right-color:rgba(201,168,76,.2)}
+      [data-theme="dark"] .sidebar {
+        background: #0d0c0a;
+        border-right-color: rgba(201, 168, 76, 0.2);
+      }
 
       /* ── Brand / Logo Area ── */
-      .sidebar-brand{
-        display:flex;align-items:center;gap:1rem;
-        padding:1.6rem 1.5rem 1.4rem;
-        border-bottom:1px solid rgba(201,168,76,.15);
-        position:relative;
-        background:rgba(0,0,0,.18);
-        flex-shrink:0;
+      .sidebar-brand {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.6rem 1.5rem 1.4rem;
+        border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+        position: relative;
+        background: rgba(0, 0, 0, 0.18);
+        flex-shrink: 0;
       }
       /* Subtle gold shimmer line at very top */
-      .sidebar-brand::before{
-        content:"";position:absolute;top:0;left:0;right:0;height:2px;
-        background:linear-gradient(90deg,transparent,var(--gold),transparent);
-        opacity:.6;
+      .sidebar-brand::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--gold),
+          transparent
+        );
+        opacity: 0.6;
       }
 
       /* Logo image container — square, rounded, with gold ring */
-      .sidebar-logo-wrap{
-        width:46px;height:46px;
-        border-radius:12px;
-        background:#fff;
-        border:2px solid rgba(201,168,76,.5);
-        box-shadow:0 4px 14px rgba(0,0,0,.3), 0 0 0 4px rgba(201,168,76,.08);
-        overflow:hidden;
-        flex-shrink:0;
-        display:flex;align-items:center;justify-content:center;
-        position:relative;
+      .sidebar-logo-wrap {
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        background: #fff;
+        border: 2px solid rgba(201, 168, 76, 0.5);
+        box-shadow:
+          0 4px 14px rgba(0, 0, 0, 0.3),
+          0 0 0 4px rgba(201, 168, 76, 0.08);
+        overflow: hidden;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
       }
-      .sidebar-logo-wrap img{
-        width:100%;height:100%;
-        object-fit:contain;
+      .sidebar-logo-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
         /* slight padding so logo breathes inside the box */
-        padding:4px;
+        padding: 4px;
       }
       /* Fallback shown when img fails */
-      .sidebar-logo-fallback{
-        display:none;
-        font-family:"Playfair Display",serif;
-        font-size:1.2rem;font-weight:900;
-        color:var(--navy);letter-spacing:-1px;
+      .sidebar-logo-fallback {
+        display: none;
+        font-family: "Playfair Display", serif;
+        font-size: 1.2rem;
+        font-weight: 900;
+        color: var(--navy);
+        letter-spacing: -1px;
       }
 
-      .sidebar-brand-text{min-width:0}
-      .sidebar-brand-text strong{
-        display:block;
-        font-family:"Playfair Display",serif;
-        font-size:1rem;font-weight:700;
-        color:#fff;letter-spacing:.3px;
-        white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+      .sidebar-brand-text {
+        min-width: 0;
       }
-      .sidebar-brand-text span{
-        font-size:.65rem;color:var(--gold);
-        letter-spacing:2.5px;text-transform:uppercase;
-        font-weight:600;
+      .sidebar-brand-text strong {
+        display: block;
+        font-family: "Playfair Display", serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: 0.3px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .sidebar-brand-text span {
+        font-size: 0.65rem;
+        color: var(--gold);
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        font-weight: 600;
       }
 
       /* ── Nav ── */
-      .sidebar-nav-wrap{
-        flex:1;overflow-y:auto;padding:1.2rem 1rem;
-        scrollbar-width:thin;scrollbar-color:rgba(201,168,76,.2) transparent;
+      .sidebar-nav-wrap {
+        flex: 1;
+        overflow-y: auto;
+        padding: 1.2rem 1rem;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(201, 168, 76, 0.2) transparent;
       }
-      .sidebar-label{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin:.8rem .6rem .4rem;font-weight:600}
-      .sidebar-nav a{display:flex;align-items:center;gap:.8rem;color:rgba(255,255,255,.55);text-decoration:none;padding:.72rem 1rem;border-radius:10px;margin-bottom:2px;font-size:.875rem;font-weight:500;transition:var(--transition);position:relative}
-      .sidebar-nav a i{width:18px;text-align:center;font-size:.9rem;flex-shrink:0}
-      .sidebar-nav a:hover,.sidebar-nav a.active{color:#fff;background:rgba(201,168,76,.1)}
-      .sidebar-nav a.active{color:var(--gold)}
-      .sidebar-nav a.active::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:60%;background:var(--gold);border-radius:0 3px 3px 0}
+      .sidebar-label {
+        font-size: 0.6rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.25);
+        margin: 0.8rem 0.6rem 0.4rem;
+        font-weight: 600;
+      }
+      .sidebar-nav a {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        color: rgba(255, 255, 255, 0.55);
+        text-decoration: none;
+        padding: 0.72rem 1rem;
+        border-radius: 10px;
+        margin-bottom: 2px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: var(--transition);
+        position: relative;
+      }
+      .sidebar-nav a i {
+        width: 18px;
+        text-align: center;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+      }
+      .sidebar-nav a:hover,
+      .sidebar-nav a.active {
+        color: #fff;
+        background: rgba(201, 168, 76, 0.1);
+      }
+      .sidebar-nav a.active {
+        color: var(--gold);
+      }
+      .sidebar-nav a.active::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 3px;
+        height: 60%;
+        background: var(--gold);
+        border-radius: 0 3px 3px 0;
+      }
 
-      .sidebar-footer{padding:0 1rem;border-top:1px solid rgba(255,255,255,.07);padding-top:1rem}
-      .sidebar-footer a{display:flex;align-items:center;gap:.8rem;color:rgba(255,255,255,.4);text-decoration:none;font-size:.85rem;padding:.6rem .8rem;border-radius:8px;transition:var(--transition)}
-      .sidebar-footer a:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+      .sidebar-footer {
+        padding: 0 1rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.07);
+        padding-top: 1rem;
+      }
+      .sidebar-footer a {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        color: rgba(255, 255, 255, 0.4);
+        text-decoration: none;
+        font-size: 0.85rem;
+        padding: 0.6rem 0.8rem;
+        border-radius: 8px;
+        transition: var(--transition);
+      }
+      .sidebar-footer a:hover {
+        color: var(--gold);
+        background: rgba(201, 168, 76, 0.08);
+      }
 
       /* BACKDROP */
-      .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.6);opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s;z-index:1040;backdrop-filter:blur(4px)}
-      .backdrop.active{opacity:1;visibility:visible}
+      .backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.4s,
+          visibility 0.4s;
+        z-index: 1040;
+        backdrop-filter: blur(4px);
+      }
+      .backdrop.active {
+        opacity: 1;
+        visibility: visible;
+      }
 
       /* MAIN */
-      .main-content{margin-left:270px;min-height:100vh;transition:margin-left .4s}
+      .main-content {
+        margin-left: 270px;
+        min-height: 100vh;
+        transition: margin-left 0.4s;
+      }
 
       /* TOPBAR */
-      .topbar{background:var(--card);height:68px;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;border-bottom:1px solid rgba(0,0,0,.06);box-shadow:var(--shadow-sm)}
-      [data-theme="dark"] .topbar{border-bottom-color:rgba(255,255,255,.05)}
-      .topbar-left{display:flex;align-items:center;gap:1rem}
-      .menu-toggle{display:none;font-size:1.3rem;cursor:pointer;color:var(--ink);border:none;background:none;padding:.3rem}
-      .topbar-title{font-family:"Playfair Display",serif;font-size:1.1rem;font-weight:700;color:var(--navy)}
-      [data-theme="dark"] .topbar-title{color:var(--gold)}
-      .topbar-right{display:flex;align-items:center;gap:1rem}
-      .topbar-badge{background:var(--navy);color:#fff;font-size:.7rem;letter-spacing:1px;text-transform:uppercase;padding:.35rem .9rem;border-radius:20px;font-weight:600}
-      [data-theme="dark"] .topbar-badge{background:var(--gold);color:var(--navy)}
-      .theme-btn{width:38px;height:38px;border-radius:50%;background:var(--bg-alt);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--ink-soft);transition:var(--transition)}
-      .theme-btn:hover{background:var(--gold);color:#fff;transform:rotate(20deg)}
+      .topbar {
+        background: var(--card);
+        height: 68px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 2rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        box-shadow: var(--shadow-sm);
+      }
+      [data-theme="dark"] .topbar {
+        border-bottom-color: rgba(255, 255, 255, 0.05);
+      }
+      .topbar-left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .menu-toggle {
+        display: none;
+        font-size: 1.3rem;
+        cursor: pointer;
+        color: var(--ink);
+        border: none;
+        background: none;
+        padding: 0.3rem;
+      }
+      .topbar-title {
+        font-family: "Playfair Display", serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--navy);
+      }
+      [data-theme="dark"] .topbar-title {
+        color: var(--gold);
+      }
+      .topbar-right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .topbar-badge {
+        background: var(--navy);
+        color: #fff;
+        font-size: 0.7rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 0.35rem 0.9rem;
+        border-radius: 20px;
+        font-weight: 600;
+      }
+      [data-theme="dark"] .topbar-badge {
+        background: var(--gold);
+        color: var(--navy);
+      }
+      .theme-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: var(--bg-alt);
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        color: var(--ink-soft);
+        transition: var(--transition);
+      }
+      .theme-btn:hover {
+        background: var(--gold);
+        color: #fff;
+        transform: rotate(20deg);
+      }
 
       /* DASHBOARD */
-      .dashboard{padding:2.5rem 2rem}
+      .dashboard {
+        padding: 2.5rem 2rem;
+      }
 
       /* HERO BANNER */
-      .hero-banner{background:var(--navy);border-radius:20px;padding:3.5rem;display:grid;grid-template-columns:1fr auto;align-items:center;gap:2rem;position:relative;overflow:hidden;margin-bottom:2.5rem;box-shadow:var(--shadow-lg)}
-      .hero-banner::before{content:"";position:absolute;top:-60px;right:200px;width:300px;height:300px;background:radial-gradient(circle,rgba(201,168,76,.15) 0%,transparent 70%);border-radius:50%;pointer-events:none}
-      .hero-banner::after{content:"";position:absolute;bottom:-40px;left:30%;width:200px;height:200px;background:radial-gradient(circle,rgba(201,168,76,.08) 0%,transparent 70%);border-radius:50%;pointer-events:none}
-      .hero-eyebrow{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
-      .hero-eyebrow::before{content:"";width:24px;height:2px;background:var(--gold)}
-      .hero-title{font-family:"Playfair Display",serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:900;color:#fff;line-height:1.2;margin-bottom:1rem}
-      .hero-title em{color:var(--gold);font-style:italic}
-      .hero-sub{color:rgba(255,255,255,.6);font-size:.95rem;line-height:1.7;max-width:420px;margin-bottom:2rem}
-      .hero-actions{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
-      .btn-gold{background:var(--gold);color:var(--navy);border:none;padding:.8rem 2rem;border-radius:50px;font-weight:700;font-size:.9rem;cursor:pointer;transition:var(--transition);text-decoration:none;letter-spacing:.3px}
-      .btn-gold:hover{background:var(--gold-light);color:var(--navy);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.4)}
-      .btn-outline-light-custom{background:transparent;color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.2);padding:.8rem 2rem;border-radius:50px;font-weight:500;font-size:.9rem;cursor:pointer;transition:var(--transition);text-decoration:none}
-      .btn-outline-light-custom:hover{border-color:var(--gold);color:var(--gold)}
-      .hero-graphic{width:180px;height:180px;position:relative;flex-shrink:0}
-      .hero-graphic-ring{width:100%;height:100%;border-radius:50%;border:2px dashed rgba(201,168,76,.3);display:flex;align-items:center;justify-content:center;animation:slowspin 20s linear infinite}
-      .hero-graphic-inner{width:120px;height:120px;border-radius:50%;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;font-size:3rem}
-      @keyframes slowspin{to{transform:rotate(360deg)}}
+      .hero-banner {
+        background: var(--navy);
+        border-radius: 20px;
+        padding: 3.5rem;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 2rem;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 2.5rem;
+        box-shadow: var(--shadow-lg);
+      }
+      .hero-banner::before {
+        content: "";
+        position: absolute;
+        top: -60px;
+        right: 200px;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(
+          circle,
+          rgba(201, 168, 76, 0.15) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        pointer-events: none;
+      }
+      .hero-banner::after {
+        content: "";
+        position: absolute;
+        bottom: -40px;
+        left: 30%;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(
+          circle,
+          rgba(201, 168, 76, 0.08) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        pointer-events: none;
+      }
+      .hero-eyebrow {
+        font-size: 0.7rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--gold);
+        font-weight: 600;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .hero-eyebrow::before {
+        content: "";
+        width: 24px;
+        height: 2px;
+        background: var(--gold);
+      }
+      .hero-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.8rem, 3vw, 2.8rem);
+        font-weight: 900;
+        color: #fff;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+      }
+      .hero-title em {
+        color: var(--gold);
+        font-style: italic;
+      }
+      .hero-sub {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.95rem;
+        line-height: 1.7;
+        max-width: 420px;
+        margin-bottom: 2rem;
+      }
+      .hero-actions {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .btn-gold {
+        background: var(--gold);
+        color: var(--navy);
+        border: none;
+        padding: 0.8rem 2rem;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: var(--transition);
+        text-decoration: none;
+        letter-spacing: 0.3px;
+      }
+      .btn-gold:hover {
+        background: var(--gold-light);
+        color: var(--navy);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(201, 168, 76, 0.4);
+      }
+      .btn-outline-light-custom {
+        background: transparent;
+        color: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 0.8rem 2rem;
+        border-radius: 50px;
+        font-weight: 500;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: var(--transition);
+        text-decoration: none;
+      }
+      .btn-outline-light-custom:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+      .hero-graphic {
+        width: 180px;
+        height: 180px;
+        position: relative;
+        flex-shrink: 0;
+      }
+      .hero-graphic-ring {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 2px dashed rgba(201, 168, 76, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: slowspin 20s linear infinite;
+      }
+      .hero-graphic-inner {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: rgba(201, 168, 76, 0.1);
+        border: 1px solid rgba(201, 168, 76, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+      }
+      @keyframes slowspin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
 
       /* STAT CARDS */
-      .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-bottom:2.5rem}
-      .stat-card{background:var(--card);border-radius:16px;padding:1.5rem;box-shadow:var(--shadow-sm);position:relative;overflow:hidden;transition:var(--transition);border:1px solid rgba(0,0,0,.04)}
-      [data-theme="dark"] .stat-card{border-color:rgba(255,255,255,.05)}
-      .stat-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
-      .stat-card::after{content:"";position:absolute;bottom:0;left:0;width:100%;height:3px;background:var(--gold);transform:scaleX(0);transition:transform .3s;transform-origin:left}
-      .stat-card:hover::after{transform:scaleX(1)}
-      .stat-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:1rem}
-      .stat-icon.gold{background:rgba(201,168,76,.12);color:var(--gold)}
-      .stat-icon.navy{background:rgba(13,27,62,.08);color:var(--navy-mid)}
-      [data-theme="dark"] .stat-icon.navy{background:rgba(201,168,76,.08);color:var(--gold)}
-      .stat-icon.green{background:rgba(34,197,94,.1);color:#16a34a}
-      .stat-icon.blue{background:rgba(59,130,246,.1);color:#2563eb}
-      .stat-value{font-size:1.8rem;font-weight:700;font-family:"Playfair Display",serif;color:var(--ink);line-height:1}
-      .stat-label{font-size:.8rem;color:var(--ink-soft);margin-top:.3rem;letter-spacing:.3px}
+      .stats-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.2rem;
+        margin-bottom: 2.5rem;
+      }
+      .stat-card {
+        background: var(--card);
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: var(--shadow-sm);
+        position: relative;
+        overflow: hidden;
+        transition: var(--transition);
+        border: 1px solid rgba(0, 0, 0, 0.04);
+      }
+      [data-theme="dark"] .stat-card {
+        border-color: rgba(255, 255, 255, 0.05);
+      }
+      .stat-card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-md);
+      }
+      .stat-card::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--gold);
+        transform: scaleX(0);
+        transition: transform 0.3s;
+        transform-origin: left;
+      }
+      .stat-card:hover::after {
+        transform: scaleX(1);
+      }
+      .stat-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+      }
+      .stat-icon.gold {
+        background: rgba(201, 168, 76, 0.12);
+        color: var(--gold);
+      }
+      .stat-icon.navy {
+        background: rgba(13, 27, 62, 0.08);
+        color: var(--navy-mid);
+      }
+      [data-theme="dark"] .stat-icon.navy {
+        background: rgba(201, 168, 76, 0.08);
+        color: var(--gold);
+      }
+      .stat-icon.green {
+        background: rgba(34, 197, 94, 0.1);
+        color: #16a34a;
+      }
+      .stat-icon.blue {
+        background: rgba(59, 130, 246, 0.1);
+        color: #2563eb;
+      }
+      .stat-value {
+        font-size: 1.8rem;
+        font-weight: 700;
+        font-family: "Playfair Display", serif;
+        color: var(--ink);
+        line-height: 1;
+      }
+      .stat-label {
+        font-size: 0.8rem;
+        color: var(--ink-soft);
+        margin-top: 0.3rem;
+        letter-spacing: 0.3px;
+      }
 
       /* SECTION HEADING */
-      .section-heading{margin-bottom:1.5rem}
-      .section-heading .overline{font-size:.65rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:.3rem}
-      .section-heading h2{font-family:"Playfair Display",serif;font-size:1.5rem;font-weight:700;color:var(--navy)}
-      [data-theme="dark"] .section-heading h2{color:var(--ink)}
+      .section-heading {
+        margin-bottom: 1.5rem;
+      }
+      .section-heading .overline {
+        font-size: 0.65rem;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--gold);
+        font-weight: 700;
+        margin-bottom: 0.3rem;
+      }
+      .section-heading h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--navy);
+      }
+      [data-theme="dark"] .section-heading h2 {
+        color: var(--ink);
+      }
 
       /* CONTENT GRID */
-      .content-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:1.5rem;margin-bottom:2.5rem}
+      .content-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 1.5rem;
+        margin-bottom: 2.5rem;
+      }
 
       /* ABOUT CARD */
-      .about-card{background:var(--card);border-radius:20px;padding:2.5rem;box-shadow:var(--shadow-sm);border:1px solid rgba(0,0,0,.04)}
-      [data-theme="dark"] .about-card{border-color:rgba(255,255,255,.05)}
-      .about-card p{color:var(--ink-soft);line-height:1.8;font-size:.95rem;margin-bottom:1.5rem}
-      .about-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
-      .tag{background:var(--bg-alt);color:var(--ink-soft);font-size:.75rem;padding:.3rem .8rem;border-radius:20px;font-weight:500}
-      [data-theme="dark"] .tag{background:rgba(255,255,255,.07)}
+      .about-card {
+        background: var(--card);
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid rgba(0, 0, 0, 0.04);
+      }
+      [data-theme="dark"] .about-card {
+        border-color: rgba(255, 255, 255, 0.05);
+      }
+      .about-card p {
+        color: var(--ink-soft);
+        line-height: 1.8;
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+      }
+      .about-tags {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.5rem;
+      }
+      .tag {
+        background: var(--bg-alt);
+        color: var(--ink-soft);
+        font-size: 0.75rem;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-weight: 500;
+      }
+      [data-theme="dark"] .tag {
+        background: rgba(255, 255, 255, 0.07);
+      }
 
       /* VISION MISSION */
-      .vm-stack{display:flex;flex-direction:column;gap:1.2rem}
-      .vm-card{background:var(--card);border-radius:16px;padding:1.8rem;box-shadow:var(--shadow-sm);border:1px solid rgba(0,0,0,.04);position:relative;overflow:hidden}
-      [data-theme="dark"] .vm-card{border-color:rgba(255,255,255,.05)}
-      .vm-card .vm-icon{font-size:2rem;margin-bottom:.8rem;display:block}
-      .vm-card h4{font-family:"Playfair Display",serif;font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
-      [data-theme="dark"] .vm-card h4{color:var(--gold)}
-      .vm-card p{color:var(--ink-soft);font-size:.85rem;line-height:1.7}
-      .vm-card .vm-accent{position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle at top right,rgba(201,168,76,.12) 0%,transparent 60%)}
+      .vm-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+      .vm-card {
+        background: var(--card);
+        border-radius: 16px;
+        padding: 1.8rem;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid rgba(0, 0, 0, 0.04);
+        position: relative;
+        overflow: hidden;
+      }
+      [data-theme="dark"] .vm-card {
+        border-color: rgba(255, 255, 255, 0.05);
+      }
+      .vm-card .vm-icon {
+        font-size: 2rem;
+        margin-bottom: 0.8rem;
+        display: block;
+      }
+      .vm-card h4 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--navy);
+        margin-bottom: 0.5rem;
+      }
+      [data-theme="dark"] .vm-card h4 {
+        color: var(--gold);
+      }
+      .vm-card p {
+        color: var(--ink-soft);
+        font-size: 0.85rem;
+        line-height: 1.7;
+      }
+      .vm-card .vm-accent {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 80px;
+        height: 80px;
+        background: radial-gradient(
+          circle at top right,
+          rgba(201, 168, 76, 0.12) 0%,
+          transparent 60%
+        );
+      }
 
       /* SERVICES PREVIEW */
-      .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-bottom:2.5rem}
-      .service-card{background:var(--card);border-radius:18px;overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid rgba(0,0,0,.04);transition:var(--transition);cursor:pointer}
-      [data-theme="dark"] .service-card{border-color:rgba(255,255,255,.05)}
-      .service-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
-      .service-card-img{height:160px;overflow:hidden;position:relative}
-      .service-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
-      .service-card:hover .service-card-img img{transform:scale(1.05)}
-      .service-card-img::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(13,27,62,.6))}
-      .service-card-body{padding:1.3rem}
-      .service-label{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:.4rem}
-      .service-card-body h5{font-family:"Playfair Display",serif;font-size:1.05rem;font-weight:700;color:var(--ink);margin-bottom:.4rem}
-      .service-card-body p{font-size:.8rem;color:var(--ink-soft);line-height:1.6;margin-bottom:1rem}
-      .service-btn{display:inline-flex;align-items:center;gap:.4rem;font-size:.8rem;font-weight:700;color:var(--navy);text-decoration:none;transition:gap .2s}
-      [data-theme="dark"] .service-btn{color:var(--gold)}
-      .service-btn:hover{gap:.7rem}
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.2rem;
+        margin-bottom: 2.5rem;
+      }
+      .service-card {
+        background: var(--card);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid rgba(0, 0, 0, 0.04);
+        transition: var(--transition);
+        cursor: pointer;
+      }
+      [data-theme="dark"] .service-card {
+        border-color: rgba(255, 255, 255, 0.05);
+      }
+      .service-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-md);
+      }
+      .service-card-img {
+        height: 160px;
+        overflow: hidden;
+        position: relative;
+      }
+      .service-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+      .service-card:hover .service-card-img img {
+        transform: scale(1.05);
+      }
+      .service-card-img::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to bottom,
+          transparent 50%,
+          rgba(13, 27, 62, 0.6)
+        );
+      }
+      .service-card-body {
+        padding: 1.3rem;
+      }
+      .service-label {
+        font-size: 0.65rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--gold);
+        font-weight: 700;
+        margin-bottom: 0.4rem;
+      }
+      .service-card-body h5 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--ink);
+        margin-bottom: 0.4rem;
+      }
+      .service-card-body p {
+        font-size: 0.8rem;
+        color: var(--ink-soft);
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+      .service-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--navy);
+        text-decoration: none;
+        transition: gap 0.2s;
+      }
+      [data-theme="dark"] .service-btn {
+        color: var(--gold);
+      }
+      .service-btn:hover {
+        gap: 0.7rem;
+      }
 
       /* CONTACT CARD */
-      .contact-card{background:var(--navy);border-radius:20px;padding:2.5rem;box-shadow:var(--shadow-lg);display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;margin-bottom:2.5rem;position:relative;overflow:hidden}
-      .contact-card::before{content:"";position:absolute;top:-50px;right:-50px;width:200px;height:200px;border:1px solid rgba(201,168,76,.2);border-radius:50%}
-      .contact-card-text h3{font-family:"Playfair Display",serif;font-size:1.6rem;color:#fff;margin-bottom:.5rem}
-      .contact-card-text p{color:rgba(255,255,255,.6);font-size:.9rem;line-height:1.7}
-      .contact-items{display:flex;flex-direction:column;gap:1rem}
-      .contact-item{display:flex;align-items:center;gap:.8rem;background:rgba(255,255,255,.06);padding:.9rem 1.2rem;border-radius:12px;border:1px solid rgba(201,168,76,.15)}
-      .contact-item i{color:var(--gold);font-size:.9rem;width:16px;text-align:center}
-      .contact-item span{color:rgba(255,255,255,.8);font-size:.85rem}
+      .contact-card {
+        background: var(--navy);
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: var(--shadow-lg);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: center;
+        margin-bottom: 2.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .contact-card::before {
+        content: "";
+        position: absolute;
+        top: -50px;
+        right: -50px;
+        width: 200px;
+        height: 200px;
+        border: 1px solid rgba(201, 168, 76, 0.2);
+        border-radius: 50%;
+      }
+      .contact-card-text h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.6rem;
+        color: #fff;
+        margin-bottom: 0.5rem;
+      }
+      .contact-card-text p {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.9rem;
+        line-height: 1.7;
+      }
+      .contact-items {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        background: rgba(255, 255, 255, 0.06);
+        padding: 0.9rem 1.2rem;
+        border-radius: 12px;
+        border: 1px solid rgba(201, 168, 76, 0.15);
+      }
+      .contact-item i {
+        color: var(--gold);
+        font-size: 0.9rem;
+        width: 16px;
+        text-align: center;
+      }
+      .contact-item span {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.85rem;
+      }
 
       /* STANDARD MODAL */
-      .modal-content{background:var(--card);border:none;border-radius:20px;overflow:hidden}
-      .modal-header{background:var(--navy);padding:1.5rem 2rem;border:none}
-      .modal-title{font-family:"Playfair Display",serif;color:#fff;font-size:1.3rem}
-      .modal-header .btn-close{filter:invert(1);opacity:.7}
-      .modal-body{padding:2rem;background:var(--bg)}
-      [data-theme="dark"] .modal-body{background:var(--bg-alt)}
+      .modal-content {
+        background: var(--card);
+        border: none;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+      .modal-header {
+        background: var(--navy);
+        padding: 1.5rem 2rem;
+        border: none;
+      }
+      .modal-title {
+        font-family: "Playfair Display", serif;
+        color: #fff;
+        font-size: 1.3rem;
+      }
+      .modal-header .btn-close {
+        filter: invert(1);
+        opacity: 0.7;
+      }
+      .modal-body {
+        padding: 2rem;
+        background: var(--bg);
+      }
+      [data-theme="dark"] .modal-body {
+        background: var(--bg-alt);
+      }
 
-      .ins-card{background:var(--card);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid rgba(0,0,0,.05);transition:var(--transition);height:100%}
-      [data-theme="dark"] .ins-card{border-color:rgba(255,255,255,.06)}
-      .ins-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
-      .ins-card-img{height:180px;overflow:hidden}
-      .ins-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
-      .ins-card:hover .ins-card-img img{transform:scale(1.06)}
-      .ins-card-body{padding:1.4rem}
-      .ins-type{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:.3rem}
-      .ins-card-body h5{font-family:"Playfair Display",serif;font-size:1.05rem;color:var(--ink);margin-bottom:.5rem}
-      .ins-card-body p{font-size:.82rem;color:var(--ink-soft);line-height:1.6;margin-bottom:1.2rem}
-      .ins-btn{width:100%;padding:.75rem;border-radius:10px;background:var(--navy);color:#fff;border:none;font-size:.85rem;font-weight:600;letter-spacing:.5px;cursor:pointer;transition:var(--transition)}
-      [data-theme="dark"] .ins-btn{background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3)}
-      .ins-btn:hover,.ins-btn.available:hover{background:var(--gold);color:var(--navy)}
+      .ins-card {
+        background: var(--card);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        transition: var(--transition);
+        height: 100%;
+      }
+      [data-theme="dark"] .ins-card {
+        border-color: rgba(255, 255, 255, 0.06);
+      }
+      .ins-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-md);
+      }
+      .ins-card-img {
+        height: 180px;
+        overflow: hidden;
+      }
+      .ins-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+      .ins-card:hover .ins-card-img img {
+        transform: scale(1.06);
+      }
+      .ins-card-body {
+        padding: 1.4rem;
+      }
+      .ins-type {
+        font-size: 0.65rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--gold);
+        font-weight: 700;
+        margin-bottom: 0.3rem;
+      }
+      .ins-card-body h5 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.05rem;
+        color: var(--ink);
+        margin-bottom: 0.5rem;
+      }
+      .ins-card-body p {
+        font-size: 0.82rem;
+        color: var(--ink-soft);
+        line-height: 1.6;
+        margin-bottom: 1.2rem;
+      }
+      .ins-btn {
+        width: 100%;
+        padding: 0.75rem;
+        border-radius: 10px;
+        background: var(--navy);
+        color: #fff;
+        border: none;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+      [data-theme="dark"] .ins-btn {
+        background: rgba(201, 168, 76, 0.15);
+        color: var(--gold);
+        border: 1px solid rgba(201, 168, 76, 0.3);
+      }
+      .ins-btn:hover,
+      .ins-btn.available:hover {
+        background: var(--gold);
+        color: var(--navy);
+      }
 
       /* NOT AVAILABLE MODAL */
-      #notAvailableModal .modal-content{border-radius:20px;overflow:hidden}
-      #notAvailableModal .modal-header{background:linear-gradient(135deg,#7f1d1d,#b91c1c)}
-      #notAvailableModal .modal-body{text-align:center;padding:2.5rem;background:var(--card)}
-      #notAvailableModal .modal-footer{background:var(--card);border:none;justify-content:center;padding-bottom:1.5rem}
-      .unavail-icon{font-size:3.5rem;margin-bottom:1rem}
-      #notAvailableModal h4{font-family:"Playfair Display",serif;font-size:1.4rem;color:var(--ink)}
-      #notAvailableModal p{color:var(--ink-soft);font-size:.9rem;margin-top:.5rem}
+      #notAvailableModal .modal-content {
+        border-radius: 20px;
+        overflow: hidden;
+      }
+      #notAvailableModal .modal-header {
+        background: linear-gradient(135deg, #7f1d1d, #b91c1c);
+      }
+      #notAvailableModal .modal-body {
+        text-align: center;
+        padding: 2.5rem;
+        background: var(--card);
+      }
+      #notAvailableModal .modal-footer {
+        background: var(--card);
+        border: none;
+        justify-content: center;
+        padding-bottom: 1.5rem;
+      }
+      .unavail-icon {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+      }
+      #notAvailableModal h4 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.4rem;
+        color: var(--ink);
+      }
+      #notAvailableModal p {
+        color: var(--ink-soft);
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+      }
 
       /* HMO PROVIDER MODAL */
       #hmoModal .modal-dialog,
-      #hmoModalForTools .modal-dialog {max-width: 860px;}
+      #hmoModalForTools .modal-dialog {
+        max-width: 860px;
+      }
       #hmoModal .modal-content,
-      #hmoModalForTools .modal-content {background:var(--card);border-radius:24px;overflow:hidden;border:none;box-shadow:0 30px 80px rgba(0,0,0,.25);}
+      #hmoModalForTools .modal-content {
+        background: var(--card);
+        border-radius: 24px;
+        overflow: hidden;
+        border: none;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+      }
       #hmoModal .modal-header,
-      #hmoModalForTools .modal-header {background:linear-gradient(135deg,#0d1b3e 0%,#1a3060 60%,#0d2a50 100%);padding:0;border:none;position:relative;overflow:hidden;}
+      #hmoModalForTools .modal-header {
+        background: linear-gradient(
+          135deg,
+          #0d1b3e 0%,
+          #1a3060 60%,
+          #0d2a50 100%
+        );
+        padding: 0;
+        border: none;
+        position: relative;
+        overflow: hidden;
+      }
       #hmoModal .modal-header::before,
-      #hmoModalForTools .modal-header::before {content:"";position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(201,168,76,.18) 0%,transparent 70%);border-radius:50%;pointer-events:none;}
+      #hmoModalForTools .modal-header::before {
+        content: "";
+        position: absolute;
+        top: -40px;
+        right: -40px;
+        width: 180px;
+        height: 180px;
+        background: radial-gradient(
+          circle,
+          rgba(201, 168, 76, 0.18) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        pointer-events: none;
+      }
       #hmoModal .modal-header::after,
-      #hmoModalForTools .modal-header::after {content:"";position:absolute;bottom:-20px;left:80px;width:120px;height:120px;background:radial-gradient(circle,rgba(201,168,76,.08) 0%,transparent 70%);border-radius:50%;pointer-events:none;}
-      .hmo-header-inner{padding:2.2rem 2.5rem;position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;width:100%}
-      .hmo-header-eyebrow{font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem}
-      .hmo-header-eyebrow::before{content:"";width:20px;height:1.5px;background:var(--gold)}
-      .hmo-header-title{font-family:"Playfair Display",serif;font-size:1.6rem;font-weight:900;color:#fff;line-height:1.2}
-      .hmo-header-title em{color:var(--gold);font-style:italic}
-      .hmo-header-sub{color:rgba(255,255,255,.5);font-size:.82rem;margin-top:.4rem;letter-spacing:.3px}
-      .hmo-close-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.7);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--transition);flex-shrink:0;font-size:1rem}
-      .hmo-close-btn:hover{background:rgba(201,168,76,.2);border-color:var(--gold);color:var(--gold)}
+      #hmoModalForTools .modal-header::after {
+        content: "";
+        position: absolute;
+        bottom: -20px;
+        left: 80px;
+        width: 120px;
+        height: 120px;
+        background: radial-gradient(
+          circle,
+          rgba(201, 168, 76, 0.08) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        pointer-events: none;
+      }
+      .hmo-header-inner {
+        padding: 2.2rem 2.5rem;
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
+      .hmo-header-eyebrow {
+        font-size: 0.65rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--gold);
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .hmo-header-eyebrow::before {
+        content: "";
+        width: 20px;
+        height: 1.5px;
+        background: var(--gold);
+      }
+      .hmo-header-title {
+        font-family: "Playfair Display", serif;
+        font-size: 1.6rem;
+        font-weight: 900;
+        color: #fff;
+        line-height: 1.2;
+      }
+      .hmo-header-title em {
+        color: var(--gold);
+        font-style: italic;
+      }
+      .hmo-header-sub {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.82rem;
+        margin-top: 0.4rem;
+        letter-spacing: 0.3px;
+      }
+      .hmo-close-btn {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: rgba(255, 255, 255, 0.7);
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: var(--transition);
+        flex-shrink: 0;
+        font-size: 1rem;
+      }
+      .hmo-close-btn:hover {
+        background: rgba(201, 168, 76, 0.2);
+        border-color: var(--gold);
+        color: var(--gold);
+      }
       #hmoModal .modal-body,
-      #hmoModalForTools .modal-body {padding:2rem 2.5rem 2.5rem;background:var(--bg);}
+      #hmoModalForTools .modal-body {
+        padding: 2rem 2.5rem 2.5rem;
+        background: var(--bg);
+      }
       [data-theme="dark"] #hmoModal .modal-body,
-      [data-theme="dark"] #hmoModalForTools .modal-body {background:var(--bg-alt);}
-      .hmo-section-label{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem}
-      .hmo-section-label .hmo-sec-line{flex:1;height:1px;background:linear-gradient(to right,rgba(201,168,76,.4),transparent)}
-      .hmo-section-label span{font-size:.65rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:700;white-space:nowrap}
-      .hmo-providers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.2rem;margin-bottom:1.5rem}
-      .hmo-provider-card{background:var(--card);border-radius:18px;border:2px solid rgba(0,0,0,.05);overflow:hidden;cursor:pointer;transition:all .3s cubic-bezier(.4,0,.2,1);position:relative}
-      [data-theme="dark"] .hmo-provider-card{border-color:rgba(255,255,255,.07)}
-      .hmo-provider-card:hover{transform:translateY(-5px);border-color:var(--gold);box-shadow:0 12px 40px rgba(201,168,76,.2)}
-      .hmo-badge{position:absolute;top:12px;right:12px;font-size:.58rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;padding:.28rem .7rem;border-radius:20px;z-index:2}
-      .hmo-badge.available{background:rgba(22,163,74,.12);color:#16a34a;border:1px solid rgba(22,163,74,.25)}
-      .hmo-badge.coming-soon{background:rgba(201,168,76,.1);color:var(--gold);border:1px solid rgba(201,168,76,.2)}
-      .hmo-logo-wrap{height:110px;display:flex;align-items:center;justify-content:center;padding:1.5rem;background:#fff;border-bottom:1px solid rgba(0,0,0,.04);position:relative;overflow:hidden}
-      [data-theme="dark"] .hmo-logo-wrap{background:rgba(255,255,255,.96)}
-      .hmo-logo-wrap img{max-height:60px;max-width:160px;object-fit:contain;transition:transform .3s ease;filter:drop-shadow(0 2px 8px rgba(0,0,0,.08))}
-      .hmo-provider-card:hover .hmo-logo-wrap img{transform:scale(1.06)}
-      .hmo-logo-shimmer{position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.6) 50%,transparent 60%);transform:translateX(-100%);transition:none}
-      .hmo-provider-card:hover .hmo-logo-shimmer{transform:translateX(100%);transition:transform .6s ease}
-      .hmo-provider-info{padding:1.1rem 1.2rem 1.3rem}
-      .hmo-provider-name{font-family:"Playfair Display",serif;font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:.2rem}
-      .hmo-provider-desc{font-size:.75rem;color:var(--ink-soft);line-height:1.5;margin-bottom:1rem}
-      .hmo-cta{display:flex;align-items:center;justify-content:space-between;background:var(--navy);color:#fff;border:none;width:100%;padding:.65rem 1rem;border-radius:10px;font-size:.78rem;font-weight:600;letter-spacing:.3px;cursor:pointer;transition:var(--transition);text-decoration:none}
-      [data-theme="dark"] .hmo-cta{background:rgba(201,168,76,.12);color:var(--gold);border:1px solid rgba(201,168,76,.25)}
-      .hmo-provider-card.available:hover .hmo-cta{background:var(--gold);color:var(--navy)}
-      .hmo-cta-disabled{background:var(--bg-alt);color:var(--ink-soft);cursor:not-allowed;border:none;width:100%;padding:.65rem 1rem;border-radius:10px;font-size:.78rem;font-weight:600;display:flex;align-items:center;justify-content:space-between}
-      [data-theme="dark"] .hmo-cta-disabled{background:rgba(255,255,255,.05)}
-      .hmo-cta i{font-size:.7rem}
-      .hmo-provider-card.coming-soon-card{opacity:.65;cursor:default}
-      .hmo-provider-card.coming-soon-card:hover{transform:none;border-color:rgba(201,168,76,.2);box-shadow:none}
-      .hmo-placeholder-logo{height:110px;display:flex;align-items:center;justify-content:center;background:var(--bg-alt);border-bottom:1px solid rgba(0,0,0,.04)}
-      [data-theme="dark"] .hmo-placeholder-logo{background:rgba(255,255,255,.03)}
-      .hmo-placeholder-logo-inner{width:56px;height:56px;border-radius:14px;background:rgba(201,168,76,.08);border:1.5px dashed rgba(201,168,76,.3);display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:rgba(201,168,76,.5)}
-      .hmo-modal-footer-note{background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.15);border-radius:12px;padding:.9rem 1.2rem;display:flex;align-items:center;gap:.8rem;margin-top:.5rem}
-      [data-theme="dark"] .hmo-modal-footer-note{background:rgba(201,168,76,.05)}
-      .hmo-modal-footer-note i{color:var(--gold);font-size:.9rem;flex-shrink:0}
-      .hmo-modal-footer-note p{font-size:.78rem;color:var(--ink-soft);margin:0;line-height:1.5}
-      .hmo-modal-footer-note strong{color:var(--ink)}
-      .hmo-amaphil-fallback{position:absolute;inset:0;align-items:center;justify-content:center;flex-direction:column;gap:.5rem;background:#f8f6f2}
-      [data-theme="dark"] .hmo-amaphil-fallback{background:rgba(255,255,255,.94)}
-      .hmo-amaphil-fallback-icon{width:52px;height:52px;border-radius:14px;background:rgba(201,168,76,.1);border:1.5px dashed rgba(201,168,76,.4);display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:rgba(201,168,76,.7)}
-      .hmo-amaphil-fallback-label{font-family:"Playfair Display",serif;font-size:.75rem;font-weight:700;color:#0d1b3e;letter-spacing:1px}
+      [data-theme="dark"] #hmoModalForTools .modal-body {
+        background: var(--bg-alt);
+      }
+      .hmo-section-label {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+      }
+      .hmo-section-label .hmo-sec-line {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          rgba(201, 168, 76, 0.4),
+          transparent
+        );
+      }
+      .hmo-section-label span {
+        font-size: 0.65rem;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--gold);
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .hmo-providers-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1.2rem;
+        margin-bottom: 1.5rem;
+      }
+      .hmo-provider-card {
+        background: var(--card);
+        border-radius: 18px;
+        border: 2px solid rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+      }
+      [data-theme="dark"] .hmo-provider-card {
+        border-color: rgba(255, 255, 255, 0.07);
+      }
+      .hmo-provider-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--gold);
+        box-shadow: 0 12px 40px rgba(201, 168, 76, 0.2);
+      }
+      .hmo-badge {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        font-size: 0.58rem;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        font-weight: 700;
+        padding: 0.28rem 0.7rem;
+        border-radius: 20px;
+        z-index: 2;
+      }
+      .hmo-badge.available {
+        background: rgba(22, 163, 74, 0.12);
+        color: #16a34a;
+        border: 1px solid rgba(22, 163, 74, 0.25);
+      }
+      .hmo-badge.coming-soon {
+        background: rgba(201, 168, 76, 0.1);
+        color: var(--gold);
+        border: 1px solid rgba(201, 168, 76, 0.2);
+      }
+      .hmo-logo-wrap {
+        height: 110px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        background: #fff;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        position: relative;
+        overflow: hidden;
+      }
+      [data-theme="dark"] .hmo-logo-wrap {
+        background: rgba(255, 255, 255, 0.96);
+      }
+      .hmo-logo-wrap img {
+        max-height: 60px;
+        max-width: 160px;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.08));
+      }
+      .hmo-provider-card:hover .hmo-logo-wrap img {
+        transform: scale(1.06);
+      }
+      .hmo-logo-shimmer {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          105deg,
+          transparent 40%,
+          rgba(255, 255, 255, 0.6) 50%,
+          transparent 60%
+        );
+        transform: translateX(-100%);
+        transition: none;
+      }
+      .hmo-provider-card:hover .hmo-logo-shimmer {
+        transform: translateX(100%);
+        transition: transform 0.6s ease;
+      }
+      .hmo-provider-info {
+        padding: 1.1rem 1.2rem 1.3rem;
+      }
+      .hmo-provider-name {
+        font-family: "Playfair Display", serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--ink);
+        margin-bottom: 0.2rem;
+      }
+      .hmo-provider-desc {
+        font-size: 0.75rem;
+        color: var(--ink-soft);
+        line-height: 1.5;
+        margin-bottom: 1rem;
+      }
+      .hmo-cta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--navy);
+        color: #fff;
+        border: none;
+        width: 100%;
+        padding: 0.65rem 1rem;
+        border-radius: 10px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        cursor: pointer;
+        transition: var(--transition);
+        text-decoration: none;
+      }
+      [data-theme="dark"] .hmo-cta {
+        background: rgba(201, 168, 76, 0.12);
+        color: var(--gold);
+        border: 1px solid rgba(201, 168, 76, 0.25);
+      }
+      .hmo-provider-card.available:hover .hmo-cta {
+        background: var(--gold);
+        color: var(--navy);
+      }
+      .hmo-cta-disabled {
+        background: var(--bg-alt);
+        color: var(--ink-soft);
+        cursor: not-allowed;
+        border: none;
+        width: 100%;
+        padding: 0.65rem 1rem;
+        border-radius: 10px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      [data-theme="dark"] .hmo-cta-disabled {
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .hmo-cta i {
+        font-size: 0.7rem;
+      }
+      .hmo-provider-card.coming-soon-card {
+        opacity: 0.65;
+        cursor: default;
+      }
+      .hmo-provider-card.coming-soon-card:hover {
+        transform: none;
+        border-color: rgba(201, 168, 76, 0.2);
+        box-shadow: none;
+      }
+      .hmo-placeholder-logo {
+        height: 110px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-alt);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+      }
+      [data-theme="dark"] .hmo-placeholder-logo {
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .hmo-placeholder-logo-inner {
+        width: 56px;
+        height: 56px;
+        border-radius: 14px;
+        background: rgba(201, 168, 76, 0.08);
+        border: 1.5px dashed rgba(201, 168, 76, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        color: rgba(201, 168, 76, 0.5);
+      }
+      .hmo-modal-footer-note {
+        background: rgba(201, 168, 76, 0.07);
+        border: 1px solid rgba(201, 168, 76, 0.15);
+        border-radius: 12px;
+        padding: 0.9rem 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin-top: 0.5rem;
+      }
+      [data-theme="dark"] .hmo-modal-footer-note {
+        background: rgba(201, 168, 76, 0.05);
+      }
+      .hmo-modal-footer-note i {
+        color: var(--gold);
+        font-size: 0.9rem;
+        flex-shrink: 0;
+      }
+      .hmo-modal-footer-note p {
+        font-size: 0.78rem;
+        color: var(--ink-soft);
+        margin: 0;
+        line-height: 1.5;
+      }
+      .hmo-modal-footer-note strong {
+        color: var(--ink);
+      }
+      .hmo-amaphil-fallback {
+        position: absolute;
+        inset: 0;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 0.5rem;
+        background: #f8f6f2;
+      }
+      [data-theme="dark"] .hmo-amaphil-fallback {
+        background: rgba(255, 255, 255, 0.94);
+      }
+      .hmo-amaphil-fallback-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        background: rgba(201, 168, 76, 0.1);
+        border: 1.5px dashed rgba(201, 168, 76, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        color: rgba(201, 168, 76, 0.7);
+      }
+      .hmo-amaphil-fallback-label {
+        font-family: "Playfair Display", serif;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: #0d1b3e;
+        letter-spacing: 1px;
+      }
 
       /* RESPONSIVE */
-      @media(max-width:768px){
-        .sidebar{left:-100%}
-        .sidebar.active{left:0}
-        .main-content{margin-left:0}
-        .menu-toggle{display:flex}
-        .hero-banner{grid-template-columns:1fr;padding:2rem}
-        .hero-graphic{display:none}
-        .stats-row{grid-template-columns:repeat(2,1fr)}
-        .content-grid{grid-template-columns:1fr}
-        .services-grid{grid-template-columns:1fr}
-        .contact-card{grid-template-columns:1fr}
-        .dashboard{padding:1.5rem 1rem}
-        #hmoModal .modal-dialog,#hmoModalForTools .modal-dialog{margin:.5rem}
-        .hmo-header-inner{padding:1.5rem}
-        .hmo-header-title{font-size:1.3rem}
-        #hmoModal .modal-body,#hmoModalForTools .modal-body{padding:1.5rem}
-        .hmo-providers-grid{grid-template-columns:1fr 1fr}
+      @media (max-width: 768px) {
+        .sidebar {
+          left: -100%;
+        }
+        .sidebar.active {
+          left: 0;
+        }
+        .main-content {
+          margin-left: 0;
+        }
+        .menu-toggle {
+          display: flex;
+        }
+        .hero-banner {
+          grid-template-columns: 1fr;
+          padding: 2rem;
+        }
+        .hero-graphic {
+          display: none;
+        }
+        .stats-row {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+        .contact-card {
+          grid-template-columns: 1fr;
+        }
+        .dashboard {
+          padding: 1.5rem 1rem;
+        }
+        #hmoModal .modal-dialog,
+        #hmoModalForTools .modal-dialog {
+          margin: 0.5rem;
+        }
+        .hmo-header-inner {
+          padding: 1.5rem;
+        }
+        .hmo-header-title {
+          font-size: 1.3rem;
+        }
+        #hmoModal .modal-body,
+        #hmoModalForTools .modal-body {
+          padding: 1.5rem;
+        }
+        .hmo-providers-grid {
+          grid-template-columns: 1fr 1fr;
+        }
       }
-      @media(max-width:480px){.hmo-providers-grid{grid-template-columns:1fr}}
+      @media (max-width: 480px) {
+        .hmo-providers-grid {
+          grid-template-columns: 1fr;
+        }
+      }
 
       /* ANIMATIONS */
-      .fade-up{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
-      .fade-up.visible{opacity:1;transform:translateY(0)}
-      @keyframes hmoCardIn{
-        from{opacity:0;transform:translateY(16px) scale(.97)}
-        to{opacity:1;transform:translateY(0) scale(1)}
+      .fade-up {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.5s ease,
+          transform 0.5s ease;
+      }
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      @keyframes hmoCardIn {
+        from {
+          opacity: 0;
+          transform: translateY(16px) scale(0.97);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
       }
       #hmoModal.show .hmo-provider-card:nth-child(1),
-      #hmoModalForTools.show .hmo-provider-card:nth-child(1){animation:hmoCardIn .4s .1s both ease-out}
+      #hmoModalForTools.show .hmo-provider-card:nth-child(1) {
+        animation: hmoCardIn 0.4s 0.1s both ease-out;
+      }
       #hmoModal.show .hmo-provider-card:nth-child(2),
-      #hmoModalForTools.show .hmo-provider-card:nth-child(2){animation:hmoCardIn .4s .18s both ease-out}
+      #hmoModalForTools.show .hmo-provider-card:nth-child(2) {
+        animation: hmoCardIn 0.4s 0.18s both ease-out;
+      }
       #hmoModal.show .hmo-provider-card:nth-child(3),
-      #hmoModalForTools.show .hmo-provider-card:nth-child(3){animation:hmoCardIn .4s .26s both ease-out}
+      #hmoModalForTools.show .hmo-provider-card:nth-child(3) {
+        animation: hmoCardIn 0.4s 0.26s both ease-out;
+      }
       #hmoModal.show .hmo-provider-card:nth-child(4),
-      #hmoModalForTools.show .hmo-provider-card:nth-child(4){animation:hmoCardIn .4s .34s both ease-out}
+      #hmoModalForTools.show .hmo-provider-card:nth-child(4) {
+        animation: hmoCardIn 0.4s 0.34s both ease-out;
+      }
     </style>
   </head>
   <body>
@@ -378,14 +1547,18 @@
          SIDEBAR
     ══════════════════════════════════════════════ -->
     <aside class="sidebar" id="sidebar">
-
       <!-- Brand / Logo -->
       <div class="sidebar-brand">
         <div class="sidebar-logo-wrap">
           <img
             src="assets/images/dis logo.png"
             alt="Divinia Insurance"
-            onerror="this.style.display='none'; this.parentElement.querySelector('.sidebar-logo-fallback').style.display='block';"
+            onerror="
+              this.style.display = 'none';
+              this.parentElement.querySelector(
+                '.sidebar-logo-fallback',
+              ).style.display = 'block';
+            "
           />
           <span class="sidebar-logo-fallback">D</span>
         </div>
@@ -400,14 +1573,23 @@
         <div class="sidebar-label">Main</div>
         <nav class="sidebar-nav">
           <a href="#home" class="active"><i class="fas fa-home"></i> Home</a>
-          <a href="#" data-bs-toggle="modal" data-bs-target="#insuranceModal"><i class="fas fa-shield-alt"></i> Services</a>
-          <a href="#" data-bs-toggle="modal" data-bs-target="#insuranceModalTools"><i class="fas fa-tools"></i> Tools</a>
+          <a href="#" data-bs-toggle="modal" data-bs-target="#insuranceModal"
+            ><i class="fas fa-shield-alt"></i> Services</a
+          >
+          <a
+            href="#"
+            data-bs-toggle="modal"
+            data-bs-target="#insuranceModalTools"
+            ><i class="fas fa-tools"></i> Tools</a
+          >
           <a href="#about"><i class="fas fa-building"></i> About Us</a>
           <a href="#contact"><i class="fas fa-headset"></i> Contact</a>
         </nav>
         <div class="sidebar-label">Account</div>
         <nav class="sidebar-nav">
-          <a href="agentlogin.html"><i class="fas fa-user-tie"></i> Affiliate Login</a>
+          <a href="agentlogin.html"
+            ><i class="fas fa-user-tie"></i> Affiliate Login</a
+          >
         </nav>
       </div>
 
@@ -420,12 +1602,16 @@
     <main class="main-content">
       <header class="topbar">
         <div class="topbar-left">
-          <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+          <button class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+          </button>
           <span class="topbar-title">Dashboard</span>
         </div>
         <div class="topbar-right">
           <span class="topbar-badge">All Care Marketing</span>
-          <button class="theme-btn" id="themeToggle" title="Toggle theme"><i class="fas fa-moon"></i></button>
+          <button class="theme-btn" id="themeToggle" title="Toggle theme">
+            <i class="fas fa-moon"></i>
+          </button>
         </div>
       </header>
 
@@ -434,10 +1620,22 @@
         <div class="hero-banner fade-up">
           <div>
             <div class="hero-eyebrow">Trusted Insurance Partner</div>
-            <h1 class="hero-title">One Place.<br /><em>Endless Possibilities.</em></h1>
-            <p class="hero-sub">Divinia Insurance Services delivers comprehensive life, non-life, and HMO solutions designed to protect what matters most to you and your family.</p>
+            <h1 class="hero-title">
+              One Place.<br /><em>Endless Possibilities.</em>
+            </h1>
+            <p class="hero-sub">
+              Divinia Insurance Services delivers comprehensive life, non-life,
+              and HMO solutions designed to protect what matters most to you and
+              your family.
+            </p>
             <div class="hero-actions">
-              <a href="#" class="btn-gold" data-bs-toggle="modal" data-bs-target="#insuranceModal">Explore Services <i class="fas fa-arrow-right ms-1"></i></a>
+              <a
+                href="#"
+                class="btn-gold"
+                data-bs-toggle="modal"
+                data-bs-target="#insuranceModal"
+                >Explore Services <i class="fas fa-arrow-right ms-1"></i
+              ></a>
               <a href="#about" class="btn-outline-light-custom">Learn More</a>
             </div>
           </div>
@@ -461,7 +1659,9 @@
             <div class="stat-label">Insurance Types</div>
           </div>
           <div class="stat-card">
-            <div class="stat-icon green"><i class="fas fa-check-circle"></i></div>
+            <div class="stat-icon green">
+              <i class="fas fa-check-circle"></i>
+            </div>
             <div class="stat-value">98%</div>
             <div class="stat-label">Claims Resolved</div>
           </div>
@@ -479,30 +1679,60 @@
         </div>
         <div class="services-grid fade-up">
           <div class="service-card" id="hmo-preview-card">
-            <div class="service-card-img"><img src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=600" alt="Health"/></div>
+            <div class="service-card-img">
+              <img
+                src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=600"
+                alt="Health"
+              />
+            </div>
             <div class="service-card-body">
               <div class="service-label">HMO</div>
               <h5>Health Insurance</h5>
-              <p>Comprehensive health coverage for you and your family against medical expenses and emergencies.</p>
-              <a href="#" class="service-btn">View Plans <i class="fas fa-arrow-right"></i></a>
+              <p>
+                Comprehensive health coverage for you and your family against
+                medical expenses and emergencies.
+              </p>
+              <a href="#" class="service-btn"
+                >View Plans <i class="fas fa-arrow-right"></i
+              ></a>
             </div>
           </div>
           <div class="service-card" id="life-preview">
-            <div class="service-card-img"><img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600" alt="Life"/></div>
+            <div class="service-card-img">
+              <img
+                src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600"
+                alt="Life"
+              />
+            </div>
             <div class="service-card-body">
               <div class="service-label">Life</div>
               <h5>Life Insurance</h5>
-              <p>Secure your family's financial future with reliable life insurance policies tailored to your needs.</p>
-              <a href="#" class="service-btn">View Plans <i class="fas fa-arrow-right"></i></a>
+              <p>
+                Secure your family's financial future with reliable life
+                insurance policies tailored to your needs.
+              </p>
+              <a href="#" class="service-btn"
+                >View Plans <i class="fas fa-arrow-right"></i
+              ></a>
             </div>
           </div>
           <div class="service-card" id="nonlife-preview">
-            <div class="service-card-img"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600" alt="Non-Life"/></div>
+            <div class="service-card-img">
+              <img
+                src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600"
+                alt="Non-Life"
+              />
+            </div>
             <div class="service-card-body">
               <div class="service-label">Non-Life</div>
               <h5>Non-Life Insurance</h5>
-              <p>Protect your vehicles, property, and valuables from unforeseen risks and damages.</p>
-              <a href="#" class="service-btn">View Plans <i class="fas fa-arrow-right"></i></a>
+              <p>
+                Protect your vehicles, property, and valuables from unforeseen
+                risks and damages.
+              </p>
+              <a href="#" class="service-btn"
+                >View Plans <i class="fas fa-arrow-right"></i
+              ></a>
             </div>
           </div>
         </div>
@@ -514,25 +1744,48 @@
               <div class="overline">Who We Are</div>
               <h2>About Divinia Insurance</h2>
             </div>
-            <p>At Divinia Insurance Services (DIS All Care Marketing), we make life simple by offering everything in one place — from Life, Non-Life, and HMO insurance to wellness, home essentials, and admin support.</p>
-            <p>We believe every Filipino deserves peace of mind and financial security. Our team is committed to finding the right solution for every client, every time.</p>
+            <p>
+              At Divinia Insurance Services (DIS All Care Marketing), we make
+              life simple by offering everything in one place — from Life,
+              Non-Life, and HMO insurance to wellness, home essentials, and
+              admin support.
+            </p>
+            <p>
+              We believe every Filipino deserves peace of mind and financial
+              security. Our team is committed to finding the right solution for
+              every client, every time.
+            </p>
             <div class="about-tags">
-              <span class="tag">Life Insurance</span><span class="tag">Non-Life Insurance</span><span class="tag">HMO</span><span class="tag">Wellness</span><span class="tag">Home Essentials</span><span class="tag">Admin Support</span>
+              <span class="tag">Life Insurance</span
+              ><span class="tag">Non-Life Insurance</span
+              ><span class="tag">HMO</span><span class="tag">Wellness</span
+              ><span class="tag">Home Essentials</span
+              ><span class="tag">Admin Support</span>
             </div>
-            <a href="about.html" class="btn-gold">Discover Our Story <i class="fas fa-arrow-right ms-1"></i></a>
+            <a href="about.html" class="btn-gold"
+              >Discover Our Story <i class="fas fa-arrow-right ms-1"></i
+            ></a>
           </div>
           <div class="vm-stack">
             <div class="vm-card">
               <div class="vm-accent"></div>
               <span class="vm-icon">🎯</span>
               <h4>Our Vision</h4>
-              <p>To inspire and guide individuals toward living with clarity, intention, and purpose — unlocking their full potential and transforming their lives.</p>
+              <p>
+                To inspire and guide individuals toward living with clarity,
+                intention, and purpose — unlocking their full potential and
+                transforming their lives.
+              </p>
             </div>
             <div class="vm-card">
               <div class="vm-accent"></div>
               <span class="vm-icon">🚀</span>
               <h4>Our Mission</h4>
-              <p>To create a business where every individual lives with purpose, fulfillment, and direction — empowered to make a meaningful impact in their own lives and others'.</p>
+              <p>
+                To create a business where every individual lives with purpose,
+                fulfillment, and direction — empowered to make a meaningful
+                impact in their own lives and others'.
+              </p>
             </div>
           </div>
         </div>
@@ -541,80 +1794,167 @@
         <div class="contact-card fade-up" id="contact">
           <div class="contact-card-text">
             <h3>Get in Touch</h3>
-            <p>We'd love to hear from you. Visit our office or reach out through any of our channels and our team will be happy to help.</p>
-            <a href="mailto:contact@divinia.com" class="btn-gold mt-3 d-inline-block">Send a Message <i class="fas fa-paper-plane ms-1"></i></a>
+            <p>
+              We'd love to hear from you. Visit our office or reach out through
+              any of our channels and our team will be happy to help.
+            </p>
+            <a
+              href="mailto:contact@divinia.com"
+              class="btn-gold mt-3 d-inline-block"
+              >Send a Message <i class="fas fa-paper-plane ms-1"></i
+            ></a>
           </div>
           <div class="contact-items">
-            <div class="contact-item"><i class="fas fa-map-marker-alt"></i><span>Building 3rd Flr. Rm. 304, Mataas-na-Lupa, Lipa City, Batangas</span></div>
-            <div class="contact-item"><i class="fas fa-phone"></i><span>+63 917 123 4567</span></div>
-            <div class="contact-item"><i class="fas fa-envelope"></i><span>contact@divinia.com</span></div>
-            <div class="contact-item"><i class="fas fa-clock"></i><span>Mon – Fri, 8:00 AM – 6:00 PM</span></div>
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i
+              ><span
+                >Building 3rd Flr. Rm. 304, Mataas-na-Lupa, Lipa City,
+                Batangas</span
+              >
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-phone"></i><span>+63 917 123 4567</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i><span>contact@divinia.com</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-clock"></i
+              ><span>Mon – Fri, 8:00 AM – 6:00 PM</span>
+            </div>
           </div>
         </div>
       </section>
     </main>
 
     <!-- HMO MODAL FOR TOOLS -->
-    <div class="modal fade" id="hmoModalForTools" tabindex="-1" aria-labelledby="hmoModalForToolsLabel" aria-hidden="true">
-      <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div
+      class="modal fade"
+      id="hmoModalForTools"
+      tabindex="-1"
+      aria-labelledby="hmoModalForToolsLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable"
+      >
         <div class="modal-content">
           <div class="modal-header">
             <div class="hmo-header-inner">
               <div>
                 <div class="hmo-header-eyebrow">Health Coverage Tools</div>
-                <h5 class="hmo-header-title" id="hmoModalForToolsLabel">Choose Your <em>HMO Provider</em></h5>
-                <p class="hmo-header-sub">Select from our trusted network of health maintenance organizations</p>
+                <h5 class="hmo-header-title" id="hmoModalForToolsLabel">
+                  Choose Your <em>HMO Provider</em>
+                </h5>
+                <p class="hmo-header-sub">
+                  Select from our trusted network of health maintenance
+                  organizations
+                </p>
               </div>
-              <button class="hmo-close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+              <button
+                class="hmo-close-btn"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              >
+                <i class="fas fa-times"></i>
+              </button>
             </div>
           </div>
           <div class="modal-body">
-            <div class="hmo-section-label"><span>Available Now</span><div class="hmo-sec-line"></div></div>
+            <div class="hmo-section-label">
+              <span>Available Now</span>
+              <div class="hmo-sec-line"></div>
+            </div>
+            <!-- ── Available Now: PhilCare + Amaphil ── -->
             <div class="hmo-providers-grid">
+              <!-- PhilCare -->
               <div class="hmo-provider-card available">
-                <span class="hmo-badge available"><i class="fas fa-circle" style="font-size:.45rem;margin-right:4px"></i> Active</span>
+                <span class="hmo-badge available"
+                  ><i class="fas fa-circle" style="font-size: 0.45rem; margin-right: 4px"></i>
+                  Active</span
+                >
                 <div class="hmo-logo-wrap">
                   <div class="hmo-logo-shimmer"></div>
-                  <img src="assets/images/philcare new.webp" alt="PhilCare HMO"/>
+                  <img src="assets/images/philcare new.webp" alt="PhilCare HMO" />
                 </div>
                 <div class="hmo-provider-info">
                   <div class="hmo-provider-name">PhilCare</div>
-                  <div class="hmo-provider-desc">A Member of the Philippines First Group (Since 1906). Comprehensive health coverage nationwide.</div>
-                  <a href="tools.html" class="hmo-cta"><span>View Plans</span><i class="fas fa-arrow-right"></i></a>
+                  <div class="hmo-provider-desc">
+                    A Member of the Philippines First Group (Since 1906).
+                    Comprehensive health coverage nationwide.
+                  </div>
+                  <a href="tools.html" class="hmo-cta"
+                    ><span>View Plans</span><i class="fas fa-arrow-right"></i
+                  ></a>
                 </div>
               </div>
-            </div>
-            <div class="hmo-section-label" style="margin-top:.5rem"><span>Coming Soon</span><div class="hmo-sec-line"></div></div>
-            <div class="hmo-providers-grid">
-              <div class="hmo-provider-card coming-soon-card">
-                <span class="hmo-badge coming-soon">Coming Soon</span>
+              <!-- Amaphil — NOW AVAILABLE -->
+              <div class="hmo-provider-card available">
+                <span class="hmo-badge available"
+                  ><i class="fas fa-circle" style="font-size: 0.45rem; margin-right: 4px"></i>
+                  Active</span
+                >
                 <div class="hmo-logo-wrap">
                   <div class="hmo-logo-shimmer"></div>
-                  <img src="assets/images/amaphil.png" alt="Amaphil HMO" onerror="this.style.display='none';this.parentElement.querySelector('.hmo-amaphil-fallback').style.display='flex';"/>
-                  <div class="hmo-amaphil-fallback" style="display:none;">
-                    <div class="hmo-amaphil-fallback-icon"><i class="fas fa-heartbeat"></i></div>
+                  <img
+                    src="assets/images/amaphil.png"
+                    alt="Amaphil HMO"
+                    onerror="
+                      this.style.display = 'none';
+                      this.parentElement.querySelector('.hmo-amaphil-fallback').style.display = 'flex';
+                    "
+                  />
+                  <div class="hmo-amaphil-fallback" style="display: none">
+                    <div class="hmo-amaphil-fallback-icon">
+                      <i class="fas fa-heartbeat"></i>
+                    </div>
                     <span class="hmo-amaphil-fallback-label">AMAPHIL</span>
                   </div>
                 </div>
                 <div class="hmo-provider-info">
                   <div class="hmo-provider-name">Amaphil</div>
-                  <div class="hmo-provider-desc">A trusted HMO provider offering comprehensive health plans and excellent nationwide coverage.</div>
-                  <div class="hmo-cta-disabled"><span>Not Yet Available</span><i class="fas fa-lock"></i></div>
+                  <div class="hmo-provider-desc">
+                    A trusted HMO provider offering comprehensive health plans
+                    and excellent nationwide coverage.
+                  </div>
+                  <a href="tools.html" class="hmo-cta"
+                    ><span>View Plans</span><i class="fas fa-arrow-right"></i
+                  ></a>
                 </div>
               </div>
+            </div>
+            <!-- ── Coming Soon ── -->
+            <div class="hmo-section-label" style="margin-top: 0.5rem">
+              <span>Coming Soon</span>
+              <div class="hmo-sec-line"></div>
+            </div>
+            <div class="hmo-providers-grid">
               <div class="hmo-provider-card coming-soon-card">
                 <span class="hmo-badge coming-soon">Coming Soon</span>
-                <div class="hmo-placeholder-logo"><div class="hmo-placeholder-logo-inner"><i class="fas fa-hospital"></i></div></div>
+                <div class="hmo-placeholder-logo">
+                  <div class="hmo-placeholder-logo-inner">
+                    <i class="fas fa-hospital"></i>
+                  </div>
+                </div>
                 <div class="hmo-provider-info">
                   <div class="hmo-provider-name">More Providers</div>
-                  <div class="hmo-provider-desc">We're partnering with top HMO providers to give you the best health solutions.</div>
-                  <div class="hmo-cta-disabled"><span>Not Yet Available</span><i class="fas fa-lock"></i></div>
+                  <div class="hmo-provider-desc">
+                    We're partnering with top HMO providers to give you the best
+                    health solutions.
+                  </div>
+                  <div class="hmo-cta-disabled">
+                    <span>Not Yet Available</span><i class="fas fa-lock"></i>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="hmo-modal-footer-note">
               <i class="fas fa-info-circle"></i>
-              <p><strong>Expanding soon.</strong> We're continuously adding trusted HMO partners to give you more choices. Check back regularly or contact us to inquire about specific providers.</p>
+              <p>
+                <strong>Expanding soon.</strong> We're continuously adding
+                trusted HMO partners to give you more choices. Check back
+                regularly or contact us to inquire about specific providers.
+              </p>
             </div>
           </div>
         </div>
@@ -622,66 +1962,133 @@
     </div>
 
     <!-- HMO MODAL FOR SERVICES -->
-    <div class="modal fade" id="hmoModal" tabindex="-1" aria-labelledby="hmoModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div
+      class="modal fade"
+      id="hmoModal"
+      tabindex="-1"
+      aria-labelledby="hmoModalLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable"
+      >
         <div class="modal-content">
           <div class="modal-header">
             <div class="hmo-header-inner">
               <div>
                 <div class="hmo-header-eyebrow">Health Coverage</div>
-                <h5 class="hmo-header-title" id="hmoModalLabel">Choose Your <em>HMO Provider</em></h5>
-                <p class="hmo-header-sub">Select from our trusted network of health maintenance organizations</p>
+                <h5 class="hmo-header-title" id="hmoModalLabel">
+                  Choose Your <em>HMO Provider</em>
+                </h5>
+                <p class="hmo-header-sub">
+                  Select from our trusted network of health maintenance
+                  organizations
+                </p>
               </div>
-              <button class="hmo-close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+              <button
+                class="hmo-close-btn"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              >
+                <i class="fas fa-times"></i>
+              </button>
             </div>
           </div>
           <div class="modal-body">
-            <div class="hmo-section-label"><span>Available Now</span><div class="hmo-sec-line"></div></div>
+            <div class="hmo-section-label">
+              <span>Available Now</span>
+              <div class="hmo-sec-line"></div>
+            </div>
+            <!-- ── Available Now: PhilCare + Amaphil ── -->
             <div class="hmo-providers-grid">
+              <!-- PhilCare -->
               <div class="hmo-provider-card available">
-                <span class="hmo-badge available"><i class="fas fa-circle" style="font-size:.45rem;margin-right:4px"></i> Active</span>
+                <span class="hmo-badge available"
+                  ><i class="fas fa-circle" style="font-size: 0.45rem; margin-right: 4px"></i>
+                  Active</span
+                >
                 <div class="hmo-logo-wrap">
                   <div class="hmo-logo-shimmer"></div>
-                  <img src="assets/images/philcare new.webp" alt="PhilCare HMO"/>
+                  <img src="assets/images/philcare new.webp" alt="PhilCare HMO" />
                 </div>
                 <div class="hmo-provider-info">
                   <div class="hmo-provider-name">PhilCare</div>
-                  <div class="hmo-provider-desc">A Member of the Philippines First Group (Since 1906). Comprehensive health coverage nationwide.</div>
-                  <a href="shop.html" class="hmo-cta"><span>View Plans</span><i class="fas fa-arrow-right"></i></a>
+                  <div class="hmo-provider-desc">
+                    A Member of the Philippines First Group (Since 1906).
+                    Comprehensive health coverage nationwide.
+                  </div>
+                  <a href="shop.html" class="hmo-cta"
+                    ><span>View Plans</span><i class="fas fa-arrow-right"></i
+                  ></a>
                 </div>
               </div>
-            </div>
-            <div class="hmo-section-label" style="margin-top:.5rem"><span>Coming Soon</span><div class="hmo-sec-line"></div></div>
-            <div class="hmo-providers-grid">
-              <div class="hmo-provider-card coming-soon-card">
-                <span class="hmo-badge coming-soon">Coming Soon</span>
+              <!-- Amaphil — NOW AVAILABLE -->
+              <div class="hmo-provider-card available">
+                <span class="hmo-badge available"
+                  ><i class="fas fa-circle" style="font-size: 0.45rem; margin-right: 4px"></i>
+                  Active</span
+                >
                 <div class="hmo-logo-wrap">
                   <div class="hmo-logo-shimmer"></div>
-                  <img src="assets/images/amaphil.png" alt="Amaphil HMO" onerror="this.style.display='none';this.parentElement.querySelector('.hmo-amaphil-fallback').style.display='flex';"/>
-                  <div class="hmo-amaphil-fallback" style="display:none;">
-                    <div class="hmo-amaphil-fallback-icon"><i class="fas fa-heartbeat"></i></div>
+                  <img
+                    src="assets/images/amaphil.png"
+                    alt="Amaphil HMO"
+                    onerror="
+                      this.style.display = 'none';
+                      this.parentElement.querySelector('.hmo-amaphil-fallback').style.display = 'flex';
+                    "
+                  />
+                  <div class="hmo-amaphil-fallback" style="display: none">
+                    <div class="hmo-amaphil-fallback-icon">
+                      <i class="fas fa-heartbeat"></i>
+                    </div>
                     <span class="hmo-amaphil-fallback-label">AMAPHIL</span>
                   </div>
                 </div>
                 <div class="hmo-provider-info">
                   <div class="hmo-provider-name">Amaphil</div>
-                  <div class="hmo-provider-desc">A trusted HMO provider offering comprehensive health plans and excellent nationwide coverage.</div>
-                  <div class="hmo-cta-disabled"><span>Not Yet Available</span><i class="fas fa-lock"></i></div>
+                  <div class="hmo-provider-desc">
+                    A trusted HMO provider offering comprehensive health plans
+                    and excellent nationwide coverage.
+                  </div>
+                  <a href="shop.html" class="hmo-cta"
+                    ><span>View Plans</span><i class="fas fa-arrow-right"></i
+                  ></a>
                 </div>
               </div>
+            </div>
+            <!-- ── Coming Soon ── -->
+            <div class="hmo-section-label" style="margin-top: 0.5rem">
+              <span>Coming Soon</span>
+              <div class="hmo-sec-line"></div>
+            </div>
+            <div class="hmo-providers-grid">
               <div class="hmo-provider-card coming-soon-card">
                 <span class="hmo-badge coming-soon">Coming Soon</span>
-                <div class="hmo-placeholder-logo"><div class="hmo-placeholder-logo-inner"><i class="fas fa-hospital"></i></div></div>
+                <div class="hmo-placeholder-logo">
+                  <div class="hmo-placeholder-logo-inner">
+                    <i class="fas fa-hospital"></i>
+                  </div>
+                </div>
                 <div class="hmo-provider-info">
                   <div class="hmo-provider-name">More Providers</div>
-                  <div class="hmo-provider-desc">We're partnering with top HMO providers to give you the best health solutions.</div>
-                  <div class="hmo-cta-disabled"><span>Not Yet Available</span><i class="fas fa-lock"></i></div>
+                  <div class="hmo-provider-desc">
+                    We're partnering with top HMO providers to give you the best
+                    health solutions.
+                  </div>
+                  <div class="hmo-cta-disabled">
+                    <span>Not Yet Available</span><i class="fas fa-lock"></i>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="hmo-modal-footer-note">
               <i class="fas fa-info-circle"></i>
-              <p><strong>Expanding soon.</strong> We're continuously adding trusted HMO partners to give you more choices. Check back regularly or contact us to inquire about specific providers.</p>
+              <p>
+                <strong>Expanding soon.</strong> We're continuously adding
+                trusted HMO partners to give you more choices. Check back
+                regularly or contact us to inquire about specific providers.
+              </p>
             </div>
           </div>
         </div>
@@ -700,34 +2107,69 @@
             <div class="row g-4">
               <div class="col-md-4">
                 <div class="ins-card">
-                  <div class="ins-card-img"><img src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=600" alt="Health"/></div>
+                  <div class="ins-card-img">
+                    <img
+                      src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=600"
+                      alt="Health"
+                    />
+                  </div>
                   <div class="ins-card-body">
                     <div class="ins-type">HMO</div>
                     <h5>Health Insurance</h5>
-                    <p>Protect yourself and your loved ones against medical expenses and emergencies with our best insurance plan.</p>
-                    <button id="insuranceModal-hmo-btn" class="ins-btn available">View HMO Plans</button>
+                    <p>
+                      Protect yourself and your loved ones against medical
+                      expenses and emergencies with our best insurance plan.
+                    </p>
+                    <button
+                      id="insuranceModal-hmo-btn"
+                      class="ins-btn available"
+                    >
+                      View HMO Plans
+                    </button>
                   </div>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="ins-card">
-                  <div class="ins-card-img"><img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600" alt="Life"/></div>
+                  <div class="ins-card-img">
+                    <img
+                      src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600"
+                      alt="Life"
+                    />
+                  </div>
                   <div class="ins-card-body">
                     <div class="ins-type">Life</div>
                     <h5>Life Insurance</h5>
-                    <p>Ensure your family's financial security even in your absence with our reliable life insurance policies tailored to your needs.</p>
-                    <button id="mainmodal-btn" class="ins-btn">View Life Plans</button>
+                    <p>
+                      Ensure your family's financial security even in your
+                      absence with our reliable life insurance policies tailored
+                      to your needs.
+                    </p>
+                    <button id="mainmodal-btn" class="ins-btn">
+                      View Life Plans
+                    </button>
                   </div>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="ins-card">
-                  <div class="ins-card-img"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600" alt="Non-Life"/></div>
+                  <div class="ins-card-img">
+                    <img
+                      src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600"
+                      alt="Non-Life"
+                    />
+                  </div>
                   <div class="ins-card-body">
                     <div class="ins-type">Non-Life</div>
                     <h5>Non-Life Insurance</h5>
-                    <p>Safeguard your assets like vehicles, homes, and valuables against unforeseen risks with our non-life insurance offerings.</p>
-                    <button id="nonlife-btn" class="ins-btn">View Non-Life Plans</button>
+                    <p>
+                      Safeguard your assets like vehicles, homes, and valuables
+                      against unforeseen risks with our non-life insurance
+                      offerings.
+                    </p>
+                    <button id="nonlife-btn" class="ins-btn">
+                      View Non-Life Plans
+                    </button>
                   </div>
                 </div>
               </div>
@@ -749,34 +2191,74 @@
             <div class="row g-4">
               <div class="col-md-4">
                 <div class="ins-card">
-                  <div class="ins-card-img"><img src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=600" alt="Health"/></div>
+                  <div class="ins-card-img">
+                    <img
+                      src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=600"
+                      alt="Health"
+                    />
+                  </div>
                   <div class="ins-card-body">
                     <div class="ins-type">HMO</div>
                     <h5>Health Insurance</h5>
-                    <p>Protect yourself and your loved ones against medical expenses and emergencies with our best insurance plan.</p>
-                    <a data-bs-toggle="modal" data-bs-target="#hmoModalForTools" class="ins-btn available" style="display:block;text-align:center;text-decoration:none;">View HMO Tools</a>
+                    <p>
+                      Protect yourself and your loved ones against medical
+                      expenses and emergencies with our best insurance plan.
+                    </p>
+                    <a
+                      data-bs-toggle="modal"
+                      data-bs-target="#hmoModalForTools"
+                      class="ins-btn available"
+                      style="
+                        display: block;
+                        text-align: center;
+                        text-decoration: none;
+                      "
+                      >View HMO Tools</a
+                    >
                   </div>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="ins-card">
-                  <div class="ins-card-img"><img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600" alt="Life"/></div>
+                  <div class="ins-card-img">
+                    <img
+                      src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600"
+                      alt="Life"
+                    />
+                  </div>
                   <div class="ins-card-body">
                     <div class="ins-type">Life</div>
                     <h5>Life Insurance</h5>
-                    <p>Ensure your family's financial security even in your absence with our reliable life insurance policies tailored to your needs.</p>
-                    <button class="ins-btn tools-unavail-btn">View Life Plans</button>
+                    <p>
+                      Ensure your family's financial security even in your
+                      absence with our reliable life insurance policies tailored
+                      to your needs.
+                    </p>
+                    <button class="ins-btn tools-unavail-btn">
+                      View Life Plans
+                    </button>
                   </div>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="ins-card">
-                  <div class="ins-card-img"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600" alt="Non-Life"/></div>
+                  <div class="ins-card-img">
+                    <img
+                      src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600"
+                      alt="Non-Life"
+                    />
+                  </div>
                   <div class="ins-card-body">
                     <div class="ins-type">Non-Life</div>
                     <h5>Non-Life Insurance</h5>
-                    <p>Safeguard your assets like vehicles, homes, and valuables against unforeseen risks with our non-life insurance offerings.</p>
-                    <button class="ins-btn tools-unavail-btn">View Non-Life Plans</button>
+                    <p>
+                      Safeguard your assets like vehicles, homes, and valuables
+                      against unforeseen risks with our non-life insurance
+                      offerings.
+                    </p>
+                    <button class="ins-btn tools-unavail-btn">
+                      View Non-Life Plans
+                    </button>
                   </div>
                 </div>
               </div>
@@ -792,15 +2274,27 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title text-white">Service Unavailable</h5>
-            <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            <button
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+            ></button>
           </div>
           <div class="modal-body">
             <div class="unavail-icon">🚧</div>
             <h4>Coming Soon!</h4>
-            <p>This service is <strong>not currently available</strong>. We're working on something exciting — please check back soon!</p>
+            <p>
+              This service is <strong>not currently available</strong>. We're
+              working on something exciting — please check back soon!
+            </p>
           </div>
           <div class="modal-footer">
-            <button class="btn-gold" data-bs-dismiss="modal" style="padding:.65rem 2rem">Close</button>
+            <button
+              class="btn-gold"
+              data-bs-dismiss="modal"
+              style="padding: 0.65rem 2rem"
+            >
+              Close
+            </button>
           </div>
         </div>
       </div>
@@ -811,19 +2305,38 @@
       const sidebar = document.getElementById("sidebar");
       const backdrop = document.getElementById("backdrop");
       const menuToggle = document.getElementById("menuToggle");
-      menuToggle.addEventListener("click", () => { sidebar.classList.toggle("active"); backdrop.classList.toggle("active"); });
-      backdrop.addEventListener("click", () => { sidebar.classList.remove("active"); backdrop.classList.remove("active"); });
+      menuToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("active");
+        backdrop.classList.toggle("active");
+      });
+      backdrop.addEventListener("click", () => {
+        sidebar.classList.remove("active");
+        backdrop.classList.remove("active");
+      });
 
       // ── Theme Toggle ──
       const themeBtn = document.getElementById("themeToggle");
-      const savedTheme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      const savedTheme =
+        localStorage.getItem("theme") ||
+        (window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light");
       const applyTheme = (t) => {
         document.documentElement.setAttribute("data-theme", t);
         localStorage.setItem("theme", t);
-        themeBtn.innerHTML = t === "dark" ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        themeBtn.innerHTML =
+          t === "dark"
+            ? '<i class="fas fa-sun"></i>'
+            : '<i class="fas fa-moon"></i>';
       };
       applyTheme(savedTheme);
-      themeBtn.addEventListener("click", () => { applyTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark"); });
+      themeBtn.addEventListener("click", () => {
+        applyTheme(
+          document.documentElement.getAttribute("data-theme") === "dark"
+            ? "light"
+            : "dark",
+        );
+      });
 
       // ── Preloader ──
       const preloader = document.getElementById("preloader");
@@ -831,24 +2344,47 @@
       window.addEventListener("load", () => {
         const elapsed = performance.now() - t0;
         const delay = elapsed < 1200 ? 1200 - elapsed : 0;
-        setTimeout(() => { preloader.classList.add("fade-out"); setTimeout(() => (preloader.style.display = "none"), 700); }, delay);
+        setTimeout(() => {
+          preloader.classList.add("fade-out");
+          setTimeout(() => (preloader.style.display = "none"), 700);
+        }, delay);
       });
 
       // ── Scroll Animations ──
       const fadeEls = document.querySelectorAll(".fade-up");
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add("visible"), i * 80); observer.unobserve(e.target); } });
-      }, { threshold: 0.1 });
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e, i) => {
+            if (e.isIntersecting) {
+              setTimeout(() => e.target.classList.add("visible"), i * 80);
+              observer.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
       fadeEls.forEach((el) => observer.observe(el));
 
       // ── HMO Preview card on homepage ──
-      document.getElementById("hmo-preview-card").addEventListener("click", () => {
-        new bootstrap.Modal(document.getElementById("hmoModal")).show();
-      });
+      document
+        .getElementById("hmo-preview-card")
+        .addEventListener("click", () => {
+          new bootstrap.Modal(document.getElementById("hmoModal")).show();
+        });
 
       // ── Life & Non-Life cards on homepage → not available ──
-      document.getElementById("life-preview").addEventListener("click", () => { new bootstrap.Modal(document.getElementById("notAvailableModal")).show(); });
-      document.getElementById("nonlife-preview").addEventListener("click", () => { new bootstrap.Modal(document.getElementById("notAvailableModal")).show(); });
+      document.getElementById("life-preview").addEventListener("click", () => {
+        new bootstrap.Modal(
+          document.getElementById("notAvailableModal"),
+        ).show();
+      });
+      document
+        .getElementById("nonlife-preview")
+        .addEventListener("click", () => {
+          new bootstrap.Modal(
+            document.getElementById("notAvailableModal"),
+          ).show();
+        });
 
       // ── Modal Transition Helper ──
       function cleanModalTransition(hideId, showId) {
@@ -856,7 +2392,9 @@
         const inst = bootstrap.Modal.getOrCreateInstance(hideEl);
         hideEl.addEventListener("hidden.bs.modal", function handler() {
           hideEl.removeEventListener("hidden.bs.modal", handler);
-          document.querySelectorAll(".modal-backdrop").forEach((el) => el.remove());
+          document
+            .querySelectorAll(".modal-backdrop")
+            .forEach((el) => el.remove());
           document.body.classList.remove("modal-open");
           document.body.style.removeProperty("overflow");
           document.body.style.removeProperty("padding-right");
@@ -865,21 +2403,41 @@
         inst.hide();
       }
 
-      document.getElementById("insuranceModal-hmo-btn").addEventListener("click", () => { cleanModalTransition("insuranceModal", "hmoModal"); });
-      document.getElementById("mainmodal-btn").addEventListener("click", () => { cleanModalTransition("insuranceModal", "notAvailableModal"); });
-      document.getElementById("nonlife-btn").addEventListener("click", () => { cleanModalTransition("insuranceModal", "notAvailableModal"); });
+      document
+        .getElementById("insuranceModal-hmo-btn")
+        .addEventListener("click", () => {
+          cleanModalTransition("insuranceModal", "hmoModal");
+        });
+      document.getElementById("mainmodal-btn").addEventListener("click", () => {
+        cleanModalTransition("insuranceModal", "notAvailableModal");
+      });
+      document.getElementById("nonlife-btn").addEventListener("click", () => {
+        cleanModalTransition("insuranceModal", "notAvailableModal");
+      });
       document.querySelectorAll(".tools-unavail-btn").forEach((btn) => {
-        btn.addEventListener("click", () => { cleanModalTransition("insuranceModalTools", "notAvailableModal"); });
+        btn.addEventListener("click", () => {
+          cleanModalTransition("insuranceModalTools", "notAvailableModal");
+        });
       });
 
       // ── Active nav link on scroll ──
       const navLinks = document.querySelectorAll('.sidebar-nav a[href^="#"]');
-      const sections = [...navLinks].map((l) => document.querySelector(l.getAttribute("href"))).filter(Boolean);
-      window.addEventListener("scroll", () => {
-        let current = "";
-        sections.forEach((s) => { if (window.scrollY >= s.offsetTop - 120) current = "#" + s.id; });
-        navLinks.forEach((l) => { l.classList.toggle("active", l.getAttribute("href") === current); });
-      }, { passive: true });
+      const sections = [...navLinks]
+        .map((l) => document.querySelector(l.getAttribute("href")))
+        .filter(Boolean);
+      window.addEventListener(
+        "scroll",
+        () => {
+          let current = "";
+          sections.forEach((s) => {
+            if (window.scrollY >= s.offsetTop - 120) current = "#" + s.id;
+          });
+          navLinks.forEach((l) => {
+            l.classList.toggle("active", l.getAttribute("href") === current);
+          });
+        },
+        { passive: true },
+      );
     </script>
   </body>
 </html>
