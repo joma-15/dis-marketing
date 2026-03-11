@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const button = document.getElementById("submit");
-
+//his
   button.addEventListener("click", async function (event) {
     event.preventDefault();
     console.log("the button was triggered");
