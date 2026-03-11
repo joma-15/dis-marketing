@@ -1,0 +1,958 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AMAPHIL - Health Plans</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #0f1e3d;
+      --primary-mid: #1a3260;
+      --accent: #f47920;
+      --accent-light: #fff0e6;
+      --accent-dark: #d4630a;
+      --dark: #080f1e;
+      --soft-bg: #f5f7fb;
+      --card-bg: #ffffff;
+      --text: #1a2340;
+      --muted: #6b7a9a;
+      --border: #d0d8ec;
+      --danger: #e05252;
+      --navy: #0f1e3d;
+      --orange: #f47920;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--soft-bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* Geometric background pattern inspired by RMC2 */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 80% 20%, rgba(244,121,32,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 20% 80%, rgba(15,30,61,0.06) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Header ── */
+    header {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--primary-mid) 100%);
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 24px rgba(15,30,61,0.4);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    header .brand-logo {
+      height: 52px;
+      width: auto;
+      filter: drop-shadow(0 0 6px rgba(255,255,255,0.3));
+      object-fit: contain;
+    }
+    header .brand-text h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.6rem;
+      color: white;
+      margin: 0;
+      letter-spacing: 2px;
+      font-weight: 900;
+    }
+    header .brand-text p {
+      color: rgba(255,255,255,0.7);
+      margin: 0;
+      font-size: 0.75rem;
+      letter-spacing: 0.5px;
+    }
+
+    /* Orange accent bar on brand name */
+    header .brand-text h1 span { color: var(--orange); }
+
+    .btn-back {
+      background: rgba(255,255,255,0.12);
+      border: 1.5px solid rgba(255,255,255,0.25);
+      color: white;
+      font-weight: 600;
+      border-radius: 50px;
+      padding: 9px 22px;
+      font-size: 0.88rem;
+      transition: all 0.2s;
+      backdrop-filter: blur(6px);
+    }
+    .btn-back:hover { background: rgba(244,121,32,0.3); border-color: var(--orange); color: white; }
+
+    /* ── Hero section ── */
+    .hero-section {
+      padding: 60px 0 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Logo card replacing old image */
+    .logo-display-card {
+      background: linear-gradient(135deg, #e8edf8 0%, #f5f7fb 60%, #eef1fa 100%);
+      border-radius: 24px;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 20px 60px rgba(15,30,61,0.18), 0 0 0 3px #1a3260;
+      position: relative;
+      overflow: hidden;
+      min-height: 280px;
+      border: 3px solid #1a3260;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+    }
+
+    /* Animated shimmer layer */
+    .logo-display-card::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: rgba(244,121,32,0.12);
+      transition: all 0.4s ease;
+    }
+    .logo-display-card::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: -40px;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: rgba(15,30,61,0.06);
+      transition: all 0.4s ease;
+    }
+
+    /* Glowing sweep overlay */
+    .logo-display-card .shine {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255,255,255,0) 30%,
+        rgba(255,255,255,0.55) 50%,
+        rgba(255,255,255,0) 70%,
+        transparent 100%
+      );
+      transform: translateX(-100%);
+      transition: transform 0.0s;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .logo-display-card:hover {
+      border-color: #4a7fd4;
+      box-shadow:
+        0 0 0 4px rgba(26,50,96,0.15),
+        0 0 24px 6px rgba(74,127,212,0.45),
+        0 0 60px 16px rgba(74,127,212,0.2),
+        0 30px 80px rgba(15,30,61,0.25);
+      transform: translateY(-6px) scale(1.02);
+      background: linear-gradient(135deg, #dde6f8 0%, #eef2fc 60%, #e4eaf8 100%);
+    }
+    .logo-display-card:hover::before {
+      top: -30px; right: -30px;
+      width: 280px; height: 280px;
+      background: rgba(244,121,32,0.18);
+    }
+    .logo-display-card:hover::after {
+      bottom: -20px; left: -20px;
+      width: 200px; height: 200px;
+      background: rgba(74,127,212,0.1);
+    }
+    .logo-display-card:hover .shine {
+      transform: translateX(200%);
+      transition: transform 0.65s ease;
+    }
+
+    .logo-display-card img {
+      max-width: 360px;
+      width: 100%;
+      position: relative;
+      z-index: 3;
+      filter: drop-shadow(0 4px 16px rgba(15,30,61,0.12));
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .logo-display-card:hover img {
+      filter: drop-shadow(0 8px 28px rgba(26,50,96,0.3)) drop-shadow(0 0 12px rgba(74,127,212,0.25));
+      transform: scale(1.05);
+    }
+
+    /* Pulse ring animation on hover */
+    @keyframes pulseRing {
+      0%   { box-shadow: 0 0 0 0 rgba(74,127,212,0.5); }
+      70%  { box-shadow: 0 0 0 16px rgba(74,127,212,0); }
+      100% { box-shadow: 0 0 0 0 rgba(74,127,212,0); }
+    }
+    .logo-display-card:hover {
+      animation: pulseRing 1.2s ease-out infinite;
+    }
+
+    .hero-right h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.4rem;
+      color: var(--navy);
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    .hero-right h2 span { color: var(--orange); }
+    .hero-right p { color: var(--muted); font-size: 1rem; }
+
+    /* Step badge */
+    .step-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-light);
+      color: var(--orange);
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: 1.5px;
+      padding: 5px 14px;
+      border-radius: 50px;
+      border: 1.5px solid rgba(244,121,32,0.3);
+      margin-bottom: 14px;
+    }
+    .step-badge::before {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+    }
+
+    /* ── Plan Type Cards ── */
+    .plan-type-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .plan-type-card {
+      background: white;
+      border: 2px solid var(--border);
+      border-radius: 18px;
+      padding: 22px 20px;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .plan-type-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(244,121,32,0.06), transparent);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .plan-type-card:hover {
+      border-color: var(--orange);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(244,121,32,0.2);
+    }
+    .plan-type-card:hover::before { opacity: 1; }
+    .plan-type-card .icon-wrap {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      background: var(--accent-light);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 12px;
+      font-size: 1.4rem;
+      color: var(--orange);
+      transition: all 0.25s;
+    }
+    .plan-type-card:hover .icon-wrap {
+      background: var(--orange);
+      color: white;
+    }
+    .plan-type-card .type-label {
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--navy);
+      display: block;
+    }
+    .plan-type-card .type-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .plan-type-card .arrow-badge {
+      position: absolute;
+      top: 10px; right: 10px;
+      background: var(--orange);
+      color: white;
+      border-radius: 50%;
+      width: 24px; height: 24px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .plan-type-card:hover .arrow-badge { opacity: 1; }
+
+    /* ── Plans Modal ── */
+    .plans-modal .modal-dialog { max-width: 940px; }
+    .plans-modal .modal-content {
+      border: none;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+    }
+    .plans-modal .modal-header {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--primary-mid) 100%);
+      padding: 20px 28px;
+      border: none;
+    }
+    .plans-modal .modal-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.3rem;
+      color: white;
+    }
+    .plans-modal .modal-title small {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.8rem;
+      opacity: 0.75;
+      display: block;
+      font-weight: 400;
+    }
+    .plans-modal .modal-body {
+      background: #f0f3fa;
+      padding: 28px;
+      max-height: 75vh;
+      overflow-y: auto;
+    }
+
+    /* Scrollbar */
+    .plans-modal .modal-body::-webkit-scrollbar { width: 6px; }
+    .plans-modal .modal-body::-webkit-scrollbar-track { background: #dde3f0; border-radius: 3px; }
+    .plans-modal .modal-body::-webkit-scrollbar-thumb { background: var(--primary-mid); border-radius: 3px; }
+
+    /* Section divider */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 28px 0 16px;
+    }
+    .section-divider:first-child { margin-top: 0; }
+    .section-divider .divider-badge {
+      background: linear-gradient(135deg, var(--navy), var(--primary-mid));
+      color: white;
+      font-weight: 800;
+      font-size: 0.82rem;
+      padding: 5px 14px;
+      border-radius: 50px;
+      white-space: nowrap;
+      letter-spacing: 0.5px;
+    }
+    .section-divider .divider-line {
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(to right, var(--border), transparent);
+    }
+
+    /* Plan card */
+    .plan-card {
+      background: white;
+      border-radius: 16px;
+      border: 1.5px solid var(--border);
+      overflow: hidden;
+      height: 100%;
+      transition: all 0.25s;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .plan-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(15,30,61,0.14);
+      border-color: var(--orange);
+    }
+    .plan-card-header {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--primary-mid) 100%);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .plan-card-header .room-badge {
+      background: rgba(244,121,32,0.3);
+      color: #ffd4a8;
+      font-size: 0.72rem;
+      padding: 3px 10px;
+      border-radius: 50px;
+      border: 1px solid rgba(244,121,32,0.5);
+    }
+    .plan-card-header h6 {
+      color: white;
+      font-weight: 700;
+      margin: 0;
+      font-size: 0.95rem;
+    }
+    .plan-card-body { padding: 16px 18px; }
+    .plan-card-body .benefit-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 16px;
+    }
+    .plan-card-body .benefit-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      padding: 4px 0;
+    }
+    .plan-card-body .benefit-list li i {
+      color: var(--orange);
+      font-size: 0.75rem;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    /* Period buttons */
+    .period-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+    .btn-period {
+      flex: 1;
+      min-width: 0;
+      background: white;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 6px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--navy);
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    .btn-period:hover {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(244,121,32,0.35);
+    }
+    .btn-period .period-label { display: block; font-size: 0.72rem; font-weight: 600; }
+    .btn-period .period-price {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-top: 2px;
+    }
+    .btn-period:hover .period-price { color: white; }
+
+    /* ── Confirmation Modal ── */
+    #modernConfirmationModal .modal-content,
+    #conditionModal .modal-content,
+    #clientDetailsModal .modal-content {
+      border: none;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+    }
+    #modernConfirmationModal .modal-header,
+    #conditionModal .modal-header,
+    #clientDetailsModal .modal-header {
+      background: linear-gradient(135deg, var(--navy), var(--primary-mid));
+      border: none;
+      padding: 18px 24px;
+    }
+    #modernConfirmationModal .modal-title,
+    #conditionModal .modal-title,
+    #clientDetailsModal .modal-title {
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .confirm-summary {
+      background: var(--accent-light);
+      border: 1.5px solid rgba(244,121,32,0.4);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin: 8px 0 16px;
+    }
+    .confirm-summary .plan-name { font-weight: 800; font-size: 1.05rem; color: var(--navy); }
+    .confirm-summary .plan-price { font-weight: 800; font-size: 1.6rem; color: var(--orange); }
+    .confirm-summary .plan-type-tag {
+      display: inline-block;
+      background: var(--navy);
+      color: white;
+      font-size: 0.72rem;
+      padding: 3px 12px;
+      border-radius: 50px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .btn-proceed {
+      background: linear-gradient(135deg, var(--orange), var(--accent-dark));
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 28px;
+      font-weight: 700;
+      transition: all 0.2s;
+    }
+    .btn-proceed:hover {
+      background: linear-gradient(135deg, #e06a10, #bf550a);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(244,121,32,0.4);
+    }
+    .btn-cancel-custom {
+      border: 2px solid var(--border);
+      background: white;
+      color: var(--muted);
+      border-radius: 50px;
+      padding: 10px 28px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .btn-cancel-custom:hover { border-color: var(--muted); color: var(--text); }
+
+    /* Form styles */
+    .form-control, .form-select {
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.9rem;
+      padding: 9px 14px;
+      color: var(--text);
+      transition: border-color 0.2s;
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(244,121,32,0.15);
+    }
+    .form-label { font-weight: 600; font-size: 0.88rem; color: var(--navy); margin-bottom: 6px; }
+    .form-check-input:checked { background-color: var(--orange); border-color: var(--orange); }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <a href="javascript:history.back()" class="btn-back">
+    <i class="fa fa-arrow-left me-2"></i>Back
+  </a>
+  <div class="brand">
+    <img
+      class="brand-logo"
+      src="dis-marketing/digital marketing website/assets/images/amaphil-logo.png"
+      alt="AMAPHIL Logo"
+      onerror="this.style.display='none'"
+    />
+    <div class="brand-text">
+      <h1>AMA<span>PHIL</span></h1>
+      <p>Advanced Medical Access Philippines, Inc.</p>
+    </div>
+  </div>
+  <div style="width:120px"></div>
+</header>
+
+<!-- Hero / Plan Type Selection -->
+<section class="hero-section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 text-center hero-left">
+        <div class="logo-display-card">
+          <div class="shine"></div>
+          <img
+            src="dis-marketing/digital marketing website/assets/images/amaphil-logo.png"
+            alt="AMAPHIL - Advanced Medical Access Philippines, Inc."
+            onerror="this.src='https://placehold.co/340x160/0f1e3d/f47920?text=AMAPHIL'"
+          />
+        </div>
+      </div>
+      <div class="col-lg-6 hero-right">
+        <div class="step-badge">STEP 1 OF 4</div>
+        <h2>Choose Your<br/><span>Coverage Plan</span></h2>
+        <p class="mb-4">Select the plan type that fits your needs. Each category offers tailored benefits and pricing.</p>
+        <div class="plan-type-grid">
+
+          <!-- Individual -->
+          <div class="plan-type-card" data-bs-toggle="modal" data-bs-target="#plansModal_Individual">
+            <div class="arrow-badge"><i class="fa fa-arrow-right"></i></div>
+            <div class="icon-wrap"><i class="fa fa-user"></i></div>
+            <span class="type-label">Individual</span>
+            <span class="type-desc">Perfect for single coverage</span>
+          </div>
+
+          <!-- Family -->
+          <div class="plan-type-card" data-bs-toggle="modal" data-bs-target="#plansModal_Family">
+            <div class="arrow-badge"><i class="fa fa-arrow-right"></i></div>
+            <div class="icon-wrap"><i class="fa fa-people-roof"></i></div>
+            <span class="type-label">Family</span>
+            <span class="type-desc">Coverage for your whole family</span>
+          </div>
+
+          <!-- Senior -->
+          <div class="plan-type-card" data-bs-toggle="modal" data-bs-target="#plansModal_Senior">
+            <div class="arrow-badge"><i class="fa fa-arrow-right"></i></div>
+            <div class="icon-wrap"><i class="fa fa-heart-pulse"></i></div>
+            <span class="type-label">Senior</span>
+            <span class="type-desc">Specialized care for seniors</span>
+          </div>
+
+          <!-- Group -->
+          <div class="plan-type-card" data-bs-toggle="modal" data-bs-target="#plansModal_Group">
+            <div class="arrow-badge"><i class="fa fa-arrow-right"></i></div>
+            <div class="icon-wrap"><i class="fa fa-building"></i></div>
+            <span class="type-label">Group</span>
+            <span class="type-desc">Ideal for organizations</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+const PLAN_DATA = {
+  Individual: [
+    { tier: '60,000 Health Plans', name: '60K ABL', room: 'Ward',         quarterly: '3,340', semi: '6,240',  annual: '12,000' },
+    { tier: '60,000 Health Plans', name: '60K MBL', room: 'Semi-Private', quarterly: '3,402', semi: '6,678',  annual: '12,600' },
+    { tier: '100,000 Health Plans', name: '100K ABL', room: 'Ward',         quarterly: '4,860', semi: '9,360',  annual: '18,000' },
+    { tier: '100,000 Health Plans', name: '100K MBL', room: 'Semi-Private', quarterly: '4,860', semi: '9,360', annual: '18,600' },
+    { tier: '120,000 Health Plans', name: '120K ABL', room: 'Ward',    quarterly: '5,832', semi: '11,232', annual: '21,600' },
+    { tier: '120,000 Health Plans', name: '120K MBL', room: 'Private', quarterly: '5,994', semi: '11,766', annual: '22,200' },
+  ],
+  Family: [
+    { tier: '50,000 Health Plans', name: '50K ABL', room: 'Ward', quarterly: '1,800', semi: '3,600', annual: '7,200' },
+  ],
+  Senior: [
+    { tier: '60,000 Health Plans', name: '60K ABL', room: 'Ward',         quarterly: '3,340', semi: '6,240',  annual: '12,000' },
+    { tier: '60,000 Health Plans', name: '60K MBL', room: 'Semi-Private', quarterly: '3,402', semi: '6,678',  annual: '12,600' },
+    { tier: '100,000 Health Plans', name: '100K ABL', room: 'Ward',         quarterly: '4,860', semi: '9,360',  annual: '18,000' },
+    { tier: '100,000 Health Plans', name: '100K MBL', room: 'Semi-Private', quarterly: '4,860', semi: '9,360', annual: '18,600' },
+    { tier: '120,000 Health Plans', name: '120K ABL', room: 'Ward',    quarterly: '5,832', semi: '11,232', annual: '21,600' },
+    { tier: '120,000 Health Plans', name: '120K MBL', room: 'Private', quarterly: '5,994', semi: '11,766', annual: '22,200' },
+  ],
+  Group: [
+    { tier: '50,000 Health Plans', name: '50K ABL', room: 'Ward', quarterly: '1,800', semi: '3,600', annual: '7,200' },
+  ],
+};
+
+const BENEFITS = [
+  'Inpatient Coverage',
+  'Outpatient Coverage',
+  'Emergency Care',
+  'Annual Physical Exam (APE)',
+  'Mental Health Care',
+  'Life Insurance'
+];
+</script>
+
+<div id="plan-modals-container"></div>
+
+<!-- MODAL: Confirmation -->
+<div class="modal fade" id="modernConfirmationModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="fa fa-circle-check me-2"></i>Confirm Your Selection</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <p class="text-muted mb-3" style="font-size:0.9rem">Review your selected plan before continuing.</p>
+        <div class="confirm-summary">
+          <span class="plan-type-tag" id="conf-plan-type">Individual</span>
+          <div class="plan-name" id="conf-plan-name">60K ABL – Ward</div>
+          <div class="plan-price" id="conf-plan-price">₱4,000</div>
+          <div style="font-size:0.82rem;color:var(--muted);margin-top:4px;" id="conf-plan-period">Quarterly</div>
+        </div>
+        <p style="font-size:0.85rem;color:var(--muted)"><i class="fa fa-info-circle me-1 text-warning"></i>Pre-existing conditions may affect your coverage terms.</p>
+      </div>
+      <div class="modal-footer border-0 pb-4 gap-2 justify-content-center">
+        <button class="btn-cancel-custom btn" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn-proceed btn" data-bs-toggle="modal" data-bs-target="#conditionModal" id="proceedConditionButton">
+          Proceed <i class="fa fa-arrow-right ms-1"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Pre-existing Condition -->
+<div class="modal fade" id="conditionModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="fa fa-heart-pulse me-2"></i>Pre-existing Condition</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <div class="mb-3">
+          <label class="form-label">Do you have a pre-existing condition?</label>
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="radio" name="conditionType" id="withCondition" value="with" />
+            <label class="form-check-label" for="withCondition">Yes, I have a pre-existing condition</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="conditionType" id="withoutCondition" value="without" checked />
+            <label class="form-check-label" for="withoutCondition">No pre-existing conditions</label>
+          </div>
+        </div>
+        <div id="conditionChecklist" class="d-none" style="background:var(--soft-bg);border-radius:12px;padding:16px;">
+          <label class="form-label">Select applicable conditions:</label>
+          <div class="row g-2">
+            <div class="col-6"><div class="form-check"><input class="form-check-input" type="checkbox" id="condAsthma" /><label class="form-check-label" for="condAsthma">Asthma</label></div></div>
+            <div class="col-6"><div class="form-check"><input class="form-check-input" type="checkbox" id="condDiabetes" /><label class="form-check-label" for="condDiabetes">Diabetes</label></div></div>
+            <div class="col-6"><div class="form-check"><input class="form-check-input" type="checkbox" id="condHypertension" /><label class="form-check-label" for="condHypertension">Hypertension</label></div></div>
+            <div class="col-6"><div class="form-check"><input class="form-check-input" type="checkbox" id="condHeart" /><label class="form-check-label" for="condHeart">Heart Condition</label></div></div>
+            <div class="col-6"><div class="form-check"><input class="form-check-input" type="checkbox" id="condCongenital" /><label class="form-check-label" for="condCongenital">Congenital Disease</label></div></div>
+            <div class="col-6"><div class="form-check"><input class="form-check-input" type="checkbox" id="condKidney" /><label class="form-check-label" for="condKidney">Kidney Disease</label></div></div>
+            <div class="col-12 mt-1">
+              <div class="form-check"><input class="form-check-input" type="checkbox" id="otherCondition" /><label class="form-check-label" for="otherCondition">Others</label></div>
+              <input type="text" class="form-control mt-2" id="otherText" placeholder="Please specify..." style="display:none" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer border-0 pb-4 gap-2 justify-content-center">
+        <button class="btn-cancel-custom btn" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn-proceed btn" data-bs-toggle="modal" data-bs-target="#clientDetailsModal">
+          Next <i class="fa fa-arrow-right ms-1"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Client Details -->
+<div class="modal fade" id="clientDetailsModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="fa fa-user-pen me-2"></i>Client Information</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4" style="max-height:70vh;overflow-y:auto;">
+        <form id="clientForm">
+          <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <div class="row g-2">
+              <div class="col-md-5"><input type="text" class="form-control" placeholder="Last Name" id="LastName" required /></div>
+              <div class="col-md-5"><input type="text" class="form-control" placeholder="First Name" id="FirstName" required /></div>
+              <div class="col-md-2"><input type="text" class="form-control" placeholder="M.I." id="MiddleName" maxlength="1" /></div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Birthdate</label>
+            <input type="date" class="form-control" id="bday" required />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Address</label>
+            <textarea class="form-control" rows="2" placeholder="Complete Address" id="address" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-control" placeholder="example@domain.com" id="email" required />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Gender</label>
+            <div class="d-flex gap-3">
+              <div class="form-check"><input class="form-check-input" type="radio" name="gender" id="male" value="Male" required /><label class="form-check-label" for="male">Male</label></div>
+              <div class="form-check"><input class="form-check-input" type="radio" name="gender" id="female" value="Female" /><label class="form-check-label" for="female">Female</label></div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Civil Status</label>
+            <select class="form-select" id="civil-status" required>
+              <option selected disabled value="">Select status</option>
+              <option>Single</option><option>Married</option><option>Widowed</option><option>Divorced</option><option>Separated</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Payment Option</label>
+            <select class="form-select" id="payment-option" required></select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Referred By <small class="text-muted fw-normal">(optional)</small></label>
+            <input type="text" class="form-control" placeholder="Name of person or source" id="referredBy" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer border-0 pb-4 gap-2 justify-content-center">
+        <button class="btn-cancel-custom btn" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn-proceed btn" id="user-info">
+          Submit <i class="fa fa-check ms-1"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const PLAN_ICONS = {
+  Individual: 'fa-user',
+  Family: 'fa-people-roof',
+  Senior: 'fa-heart-pulse',
+  Group: 'fa-building'
+};
+
+const PLAN_SUBTITLES = {
+  Individual: 'Single coverage · Tailored for you',
+  Family: 'Coverage for the whole family',
+  Senior: 'Specialized senior care',
+  Group: 'Ideal for businesses & organizations'
+};
+
+function buildPlanModals() {
+  const container = document.getElementById('plan-modals-container');
+  let html = '';
+
+  Object.keys(PLAN_DATA).forEach(planType => {
+    const plans = PLAN_DATA[planType];
+    const tiers = {};
+    plans.forEach(p => {
+      if (!tiers[p.tier]) tiers[p.tier] = [];
+      tiers[p.tier].push(p);
+    });
+
+    let cardsHtml = '';
+    Object.keys(tiers).forEach(tier => {
+      cardsHtml += `
+        <div class="section-divider">
+          <span class="divider-badge"><i class="fa fa-shield-halved me-1"></i>${tier}</span>
+          <div class="divider-line"></div>
+        </div>
+        <div class="row g-3 mb-1">
+      `;
+      tiers[tier].forEach(plan => {
+        const benefits = BENEFITS.map(b => `<li><i class="fa fa-circle-check"></i>${b}</li>`).join('');
+        cardsHtml += `
+          <div class="col-md-6">
+            <div class="plan-card">
+              <div class="plan-card-header">
+                <div>
+                  <h6>${plan.name}</h6>
+                  <span class="room-badge"><i class="fa fa-bed me-1"></i>${plan.room}</span>
+                </div>
+              </div>
+              <div class="plan-card-body">
+                <ul class="benefit-list">${benefits}</ul>
+                <div class="period-buttons">
+                  <button class="btn-period select-plan-btn"
+                    data-plan="${plan.name} – ${plan.room}"
+                    data-plan-type="${planType}"
+                    data-period="Quarterly"
+                    data-price="${plan.quarterly}"
+                    data-bs-toggle="modal" data-bs-target="#modernConfirmationModal">
+                    <span class="period-label">Quarterly</span>
+                    <span class="period-price">₱${plan.quarterly}</span>
+                  </button>
+                  <button class="btn-period select-plan-btn"
+                    data-plan="${plan.name} – ${plan.room}"
+                    data-plan-type="${planType}"
+                    data-period="Semi-Annually"
+                    data-price="${plan.semi}"
+                    data-bs-toggle="modal" data-bs-target="#modernConfirmationModal">
+                    <span class="period-label">Semi-Annual</span>
+                    <span class="period-price">₱${plan.semi}</span>
+                  </button>
+                  <button class="btn-period select-plan-btn"
+                    data-plan="${plan.name} – ${plan.room}"
+                    data-plan-type="${planType}"
+                    data-period="Annually"
+                    data-price="${plan.annual}"
+                    data-bs-toggle="modal" data-bs-target="#modernConfirmationModal">
+                    <span class="period-label">Annually</span>
+                    <span class="period-price">₱${plan.annual}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      cardsHtml += `</div>`;
+    });
+
+    html += `
+      <div class="modal fade plans-modal" id="plansModal_${planType}" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div>
+                <div class="modal-title">
+                  <i class="fa ${PLAN_ICONS[planType]} me-2"></i>${planType} Health Plans
+                  <small>${PLAN_SUBTITLES[planType]}</small>
+                </div>
+              </div>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              ${cardsHtml}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+  bindPlanButtons();
+}
+
+function bindPlanButtons() {
+  document.querySelectorAll('.select-plan-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const b = e.currentTarget;
+      document.getElementById('conf-plan-name').textContent   = b.dataset.plan;
+      document.getElementById('conf-plan-type').textContent   = b.dataset.planType;
+      document.getElementById('conf-plan-price').textContent  = '₱' + b.dataset.price;
+      document.getElementById('conf-plan-period').textContent = b.dataset.period;
+
+      const paymentSel = document.getElementById('payment-option');
+      paymentSel.innerHTML = '';
+      ['Quarterly', 'Semi-Annually', 'Annually'].forEach(type => {
+        const opt = document.createElement('option');
+        opt.value = type;
+        opt.textContent = type;
+        if (type === b.dataset.period) opt.selected = true;
+        paymentSel.appendChild(opt);
+      });
+    });
+  });
+}
+
+document.querySelectorAll('input[name="conditionType"]').forEach(radio => {
+  radio.addEventListener('change', () => {
+    document.getElementById('conditionChecklist').classList.toggle('d-none', radio.value !== 'with');
+  });
+});
+
+document.getElementById('otherCondition').addEventListener('change', function () {
+  document.getElementById('otherText').style.display = this.checked ? 'block' : 'none';
+});
+
+buildPlanModals();
+</script>
+
+<script src="assets/js/enroll.js" type="module"></script>
+</body>
+</html>
