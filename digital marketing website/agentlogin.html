@@ -764,9 +764,9 @@
       }
 
       /* ══════════════════════════════════════════
-         REGISTER — original logic, new UI alerts
+         REGISTER — fetch-based (same as login)
       ══════════════════════════════════════════ */
-      function handleRegister(e) {
+      async function handleRegister(e) {
         e.preventDefault();
 
         const fullname    = document.getElementById('regName').value.trim();
@@ -790,15 +790,23 @@
         const btn = document.getElementById('submit');
         btn.classList.add('loading');
         btn.disabled = true;
-        showLoading('Creating your account…', 'Setting up your affiliate profile.');
+        showLoading('Creating your account…', 'Checking for duplicates…');
 
-        const callbackName = 'jsonpCallback_' + Date.now();
+        try {
+          // ── Step 1: Check duplicates via fetch (same GAS endpoint as login) ──
+          const checkUrl = `https://script.google.com/macros/s/AKfycbzB9F4g68ZKkWnEN1wXA4BBTFXztXssO-VwK3YH87vPlUK7piQkcQwJd58-TtpwRhCn/exec?action=checkDuplicates&password=${encodeURIComponent(password)}&referral=${encodeURIComponent(referral)}`;
+          console.log('🔗 Checking duplicates:', checkUrl);
 
-        window[callbackName] = function (data) {
-          delete window[callbackName];
-          document.body.removeChild(script);
+          const checkRes = await fetch(checkUrl);
 
-          if (data.exists) {
+          if (!checkRes.ok) {
+            throw new Error('Duplicate check request failed: ' + checkRes.status);
+          }
+
+          const checkData = await checkRes.json();
+          console.log('✅ Duplicate check result:', checkData);
+
+          if (checkData.exists) {
             hideLoading();
             btn.classList.remove('loading');
             btn.disabled = false;
@@ -811,6 +819,8 @@
             return;
           }
 
+          // ── Step 2: Submit to Google Form ──
+          showLoading('Creating your account…', 'Saving your details…');
           const formUrl = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSf4ILyBKJDLi1yHBwwQ8ZLbXYNgSmx9prgi-tqdRrvxSyn_mQ/formResponse';
           const params = new URLSearchParams();
           params.append('entry.1669826201', fullname);
@@ -818,32 +828,33 @@
           params.append('entry.1025155675', password);
           params.append('entry.2067985687', referral);
 
-          fetch(formUrl, { method: 'POST', mode: 'no-cors', body: params })
-            .then(() => {
-              hideLoading();
-              btn.classList.remove('loading');
-              btn.disabled = false;
-              form.reset();
-              showDialog({
-                type: 'success',
-                title: 'Registration Successful!',
-                message: 'Your affiliate account has been created. You can now log in.',
-                confirmText: 'Go to Login',
-                onConfirm: () => { window.location.href = 'agentlogin.html'; }
-              });
-            })
-            .catch((error) => {
-              console.error('Submission error:', error);
-              hideLoading();
-              btn.classList.remove('loading');
-              btn.disabled = false;
-              showToast('error', 'Submission Error', 'An error occurred while sending the data.');
-            });
-        };
+          await fetch(formUrl, { method: 'POST', mode: 'no-cors', body: params });
 
-        const script = document.createElement('script');
-        script.src = `https://script.google.com/macros/s/AKfycbzB9F4g68ZKkWnEN1wXA4BBTFXztXssO-VwK3YH87vPlUK7piQkcQwJd58-TtpwRhCn/exec?action=checkDuplicates&password=${encodeURIComponent(password)}&referral=${encodeURIComponent(referral)}&callback=${callbackName}`;
-        document.body.appendChild(script);
+          // no-cors always resolves even on error, so we treat reaching here as success
+          hideLoading();
+          btn.classList.remove('loading');
+          btn.disabled = false;
+          form.reset();
+          showDialog({
+            type: 'success',
+            title: 'Registration Successful!',
+            message: 'Your affiliate account has been created. You can now log in.',
+            confirmText: 'Go to Login',
+            onConfirm: () => { window.location.href = 'agentlogin.html'; }
+          });
+
+        } catch (error) {
+          console.error('🔥 Registration error:', error);
+          hideLoading();
+          btn.classList.remove('loading');
+          btn.disabled = false;
+          showDialog({
+            type: 'error',
+            title: 'Registration Failed',
+            message: 'Something went wrong while creating your account. Please check your connection and try again.',
+            confirmText: 'Try Again'
+          });
+        }
       }
 
       /* ══════════════════════════════════════════
