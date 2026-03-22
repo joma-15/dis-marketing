@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amaphil Easy Access Tools</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal:        #0d8a8f;
+      --teal-light:  #17b8be;
+      --teal-pale:   #e6f7f7;
+      --gold:        #c8922a;
+      --gold-pale:   #fdf4e3;
+      --bg:          #f4f8f8;
+      --white:       #ffffff;
+      --text:        #1a2e2e;
+      --text-muted:  #6b8f8f;
+      --border:      rgba(13,138,143,0.14);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── BACKGROUND SHAPES ── */
+    .bg-shapes {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.55;
+      animation: drift 20s ease-in-out infinite alternate;
+    }
+    .shape-1 { width: 500px; height: 500px; background: #b2e8ea; top: -180px; left: -120px; animation-duration: 22s; }
+    .shape-2 { width: 350px; height: 350px; background: #fde9bb; bottom: -100px; right: -80px; animation-duration: 26s; animation-delay: -9s; }
+    .shape-3 { width: 260px; height: 260px; background: #c8efef; top: 42%; left: 58%; animation-duration: 17s; animation-delay: -5s; opacity: 0.4; }
+    @keyframes drift {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(30px, 22px) scale(1.06); }
+    }
+
+    /* ── WRAPPER ── */
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 44px 24px 80px;
+    }
+
+    /* ── BACK BUTTON ── */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      color: var(--teal);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 9px 18px;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(13,138,143,0.08);
+      transition: background 0.22s, box-shadow 0.22s, transform 0.2s;
+      margin-bottom: 52px;
+      letter-spacing: 0.01em;
+    }
+    .back-btn:hover {
+      background: var(--teal-pale);
+      box-shadow: 0 4px 16px rgba(13,138,143,0.14);
+      transform: translateX(-3px);
+      color: var(--teal);
+    }
+    .back-btn svg { width: 15px; height: 15px; }
+
+    /* ── HEADER ── */
+    .header {
+      text-align: center;
+      margin-bottom: 56px;
+      animation: fadeUp 0.65s ease both;
+    }
+    .eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--teal);
+      background: var(--teal-pale);
+      border: 1px solid rgba(13,138,143,0.2);
+      padding: 5px 16px;
+      border-radius: 50px;
+      margin-bottom: 18px;
+    }
+    .header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+    .header h1 span { color: var(--teal); font-style: italic; }
+    .header p {
+      color: var(--text-muted);
+      font-size: 15px;
+      font-weight: 300;
+      max-width: 440px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Divider */
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 26px;
+    }
+    .divider-line { flex: 1; max-width: 70px; height: 1px; background: linear-gradient(to right, transparent, rgba(200,146,42,0.35)); }
+    .divider-line:last-child { background: linear-gradient(to left, transparent, rgba(200,146,42,0.35)); }
+    .divider-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); opacity: 0.6; }
+
+    /* ── GRID ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 16px;
+    }
+
+    /* ── CARDS ── */
+    .card-link {
+      text-decoration: none;
+      display: block;
+      animation: fadeUp 0.55s ease both;
+    }
+    .card-link:nth-child(1)  { animation-delay: 0.05s; }
+    .card-link:nth-child(2)  { animation-delay: 0.10s; }
+    .card-link:nth-child(3)  { animation-delay: 0.15s; }
+    .card-link:nth-child(4)  { animation-delay: 0.20s; }
+    .card-link:nth-child(5)  { animation-delay: 0.25s; }
+    .card-link:nth-child(6)  { animation-delay: 0.30s; }
+    .card-link:nth-child(7)  { animation-delay: 0.35s; }
+    .card-link:nth-child(8)  { animation-delay: 0.40s; }
+    .card-link:nth-child(9)  { animation-delay: 0.45s; }
+    .card-link:nth-child(10) { animation-delay: 0.50s; }
+    .card-link:nth-child(11) { animation-delay: 0.55s; }
+
+    .card {
+      background: var(--white);
+      border: 1px solid rgba(13,138,143,0.10);
+      border-radius: 20px;
+      padding: 28px 20px 24px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 13px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(13,138,143,0.06);
+      transition: transform 0.26s cubic-bezier(.23,1,.32,1),
+                  box-shadow 0.26s ease,
+                  border-color 0.26s ease;
+      cursor: pointer;
+    }
+
+    /* Bottom accent bar */
+    .card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--teal-light));
+      border-radius: 0 0 20px 20px;
+      opacity: 0;
+      transform: scaleX(0.35);
+      transition: opacity 0.28s, transform 0.28s;
+    }
+
+    .card-link:hover .card {
+      transform: translateY(-7px);
+      border-color: rgba(13,138,143,0.25);
+      box-shadow: 0 16px 40px rgba(13,138,143,0.13), 0 2px 8px rgba(13,138,143,0.07);
+    }
+    .card-link:hover .card::after { opacity: 1; transform: scaleX(1); }
+    .card-link:hover .icon-ring {
+      background: var(--teal);
+      border-color: var(--teal);
+    }
+    .card-link:hover .icon-ring svg { stroke: var(--white); }
+    .card-link:hover .card-label { color: var(--teal); }
+
+    /* ── ICON RING ── */
+    .icon-ring {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--teal-pale);
+      border: 1.5px solid rgba(13,138,143,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.26s, border-color 0.26s;
+    }
+    .icon-ring svg {
+      width: 23px;
+      height: 23px;
+      stroke: var(--teal);
+      fill: none;
+      stroke-width: 1.65;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: stroke 0.26s;
+    }
+
+    .card-label {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.45;
+      transition: color 0.26s;
+      letter-spacing: 0.005em;
+    }
+
+    /* ── FOOTER ── */
+    .footer-strip {
+      margin-top: 68px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      animation: fadeUp 0.7s ease 0.6s both;
+    }
+    .footer-strip span { color: var(--teal); font-weight: 600; }
+
+    /* ── ANIMATION ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 520px) {
+      .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .card { padding: 22px 14px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-shapes">
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+  <div class="shape shape-3"></div>
+</div>
+
+<div class="wrapper">
+
+  <!-- Back -->
+  <a href="#" class="back-btn" onclick="history.back(); return false;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Back
+  </a>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="eyebrow">Member Portal</div>
+    <h1>Easy Access <span>Tools</span></h1>
+    <p>Everything you need, right at your fingertips. Navigate AmaPhil's resources with ease.</p>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-dot"></div>
+      <div class="divider-line"></div>
+    </div>
+  </div>
+
+  <!-- Grid -->
+  <div class="grid">
+
+    <a href="https://amaphil.com.ph/AccProviders.html" class="card-link">
+      <div class="card">
+        <div class="icon-ring">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <span class="card-label">Accredited Providers</span>
+      </div>
+    </a>
+
+    <a href="https://amaphil.com.ph/AccPhysicians.html" class="card-link">
+      <div class="card">
+        <div class="icon-ring">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <span class="card-label">Accredited Physicians</span>
+      </div>
+    </a>
+
+    <a href="https://docs.google.com/spreadsheets/d/1eYya-0FgR4eCTHOQtqFkimDk3VTEwGneAsdPpktpO8w/edit?gid=1952026825#gid=1952026825" class="card-link">
+      <div class="card">
+        <div class="icon-ring">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <span class="card-label">Medical Coordinator</span>
+      </div>
+    </a>
+
+    <a href="https://amaphil.com.ph/Outline.html" class="card-link">
+      <div class="card">
+        <div class="icon-ring">
+          <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        </div>
+        <span class="card-label">Outline</span>
+      </div>
+    </a>
+
+    <a href="https://amaphil.com.ph/WhyAmaphil.html" class="card-link">
+      <div class="card">
+        <div class="icon-ring">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <span class="card-label">Why AmaPhil?</span>
+      </div>
+    </a>
+
+    <a href="https://amaphil.com.ph/News.html" class="card-link">
+      <div class="card">
+        <div class="icon-ring">
+          <svg viewBox="0 0 24 24"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
+        </div>
+        <span class="card-label">News & Articles</span>
+      </div>
+    </a>
+
+    <a href="https://amaphil.com.ph/PrivacyPolicy.html" class="card-link">
+      <div class="card">
+        <div class="icon-ring">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <span class="card-label">Data & Privacy Policy</span>
+      </div>
+    </a>
+
+    <a href="https://amaphil.com.ph/DentalPartners.html" class="card-link">
+      <div class="card">
+        <div class="icon-ring">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        </div>
+        <span class="card-label">Dental Network Partners</span>
+      </div>
+    </a>
+
+    <a href="https://amaphil.com.ph/Testimonials.html" class="card-link">
+      <div class="card">
+        <div class="icon-ring">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <span class="card-label">Testimonials</span>
+      </div>
+    </a>
+
+    <a href="https://amaphil.com.ph/CertGoodCredit.html" class="card-link">
+      <div class="card">
+        <div class="icon-ring">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <span class="card-label">Certificate of Good Credit Standing</span>
+      </div>
+    </a>
+
+    <a href="https://amaphil.com.ph/Contact.html" class="card-link">
+      <div class="card">
+        <div class="icon-ring">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.37 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l1.16-.97a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <span class="card-label">Get In Touch</span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-strip">
+    © 2025 <span>AmaPhil</span> — All rights reserved
+  </div>
+
+</div>
+</body>
+</html>
