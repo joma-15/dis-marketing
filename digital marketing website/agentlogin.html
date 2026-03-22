@@ -23,6 +23,9 @@
         --card-bg: rgba(8, 18, 40, 0.85);
         --radius: 18px;
         --radius-sm: 10px;
+        --ok: #22c55e;
+        --warn: #f59e0b;
+        --err: #ef4444;
       }
 
       * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -249,6 +252,11 @@
         border-color: var(--accent); background: rgba(59,130,246,0.06);
         box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
       }
+      /* input state borders */
+      .form-input.input-valid   { border-color: var(--ok);   box-shadow: 0 0 0 3px rgba(34,197,94,0.1); }
+      .form-input.input-invalid { border-color: var(--err);  box-shadow: 0 0 0 3px rgba(239,68,68,0.1); }
+      .form-input.input-checking { border-color: var(--warn); box-shadow: 0 0 0 3px rgba(245,158,11,0.1); }
+
       .form-input:focus ~ .input-icon,
       .input-wrap:focus-within .input-icon { color: var(--accent); }
       .input-action {
@@ -258,6 +266,75 @@
         font-size: 1rem; transition: color 0.2s;
       }
       .input-action:hover { color: var(--accent); }
+
+      /* ── field status badge (right side of label row) ── */
+      .field-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 7px; }
+      .field-status {
+        font-size: 0.75rem; font-weight: 500; display: flex; align-items: center; gap: 4px;
+        opacity: 0; transition: opacity 0.25s; white-space: nowrap;
+      }
+      .field-status.visible { opacity: 1; }
+      .field-status.ok   { color: var(--ok); }
+      .field-status.err  { color: var(--err); }
+      .field-status.warn { color: var(--warn); }
+
+
+
+      /* ── PASSWORD STRENGTH ── */
+      .pw-strength-wrap {
+        margin-top: 10px;
+        overflow: hidden;
+        max-height: 0; opacity: 0;
+        transition: max-height 0.4s ease, opacity 0.3s ease;
+      }
+      .pw-strength-wrap.visible { max-height: 200px; opacity: 1; }
+
+      .pw-bar-row { display: flex; gap: 4px; margin-bottom: 8px; }
+      .pw-bar-seg {
+        flex: 1; height: 4px; border-radius: 4px;
+        background: rgba(255,255,255,0.08);
+        transition: background 0.3s ease;
+      }
+      .pw-bar-seg.active-weak    { background: var(--err); }
+      .pw-bar-seg.active-fair    { background: var(--warn); }
+      .pw-bar-seg.active-strong  { background: #3b82f6; }
+      .pw-bar-seg.active-great   { background: var(--ok); }
+
+      .pw-label {
+        font-size: 0.78rem; font-weight: 600; margin-bottom: 10px;
+        transition: color 0.3s;
+      }
+      .pw-label.weak  { color: var(--err); }
+      .pw-label.fair  { color: var(--warn); }
+      .pw-label.strong { color: #3b82f6; }
+      .pw-label.great  { color: var(--ok); }
+
+      .pw-checklist { display: flex; flex-direction: column; gap: 5px; }
+      .pw-check-item {
+        display: flex; align-items: center; gap: 7px;
+        font-size: 0.78rem; color: var(--text-muted);
+        transition: color 0.25s;
+      }
+      .pw-check-item.pass { color: var(--ok); }
+      .pw-check-item .pw-dot {
+        width: 14px; height: 14px; border-radius: 50%;
+        border: 1.5px solid rgba(139,155,191,0.3);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.55rem; flex-shrink: 0;
+        transition: all 0.25s;
+      }
+      .pw-check-item.pass .pw-dot {
+        background: var(--ok); border-color: var(--ok); color: #fff;
+      }
+
+      /* ── confirm password match indicator ── */
+      .confirm-match-msg {
+        margin-top: 6px; font-size: 0.78rem; display: flex; align-items: center; gap: 5px;
+        opacity: 0; transition: opacity 0.2s;
+      }
+      .confirm-match-msg.visible { opacity: 1; }
+      .confirm-match-msg.ok  { color: var(--ok); }
+      .confirm-match-msg.err { color: var(--err); }
 
       /* Referral code field */
       .referral-wrap { display: flex; gap: 8px; }
@@ -506,20 +583,28 @@
         </div>
         <div class="modal-body">
           <form id="registerForm" onsubmit="handleRegister(event)">
+
+            <!-- Full Name -->
             <div class="form-group">
               <label class="form-label">Full Name</label>
               <div class="input-wrap">
                 <i class="bi bi-person input-icon"></i>
-                <input type="text" class="form-input" id="regName" placeholder="John Doe" />
+                <input type="text" class="form-input" id="regName" placeholder="John Doe" autocomplete="off" />
               </div>
             </div>
+
+            <!-- Username with availability check -->
             <div class="form-group">
               <label class="form-label">Username</label>
               <div class="input-wrap">
                 <i class="bi bi-at input-icon"></i>
-                <input type="text" class="form-input" id="regUsername" placeholder="johndoe123" />
+                <input type="text" class="form-input" id="regUsername" placeholder="johndoe123"
+                       autocomplete="off" />
+
               </div>
             </div>
+
+            <!-- Email -->
             <div class="form-group">
               <label class="form-label">Email Address</label>
               <div class="input-wrap">
@@ -527,22 +612,72 @@
                 <input type="email" class="form-input" id="regEmail" placeholder="name@example.com" />
               </div>
             </div>
+
+            <!-- Password with strength meter -->
             <div class="form-group">
-              <label class="form-label">Password</label>
+              <div class="field-header">
+                <label class="form-label" style="margin-bottom:0">Password</label>
+                <span class="field-status" id="passwordStatus"></span>
+              </div>
               <div class="input-wrap">
                 <i class="bi bi-lock input-icon"></i>
-                <input type="password" class="form-input" id="regPassword" placeholder="Create a strong password" />
+                <input type="password" class="form-input" id="regPassword" placeholder="Create a strong password"
+                       oninput="onPasswordInput(this)" autocomplete="new-password" />
                 <button type="button" class="input-action" onclick="togglePassword('regPassword', this)"><i class="bi bi-eye"></i></button>
               </div>
+
+              <!-- Strength meter (hidden until typing starts) -->
+              <div class="pw-strength-wrap" id="pwStrengthWrap">
+                <div class="pw-bar-row">
+                  <div class="pw-bar-seg" id="bar0"></div>
+                  <div class="pw-bar-seg" id="bar1"></div>
+                  <div class="pw-bar-seg" id="bar2"></div>
+                  <div class="pw-bar-seg" id="bar3"></div>
+                </div>
+                <div class="pw-label" id="pwLabel">Weak — meet 3 of 5 to continue</div>
+                <div class="pw-checklist">
+                  <div class="pw-check-item" id="chk-len">
+                    <span class="pw-dot"><i class="bi bi-check"></i></span>
+                    At least 8 characters
+                  </div>
+                  <div class="pw-check-item" id="chk-upper">
+                    <span class="pw-dot"><i class="bi bi-check"></i></span>
+                    At least one uppercase letter (A–Z)
+                  </div>
+                  <div class="pw-check-item" id="chk-lower">
+                    <span class="pw-dot"><i class="bi bi-check"></i></span>
+                    At least one lowercase letter (a–z)
+                  </div>
+                  <div class="pw-check-item" id="chk-num">
+                    <span class="pw-dot"><i class="bi bi-check"></i></span>
+                    At least one number (0–9)
+                  </div>
+                  <div class="pw-check-item" id="chk-special">
+                    <span class="pw-dot"><i class="bi bi-check"></i></span>
+                    At least one special character (!@#$…)
+                  </div>
+                </div>
+              </div>
             </div>
+
+            <!-- Confirm Password -->
             <div class="form-group">
               <label class="form-label">Confirm Password</label>
               <div class="input-wrap">
                 <i class="bi bi-lock-fill input-icon"></i>
-                <input type="password" class="form-input" id="regConfirmPassword" placeholder="Re-enter password" />
+                <input type="password" class="form-input" id="regConfirmPassword"
+                       placeholder="Re-enter password"
+                       oninput="onConfirmInput(this)"
+                       autocomplete="new-password" />
                 <button type="button" class="input-action" onclick="togglePassword('regConfirmPassword', this)"><i class="bi bi-eye"></i></button>
               </div>
+              <div class="confirm-match-msg" id="confirmMatchMsg">
+                <i class="bi bi-check-circle-fill"></i>
+                <span id="confirmMatchText">Passwords match</span>
+              </div>
             </div>
+
+            <!-- Referral Code -->
             <div class="form-group">
               <label class="form-label">Referral Code</label>
               <div class="referral-wrap">
@@ -559,6 +694,7 @@
                 Generate your unique referral code to earn commission from people you invite.
               </div>
             </div>
+
             <button type="submit" class="btn-submit" id="submit">
               <span class="btn-text"><i class="bi bi-person-check-fill"></i> &nbsp;Create My Account</span>
               <span class="btn-spinner">
@@ -627,7 +763,7 @@
       </div>
     </div>
 
-    <!-- Shim: keeps any legacy reference to loadingPopup from throwing null errors -->
+    <!-- Shim -->
     <div id="loadingPopup" style="display:none"></div>
 
     <!-- Toast container -->
@@ -669,7 +805,6 @@
         closeModal(from);
         setTimeout(() => openModal(to), 200);
       }
-      // close on backdrop click
       document.querySelectorAll('.modal-overlay').forEach(overlay => {
         overlay.addEventListener('click', e => {
           if (e.target === overlay) closeModal(overlay.id);
@@ -700,6 +835,123 @@
         const code = generateReferralCode();
         document.getElementById('regReferral').value = code;
         showToast('success', 'Code Generated!', `Your referral code is ${code}. Share it to earn commissions!`);
+      }
+
+      /* ═══════════════════════════════════════
+         PASSWORD STRENGTH METER
+      ═══════════════════════════════════════ */
+      const PW_RULES = [
+        { id: 'chk-len',     test: v => v.length >= 8,                label: 'At least 8 characters' },
+        { id: 'chk-upper',   test: v => /[A-Z]/.test(v),              label: 'Uppercase letter' },
+        { id: 'chk-lower',   test: v => /[a-z]/.test(v),              label: 'Lowercase letter' },
+        { id: 'chk-num',     test: v => /[0-9]/.test(v),              label: 'Number (0–9)' },
+        { id: 'chk-special', test: v => /[^A-Za-z0-9]/.test(v),       label: 'Special character' },
+      ];
+
+      const STRENGTH_LEVELS = [
+        { label: 'Weak',        cls: 'weak',   bars: 1, barCls: 'active-weak'   },
+        { label: 'Fair',        cls: 'fair',   bars: 2, barCls: 'active-fair'   },
+        { label: 'Strong',      cls: 'strong', bars: 3, barCls: 'active-strong' },
+        { label: 'Very Strong', cls: 'great',  bars: 4, barCls: 'active-great'  },
+      ];
+
+      let passwordIsStrong = false;
+
+      function onPasswordInput(input) {
+        const val     = input.value;
+        const wrap    = document.getElementById('pwStrengthWrap');
+        const pwLabel = document.getElementById('pwLabel');
+        const statusEl = document.getElementById('passwordStatus');
+
+        if (!val) {
+          wrap.classList.remove('visible');
+          input.classList.remove('input-valid', 'input-invalid');
+          statusEl.className = 'field-status';
+          statusEl.textContent = '';
+          passwordIsStrong = false;
+          return;
+        }
+
+        wrap.classList.add('visible');
+
+        // Evaluate rules
+        let passed = 0;
+        PW_RULES.forEach(rule => {
+          const ok  = rule.test(val);
+          const el  = document.getElementById(rule.id);
+          if (ok) { el.classList.add('pass'); passed++; }
+          else    { el.classList.remove('pass'); }
+        });
+
+        // Determine strength level (0-indexed)
+        let level;
+        if      (passed <= 1) level = 0;
+        else if (passed === 2) level = 1;
+        else if (passed === 3 || passed === 4) level = 2;
+        else    level = 3;  // all 5 passed
+
+        const s = STRENGTH_LEVELS[level];
+
+        // Update bars
+        for (let i = 0; i < 4; i++) {
+          const bar = document.getElementById(`bar${i}`);
+          bar.className = 'pw-bar-seg' + (i < s.bars ? ` ${s.barCls}` : '');
+        }
+
+        // Update label
+        pwLabel.textContent = s.label;
+        pwLabel.className   = `pw-label ${s.cls}`;
+
+        // Input border + header status — require at least 3 out of 5 rules
+        const MIN_RULES = 3;
+        passwordIsStrong = passed >= MIN_RULES;
+        if (passwordIsStrong) {
+          input.classList.add('input-valid');
+          input.classList.remove('input-invalid');
+          statusEl.className = 'field-status visible ok';
+          statusEl.innerHTML = passed === 5
+            ? '<i class="bi bi-shield-fill-check"></i> Very Strong'
+            : `<i class="bi bi-shield-fill-check"></i> Accepted (${passed}/5)`;
+        } else {
+          input.classList.remove('input-valid');
+          input.classList.add('input-invalid');
+          statusEl.className = 'field-status visible err';
+          const need = MIN_RULES - passed;
+          statusEl.innerHTML = `<i class="bi bi-shield-exclamation"></i> Need ${need} more rule${need > 1 ? 's' : ''}`;
+        }
+
+        // Also re-check confirm password match
+        const confirm = document.getElementById('regConfirmPassword');
+        if (confirm.value) onConfirmInput(confirm);
+      }
+
+      /* ═══════════════════════════════════════
+         CONFIRM PASSWORD MATCH
+      ═══════════════════════════════════════ */
+      function onConfirmInput(input) {
+        const pw      = document.getElementById('regPassword').value;
+        const msgEl   = document.getElementById('confirmMatchMsg');
+        const textEl  = document.getElementById('confirmMatchText');
+
+        if (!input.value) {
+          msgEl.className = 'confirm-match-msg';
+          input.classList.remove('input-valid', 'input-invalid');
+          return;
+        }
+
+        if (input.value === pw) {
+          input.classList.add('input-valid');
+          input.classList.remove('input-invalid');
+          msgEl.className     = 'confirm-match-msg visible ok';
+          msgEl.querySelector('i').className = 'bi bi-check-circle-fill';
+          textEl.textContent  = 'Passwords match';
+        } else {
+          input.classList.remove('input-valid');
+          input.classList.add('input-invalid');
+          msgEl.className     = 'confirm-match-msg visible err';
+          msgEl.querySelector('i').className = 'bi bi-x-circle-fill';
+          textEl.textContent  = 'Passwords do not match';
+        }
       }
 
       /* ─ Toast ─ */
@@ -764,7 +1016,7 @@
       }
 
       /* ══════════════════════════════════════════
-         REGISTER — fetch-based (same as login)
+         REGISTER
       ══════════════════════════════════════════ */
       async function handleRegister(e) {
         e.preventDefault();
@@ -776,14 +1028,19 @@
         const referral    = document.getElementById('regReferral').value.trim();
         const form        = document.getElementById('registerForm');
 
-        if (password !== confirmPass) {
-          showToast('error', 'Password Mismatch', 'Passwords must be the same. Please try again.');
-          form.reset();
+        // ── Client-side guards ──
+        if (!fullname || !username || !password || !confirmPass || !referral) {
+          showToast('warning', 'Incomplete Form', 'Please fill in all required fields.');
           return;
         }
 
-        if (!fullname || !username || !password || !referral) {
-          showToast('warning', 'Incomplete Form', 'Please fill in all fields.');
+        if (password !== confirmPass) {
+          showToast('error', 'Password Mismatch', 'Passwords must be the same. Please try again.');
+          return;
+        }
+
+        if (!passwordIsStrong) {
+          showToast('error', 'Weak Password', 'Your password must meet at least 3 of the 5 requirements. Please check the checklist below the password field.');
           return;
         }
 
@@ -793,18 +1050,13 @@
         showLoading('Creating your account…', 'Checking for duplicates…');
 
         try {
-          // ── Step 1: Check duplicates via fetch (same GAS endpoint as login) ──
+          // Step 1: Check duplicates (password / referral)
           const checkUrl = `https://script.google.com/macros/s/AKfycbzB9F4g68ZKkWnEN1wXA4BBTFXztXssO-VwK3YH87vPlUK7piQkcQwJd58-TtpwRhCn/exec?action=checkDuplicates&password=${encodeURIComponent(password)}&referral=${encodeURIComponent(referral)}`;
-          console.log('🔗 Checking duplicates:', checkUrl);
+          const checkRes  = await fetch(checkUrl);
 
-          const checkRes = await fetch(checkUrl);
-
-          if (!checkRes.ok) {
-            throw new Error('Duplicate check request failed: ' + checkRes.status);
-          }
+          if (!checkRes.ok) throw new Error('Duplicate check failed: ' + checkRes.status);
 
           const checkData = await checkRes.json();
-          console.log('✅ Duplicate check result:', checkData);
 
           if (checkData.exists) {
             hideLoading();
@@ -819,10 +1071,10 @@
             return;
           }
 
-          // ── Step 2: Submit to Google Form ──
+          // Step 2: Submit to Google Form
           showLoading('Creating your account…', 'Saving your details…');
           const formUrl = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSf4ILyBKJDLi1yHBwwQ8ZLbXYNgSmx9prgi-tqdRrvxSyn_mQ/formResponse';
-          const params = new URLSearchParams();
+          const params  = new URLSearchParams();
           params.append('entry.1669826201', fullname);
           params.append('entry.305930707',  username);
           params.append('entry.1025155675', password);
@@ -830,11 +1082,14 @@
 
           await fetch(formUrl, { method: 'POST', mode: 'no-cors', body: params });
 
-          // no-cors always resolves even on error, so we treat reaching here as success
           hideLoading();
           btn.classList.remove('loading');
           btn.disabled = false;
           form.reset();
+
+          // Reset validation states after successful reset
+          resetRegisterValidation();
+
           showDialog({
             type: 'success',
             title: 'Registration Successful!',
@@ -844,7 +1099,7 @@
           });
 
         } catch (error) {
-          console.error('🔥 Registration error:', error);
+          console.error('Registration error:', error);
           hideLoading();
           btn.classList.remove('loading');
           btn.disabled = false;
@@ -857,8 +1112,20 @@
         }
       }
 
+      function resetRegisterValidation() {
+        passwordIsStrong = false;
+        const fields = ['regUsername', 'regPassword', 'regConfirmPassword'];
+        fields.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.classList.remove('input-valid', 'input-invalid', 'input-checking');
+        });
+        document.getElementById('passwordStatus').className   = 'field-status';
+        document.getElementById('pwStrengthWrap').classList.remove('visible');
+        document.getElementById('confirmMatchMsg').className  = 'confirm-match-msg';
+      }
+
       /* ══════════════════════════════════════════
-         LOGIN — original logic, new UI alerts
+         LOGIN
       ══════════════════════════════════════════ */
       async function loginUser(username, password) {
         const btn = document.getElementById('submit-log');
@@ -868,7 +1135,6 @@
 
         try {
           const url = `https://script.google.com/macros/s/AKfycbzB9F4g68ZKkWnEN1wXA4BBTFXztXssO-VwK3YH87vPlUK7piQkcQwJd58-TtpwRhCn/exec?action=isAccountValid&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
-          console.log('🔗 Fetching URL:', url);
 
           const response = await fetch(url);
 
@@ -905,7 +1171,7 @@
           return data.extraData;
 
         } catch (error) {
-          console.error('🔥 Login error:', error);
+          console.error('Login error:', error);
           hideLoading();
           btn.classList.remove('loading');
           btn.disabled = false;
