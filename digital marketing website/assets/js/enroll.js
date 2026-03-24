@@ -105,11 +105,21 @@ function checkedConditions() {
     });
   }
   document.addEventListener("DOMContentLoaded", extractData);
+  
+  //destination on where to sent the google form data
+  let formlink;
+  if(window.location.pathname == "/shop.html"){ 
+    formlink = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSd6k9TCCfsDvQI84QmtORnyEraWW4PwUFRihlvgfxfHLJ0xgw/formResponse";
+  }
+
+  if(window.location.pathname == "/amaphilshop.html"){
+    formlink
+  }
 
   async function sendIntoExcel(data) {
-    const formUrl =
+    const formUrl = formlink;
       // "https://docs.google.com/forms/d/e/1FAIpQLScQmnDQfzBud88VDwXSRxZb_Kj3Qeh0WVpCnv297P4I0QkJHg/formResponse";
-      "https://docs.google.com/forms/u/0/d/e/1FAIpQLSd6k9TCCfsDvQI84QmtORnyEraWW4PwUFRihlvgfxfHLJ0xgw/formResponse";
+      // "https://docs.google.com/forms/u/0/d/e/1FAIpQLSd6k9TCCfsDvQI84QmtORnyEraWW4PwUFRihlvgfxfHLJ0xgw/formResponse";
     const params = new URLSearchParams();
 
     const formFields = {
