@@ -108,25 +108,25 @@ function checkedConditions() {
 
   async function sendIntoExcel(data) {
     const formUrl =
-      // "https://docs.google.com/forms/d/e/1FAIpQLScVcBDaGA9Rj93kd6K0GzDkm9ymkbz-rLjOKpFqE6DAzdKE1w/formResponse";
-      "https://docs.google.com/forms/d/e/1FAIpQLScQmnDQfzBud88VDwXSRxZb_Kj3Qeh0WVpCnv297P4I0QkJHg/formResponse";
+      // "https://docs.google.com/forms/d/e/1FAIpQLScQmnDQfzBud88VDwXSRxZb_Kj3Qeh0WVpCnv297P4I0QkJHg/formResponse";
+      "https://docs.google.com/forms/u/0/d/e/1FAIpQLSd6k9TCCfsDvQI84QmtORnyEraWW4PwUFRihlvgfxfHLJ0xgw/formResponse";
     const params = new URLSearchParams();
 
     const formFields = {
-      "entry.807207221": localStorage.getItem("PlanType") || "no selected plan",
-      "entry.1368872495": data.fullName,
-      "entry.265391803": data.address,
-      "entry.21286280": data.email,
-      "entry.914829469": data.gender,
-      "entry.1102795712": data.civilStatus,
-      "entry.962982325": data.condition,
-      "entry.354268935": data.plan,
-      "entry.277015241_year": data.birthDate.year,
-      "entry.277015241_month": data.birthDate.month,
-      "entry.277015241_day": data.birthDate.day,
-      "entry.597664781": "Pending",
-      "entry.232079207": data.payment,
-      "entry.118563215": data.referral,
+      "entry.307150928": localStorage.getItem("PlanType") || "no selected plan",
+      "entry.598676198": data.fullName, //ok na 
+      "entry.233583999": data.address, //ok na
+      "entry.692955566": data.email, //ok na
+      "entry.2097655811": data.gender, //ok na
+      "entry.814261707": data.civilStatus, //ok na
+      "entry.1339191093": data.condition, //ok na
+      "entry.89154130": data.plan, //ok na
+      "entry.1292583609_year": data.birthDate.year,//ok na
+      "entry.1292583609_month": data.birthDate.month,//ok na
+      "entry.1292583609_day": data.birthDate.day,//ok na
+      "entry.1819469267": "Pending",//ok na
+      "entry.322952436": data.payment, //ok na
+      "entry.684880416": data.referral, //ok na
     };
 
     for (const [key, value] of Object.entries(formFields)) {
