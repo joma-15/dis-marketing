@@ -107,56 +107,122 @@ function checkedConditions() {
   document.addEventListener("DOMContentLoaded", extractData);
   
   //destination on where to sent the google form data
-  let formlink;
-  if(window.location.pathname == "/shop.html"){ 
-    formlink = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSd6k9TCCfsDvQI84QmtORnyEraWW4PwUFRihlvgfxfHLJ0xgw/formResponse";
-  }
+  // let formlink;
+  // //entries where to put the data
+  // let planTypeEntry;
+  // let fullNameEntry;
+  // let addressEntry;
+  // let emailEntry;
+  // let genderEntry;
+  // let civilStatusEntry;
+  // let conditionEntry;
+  // let planEntry;
+  // let birthyearEntry;
+  // let birthmonthEntry;
+  // let birthdayEntry;
+  // let statusEntry;
+  // let paymentEntry;
+  // let referralEntry;
 
-  if(window.location.pathname == "/amaphilshop.html"){
-    formlink
-  }
+  // if(window.location.pathname.includes("shop.html")){
+  //   formlink = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSd6k9TCCfsDvQI84QmtORnyEraWW4PwUFRihlvgfxfHLJ0xgw/formResponse";
+  // }
 
-  async function sendIntoExcel(data) {
-    const formUrl = formlink;
-      // "https://docs.google.com/forms/d/e/1FAIpQLScQmnDQfzBud88VDwXSRxZb_Kj3Qeh0WVpCnv297P4I0QkJHg/formResponse";
-      // "https://docs.google.com/forms/u/0/d/e/1FAIpQLSd6k9TCCfsDvQI84QmtORnyEraWW4PwUFRihlvgfxfHLJ0xgw/formResponse";
-    const params = new URLSearchParams();
+  // if(window.location.pathname.includes("amaphiltools.html")){
+  //   formlink = "https://docs.google.com/forms/u/0/d/e/1FAIpQLScM7WdNo77mVF0Ov40fKqMRi-xerTSFp8WRB6DEl8oYAwPACA/formResponse";
+  // }
 
-    const formFields = {
-      "entry.307150928": localStorage.getItem("PlanType") || "no selected plan",
-      "entry.598676198": data.fullName, //ok na 
-      "entry.233583999": data.address, //ok na
-      "entry.692955566": data.email, //ok na
-      "entry.2097655811": data.gender, //ok na
-      "entry.814261707": data.civilStatus, //ok na
-      "entry.1339191093": data.condition, //ok na
-      "entry.89154130": data.plan, //ok na
-      "entry.1292583609_year": data.birthDate.year,//ok na
-      "entry.1292583609_month": data.birthDate.month,//ok na
-      "entry.1292583609_day": data.birthDate.day,//ok na
-      "entry.1819469267": "Pending",//ok na
-      "entry.322952436": data.payment, //ok na
-      "entry.684880416": data.referral, //ok na
-    };
-
-    for (const [key, value] of Object.entries(formFields)) {
-      params.append(key, value);
+  const formsConfig = {
+  "shop.html": {
+    url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSd6k9TCCfsDvQI84QmtORnyEraWW4PwUFRihlvgfxfHLJ0xgw/formResponse",
+    fields: {
+      planType: "entry.307150928",
+      fullName: "entry.598676198",
+      address: "entry.233583999",
+      email: "entry.692955566",
+      gender: "entry.2097655811",
+      civilStatus: "entry.814261707",
+      condition: "entry.1339191093",
+      plan: "entry.89154130",
+      birthYear: "entry.1292583609_year",
+      birthMonth: "entry.1292583609_month",
+      birthDay: "entry.1292583609_day",
+      status: "entry.1819469267",
+      payment: "entry.322952436",
+      referral: "entry.684880416",
     }
+  },
 
-    if (!data) return false;
-
-    try {
-      const response = await fetch(formUrl, {
-        method: "POST",
-        mode: "no-cors",
-        body: params,
-      });
-      console.log(response);
-    } catch (error) {
-      alert("an error occured sending the data");
-      console.error("An error occured " + error);
+  "amaphilshop.html": {
+    url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLScM7WdNo77mVF0Ov40fKqMRi-xerTSFp8WRB6DEl8oYAwPACA/formResponse",
+    fields: {
+      planType: "entry.1182148951",
+      fullName: "entry.1766981923",
+      address: "entry.1791205225",
+      email: "entry.1496075633",
+      gender: "entry.1392159046",
+      civilStatus: "entry.998531261",
+      condition: "entry.1673739680",
+      plan: "entry.960401984",
+      birthYear: "entry.1357420546_year",
+      birthMonth: "entry.1357420546_month",
+      birthDay: "entry.1357420546_day",
+      status: "entry.1843997625",
+      payment: "entry.231346316",
+      referral: "entry.1754101156",
     }
   }
+};
+
+const selectedForm = localStorage.getItem("selectedForm");
+
+// map to your config keys
+const pageKey = selectedForm + ".html";
+
+const link = formsConfig[pageKey]?.url;
+const fields = formsConfig[pageKey]?.fields;
+
+async function sendIntoExcel(data) {
+  if (!data) return;
+  if (!link || !fields) {
+    console.error("No form config found for this page");
+    return;
+  }
+
+  const params = new URLSearchParams();
+
+  const formFields = {
+    [fields.planType]: localStorage.getItem("PlanType") || "no selected plan",
+    [fields.fullName]: data.fullName,
+    [fields.address]: data.address,
+    [fields.email]: data.email,
+    [fields.gender]: data.gender,
+    [fields.civilStatus]: data.civilStatus,
+    [fields.condition]: data.condition,
+    [fields.plan]: data.plan,
+    [fields.birthYear]: data.birthDate.year,
+    [fields.birthMonth]: data.birthDate.month,
+    [fields.birthDay]: data.birthDate.day,
+    [fields.status]: "Pending",
+    [fields.payment]: data.payment,
+    [fields.referral]: data.referral,
+  };
+
+  for (const [key, value] of Object.entries(formFields)) {
+    if (key) params.append(key, value); // avoid undefined keys
+  }
+
+  try {
+    await fetch(link, {
+      method: "POST",
+      mode: "no-cors",
+      body: params,
+    });
+  } catch (error) {
+    alert("An error occurred sending the data");
+    console.error(error);
+  }
+}
 
 //send the data to the database and gmail
 async function sendData() {

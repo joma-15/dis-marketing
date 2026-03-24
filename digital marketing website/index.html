@@ -2017,7 +2017,7 @@
                     A Member of the Philippines First Group (Since 1906).
                     Comprehensive health coverage nationwide.
                   </div>
-                  <a href="shop.html" class="hmo-cta"
+                  <a href="shop.html" class="hmo-cta" onclick="selectForm('shop')"
                     ><span>View Plans</span><i class="fas fa-arrow-right"></i
                   ></a>
                 </div>
@@ -2051,7 +2051,7 @@
                     A trusted HMO provider offering comprehensive health plans
                     and excellent nationwide coverage.
                   </div>
-                  <a href="amaphilshop.html" class="hmo-cta"
+                  <a href="amaphilshop.html" class="hmo-cta" onclick="selectForm('amaphilshop')"
                     ><span>View Plans</span><i class="fas fa-arrow-right"></i
                   ></a>
                 </div>
@@ -2438,6 +2438,11 @@
         },
         { passive: true },
       );
+
+      function selectForm(type){
+        localStorage.setItem("selectedForm", type);
+        console.log("stored to database");
+      }
     </script>
   </body>
 </html>
