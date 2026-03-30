@@ -632,23 +632,20 @@
 <script>
 const PLAN_DATA = {
   Individual: [
-    { tier: '60,000 Health Plans', name: '60K ABL', room: 'Ward',         quarterly: '3,340', semi: '6,240',  annual: '12,000' },
-    { tier: '60,000 Health Plans', name: '60K MBL', room: 'Semi-Private', quarterly: '3,402', semi: '6,678',  annual: '12,600' },
-    { tier: '100,000 Health Plans', name: '100K ABL', room: 'Ward',         quarterly: '4,860', semi: '9,360',  annual: '18,000' },
-    { tier: '100,000 Health Plans', name: '100K MBL', room: 'Semi-Private', quarterly: '4,860', semi: '9,360', annual: '18,600' },
-    { tier: '120,000 Health Plans', name: '120K ABL', room: 'Ward',    quarterly: '5,832', semi: '11,232', annual: '21,600' },
-    { tier: '120,000 Health Plans', name: '120K MBL', room: 'Private', quarterly: '5,994', semi: '11,766', annual: '22,200' },
+    { tier: '60,000 Health Plans', name: '60K ABL', room: '6 Months PEC', monthly: '1,140', quarterly: '3,340', semi: '6,240',  annual: '12,000' },
+    { tier: '60,000 Health Plans', name: '60K ABL', room: '2 Months PEC', monthly: '1,197', quarterly: '3,402', semi: '6,678',  annual: '12,600' },
+    { tier: '100,000 Health Plans', name: '100K ABL', room: '6 Months PEC', monthly: '1,140', quarterly: '4,860', semi: '9,360',  annual: '18,000' },
+    { tier: '100,000 Health Plans', name: '100K MBL', room: '2 Months PEC', monthly: '1,197', quarterly: '4,860', semi: '9,360', annual: '18,600' },
+    { tier: '120,000 Health Plans', name: '120K ABL', room: '6 Months PEC', monthly: '1,140', quarterly: '5,832', semi: '11,232', annual: '21,600' },
+    { tier: '120,000 Health Plans', name: '120K MBL', room: '2 Months PEC', monthly: '1,197', quarterly: '5,994', semi: '11,766', annual: '22,200' },
   ],
   Family: [
     { tier: '50,000 Health Plans', name: '50K ABL', room: 'Ward', quarterly: '1,800', semi: '3,600', annual: '7,200' },
-  ],
+  
+  ],  
   Senior: [
-    { tier: '60,000 Health Plans', name: '60K ABL', room: 'Ward',         quarterly: '3,340', semi: '6,240',  annual: '12,000' },
-    { tier: '60,000 Health Plans', name: '60K MBL', room: 'Semi-Private', quarterly: '3,402', semi: '6,678',  annual: '12,600' },
-    { tier: '100,000 Health Plans', name: '100K ABL', room: 'Ward',         quarterly: '4,860', semi: '9,360',  annual: '18,000' },
-    { tier: '100,000 Health Plans', name: '100K MBL', room: 'Semi-Private', quarterly: '4,860', semi: '9,360', annual: '18,600' },
-    { tier: '120,000 Health Plans', name: '120K ABL', room: 'Ward',    quarterly: '5,832', semi: '11,232', annual: '21,600' },
-    { tier: '120,000 Health Plans', name: '120K MBL', room: 'Private', quarterly: '5,994', semi: '11,766', annual: '22,200' },
+    { tier: '60,000 Health Plans', name: '60K ABL', room: '', quarterly: '3,340', semi: '6,240',  annual: '12,000' },
+    { tier: '60,000 Health Plans', name: '60K ABL', room: '', quarterly: '3,402', semi: '6,678',  annual: '12,600' },
   ],
   Group: [
     { tier: '50,000 Health Plans', name: '50K ABL', room: 'Ward', quarterly: '1,800', semi: '3,600', annual: '7,200' },
@@ -661,7 +658,7 @@ const BENEFITS = [
   'Emergency Care',
   'Annual Physical Exam (APE)',
   'Mental Health Care',
-  'Life Insurance'
+  'Accidental Insurance'
 ];
 </script>
 
@@ -844,6 +841,19 @@ function buildPlanModals() {
       `;
       tiers[tier].forEach(plan => {
         const benefits = BENEFITS.map(b => `<li><i class="fa fa-circle-check"></i>${b}</li>`).join('');
+
+        // Build period buttons — Monthly only shown when data exists
+        const monthlyBtn = plan.monthly ? `
+          <button class="btn-period select-plan-btn"
+            data-plan="${plan.name} – ${plan.room}"
+            data-plan-type="${planType}"
+            data-period="Monthly"
+            data-price="${plan.monthly}"
+            data-bs-toggle="modal" data-bs-target="#modernConfirmationModal">
+            <span class="period-label">Monthly</span>
+            <span class="period-price">₱${plan.monthly}</span>
+          </button>` : '';
+
         cardsHtml += `
           <div class="col-md-6">
             <div class="plan-card">
@@ -856,6 +866,7 @@ function buildPlanModals() {
               <div class="plan-card-body">
                 <ul class="benefit-list">${benefits}</ul>
                 <div class="period-buttons">
+                  ${monthlyBtn}
                   <button class="btn-period select-plan-btn"
                     data-plan="${plan.name} – ${plan.room}"
                     data-plan-type="${planType}"
@@ -929,7 +940,12 @@ function bindPlanButtons() {
 
       const paymentSel = document.getElementById('payment-option');
       paymentSel.innerHTML = '';
-      ['Quarterly', 'Semi-Annually', 'Annually'].forEach(type => {
+      // Include Monthly in dropdown only if the plan has monthly pricing
+      const periods = b.dataset.period === 'Monthly'
+        ? ['Monthly', 'Quarterly', 'Semi-Annually', 'Annually']
+        : ['Quarterly', 'Semi-Annually', 'Annually'];
+
+      periods.forEach(type => {
         const opt = document.createElement('option');
         opt.value = type;
         opt.textContent = type;
