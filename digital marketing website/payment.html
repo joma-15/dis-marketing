@@ -596,7 +596,7 @@
         <span class="arrow">→</span>
       </div>
 
-      <div class="btn-send btn-facebook" onclick="openModal()">
+      <div class="btn-send btn-facebook" onclick="sendProofPaymentFacebook()">
         <div class="send-icon">💬</div>
         <div class="send-text">
           Send via Facebook Messenger
@@ -762,6 +762,10 @@
       `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
       "_blank"
     );
+  }
+
+  function sendProofPaymentFacebook(){
+    window.location.href = "https://www.facebook.com/share/17vriUgXRF/";
   }
 
   function openModal() {
