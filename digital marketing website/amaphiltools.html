@@ -265,6 +265,20 @@
       .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
       .card { padding: 22px 14px 20px; }
     }
+
+    .ppt-open { display:block !important; }
+    .ppt-item {
+      display:block;
+      padding:11px 18px;
+      font-size:13px;
+      font-weight:500;
+      color:var(--text);
+      text-decoration:none;
+      border-bottom:1px solid var(--border);
+      transition:background 0.18s, color 0.18s;
+    }
+.ppt-item:last-child { border-bottom:none; }
+.ppt-item:hover { background:var(--teal-pale); color:var(--teal); }
   </style>
 </head>
 <body>
@@ -396,6 +410,43 @@
         <span class="card-label">Get In Touch</span>
       </div>
     </a>
+
+    <div class="card-link" style="position:relative;">
+      <div class="card" onclick="this.closest('.card-link').querySelector('.ppt-dropdown').classList.toggle('ppt-open')" style="cursor:pointer;">
+        <div class="icon-ring">
+          <svg viewBox="0 0 24 24">
+            <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+            <path d="M9 8h1a2 2 0 0 1 0 4H9V8z"/><path d="M14 8h2M14 12h2"/>
+          </svg>
+        </div>
+        <span class="card-label">Presentations</span>
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:var(--text-muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-top:-4px;">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </div>
+
+    <div class="ppt-dropdown" style="
+      display:none;
+      position:absolute;
+      top:calc(100% + 8px);
+      left:0; right:0;
+      background:var(--white);
+      border:1px solid var(--border);
+      border-radius:14px;
+      box-shadow:0 8px 28px rgba(13,138,143,0.13);
+      z-index:100;
+      overflow:hidden;
+    ">
+      <a href="assets/tools/AmaphiltoolsPPTS/BUREAU HEALTH PRESENTATION.pptx" class="ppt-item">Bureau Health Presentation</a>
+      <a href="assets/tools/AmaphiltoolsPPTS/CORPOHEALTH CHECK.pptx" class="ppt-item">Corpohealth Check</a>
+      <a href="assets/tools/AmaphiltoolsPPTS/FAMILY GUARD.pptx" class="ppt-item">Family Guard</a>
+      <a href="assets/tools/AmaphiltoolsPPTS/KAAGAPAY Emergency Access..pptx" class="ppt-item">Kaagapay Emergency Access</a>
+      <a href="assets/tools/AmaphiltoolsPPTS/MANPOWER-PROTECT-PLUS (1).pptx" class="ppt-item">Manpower Protect Plus</a>
+      <a href="assets/tools/AmaphiltoolsPPTS/ONE CARE SHIELD.pptx" class="ppt-item">One Care Shield</a>
+      <a href="assets/tools/AmaphiltoolsPPTS/PRIME WELL.pptx" class="ppt-item">Prime Well</a>
+      <a href="assets/tools/AmaphiltoolsPPTS/TOTAL CORPOSHIELD.pptx" class="ppt-item">Total Corposhield</a>
+      </div>
+    </div>
 
   </div>
 
