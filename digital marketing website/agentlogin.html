@@ -1051,7 +1051,8 @@
 
         try {
           // Step 1: Check duplicates (password / referral)
-          const checkUrl = `https://script.google.com/macros/s/AKfycbzB9F4g68ZKkWnEN1wXA4BBTFXztXssO-VwK3YH87vPlUK7piQkcQwJd58-TtpwRhCn/exec?action=checkDuplicates&password=${encodeURIComponent(password)}&referral=${encodeURIComponent(referral)}`;
+          // const checkUrl = `https://script.google.com/macros/s/AKfycbzB9F4g68ZKkWnEN1wXA4BBTFXztXssO-VwK3YH87vPlUK7piQkcQwJd58-TtpwRhCn/exec?action=checkDuplicates&password=${encodeURIComponent(password)}&referral=${encodeURIComponent(referral)}`;
+          const checkUrl = `https://script.google.com/macros/s/AKfycbxdjm1U5sSbu6oDvqzkN1aRH0r-r1Vl22jcBFwXkSUBlplngJbTOtFAGxD4R0p8xW7a/exec?action=checkDuplicates&password=${encodeURIComponent(password)}&referral=${encodeURIComponent(referral)}`;
           const checkRes  = await fetch(checkUrl);
 
           if (!checkRes.ok) throw new Error('Duplicate check failed: ' + checkRes.status);
@@ -1135,7 +1136,8 @@
         showLoading('Signing you in…', 'Verifying your credentials.');
 
         try {
-          const url = `https://script.google.com/macros/s/AKfycbzB9F4g68ZKkWnEN1wXA4BBTFXztXssO-VwK3YH87vPlUK7piQkcQwJd58-TtpwRhCn/exec?action=isAccountValid&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+          // const url = `https://script.google.com/macros/s/AKfycbzB9F4g68ZKkWnEN1wXA4BBTFXztXssO-VwK3YH87vPlUK7piQkcQwJd58-TtpwRhCn/exec?action=isAccountValid&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+           const url = `https://script.google.com/macros/s/AKfycbxdjm1U5sSbu6oDvqzkN1aRH0r-r1Vl22jcBFwXkSUBlplngJbTOtFAGxD4R0p8xW7a/exec?action=isAccountValid&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
 
           const response = await fetch(url);
 
