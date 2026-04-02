@@ -124,7 +124,7 @@ function checkedConditions() {
   // let paymentEntry;
   // let referralEntry;
 
-  // if(window.location.pathname.includes("shop.html")){
+  // if(window.location.pathname.i ncludes("shop.html")){
   //   formlink = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSd6k9TCCfsDvQI84QmtORnyEraWW4PwUFRihlvgfxfHLJ0xgw/formResponse";
   // }
 
