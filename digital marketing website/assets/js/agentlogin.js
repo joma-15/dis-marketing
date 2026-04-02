@@ -41,8 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const formUrl =
-        // "https://docs.google.com/forms/u/0/d/e/1FAIpQLSf4ILyBKJDLi1yHBwwQ8ZLbXYNgSmx9prgi-tqdRrvxSyn_mQ/formResponse";
-        "https://docs.google.com/forms/u/0/d/e/1FAIpQLSexx0fvoaO0YpfgFRS8g-_hue9WNYn6H6nhcJcZ1uqbkfp0kQ/formResponse";
+        "https://docs.google.com/forms/u/0/d/e/1FAIpQLSf4ILyBKJDLi1yHBwwQ8ZLbXYNgSmx9prgi-tqdRrvxSyn_mQ/formResponse";
+        // "https://docs.google.com/forms/u/0/d/e/1FAIpQLSexx0fvoaO0YpfgFRS8g-_hue9WNYn6H6nhcJcZ1uqbkfp0kQ/formResponse";
 
       const params = new URLSearchParams();
       params.append("entry.1820214400", fullname);
