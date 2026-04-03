@@ -1,3 +1,56 @@
+function getAllDependents() {
+  const dependents = [];
+
+  for (let i = 1; i <= dependentCount; i++) {
+    const block = document.getElementById(`dependent-${i}`);
+    if (!block) continue; // block removed, skip entirely
+
+    const lastEl  = document.getElementById(`dep${i}_last`);
+    const firstEl = document.getElementById(`dep${i}_first`);
+    const miEl    = document.getElementById(`dep${i}_mi`);
+    const bdayEl  = document.getElementById(`dep${i}_bday`);
+    const relEl   = document.getElementById(`dep${i}_rel`);
+
+    // Guard: skip if any required field is missing from DOM
+    if (!lastEl || !firstEl || !bdayEl || !relEl) continue;
+
+    const bday   = bdayEl.value;
+    const dateObj = new Date(bday);
+
+    if (isNaN(dateObj.getTime())) {
+      alert(`Invalid birthdate for Dependent ${i}`);
+      return null;
+    }
+
+    const genderEl = document.querySelector(`input[name="dep${i}_gender"]:checked`);
+
+    dependents.push({
+      fullName: `${lastEl.value} ${firstEl.value} ${miEl?.value ?? ''}`.trim(),
+      birthDate: {
+        year:  dateObj.getFullYear(),
+        month: dateObj.getMonth() + 1,
+        day:   dateObj.getDate(),
+      },
+      rel:    relEl.value,
+      gender: genderEl ? genderEl.value : ''
+    });
+  }
+  localStorage.setItem("dependentsData", JSON.stringify(dependents));
+  return dependents;
+}
+
+// document.getElementById('user-info')?.addEventListener('click', getAllDependents);
+
+// document.addEventListener("DOMContentLoaded", () => {
+//     const path = window.location.pathname;
+
+//     if(path == "/payment.html"){
+//       console.log("dependents data was being triggered");
+//       console.log(JSON.parse(localStorage.getItem("dependentsData")));
+//     }
+//     console.log(window.location.pathname);
+// });
+
 function PlanChoose() {
   const btn = document.getElementById("planChoose-btn"); // get the button
 
@@ -15,7 +68,7 @@ function PlanChoose() {
     console.log(selectedPlan);
     localStorage.setItem("PlanType", selectedPlan);
 
-    if (localStorage.getItem("planType")) {
+    if (localStorage.getItem("PlanType")) {
       window.location.href = "Plans.html";
     }
   });
@@ -101,6 +154,10 @@ function checkedConditions() {
       };
       //localstorage for persistent data
       localStorage.setItem("data", JSON.stringify(data));
+      const dependents = getAllDependents();
+      if (!dependents) return; // stop if invalid
+
+      localStorage.setItem("dependentsData", JSON.stringify(dependents));
       window.location.href = "payment.html";
     });
   }
@@ -224,19 +281,76 @@ async function sendIntoExcel(data) {
   }
 }
 
+
+//sending dependents data 
+async function sendDependentsData(data) {
+  const dependentsData = JSON.parse(localStorage.getItem("dependentsData"));
+  if (!dependentsData) return;
+
+  for (const dependent of Object.values(dependentsData)) {
+    if (!dependent) continue; // skip null/empty entries
+
+    const params = new URLSearchParams();
+
+    const formFields = {
+      [fields.planType]: localStorage.getItem("PlanType") || "no selected plan",
+      [fields.fullName]: dependent.fullName,
+      [fields.address]: data.address,
+      [fields.email]: data.email,
+      [fields.gender]: dependent.gender,
+      [fields.civilStatus]: 'n/a',
+      [fields.condition]: 'n/a',
+      [fields.plan]: data.plan,
+      [fields.birthYear]: dependent.birthDate?.year,
+      [fields.birthMonth]: dependent.birthDate?.month,
+      [fields.birthDay]: dependent.birthDate?.day,
+      [fields.status]: "Pending",
+      [fields.payment]: data.payment,
+      [fields.referral]: data.referral,
+    };
+
+    for (const [key, value] of Object.entries(formFields)) {
+      if (key && value != null) {
+        params.append(key, value);
+      }
+    }
+
+    try {
+      await fetch(link, {
+        method: "POST",
+        mode: "no-cors",
+        body: params,
+      });
+    } catch (error) {
+      console.error("Error sending dependent:", error);
+    }
+  }
+}
+
 //send the data to the database and gmail
 async function sendData() {
   const btn = document.getElementById("gmail");
 
   btn.addEventListener("click", async () => {
     const data = JSON.parse(localStorage.getItem("data"));
-    console.log("the fuckin function is being triggered");
+    const dependents = JSON.parse(localStorage.getItem("dependentsData"));
+    console.log("the function is being triggered");
 
     if (!data) {
       console.log("the data was missing");
     }
     console.log(JSON.stringify(data));
     await sendIntoExcel(data);
+
+    console.log("the data was being sent to the database");
+
+    //send the dependent data if in family 
+    const isFamily = localStorage.getItem("PlanType") == "Family";
+
+    if(selectedForm === "amaphilshop" && isFamily){
+      await sendDependentsData(data);
+    }
+
     sendProofPaymentGmail();
   });
 }
