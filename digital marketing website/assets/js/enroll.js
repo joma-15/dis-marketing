@@ -35,7 +35,7 @@ function getAllDependents() {
       gender: genderEl ? genderEl.value : ''
     });
   }
-  localStorage.setItem("dependentsData", JSON.stringify(dependents));
+  // localStorage.setItem("dependentsData", JSON.stringify(dependents));
   return dependents;
 }
 
@@ -154,8 +154,13 @@ function checkedConditions() {
       };
       //localstorage for persistent data
       localStorage.setItem("data", JSON.stringify(data));
-      const dependents = getAllDependents();
-      if (!dependents) return; // stop if invalid
+      let dependents = {};
+
+      const form = localStorage.getItem("selectedForm"); 
+      if(form == "amaphilshop"){
+        dependents = getAllDependents();
+        if (!dependents) return; // stop if invalid
+      }
 
       localStorage.setItem("dependentsData", JSON.stringify(dependents));
       window.location.href = "payment.html";
