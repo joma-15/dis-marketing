@@ -226,6 +226,8 @@ function checkedConditions() {
       birthDay: "entry.1357420546_day",
       status: "entry.1843997625",
       payment: "entry.231346316",
+      PrincipalDependent : "entry.1647194468",
+      relationship : "entry.60456725",
       referral: "entry.1754101156",
     }
   }
@@ -263,6 +265,8 @@ async function sendIntoExcel(data) {
     [fields.status]: "Pending",
     [fields.payment]: data.payment,
     [fields.referral]: data.referral,
+    [fields.PrincipalDependent]: "Principal",
+    [fields.relationship]: "Principal Applicant",
   };
 
   for (const [key, value] of Object.entries(formFields)) {
@@ -306,7 +310,9 @@ async function sendDependentsData(data) {
       [fields.birthDay]: dependent.birthDate?.day,
       [fields.status]: "Pending",
       [fields.payment]: data.payment,
+      [fields.PrincipalDependent]: "Dependent",
       [fields.referral]: data.referral,
+      [fields.relationship]: dependent.rel,
     };
 
     for (const [key, value] of Object.entries(formFields)) {
