@@ -45,6 +45,7 @@
       z-index: 0;
     }
 
+    /* ── Header ── */
     header {
       background: linear-gradient(135deg, var(--navy) 0%, var(--primary-mid) 100%);
       padding: 14px 32px;
@@ -75,6 +76,7 @@
     }
     .btn-back:hover { background: rgba(244,121,32,0.3); border-color: var(--orange); color: white; }
 
+    /* ── Hero ── */
     .hero-section { padding: 60px 0 40px; position: relative; z-index: 1; }
 
     .logo-display-card {
@@ -115,6 +117,7 @@
     .step-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-light); color: var(--orange); font-weight: 800; font-size: 0.78rem; letter-spacing: 1.5px; padding: 5px 14px; border-radius: 50px; border: 1.5px solid rgba(244,121,32,0.3); margin-bottom: 14px; }
     .step-badge::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--orange); }
 
+    /* ── Plan type cards ── */
     .plan-type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .plan-type-card { background: white; border: 2px solid var(--border); border-radius: 18px; padding: 22px 20px; cursor: pointer; transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; overflow: hidden; text-align: center; }
     .plan-type-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(244,121,32,0.06), transparent); opacity: 0; transition: opacity 0.25s; }
@@ -127,6 +130,7 @@
     .plan-type-card .arrow-badge { position: absolute; top: 10px; right: 10px; background: var(--orange); color: white; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; opacity: 0; transition: opacity 0.2s; }
     .plan-type-card:hover .arrow-badge { opacity: 1; }
 
+    /* ── Plan modals (Individual / Family / Senior) ── */
     .plans-modal .modal-dialog { max-width: 940px; }
     .plans-modal .modal-content { border: none; border-radius: 20px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.2); }
     .plans-modal .modal-header { background: linear-gradient(135deg, var(--navy) 0%, var(--primary-mid) 100%); padding: 20px 28px; border: none; }
@@ -159,15 +163,19 @@
     .btn-period .period-price { display: block; font-size: 0.88rem; font-weight: 800; color: var(--navy); margin-top: 2px; }
     .btn-period:hover .period-price { color: white; }
 
+    /* ── Shared modal base styles ── */
     #modernConfirmationModal .modal-content,
     #conditionModal .modal-content,
-    #clientDetailsModal .modal-content { border: none; border-radius: 20px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.2); }
+    #clientDetailsModal .modal-content,
+    #groupEnrollModal .modal-content { border: none; border-radius: 20px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.2); }
     #modernConfirmationModal .modal-header,
     #conditionModal .modal-header,
-    #clientDetailsModal .modal-header { background: linear-gradient(135deg, var(--navy), var(--primary-mid)); border: none; padding: 18px 24px; }
+    #clientDetailsModal .modal-header,
+    #groupEnrollModal .modal-header { background: linear-gradient(135deg, var(--navy), var(--primary-mid)); border: none; padding: 18px 24px; }
     #modernConfirmationModal .modal-title,
     #conditionModal .modal-title,
-    #clientDetailsModal .modal-title { color: white; font-weight: 700; font-size: 1.1rem; }
+    #clientDetailsModal .modal-title,
+    #groupEnrollModal .modal-title { color: white; font-weight: 700; font-size: 1.1rem; }
 
     .confirm-summary { background: var(--accent-light); border: 1.5px solid rgba(244,121,32,0.4); border-radius: 14px; padding: 18px 20px; margin: 8px 0 16px; }
     .confirm-summary .plan-name { font-weight: 800; font-size: 1.05rem; color: var(--navy); }
@@ -185,76 +193,267 @@
     .form-check-input:checked { background-color: var(--orange); border-color: var(--orange); }
 
     /* ── Family Members Section ── */
-    .members-section {
-      background: #f0f3fa;
-      border-radius: 14px;
-      padding: 18px;
-      border: 1.5px dashed var(--border);
-    }
-    .members-section-title {
-      font-weight: 800;
-      font-size: 0.9rem;
-      color: var(--navy);
+    .members-section { background: #f0f3fa; border-radius: 14px; padding: 18px; border: 1.5px dashed var(--border); }
+    .members-section-title { font-weight: 800; font-size: 0.9rem; color: var(--navy); display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+    .members-section-title i { color: var(--orange); }
+    .member-block { background: white; border-radius: 12px; padding: 14px 16px; border: 1.5px solid var(--border); margin-bottom: 12px; }
+    .member-block:last-child { margin-bottom: 0; }
+    .member-block-label { font-weight: 700; font-size: 0.82rem; color: var(--orange); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    .btn-add-dependent { background: var(--accent-light); border: 2px dashed rgba(244,121,32,0.5); color: var(--orange); border-radius: 10px; padding: 8px 18px; font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: all 0.2s; width: 100%; margin-top: 10px; }
+    .btn-add-dependent:hover { background: var(--orange); color: white; border-color: var(--orange); }
+    .btn-remove-dependent { background: none; border: none; color: var(--danger); font-size: 0.8rem; cursor: pointer; padding: 2px 8px; border-radius: 6px; transition: all 0.2s; }
+    .btn-remove-dependent:hover { background: #ffeaea; }
+    .dependent-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+
+    /* ═══════════════════════════════════════════════════════
+       GROUP ENROLLMENT MODAL — Excel-style table
+    ═══════════════════════════════════════════════════════ */
+    #groupEnrollModal .modal-dialog { max-width: 1100px; }
+
+    .group-plan-banner {
+      background: var(--accent-light);
+      border-bottom: 2px solid rgba(244,121,32,0.25);
+      padding: 12px 24px;
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 14px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
     }
-    .members-section-title i { color: var(--orange); }
+    .group-plan-banner .banner-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .group-plan-tag { background: var(--navy); color: white; font-size: 0.72rem; font-weight: 700; padding: 4px 13px; border-radius: 50px; letter-spacing: 0.5px; }
+    .group-plan-detail { font-size: 0.82rem; color: #8a5520; font-weight: 500; }
+    .group-plan-price { font-size: 1.15rem; font-weight: 800; color: var(--orange); }
 
-    .member-block {
-      background: white;
-      border-radius: 12px;
-      padding: 14px 16px;
-      border: 1.5px solid var(--border);
-      margin-bottom: 12px;
+    #groupEnrollModal .modal-body {
+      background: #f0f3fa;
+      padding: 20px 24px;
+      max-height: 72vh;
+      overflow-y: auto;
     }
-    .member-block:last-child { margin-bottom: 0; }
-    .member-block-label {
+    #groupEnrollModal .modal-body::-webkit-scrollbar { width: 6px; }
+    #groupEnrollModal .modal-body::-webkit-scrollbar-track { background: #dde3f0; border-radius: 3px; }
+    #groupEnrollModal .modal-body::-webkit-scrollbar-thumb { background: var(--primary-mid); border-radius: 3px; }
+
+    /* Toolbar */
+    .enroll-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .enroll-toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .enrollee-count-badge {
+      background: var(--navy);
+      color: white;
+      font-size: 0.75rem;
       font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 50px;
+    }
+    .enroll-toolbar-hint {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .enroll-toolbar-right { display: flex; gap: 8px; }
+
+    .btn-enroll-add {
+      background: linear-gradient(135deg, var(--orange), var(--accent-dark));
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 16px;
       font-size: 0.82rem;
-      color: var(--orange);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 10px;
+      font-weight: 700;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s;
       display: flex;
       align-items: center;
       gap: 6px;
     }
+    .btn-enroll-add:hover {
+      background: linear-gradient(135deg, #e06a10, #bf550a);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(244,121,32,0.4);
+    }
 
-    .btn-add-dependent {
-      background: var(--accent-light);
-      border: 2px dashed rgba(244,121,32,0.5);
-      color: var(--orange);
-      border-radius: 10px;
-      padding: 8px 18px;
-      font-size: 0.85rem;
-      font-weight: 700;
+    .btn-enroll-clear {
+      background: white;
+      border: 2px solid var(--border);
+      color: var(--muted);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       cursor: pointer;
       transition: all 0.2s;
-      width: 100%;
-      margin-top: 10px;
     }
-    .btn-add-dependent:hover { background: var(--orange); color: white; border-color: var(--orange); }
+    .btn-enroll-clear:hover {
+      border-color: var(--danger);
+      color: var(--danger);
+      background: #fff5f5;
+    }
 
-    .btn-remove-dependent {
+    /* Table wrapper */
+    .enroll-table-wrap {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1.5px solid var(--border);
+      box-shadow: 0 4px 16px rgba(15,30,61,0.08);
+    }
+
+    .enroll-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 860px;
+      font-size: 0.8rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Thead */
+    .enroll-table thead tr {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--primary-mid) 100%);
+    }
+    .enroll-table thead th {
+      color: rgba(255,255,255,0.9);
+      font-weight: 700;
+      font-size: 0.72rem;
+      padding: 11px 10px;
+      text-align: left;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      white-space: nowrap;
+      letter-spacing: 0.3px;
+    }
+    .enroll-table thead th:last-child { border-right: none; text-align: center; }
+    .enroll-table thead th .th-icon { color: var(--orange); margin-right: 5px; font-size: 0.68rem; }
+
+    /* Col widths — updated field set */
+    .col-no       { width: 36px; }
+    .col-empid    { width: 88px; }
+    .col-last     { width: 105px; }
+    .col-first    { width: 105px; }
+    .col-mid      { width: 90px; }
+    .col-suffix   { width: 68px; }
+    .col-nick     { width: 80px; }
+    .col-byear    { width: 72px; }
+    .col-bmon     { width: 90px; }
+    .col-bday2    { width: 64px; }
+    .col-gen      { width: 78px; }
+    .col-civil    { width: 90px; }
+    .col-nat      { width: 90px; }
+    .col-ph       { width: 82px; }
+    .col-phid     { width: 105px; }
+    .col-phone    { width: 110px; }
+    .col-dept     { width: 95px; }
+    .col-resign   { width: 95px; }
+    .col-empdate  { width: 105px; }
+    .col-plan     { width: 90px; }
+    .col-mtype    { width: 95px; }
+    .col-idname   { width: 110px; }
+    .col-actdate  { width: 105px; }
+    .col-email    { width: 140px; }
+    .col-expdate  { width: 105px; }
+    .col-remarks  { width: 110px; }
+    .col-amaid    { width: 105px; }
+    .col-act      { width: 40px; }
+
+    /* Tbody rows */
+    .enroll-table tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .enroll-table tbody tr:last-child { border-bottom: none; }
+    .enroll-table tbody tr:nth-child(odd)  { background: white; }
+    .enroll-table tbody tr:nth-child(even) { background: #f8f9fd; }
+    .enroll-table tbody tr:hover { background: var(--accent-light); }
+
+    .row-num {
+      text-align: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--orange);
+      padding: 0 4px;
+      user-select: none;
+    }
+
+    .enroll-table td { padding: 4px 5px; vertical-align: middle; }
+
+    /* Cell inputs */
+    .cell-inp {
+      width: 100%;
+      background: transparent;
+      border: 1.5px solid transparent;
+      border-radius: 6px;
+      padding: 5px 7px;
+      font-size: 0.79rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text);
+      outline: none;
+      transition: all 0.15s;
+    }
+    .cell-inp:hover { border-color: var(--border); background: white; }
+    .cell-inp:focus { border-color: var(--orange); background: white; box-shadow: 0 0 0 3px rgba(244,121,32,0.12); }
+    .cell-inp::placeholder { color: var(--muted); font-size: 0.75rem; opacity: 0.7; }
+    select.cell-inp { cursor: pointer; -webkit-appearance: auto; }
+    select.cell-inp option { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); background: white; }
+
+    /* Delete row btn */
+    .btn-del-row {
       background: none;
       border: none;
-      color: var(--danger);
+      color: #c8cedf;
       font-size: 0.8rem;
       cursor: pointer;
-      padding: 2px 8px;
-      border-radius: 6px;
-      transition: all 0.2s;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      transition: all 0.15s;
     }
-    .btn-remove-dependent:hover { background: #ffeaea; }
+    .btn-del-row:hover { background: #ffeaea; color: var(--danger); }
 
-    .dependent-header {
+    /* Empty state row */
+    .empty-enroll-row td {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--muted);
+    }
+    .empty-enroll-icon {
+      font-size: 2.4rem;
+      color: #c8cedf;
+      margin-bottom: 10px;
+    }
+    .empty-enroll-text { font-size: 0.88rem; font-weight: 600; color: var(--muted); }
+    .empty-enroll-sub  { font-size: 0.77rem; color: #a0acc8; margin-top: 4px; }
+
+    /* Table footer bar */
+    .enroll-table-foot {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--primary-mid) 100%);
+      padding: 9px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 10px;
+      flex-wrap: wrap;
+      gap: 6px;
     }
+    .enroll-table-foot span { font-size: 0.76rem; color: rgba(255,255,255,0.7); }
+    .enroll-table-foot .foot-count { color: white; font-weight: 700; }
+
+    /* Modal footer */
+    #groupEnrollModal .modal-footer { border-top: 1.5px solid var(--border); background: white; padding: 14px 24px; }
+    .group-footer-note { font-size: 0.78rem; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+    .group-footer-note i { color: var(--orange); }
   </style>
 </head>
 <body>
@@ -317,6 +516,9 @@
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════════
+     PLAN DATA & BENEFITS
+═══════════════════════════════════════════ -->
 <script>
 const PLAN_DATA = {
   Individual: [
@@ -348,13 +550,16 @@ const BENEFITS = [
   'Accidental Insurance'
 ];
 
-// Tracks currently selected plan type
-let currentPlanType = '';
+let currentPlanType  = '';
+let selectedGroupPlan = { name: '', period: '', price: '' };
 </script>
 
+<!-- Plan modal container -->
 <div id="plan-modals-container"></div>
 
-<!-- MODAL: Confirmation -->
+<!-- ═══════════════════════════════════════════
+     MODAL: Confirmation (Individual / Family / Senior)
+═══════════════════════════════════════════ -->
 <div class="modal fade" id="modernConfirmationModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -382,7 +587,9 @@ let currentPlanType = '';
   </div>
 </div>
 
-<!-- MODAL: Pre-existing Condition -->
+<!-- ═══════════════════════════════════════════
+     MODAL: Pre-existing Condition
+═══════════════════════════════════════════ -->
 <div class="modal fade" id="conditionModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -428,7 +635,9 @@ let currentPlanType = '';
   </div>
 </div>
 
-<!-- MODAL: Client Details -->
+<!-- ═══════════════════════════════════════════
+     MODAL: Client Details (Individual / Family / Senior)
+═══════════════════════════════════════════ -->
 <div class="modal fade" id="clientDetailsModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -438,14 +647,10 @@ let currentPlanType = '';
       </div>
       <div class="modal-body p-4" style="max-height:70vh;overflow-y:auto;">
         <form id="clientForm">
-
-          <!-- ─── PRINCIPAL (always shown) ─── -->
           <div id="principalSection">
-            <!-- For Family plans, label it "Principal Member" -->
             <div id="principalLabel" class="members-section-title mb-3" style="display:none;">
               <i class="fa fa-crown"></i> Principal Member
             </div>
-
             <div class="mb-3">
               <label class="form-label">Full Name</label>
               <div class="row g-2">
@@ -482,23 +687,19 @@ let currentPlanType = '';
             </div>
           </div>
 
-          <!-- ─── DEPENDENTS (Family plan only) ─── -->
           <div id="familyMembersSection" style="display:none;" class="mb-3">
             <hr class="my-3" />
             <div class="members-section">
               <div class="members-section-title">
                 <i class="fa fa-people-roof"></i> Dependents
               </div>
-              <div id="dependentsContainer">
-                <!-- Dependent blocks inserted here by JS -->
-              </div>
+              <div id="dependentsContainer"></div>
               <button type="button" class="btn-add-dependent" id="addDependentBtn">
                 <i class="fa fa-plus me-1"></i> Add Dependent
               </button>
             </div>
           </div>
 
-          <!-- ─── PAYMENT & REFERRAL (always shown) ─── -->
           <div class="mb-3">
             <label class="form-label">Payment Option</label>
             <select class="form-select" id="payment-option" required></select>
@@ -507,7 +708,6 @@ let currentPlanType = '';
             <label class="form-label">Referred By <small class="text-muted fw-normal">(optional)</small></label>
             <input type="text" class="form-control" placeholder="Name of person or source" id="referredBy" />
           </div>
-
         </form>
       </div>
       <div class="modal-footer border-0 pb-4 gap-2 justify-content-center">
@@ -520,6 +720,143 @@ let currentPlanType = '';
   </div>
 </div>
 
+<!-- ═══════════════════════════════════════════
+     MODAL: Group Enrollment — Excel-style table
+═══════════════════════════════════════════ -->
+<div class="modal fade" id="groupEnrollModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+
+      <!-- Header -->
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <i class="fa fa-building me-2"></i>Group Enrollment Form
+          <small style="font-family:'Plus Jakarta Sans',sans-serif;font-size:0.78rem;opacity:0.7;display:block;font-weight:400;margin-top:2px;">
+            Add all enrollees below — one row per person
+          </small>
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Plan banner -->
+      <div class="group-plan-banner">
+        <div class="banner-left">
+          <span class="group-plan-tag"><i class="fa fa-building me-1"></i>Group Plan</span>
+          <span class="group-plan-detail" id="group-banner-detail">50K ABL · Ward · Inpatient + Outpatient + APE + Emergency</span>
+        </div>
+        <span class="group-plan-price" id="group-banner-price">₱7,200 / year per head</span>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body">
+
+        <!-- Toolbar -->
+        <div class="enroll-toolbar">
+          <div class="enroll-toolbar-left">
+            <span class="enrollee-count-badge">
+              <i class="fa fa-users me-1"></i>
+              <span id="enroll-count-num">0</span> enrollee(s)
+            </span>
+            <span class="enroll-toolbar-hint">Click a cell to edit • Tab to move between fields</span>
+          </div>
+          <div class="enroll-toolbar-right">
+            <button class="btn-enroll-clear" onclick="clearAllEnrollees()">
+              <i class="fa fa-trash-can me-1"></i>Clear all
+            </button>
+            <button class="btn-enroll-add" onclick="addEnrolleeRow()">
+              <i class="fa fa-plus"></i> Add enrollee
+            </button>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="enroll-table-wrap">
+          <div style="overflow-x:auto;">
+            <table class="enroll-table">
+              <thead>
+                <tr>
+                  <th class="col-no"  style="text-align:center;">#</th>
+                  <th class="col-empid"><i class="fa fa-id-badge th-icon"></i>Emp. ID <span style="opacity:0.55;font-weight:400">(opt)</span></th>
+                  <th class="col-last"><i class="fa fa-user th-icon"></i>Last Name</th>
+                  <th class="col-first">Given Name</th>
+                  <th class="col-mid">Middle Name <span style="opacity:0.55;font-weight:400">(opt)</span></th>
+                  <th class="col-suffix">Suffix <span style="opacity:0.55;font-weight:400">(opt)</span></th>
+                  <th class="col-nick">Nickname <span style="opacity:0.55;font-weight:400">(opt)</span></th>
+                  <th class="col-byear"><i class="fa fa-calendar th-icon"></i>Birth Year</th>
+                  <th class="col-bmon">Birth Month</th>
+                  <th class="col-bday2">Birth Day</th>
+                  <th class="col-gen"><i class="fa fa-venus-mars th-icon"></i>Gender</th>
+                  <th class="col-civil">Civil Status</th>
+                  <th class="col-nat">Nationality</th>
+                  <th class="col-ph">PhilHealth</th>
+                  <th class="col-phid">PhilHealth ID</th>
+                  <th class="col-phone"><i class="fa fa-phone th-icon"></i>Phone No.</th>
+                  <th class="col-dept">Department <span style="opacity:0.55;font-weight:400">(opt)</span></th>
+                  <th class="col-resign">Resignation</th>
+                  <th class="col-empdate">Employ. Date</th>
+                  <th class="col-plan"><i class="fa fa-shield-halved th-icon"></i>Plan</th>
+                  <th class="col-mtype">Member Type</th>
+                  <th class="col-idname">ID Name <span style="opacity:0.55;font-weight:400">(dep.)</span></th>
+                  <th class="col-actdate">Activation <span style="opacity:0.55;font-weight:400">(opt)</span></th>
+                  <th class="col-email"><i class="fa fa-envelope th-icon"></i>Email</th>
+                  <th class="col-expdate">Expiration <span style="opacity:0.55;font-weight:400">(opt)</span></th>
+                  <th class="col-remarks">Remarks</th>
+                  <th class="col-amaid">AMAPHIL ID <span style="opacity:0.55;font-weight:400">(opt)</span></th>
+                  <th class="col-act"></th>
+                </tr>
+              </thead>
+              <tbody id="enrollee-tbody">
+                <tr class="empty-enroll-row" id="empty-enroll-msg">
+                  <td colspan="28">
+                    <div class="empty-enroll-icon"><i class="fa fa-table-list"></i></div>
+                    <div class="empty-enroll-text">No enrollees added yet</div>
+                    <div class="empty-enroll-sub">Click "Add enrollee" to start filling out the enrollment table</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Table footer bar -->
+          <div class="enroll-table-foot">
+            <span>
+              Total enrollees:&nbsp;<span class="foot-count" id="enroll-foot-count">0</span>
+            </span>
+            <span>Maximum 200 enrollees per submission</span>
+          </div>
+        </div>
+
+        <!-- Bottom note -->
+        <div class="mt-3 d-flex align-items-start gap-2" style="background:var(--accent-light);border:1.5px solid rgba(244,121,32,0.3);border-radius:10px;padding:12px 14px;">
+          <i class="fa fa-circle-info" style="color:var(--orange);margin-top:2px;flex-shrink:0;"></i>
+          <span style="font-size:0.8rem;color:#8a5520;">
+            All enrollees share the same plan and payment period. Pre-existing conditions declared here may affect individual coverage terms. Ensure all birthdates and names match valid government IDs.
+          </span>
+        </div>
+
+      </div><!-- end modal-body -->
+
+      <!-- Footer -->
+      <div class="modal-footer d-flex align-items-center justify-content-between flex-wrap gap-2">
+        <div class="group-footer-note">
+          <i class="fa fa-shield-halved"></i>
+          Data is kept confidential and used solely for enrollment processing.
+        </div>
+        <div class="d-flex gap-2">
+          <button class="btn-cancel-custom btn" data-bs-dismiss="modal">Cancel</button>
+          <button class="btn-proceed btn" id="group-submit-btn" onclick="submitGroupEnrollment()">
+            <i class="fa fa-paper-plane me-1"></i>Submit Enrollment
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════ -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 const PLAN_ICONS = {
@@ -536,7 +873,7 @@ const PLAN_SUBTITLES = {
   Group: 'Ideal for businesses & organizations'
 };
 
-// ─── Build all plan modals ───────────────────────────────────────────
+// ── Build all plan modals ──────────────────────────────────────────
 function buildPlanModals() {
   const container = document.getElementById('plan-modals-container');
   let html = '';
@@ -544,10 +881,7 @@ function buildPlanModals() {
   Object.keys(PLAN_DATA).forEach(planType => {
     const plans = PLAN_DATA[planType];
     const tiers = {};
-    plans.forEach(p => {
-      if (!tiers[p.tier]) tiers[p.tier] = [];
-      tiers[p.tier].push(p);
-    });
+    plans.forEach(p => { if (!tiers[p.tier]) tiers[p.tier] = []; tiers[p.tier].push(p); });
 
     let cardsHtml = '';
     Object.keys(tiers).forEach(tier => {
@@ -560,13 +894,18 @@ function buildPlanModals() {
       `;
       tiers[tier].forEach(plan => {
         const benefits = BENEFITS.map(b => `<li><i class="fa fa-circle-check"></i>${b}</li>`).join('');
+        const isGroup  = planType === 'Group';
+
+        // For Group plans, buttons open groupEnrollModal; others open modernConfirmationModal
+        const targetModal = isGroup ? '#groupEnrollModal' : '#modernConfirmationModal';
+
         const monthlyBtn = plan.monthly ? `
           <button class="btn-period select-plan-btn"
             data-plan="${plan.name} – ${plan.room}"
             data-plan-type="${planType}"
             data-period="Monthly"
             data-price="${plan.monthly}"
-            data-bs-toggle="modal" data-bs-target="#modernConfirmationModal">
+            data-bs-toggle="modal" data-bs-target="${targetModal}">
             <span class="period-label">Monthly</span>
             <span class="period-price">₱${plan.monthly}</span>
           </button>` : '';
@@ -593,7 +932,7 @@ function buildPlanModals() {
                     data-plan-type="${planType}"
                     data-period="Quarterly"
                     data-price="${plan.quarterly}"
-                    data-bs-toggle="modal" data-bs-target="#modernConfirmationModal">
+                    data-bs-toggle="modal" data-bs-target="${targetModal}">
                     <span class="period-label">Quarterly</span>
                     <span class="period-price">₱${plan.quarterly}</span>
                   </button>
@@ -602,7 +941,7 @@ function buildPlanModals() {
                     data-plan-type="${planType}"
                     data-period="Semi-Annually"
                     data-price="${plan.semi}"
-                    data-bs-toggle="modal" data-bs-target="#modernConfirmationModal">
+                    data-bs-toggle="modal" data-bs-target="${targetModal}">
                     <span class="period-label">Semi-Annual</span>
                     <span class="period-price">₱${plan.semi}</span>
                   </button>
@@ -611,7 +950,7 @@ function buildPlanModals() {
                     data-plan-type="${planType}"
                     data-period="Annually"
                     data-price="${plan.annual}"
-                    data-bs-toggle="modal" data-bs-target="#modernConfirmationModal">
+                    data-bs-toggle="modal" data-bs-target="${targetModal}">
                     <span class="period-label">Annually</span>
                     <span class="period-price">₱${plan.annual}</span>
                   </button>
@@ -650,57 +989,61 @@ function buildPlanModals() {
   bindPlanButtons();
 }
 
-// ─── Bind plan selection buttons ────────────────────────────────────
+// ── Bind plan selection buttons ────────────────────────────────────
 function bindPlanButtons() {
   document.querySelectorAll('.select-plan-btn').forEach(btn => {
     btn.addEventListener('click', e => {
       const b = e.currentTarget;
-
-      // Save current plan type globally
       currentPlanType = b.dataset.planType;
 
-      // Update confirmation modal
-      document.getElementById('conf-plan-name').textContent   = b.dataset.plan;
-      document.getElementById('conf-plan-type').textContent   = b.dataset.planType;
-      document.getElementById('conf-plan-price').textContent  = '₱' + b.dataset.price;
-      document.getElementById('conf-plan-period').textContent = b.dataset.period;
+      if (currentPlanType === 'Group') {
+        // Populate the Group enrollment banner
+        selectedGroupPlan = {
+          name:   b.dataset.plan,
+          period: b.dataset.period,
+          price:  b.dataset.price
+        };
+        document.getElementById('group-banner-detail').textContent =
+          `${b.dataset.plan} · Inpatient + Outpatient + APE + Emergency`;
+        document.getElementById('group-banner-price').textContent =
+          `₱${b.dataset.price} / ${b.dataset.period.toLowerCase()} per head`;
+      } else {
+        // Populate confirmation modal for other plan types
+        document.getElementById('conf-plan-name').textContent   = b.dataset.plan;
+        document.getElementById('conf-plan-type').textContent   = b.dataset.planType;
+        document.getElementById('conf-plan-price').textContent  = '₱' + b.dataset.price;
+        document.getElementById('conf-plan-period').textContent = b.dataset.period;
 
-      // Update payment options
-      const paymentSel = document.getElementById('payment-option');
-      paymentSel.innerHTML = '';
-      const periods = b.dataset.period === 'Monthly'
-        ? ['Monthly', 'Quarterly', 'Semi-Annually', 'Annually']
-        : ['Quarterly', 'Semi-Annually', 'Annually'];
-      periods.forEach(type => {
-        const opt = document.createElement('option');
-        opt.value = type;
-        opt.textContent = type;
-        if (type === b.dataset.period) opt.selected = true;
-        paymentSel.appendChild(opt);
-      });
+        const paymentSel = document.getElementById('payment-option');
+        paymentSel.innerHTML = '';
+        const periods = b.dataset.period === 'Monthly'
+          ? ['Monthly', 'Quarterly', 'Semi-Annually', 'Annually']
+          : ['Quarterly', 'Semi-Annually', 'Annually'];
+        periods.forEach(type => {
+          const opt = document.createElement('option');
+          opt.value = type;
+          opt.textContent = type;
+          if (type === b.dataset.period) opt.selected = true;
+          paymentSel.appendChild(opt);
+        });
+      }
     });
   });
 }
 
-// ─── Toggle Family-specific fields when clientDetailsModal opens ─────
+// ── Toggle Family-specific fields ────────────────────────────────
 document.getElementById('clientDetailsModal').addEventListener('show.bs.modal', () => {
   const isFamily = currentPlanType === 'Family';
-
-  // Show/hide the "Principal Member" label above the standard fields
   document.getElementById('principalLabel').style.display = isFamily ? 'flex' : 'none';
-
-  // Show/hide the dependents section
   document.getElementById('familyMembersSection').style.display = isFamily ? 'block' : 'none';
-
-  // Reset dependents when reopening
   if (isFamily) {
     document.getElementById('dependentsContainer').innerHTML = '';
     dependentCount = 0;
-    addDependent(); // Start with one dependent block
+    addDependent();
   }
 });
 
-// ─── Dependents logic ────────────────────────────────────────────────
+// ── Dependents logic ──────────────────────────────────────────────
 let dependentCount = 0;
 
 function updateAddButton() {
@@ -731,23 +1074,15 @@ function addDependent() {
   block.id = `dependent-${idx}`;
   block.innerHTML = `
     <div class="dependent-header">
-      <div class="member-block-label">
-        <i class="fa fa-user-plus"></i> Dependent ${idx}
-      </div>
+      <div class="member-block-label"><i class="fa fa-user-plus"></i> Dependent ${idx}</div>
       <button type="button" class="btn-remove-dependent" onclick="removeDependent(${idx})">
         <i class="fa fa-times me-1"></i> Remove
       </button>
     </div>
     <div class="row g-2 mb-2">
-      <div class="col-md-5">
-        <input type="text" class="form-control" placeholder="Last Name" id="dep${idx}_last" required />
-      </div>
-      <div class="col-md-5">
-        <input type="text" class="form-control" placeholder="First Name" id="dep${idx}_first" required />
-      </div>
-      <div class="col-md-2">
-        <input type="text" class="form-control" placeholder="M.I." id="dep${idx}_mi" maxlength="1" />
-      </div>
+      <div class="col-md-5"><input type="text" class="form-control" placeholder="Last Name" id="dep${idx}_last" required /></div>
+      <div class="col-md-5"><input type="text" class="form-control" placeholder="First Name" id="dep${idx}_first" required /></div>
+      <div class="col-md-2"><input type="text" class="form-control" placeholder="M.I." id="dep${idx}_mi" maxlength="1" /></div>
     </div>
     <div class="row g-2 mb-2">
       <div class="col-md-6">
@@ -758,11 +1093,7 @@ function addDependent() {
         <label class="form-label" style="font-size:0.8rem;">Relationship</label>
         <select class="form-select" id="dep${idx}_rel" required>
           <option value="" disabled selected>Select</option>
-          <option>Spouse</option>
-          <option>Child</option>
-          <option>Parent</option>
-          <option>Sibling</option>
-          <option>Other</option>
+          <option>Spouse</option><option>Child</option><option>Parent</option><option>Sibling</option><option>Other</option>
         </select>
       </div>
     </div>
@@ -788,7 +1119,7 @@ function removeDependent(idx) {
 
 document.getElementById('addDependentBtn').addEventListener('click', addDependent);
 
-// ─── Pre-existing condition toggle ──────────────────────────────────
+// ── Pre-existing condition toggle ──────────────────────────────────
 document.querySelectorAll('input[name="conditionType"]').forEach(radio => {
   radio.addEventListener('change', () => {
     document.getElementById('conditionChecklist').classList.toggle('d-none', radio.value !== 'with');
@@ -798,6 +1129,260 @@ document.querySelectorAll('input[name="conditionType"]').forEach(radio => {
 document.getElementById('otherCondition').addEventListener('change', function () {
   document.getElementById('otherText').style.display = this.checked ? 'block' : 'none';
 });
+
+// ══════════════════════════════════════════════════════════════════
+//  GROUP ENROLLMENT TABLE LOGIC
+// ══════════════════════════════════════════════════════════════════
+let enrollRowCount = 0;
+
+function updateEnrollCount() {
+  const n = document.querySelectorAll('#enrollee-tbody tr[data-erow]').length;
+  document.getElementById('enroll-count-num').textContent = n;
+  document.getElementById('enroll-foot-count').textContent = n;
+  const empty = document.getElementById('empty-enroll-msg');
+  if (empty) empty.style.display = n > 0 ? 'none' : '';
+}
+
+function addEnrolleeRow() {
+  enrollRowCount++;
+  const idx = enrollRowCount;
+  const tbody = document.getElementById('enrollee-tbody');
+
+  const empty = document.getElementById('empty-enroll-msg');
+  if (empty) empty.style.display = 'none';
+
+  const tr = document.createElement('tr');
+  tr.setAttribute('data-erow', idx);
+  tr.style.animation = 'rowSlideIn 0.2s ease';
+
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const monthOpts = months.map((m,i) => `<option value="${i+1}">${m}</option>`).join('');
+  const dayOpts   = Array.from({length:31},(_,i)=>`<option value="${i+1}">${i+1}</option>`).join('');
+
+  tr.innerHTML = `
+    <td class="row-num">${idx}</td>
+
+    <!-- Employee ID (optional) -->
+    <td><input class="cell-inp" type="text" placeholder="—" /></td>
+
+    <!-- Last Name (required) -->
+    <td><input class="cell-inp" type="text" placeholder="Last name" data-req="1" /></td>
+
+    <!-- Given Name (required) -->
+    <td><input class="cell-inp" type="text" placeholder="Given name" data-req="1" /></td>
+
+    <!-- Middle Name (optional) -->
+    <td><input class="cell-inp" type="text" placeholder="—" /></td>
+
+    <!-- Suffix (optional) -->
+    <td>
+      <select class="cell-inp">
+        <option value="">—</option>
+        <option>Jr.</option><option>Sr.</option><option>II</option><option>III</option><option>IV</option>
+      </select>
+    </td>
+
+    <!-- Nickname (optional) -->
+    <td><input class="cell-inp" type="text" placeholder="—" /></td>
+
+    <!-- Birth Year (required) -->
+    <td><input class="cell-inp" type="number" placeholder="YYYY" min="1900" max="2099" style="width:100%;text-align:center;" data-req="1" /></td>
+
+    <!-- Birth Month (required) -->
+    <td>
+      <select class="cell-inp" data-req="1">
+        <option value="">—</option>
+        ${monthOpts}
+      </select>
+    </td>
+
+    <!-- Birth Day (required) -->
+    <td>
+      <select class="cell-inp" data-req="1">
+        <option value="">—</option>
+        ${dayOpts}
+      </select>
+    </td>
+
+    <!-- Gender (required) -->
+    <td>
+      <select class="cell-inp" data-req="1">
+        <option value="">—</option>
+        <option>Male</option><option>Female</option>
+      </select>
+    </td>
+
+    <!-- Civil Status (required) -->
+    <td>
+      <select class="cell-inp" data-req="1">
+        <option value="">—</option>
+        <option>Single</option><option>Married</option><option>Widowed</option>
+        <option>Divorced</option><option>Separated</option>
+      </select>
+    </td>
+
+    <!-- Nationality (required) -->
+    <td><input class="cell-inp" type="text" placeholder="Filipino" data-req="1" /></td>
+
+    <!-- PhilHealth (required) -->
+    <td>
+      <select class="cell-inp" data-req="1">
+        <option value="">—</option>
+        <option>Yes</option><option>No</option>
+      </select>
+    </td>
+
+    <!-- PhilHealth ID (required) -->
+    <td><input class="cell-inp" type="text" placeholder="PhilHealth ID" data-req="1" /></td>
+
+    <!-- Phone Number (required) -->
+    <td><input class="cell-inp" type="tel" placeholder="+63 9XX XXX XXXX" data-req="1" /></td>
+
+    <!-- Department (optional) -->
+    <td><input class="cell-inp" type="text" placeholder="—" /></td>
+
+    <!-- Resignation (required) -->
+    <td>
+      <select class="cell-inp" data-req="1">
+        <option value="">—</option>
+        <option>Active</option><option>Resigned</option><option>Terminated</option><option>Retired</option>
+      </select>
+    </td>
+
+    <!-- Employment Date (required) -->
+    <td><input class="cell-inp" type="date" data-req="1" /></td>
+
+    <!-- Plan (required) -->
+    <td><input class="cell-inp" type="text" placeholder="Plan name" data-req="1" /></td>
+
+    <!-- Member Type (required) — controls ID Name -->
+    <td>
+      <select class="cell-inp mtype-sel" data-req="1">
+        <option value="">—</option>
+        <option value="Principal">Principal</option>
+        <option value="Dependent">Dependent</option>
+      </select>
+    </td>
+
+    <!-- ID Name — dependent only; disabled when Principal -->
+    <td>
+      <input class="cell-inp idname-inp" type="text" placeholder="Principal's name"
+             disabled
+             style="background:#f0f3fa;color:var(--muted);cursor:not-allowed;"
+             title="Only filled in for Dependent members" />
+    </td>
+
+    <!-- Activation Date (optional) -->
+    <td><input class="cell-inp" type="date" /></td>
+
+    <!-- Email (required) -->
+    <td><input class="cell-inp" type="email" placeholder="email@domain.com" data-req="1" /></td>
+
+    <!-- Expiration Date (optional) -->
+    <td><input class="cell-inp" type="date" /></td>
+
+    <!-- Remarks (optional) -->
+    <td><input class="cell-inp" type="text" placeholder="—" /></td>
+
+    <!-- AMAPHIL ID (optional) -->
+    <td><input class="cell-inp" type="text" placeholder="—" /></td>
+
+    <!-- Delete -->
+    <td>
+      <button class="btn-del-row" onclick="removeEnrolleeRow(this)" title="Remove this enrollee">
+        <i class="fa fa-times"></i>
+      </button>
+    </td>
+  `;
+
+  tbody.appendChild(tr);
+
+  // ── Member type → ID Name interlock ─────────────────────────────
+  const mtypeSel  = tr.querySelector('.mtype-sel');
+  const idNameInp = tr.querySelector('.idname-inp');
+
+  mtypeSel.addEventListener('change', () => {
+    const isDependent = mtypeSel.value === 'Dependent';
+    idNameInp.disabled    = !isDependent;
+    idNameInp.placeholder = isDependent ? "Principal's name" : '—';
+    idNameInp.style.background  = isDependent ? '' : '#f0f3fa';
+    idNameInp.style.color       = isDependent ? '' : 'var(--muted)';
+    idNameInp.style.cursor      = isDependent ? '' : 'not-allowed';
+    if (!isDependent) idNameInp.value = '';
+  });
+
+  updateEnrollCount();
+  tr.querySelector('input').focus();
+}
+
+function removeEnrolleeRow(btn) {
+  const tr = btn.closest('tr');
+  tr.remove();
+  reNumberEnrollRows();
+  updateEnrollCount();
+}
+
+function reNumberEnrollRows() {
+  document.querySelectorAll('#enrollee-tbody tr[data-erow]').forEach((tr, i) => {
+    tr.querySelector('.row-num').textContent = i + 1;
+  });
+}
+
+function clearAllEnrollees() {
+  if (!confirm('Clear all enrollee rows? This cannot be undone.')) return;
+  document.querySelectorAll('#enrollee-tbody tr[data-erow]').forEach(r => r.remove());
+  enrollRowCount = 0;
+  updateEnrollCount();
+  const empty = document.getElementById('empty-enroll-msg');
+  if (empty) empty.style.display = '';
+}
+
+function submitGroupEnrollment() {
+  const rows = document.querySelectorAll('#enrollee-tbody tr[data-erow]');
+  if (rows.length === 0) {
+    alert('Please add at least one enrollee before submitting.');
+    return;
+  }
+
+  // Validate only required fields (data-req="1"), skip optional ones
+  let firstInvalid = null;
+  rows.forEach(tr => {
+    tr.querySelectorAll('[data-req="1"]').forEach(el => {
+      el.style.borderColor = '';
+      if (!el.value.trim()) {
+        el.style.borderColor = 'var(--danger)';
+        if (!firstInvalid) firstInvalid = el;
+      }
+    });
+  });
+
+  if (firstInvalid) {
+    firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    firstInvalid.focus();
+    alert('Please fill in all required fields (highlighted in red) before submitting.');
+    return;
+  }
+
+  // Placeholder — replace with your actual submission logic (e.g. enroll.js handler)
+  alert(`Group enrollment submitted for ${rows.length} enrollee(s)!\n\nPlan: ${selectedGroupPlan.name}\nPayment: ${selectedGroupPlan.period}`);
+}
+
+// Auto-open Group enrollment table when the Group plans modal opens
+document.getElementById('groupEnrollModal').addEventListener('show.bs.modal', () => {
+  // Reset table each time it's opened fresh (optional — remove if persistence preferred)
+  // updateEnrollCount() just refreshes count display
+  updateEnrollCount();
+});
+
+// Row slide-in animation
+const rowStyle = document.createElement('style');
+rowStyle.textContent = `
+  @keyframes rowSlideIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+`;
+document.head.appendChild(rowStyle);
 
 buildPlanModals();
 </script>
