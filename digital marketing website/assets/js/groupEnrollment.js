@@ -92,9 +92,9 @@ const GROUP_FORM_CONFIG = {
     amaphilId:        "entry.XXXXXXXXXX",   // AMAPHIL ID (optional)
 
     // ── Auto-filled by the system ─────────────────────────────
-    planType:         "entry.XXXXXXXXXX",   // "Group" — set automatically
-    status:           "entry.XXXXXXXXXX",   // "Pending" — set automatically
-    paymentPeriod:    "entry.XXXXXXXXXX",   // e.g. "Quarterly" — from plan selection
+    // planType:         "entry.XXXXXXXXXX",   // "Group" — set automatically
+    // status:           "entry.XXXXXXXXXX",   // "Pending" — set automatically
+    // paymentPeriod:    "entry.XXXXXXXXXX",   // e.g. "Quarterly" — from plan selection
   }
 };
 
@@ -162,9 +162,9 @@ function buildParams(enrolleeData, planInfo) {
   const params = new URLSearchParams();
 
   const mapping = {
-    [f.planType]:       'Group',
-    [f.status]:         'Pending',
-    [f.paymentPeriod]:  planInfo.period || '',
+    // [f.planType]:       'Group',
+    // [f.status]:         'Pending',
+    // [f.paymentPeriod]:  planInfo.period || '',
 
     [f.employeeId]:     enrolleeData.employeeId,
     [f.lastName]:       enrolleeData.lastName,
