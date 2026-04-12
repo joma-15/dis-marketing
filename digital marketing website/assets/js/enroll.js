@@ -344,7 +344,7 @@ async function sendData() {
 
   btn.addEventListener("click", async () => {
     const data = JSON.parse(localStorage.getItem("data"));
-    const dependents = JSON.parse(localStorage.getItem("dependentsData"));
+    // const dependents = JSON.parse(localStorage.getItem("dependentsData"));
     console.log("the function is being triggered");
 
     if (!data) {
