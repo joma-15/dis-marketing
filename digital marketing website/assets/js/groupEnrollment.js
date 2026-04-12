@@ -51,7 +51,7 @@ const GROUP_FORM_CONFIG = {
    * Example:
    *   "https://docs.google.com/forms/u/0/d/e/1FAIpQLSXXXXXX/formResponse"
    */
-  url: "https://docs.google.com/forms/u/5/d/e/1FAIpQLSeiNAHp9jUA299kf-hRvvNh2_UO7p2jhV-lfipSqb9G2i5bQQ/formResponse",
+  url: "https://docs.google.com/forms/u/5/d/e/1FAIpQLSeiNAHp9jUA299kf-hRvvNh2_UO7p2jhV-lfipSqb9G2i5bQQ/formResponse?",
 
   fields: {
     // ── Identity ──────────────────────────────────────────────
