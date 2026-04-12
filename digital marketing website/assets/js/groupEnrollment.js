@@ -21,7 +21,7 @@
  *  6  Nickname           (optional)
  *  7  Birth Year         (required)
  *  8  Birth Month        (required)
- *  9  Birth Day          (required)
+ *  9  Birth Day          (required)a
  * 10  Gender             (required)
  * 11  Civil Status       (required)
  * 12  Nationality        (required)
@@ -42,7 +42,6 @@
  * 27  Delete btn         (skipped)
  * ───────────────────────────────────────────────────────────────
  */
-
 // ══════════════════════════════════════════════════════════════
 //  CONFIGURATION  ← fill in your real entry IDs & form URL
 // ══════════════════════════════════════════════════════════════
@@ -52,49 +51,54 @@ const GROUP_FORM_CONFIG = {
    * Example:
    *   "https://docs.google.com/forms/u/0/d/e/1FAIpQLSXXXXXX/formResponse"
    */
-  url: "PASTE_YOUR_FORM_RESPONSE_URL_HERE",
+  url: "https://docs.google.com/forms/u/5/d/e/1FAIpQLSeiNAHp9jUA299kf-hRvvNh2_UO7p2jhV-lfipSqb9G2i5bQQ/formResponse",
 
   fields: {
     // ── Identity ──────────────────────────────────────────────
-    employeeId:       "entry.XXXXXXXXXX",   // Employee ID (optional)
-    lastName:         "entry.XXXXXXXXXX",   // Last Name
-    givenName:        "entry.XXXXXXXXXX",   // Given Name
-    middleName:       "entry.XXXXXXXXXX",   // Middle Name (optional)
-    suffix:           "entry.XXXXXXXXXX",   // Suffix (optional)
-    nickname:         "entry.XXXXXXXXXX",   // Nickname (optional)
+    employeeId:       "entry.566583630",   // Employee ID (optional)
+    lastName:         "entry.2104810968",   // Last Name
+    givenName:        "entry.61662416",   // Given Name
+    middleName:       "entry.1344256124",   // Middle Name (optional)
+    suffix:           "entry.1594710087",   // Suffix (optional)
+    nickname:         "entry.545619272",   // Nickname (optional)
 
     // ── Birthdate (three separate fields) ─────────────────────
-    birthYear:        "entry.XXXXXXXXXX",   // Birth Year
-    birthMonth:       "entry.XXXXXXXXXX",   // Birth Month
-    birthDay:         "entry.XXXXXXXXXX",   // Birth Day
+    birthYear:        "entry.148491576",   // Birth Year
+    birthMonth:       "entry.2009841461",   // Birth Month
+    birthDay:         "entry.1974754067",   // Birth Day
 
     // ── Personal info ─────────────────────────────────────────
-    gender:           "entry.XXXXXXXXXX",   // Gender
-    civilStatus:      "entry.XXXXXXXXXX",   // Civil Status
-    nationality:      "entry.XXXXXXXXXX",   // Nationality
-    philhealth:       "entry.XXXXXXXXXX",   // PhilHealth (Yes/No)
-    philhealthId:     "entry.XXXXXXXXXX",   // PhilHealth ID
-    phoneNumber:      "entry.XXXXXXXXXX",   // Phone Number
+    gender:           "entry.1287314341",   // Gender
+    civilStatus:      "entry.1672467287",   // Civil Status
+    nationality:      "entry.780917338",   // Nationality
+    philhealth:       "entry.394490036",   // PhilHealth (Yes/No)
+    philhealthId:     "entry.1451559032",   // PhilHealth ID
+    phoneNumber:      "entry.1477993387",   // Phone Number
 
     // ── Employment ────────────────────────────────────────────
-    department:       "entry.XXXXXXXXXX",   // Department (optional)
-    resignation:      "entry.XXXXXXXXXX",   // Resignation status
-    employmentDate:   "entry.XXXXXXXXXX",   // Employment Date
+    department:       "entry.268001845",   // Department (optional)
+    designation:      "entry.8030478",   // Resignation status
+    employmentDate:   "entry.909570184",   // Employment Date
 
     // ── Plan & membership ─────────────────────────────────────
-    plan:             "entry.XXXXXXXXXX",   // Plan name
-    memberType:       "entry.XXXXXXXXXX",   // Principal / Dependent
-    idName:           "entry.XXXXXXXXXX",   // ID Name (dependent only)
-    activationDate:   "entry.XXXXXXXXXX",   // Activation Date (optional)
-    email:            "entry.XXXXXXXXXX",   // Email
-    expirationDate:   "entry.XXXXXXXXXX",   // Expiration Date (optional)
-    remarks:          "entry.XXXXXXXXXX",   // Remarks (optional)
-    amaphilId:        "entry.XXXXXXXXXX",   // AMAPHIL ID (optional)
+    plan:             "entry.1673750224",   // Plan name
+    memberType:       "entry.174718140",   // Principal / Dependent
+    idName:           "entry.1636130502",   // ID Name (dependent only)
+    // activationDate:   "entry.1926969263",   // Activation Date (optional)
+    email:            "entry.928296627",   // Email
+    // expirationDate:   "entry.634119965",   // Expiration Date (optional)
+    remarks:          "entry.334521893",   // Remarks (optional)
+    amaphilId:        "entry.1182240530",   // AMAPHIL ID (optional)
 
-    // ── Auto-filled by the system ─────────────────────────────
-    // planType:         "entry.XXXXXXXXXX",   // "Group" — set automatically
-    // status:           "entry.XXXXXXXXXX",   // "Pending" — set automatically
-    // paymentPeriod:    "entry.XXXXXXXXXX",   // e.g. "Quarterly" — from plan selection
+    //activation date 
+    //year
+    //month 
+    //day 
+
+    //expiration date
+    //year
+    //month 
+    //day
   }
 };
 
@@ -108,13 +112,7 @@ const GROUP_FORM_CONFIG = {
  * Returns an array of trimmed string values (index 0 = row number cell,
  * index 1 = Employee ID, …, index 27 = delete button — skip those).
  */
-function extractRowValues(tr) {
-  const cells = tr.querySelectorAll('td');
-  return Array.from(cells).map(td => {
-    const inp = td.querySelector('input, select, textarea');
-    return inp ? inp.value.trim() : '';
-  });
-}
+
 
 /**
  * Map a row's cell values to a named data object.
@@ -140,7 +138,7 @@ function rowToData(tr) {
     philhealthId:   v[14] || '',
     phoneNumber:    v[15] || '',
     department:     v[16] || '',   // optional
-    resignation:    v[17] || '',
+    designation:    v[17] || '',
     employmentDate: v[18] || '',
     plan:           v[19] || '',
     memberType:     v[20] || '',
@@ -162,9 +160,6 @@ function buildParams(enrolleeData, planInfo) {
   const params = new URLSearchParams();
 
   const mapping = {
-    // [f.planType]:       'Group',
-    // [f.status]:         'Pending',
-    // [f.paymentPeriod]:  planInfo.period || '',
 
     [f.employeeId]:     enrolleeData.employeeId,
     [f.lastName]:       enrolleeData.lastName,
@@ -185,7 +180,7 @@ function buildParams(enrolleeData, planInfo) {
     [f.phoneNumber]:    enrolleeData.phoneNumber,
 
     [f.department]:     enrolleeData.department,
-    [f.resignation]:    enrolleeData.resignation,
+    [f.designation]:    enrolleeData.designation,
     [f.employmentDate]: enrolleeData.employmentDate,
 
     [f.plan]:           enrolleeData.plan || planInfo.name || '',
@@ -279,10 +274,10 @@ async function submitGroupEnrollment(planInfo) {
   }
 
   // ── Guard: form URL configured ────────────────────────────
-  if (GROUP_FORM_CONFIG.url === 'PASTE_YOUR_FORM_RESPONSE_URL_HERE') {
-    alert('Google Form URL is not configured yet.\nOpen group-enroll.js and set GROUP_FORM_CONFIG.url.');
-    return;
-  }
+  if (!GROUP_FORM_CONFIG.url || !GROUP_FORM_CONFIG.url.includes("formResponse")) {
+  alert('Invalid Google Form URL.');
+  return;
+}
 
   // ── Lock the submit button ─────────────────────────────────
   const submitBtn = document.getElementById('group-submit-btn');
@@ -399,3 +394,6 @@ function showToast(message, type = 'success') {
 // this file with a plain <script src="...">, not as ES module.
 window.submitGroupEnrollment = submitGroupEnrollment;
 window.showToast             = showToast;
+
+
+
