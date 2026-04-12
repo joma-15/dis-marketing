@@ -21,7 +21,7 @@
  *  6  Nickname           (optional)
  *  7  Birth Year         (required)
  *  8  Birth Month        (required)
- *  9  Birth Day          (required)
+ *  9  Birth Day          (required)a
  * 10  Gender             (required)
  * 11  Civil Status       (required)
  * 12  Nationality        (required)
@@ -84,11 +84,26 @@ const GROUP_FORM_CONFIG = {
     plan:             "entry.1673750224",   // Plan name
     memberType:       "entry.174718140",   // Principal / Dependent
     idName:           "entry.1636130502",   // ID Name (dependent only)
-    activationDate:   "entry.1926969263",   // Activation Date (optional)
+    // activationDate:   "entry.1926969263",   // Activation Date (optional)
     email:            "entry.928296627",   // Email
-    expirationDate:   "entry.634119965",   // Expiration Date (optional)
+    // expirationDate:   "entry.634119965",   // Expiration Date (optional)
     remarks:          "entry.334521893",   // Remarks (optional)
     amaphilId:        "entry.1182240530",   // AMAPHIL ID (optional)
+
+    //activation date 
+    activationDate_year:   "entry.1926969263_year",//year
+    activationDate_month:   "entry.1926969263_month",//month 
+    activationDate_day:   "entry.1926969263_day",//day 
+
+    //expiration date
+    expirationDate_year:   "entry.634119965_year",//year
+    expirationDate_month:   "entry.634119965_month",//month 
+    expirationDate_day:   "entry.634119965_day",//day\
+
+    //employmentDate
+    employmentDate_year:   "entry.909570184_year",//year
+    employmentDate_month:   "entry.909570184_month",//month
+    employmentDate_day:   "entry.909570184_day",//day
   }
 };
 
@@ -102,13 +117,7 @@ const GROUP_FORM_CONFIG = {
  * Returns an array of trimmed string values (index 0 = row number cell,
  * index 1 = Employee ID, …, index 27 = delete button — skip those).
  */
-function extractRowValues(tr) {
-  const cells = tr.querySelectorAll('td');
-  return Array.from(cells).map(td => {
-    const inp = td.querySelector('input, select, textarea');
-    return inp ? inp.value.trim() : '';
-  });
-}
+
 
 /**
  * Map a row's cell values to a named data object.
@@ -134,7 +143,7 @@ function rowToData(tr) {
     philhealthId:   v[14] || '',
     phoneNumber:    v[15] || '',
     department:     v[16] || '',   // optional
-    resignation:    v[17] || '',
+    designation:    v[17] || '',
     employmentDate: v[18] || '',
     plan:           v[19] || '',
     memberType:     v[20] || '',
@@ -176,7 +185,7 @@ function buildParams(enrolleeData, planInfo) {
     [f.phoneNumber]:    enrolleeData.phoneNumber,
 
     [f.department]:     enrolleeData.department,
-    [f.resignation]:    enrolleeData.resignation,
+    [f.designation]:    enrolleeData.designation,
     [f.employmentDate]: enrolleeData.employmentDate,
 
     [f.plan]:           enrolleeData.plan || planInfo.name || '',
@@ -270,10 +279,10 @@ async function submitGroupEnrollment(planInfo) {
   }
 
   // ── Guard: form URL configured ────────────────────────────
-  if (GROUP_FORM_CONFIG.url === 'https://docs.google.com/forms/u/5/d/e/1FAIpQLSeiNAHp9jUA299kf-hRvvNh2_UO7p2jhV-lfipSqb9G2i5bQQ/formResponse') {
-    alert('Google Form URL is not configured yet.\nOpen group-enroll.js and set GROUP_FORM_CONFIG.url.');
-    return;
-  }
+  if (!GROUP_FORM_CONFIG.url || !GROUP_FORM_CONFIG.url.includes("formResponse")) {
+  alert('Invalid Google Form URL.');
+  return;
+}
 
   // ── Lock the submit button ─────────────────────────────────
   const submitBtn = document.getElementById('group-submit-btn');
@@ -390,3 +399,6 @@ function showToast(message, type = 'success') {
 // this file with a plain <script src="...">, not as ES module.
 window.submitGroupEnrollment = submitGroupEnrollment;
 window.showToast             = showToast;
+
+
+
