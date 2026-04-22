@@ -192,7 +192,6 @@
     .form-label { font-weight: 600; font-size: 0.88rem; color: var(--navy); margin-bottom: 6px; }
     .form-check-input:checked { background-color: var(--orange); border-color: var(--orange); }
 
-    /* ── Family Members Section ── */
     .members-section { background: #f0f3fa; border-radius: 14px; padding: 18px; border: 1.5px dashed var(--border); }
     .members-section-title { font-weight: 800; font-size: 0.9rem; color: var(--navy); display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
     .members-section-title i { color: var(--orange); }
@@ -205,252 +204,127 @@
     .btn-remove-dependent:hover { background: #ffeaea; }
     .dependent-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
 
-    /* ═══════════════════════════════════════════════════════
-       GROUP ENROLLMENT MODAL — Excel-style table
-    ═══════════════════════════════════════════════════════ */
-    #groupEnrollModal .modal-dialog { max-width: 1100px; }
-
-    .group-plan-banner {
-      background: var(--accent-light);
-      border-bottom: 2px solid rgba(244,121,32,0.25);
-      padding: 12px 24px;
+    /* ── Age Warning Banner ── */
+    #age-warning-banner {
+      display: none;
+      background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+      border: 2px solid #f47920;
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin-bottom: 16px;
+      animation: warnPulse 0.4s ease;
+    }
+    @keyframes warnPulse {
+      0%   { transform: scale(0.97); opacity: 0; }
+      60%  { transform: scale(1.01); }
+      100% { transform: scale(1);    opacity: 1; }
+    }
+    .age-warn-title {
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: #b34d00;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .age-warn-title i { color: var(--orange); font-size: 1rem; }
+    .age-warn-body {
+      font-size: 0.84rem;
+      color: #7a3800;
+      line-height: 1.55;
+    }
+    .age-warn-suggest {
+      margin-top: 10px;
+      background: var(--navy);
+      color: white;
+      border-radius: 8px;
+      padding: 10px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
       gap: 10px;
+      flex-wrap: wrap;
     }
+    .age-warn-suggest span { font-size: 0.82rem; font-weight: 600; }
+    .btn-switch-plan {
+      background: var(--orange);
+      border: none;
+      color: white;
+      font-weight: 700;
+      font-size: 0.8rem;
+      border-radius: 8px;
+      padding: 7px 16px;
+      cursor: pointer;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: all 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .btn-switch-plan:hover { background: var(--accent-dark); transform: translateY(-1px); }
+
+    /* ── Age indicator chip on bday field ── */
+    #age-chip {
+      display: none;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 50px;
+      margin-top: 6px;
+      width: fit-content;
+    }
+    #age-chip.ok   { background: #e6f7ee; color: #1a7a46; border: 1.5px solid #a8dfc0; }
+    #age-chip.warn { background: #fff0e0; color: #b34d00; border: 1.5px solid #f4b27a; }
+    #age-chip.over { background: #ffeaea; color: #c0392b; border: 1.5px solid #f4a0a0; }
+
+    /* ── Group Modal ── */
+    #groupEnrollModal .modal-dialog { max-width: 1100px; }
+    .group-plan-banner { background: var(--accent-light); border-bottom: 2px solid rgba(244,121,32,0.25); padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
     .group-plan-banner .banner-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
     .group-plan-tag { background: var(--navy); color: white; font-size: 0.72rem; font-weight: 700; padding: 4px 13px; border-radius: 50px; letter-spacing: 0.5px; }
     .group-plan-detail { font-size: 0.82rem; color: #8a5520; font-weight: 500; }
     .group-plan-price { font-size: 1.15rem; font-weight: 800; color: var(--orange); }
-
-    #groupEnrollModal .modal-body {
-      background: #f0f3fa;
-      padding: 20px 24px;
-      max-height: 72vh;
-      overflow-y: auto;
-    }
+    #groupEnrollModal .modal-body { background: #f0f3fa; padding: 20px 24px; max-height: 72vh; overflow-y: auto; }
     #groupEnrollModal .modal-body::-webkit-scrollbar { width: 6px; }
     #groupEnrollModal .modal-body::-webkit-scrollbar-track { background: #dde3f0; border-radius: 3px; }
     #groupEnrollModal .modal-body::-webkit-scrollbar-thumb { background: var(--primary-mid); border-radius: 3px; }
-
-    /* Toolbar */
-    .enroll-toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .enroll-toolbar-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .enrollee-count-badge {
-      background: var(--navy);
-      color: white;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 4px 12px;
-      border-radius: 50px;
-    }
-    .enroll-toolbar-hint {
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
+    .enroll-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+    .enroll-toolbar-left { display: flex; align-items: center; gap: 10px; }
+    .enrollee-count-badge { background: var(--navy); color: white; font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 50px; }
+    .enroll-toolbar-hint { font-size: 0.78rem; color: var(--muted); }
     .enroll-toolbar-right { display: flex; gap: 8px; }
-
-    .btn-enroll-add {
-      background: linear-gradient(135deg, var(--orange), var(--accent-dark));
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 8px 16px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .btn-enroll-add:hover {
-      background: linear-gradient(135deg, #e06a10, #bf550a);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 14px rgba(244,121,32,0.4);
-    }
-
-    .btn-enroll-clear {
-      background: white;
-      border: 2px solid var(--border);
-      color: var(--muted);
-      border-radius: 8px;
-      padding: 8px 14px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .btn-enroll-clear:hover {
-      border-color: var(--danger);
-      color: var(--danger);
-      background: #fff5f5;
-    }
-
-    /* Table wrapper */
-    .enroll-table-wrap {
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1.5px solid var(--border);
-      box-shadow: 0 4px 16px rgba(15,30,61,0.08);
-    }
-
-    .enroll-table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 860px;
-      font-size: 0.8rem;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-
-    /* Thead */
-    .enroll-table thead tr {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--primary-mid) 100%);
-    }
-    .enroll-table thead th {
-      color: rgba(255,255,255,0.9);
-      font-weight: 700;
-      font-size: 0.72rem;
-      padding: 11px 10px;
-      text-align: left;
-      border-right: 1px solid rgba(255,255,255,0.1);
-      white-space: nowrap;
-      letter-spacing: 0.3px;
-    }
+    .btn-enroll-add { background: linear-gradient(135deg, var(--orange), var(--accent-dark)); color: white; border: none; border-radius: 8px; padding: 8px 16px; font-size: 0.82rem; font-weight: 700; font-family: 'Plus Jakarta Sans', sans-serif; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+    .btn-enroll-add:hover { background: linear-gradient(135deg, #e06a10, #bf550a); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(244,121,32,0.4); }
+    .btn-enroll-clear { background: white; border: 2px solid var(--border); color: var(--muted); border-radius: 8px; padding: 8px 14px; font-size: 0.82rem; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif; cursor: pointer; transition: all 0.2s; }
+    .btn-enroll-clear:hover { border-color: var(--danger); color: var(--danger); background: #fff5f5; }
+    .enroll-table-wrap { border-radius: 14px; overflow: hidden; border: 1.5px solid var(--border); box-shadow: 0 4px 16px rgba(15,30,61,0.08); }
+    .enroll-table { width: 100%; border-collapse: collapse; min-width: 860px; font-size: 0.8rem; font-family: 'Plus Jakarta Sans', sans-serif; }
+    .enroll-table thead tr { background: linear-gradient(135deg, var(--navy) 0%, var(--primary-mid) 100%); }
+    .enroll-table thead th { color: rgba(255,255,255,0.9); font-weight: 700; font-size: 0.72rem; padding: 11px 10px; text-align: left; border-right: 1px solid rgba(255,255,255,0.1); white-space: nowrap; letter-spacing: 0.3px; }
     .enroll-table thead th:last-child { border-right: none; text-align: center; }
     .enroll-table thead th .th-icon { color: var(--orange); margin-right: 5px; font-size: 0.68rem; }
-
-    /* Col widths — updated field set */
-    .col-no       { width: 36px; }
-    .col-empid    { width: 88px; }
-    .col-last     { width: 105px; }
-    .col-first    { width: 105px; }
-    .col-mid      { width: 90px; }
-    .col-suffix   { width: 68px; }
-    .col-nick     { width: 80px; }
-    .col-byear    { width: 72px; }
-    .col-bmon     { width: 90px; }
-    .col-bday2    { width: 64px; }
-    .col-gen      { width: 78px; }
-    .col-civil    { width: 90px; }
-    .col-nat      { width: 90px; }
-    .col-ph       { width: 82px; }
-    .col-phid     { width: 105px; }
-    .col-phone    { width: 110px; }
-    .col-dept     { width: 95px; }
-    .col-resign   { width: 95px; }
-    .col-empdate  { width: 105px; }
-    .col-plan     { width: 90px; }
-    .col-mtype    { width: 95px; }
-    .col-idname   { width: 110px; }
-    .col-actdate  { width: 105px; }
-    .col-email    { width: 140px; }
-    .col-expdate  { width: 105px; }
-    .col-remarks  { width: 110px; }
-    .col-amaid    { width: 105px; }
-    .col-act      { width: 40px; }
-
-    /* Tbody rows */
-    .enroll-table tbody tr {
-      border-bottom: 1px solid var(--border);
-      transition: background 0.15s;
-    }
+    .col-no{width:36px}.col-empid{width:88px}.col-last{width:105px}.col-first{width:105px}.col-mid{width:90px}.col-suffix{width:68px}.col-nick{width:80px}.col-byear{width:72px}.col-bmon{width:90px}.col-bday2{width:64px}.col-gen{width:78px}.col-civil{width:90px}.col-nat{width:90px}.col-ph{width:82px}.col-phid{width:105px}.col-phone{width:110px}.col-dept{width:95px}.col-resign{width:95px}.col-empdate{width:105px}.col-plan{width:90px}.col-mtype{width:95px}.col-idname{width:110px}.col-actdate{width:105px}.col-email{width:140px}.col-expdate{width:105px}.col-remarks{width:110px}.col-amaid{width:105px}.col-act{width:40px}
+    .enroll-table tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
     .enroll-table tbody tr:last-child { border-bottom: none; }
-    .enroll-table tbody tr:nth-child(odd)  { background: white; }
+    .enroll-table tbody tr:nth-child(odd) { background: white; }
     .enroll-table tbody tr:nth-child(even) { background: #f8f9fd; }
     .enroll-table tbody tr:hover { background: var(--accent-light); }
-
-    .row-num {
-      text-align: center;
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: var(--orange);
-      padding: 0 4px;
-      user-select: none;
-    }
-
+    .row-num { text-align: center; font-size: 0.7rem; font-weight: 700; color: var(--orange); padding: 0 4px; user-select: none; }
     .enroll-table td { padding: 4px 5px; vertical-align: middle; }
-
-    /* Cell inputs */
-    .cell-inp {
-      width: 100%;
-      background: transparent;
-      border: 1.5px solid transparent;
-      border-radius: 6px;
-      padding: 5px 7px;
-      font-size: 0.79rem;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      color: var(--text);
-      outline: none;
-      transition: all 0.15s;
-    }
+    .cell-inp { width: 100%; background: transparent; border: 1.5px solid transparent; border-radius: 6px; padding: 5px 7px; font-size: 0.79rem; font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); outline: none; transition: all 0.15s; }
     .cell-inp:hover { border-color: var(--border); background: white; }
     .cell-inp:focus { border-color: var(--orange); background: white; box-shadow: 0 0 0 3px rgba(244,121,32,0.12); }
     .cell-inp::placeholder { color: var(--muted); font-size: 0.75rem; opacity: 0.7; }
     select.cell-inp { cursor: pointer; -webkit-appearance: auto; }
-    select.cell-inp option { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); background: white; }
-
-    /* Delete row btn */
-    .btn-del-row {
-      background: none;
-      border: none;
-      color: #c8cedf;
-      font-size: 0.8rem;
-      cursor: pointer;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto;
-      transition: all 0.15s;
-    }
+    .btn-del-row { background: none; border: none; color: #c8cedf; font-size: 0.8rem; cursor: pointer; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; transition: all 0.15s; }
     .btn-del-row:hover { background: #ffeaea; color: var(--danger); }
-
-    /* Empty state row */
-    .empty-enroll-row td {
-      text-align: center;
-      padding: 40px 20px;
-      color: var(--muted);
-    }
-    .empty-enroll-icon {
-      font-size: 2.4rem;
-      color: #c8cedf;
-      margin-bottom: 10px;
-    }
+    .empty-enroll-row td { text-align: center; padding: 40px 20px; color: var(--muted); }
+    .empty-enroll-icon { font-size: 2.4rem; color: #c8cedf; margin-bottom: 10px; }
     .empty-enroll-text { font-size: 0.88rem; font-weight: 600; color: var(--muted); }
-    .empty-enroll-sub  { font-size: 0.77rem; color: #a0acc8; margin-top: 4px; }
-
-    /* Table footer bar */
-    .enroll-table-foot {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--primary-mid) 100%);
-      padding: 9px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
+    .empty-enroll-sub { font-size: 0.77rem; color: #a0acc8; margin-top: 4px; }
+    .enroll-table-foot { background: linear-gradient(135deg, var(--navy) 0%, var(--primary-mid) 100%); padding: 9px 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
     .enroll-table-foot span { font-size: 0.76rem; color: rgba(255,255,255,0.7); }
     .enroll-table-foot .foot-count { color: white; font-weight: 700; }
-
-    /* Modal footer */
     #groupEnrollModal .modal-footer { border-top: 1.5px solid var(--border); background: white; padding: 14px 24px; }
     .group-footer-note { font-size: 0.78rem; color: var(--muted); display: flex; align-items: center; gap: 6px; }
     .group-footer-note i { color: var(--orange); }
@@ -533,8 +407,22 @@ const PLAN_DATA = {
     { tier: 'Family Plan', name: 'Family Guard Plan', room: '', quarterly: '1,500', semi: '3,600', annual: '7,200' },
   ],
   Senior: [
-    { tier: 'Senior Plan', name: 'Kaagapay Emergency Access Plan', room: '1,499', quarterly: '3,340', semi: '6,240',  annual: '12,000' },
-    { tier: 'Senior Plan', name: 'Kaagapay Emergency Access Plan', room: '1,599', quarterly: '3,402', semi: '6,678',  annual: '12,600' },
+    {
+      tier: 'Senior Plan',
+      name: 'Kaagapay Emergency Access Plan',
+      room: '1,499',
+      quarterly: '3,340', semi: '6,240', annual: '12,000',
+      // Age restriction: only ages 0–59
+      ageMin: 0, ageMax: 59,
+      upgradeTo: '1,599'  // name of sibling plan to suggest
+    },
+    {
+      tier: 'Senior Plan',
+      name: 'Kaagapay Emergency Access Plan',
+      room: '1,599',
+      quarterly: '3,402', semi: '6,678', annual: '12,600',
+      ageMin: 0, ageMax: 999  // no upper restriction
+    },
   ],
   Group: [
     { tier: 'Group Plan', name: 'Bureau Health Plan', room: '', quarterly: '1,800', semi: '3,600', annual: '7,200' },
@@ -552,13 +440,17 @@ const BENEFITS = [
 
 let currentPlanType  = '';
 let selectedGroupPlan = { name: '', period: '', price: '' };
+
+// ── Tracks the selected senior plan's age limits ──────────────────
+let selectedSeniorAgeMax = 999; // default = no restriction
+let selectedSeniorUpgradeTo = null;
 </script>
 
 <!-- Plan modal container -->
 <div id="plan-modals-container"></div>
 
 <!-- ═══════════════════════════════════════════
-     MODAL: Confirmation (Individual / Family / Senior)
+     MODAL: Confirmation
 ═══════════════════════════════════════════ -->
 <div class="modal fade" id="modernConfirmationModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
   <div class="modal-dialog modal-dialog-centered">
@@ -636,7 +528,7 @@ let selectedGroupPlan = { name: '', period: '', price: '' };
 </div>
 
 <!-- ═══════════════════════════════════════════
-     MODAL: Client Details (Individual / Family / Senior)
+     MODAL: Client Details
 ═══════════════════════════════════════════ -->
 <div class="modal fade" id="clientDetailsModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
   <div class="modal-dialog modal-dialog-centered">
@@ -646,6 +538,31 @@ let selectedGroupPlan = { name: '', period: '', price: '' };
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body p-4" style="max-height:70vh;overflow-y:auto;">
+
+        <!-- ══ AGE WARNING BANNER (Senior only) ══ -->
+        <div id="age-warning-banner">
+          <div class="age-warn-title">
+            <i class="fa fa-triangle-exclamation"></i>
+            Age Restriction Notice
+          </div>
+          <div class="age-warn-body" id="age-warn-text">
+            Based on your birthdate, you are <strong id="age-warn-years">—</strong> years old.
+            The <strong>Kaagapay Emergency Access Plan ₱1,499</strong> is only available for
+            individuals <strong>59 years old and below</strong>.
+          </div>
+          <div class="age-warn-suggest">
+            <span>
+              <i class="fa fa-arrow-right me-1" style="color:var(--orange)"></i>
+              We recommend switching to the
+              <strong style="color:white"> ₱1,599 Plan</strong>
+              which covers all ages.
+            </span>
+            <button class="btn-switch-plan" id="btn-switch-senior-plan">
+              <i class="fa fa-rotate me-1"></i>Switch to ₱1,599 Plan
+            </button>
+          </div>
+        </div>
+
         <form id="clientForm">
           <div id="principalSection">
             <div id="principalLabel" class="members-section-title mb-3" style="display:none;">
@@ -659,10 +576,14 @@ let selectedGroupPlan = { name: '', period: '', price: '' };
                 <div class="col-md-2"><input type="text" class="form-control" placeholder="M.I." id="MiddleName" maxlength="1" /></div>
               </div>
             </div>
+
+            <!-- Birthdate with age chip -->
             <div class="mb-3">
               <label class="form-label">Birthdate</label>
               <input type="date" class="form-control" id="bday" required />
+              <div id="age-chip"></div>
             </div>
+
             <div class="mb-3">
               <label class="form-label">Address</label>
               <textarea class="form-control" rows="2" placeholder="Complete Address" id="address" required></textarea>
@@ -720,14 +641,10 @@ let selectedGroupPlan = { name: '', period: '', price: '' };
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     MODAL: Group Enrollment — Excel-style table
-═══════════════════════════════════════════ -->
+<!-- Group Enrollment Modal (unchanged) -->
 <div class="modal fade" id="groupEnrollModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
   <div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content">
-
-      <!-- Header -->
       <div class="modal-header">
         <h5 class="modal-title">
           <i class="fa fa-building me-2"></i>Group Enrollment Form
@@ -737,8 +654,6 @@ let selectedGroupPlan = { name: '', period: '', price: '' };
         </h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
-
-      <!-- Plan banner -->
       <div class="group-plan-banner">
         <div class="banner-left">
           <span class="group-plan-tag"><i class="fa fa-building me-1"></i>Group Plan</span>
@@ -746,36 +661,23 @@ let selectedGroupPlan = { name: '', period: '', price: '' };
         </div>
         <span class="group-plan-price" id="group-banner-price">₱7,200 / year per head</span>
       </div>
-
-      <!-- Body -->
       <div class="modal-body">
-
-        <!-- Toolbar -->
         <div class="enroll-toolbar">
           <div class="enroll-toolbar-left">
-            <span class="enrollee-count-badge">
-              <i class="fa fa-users me-1"></i>
-              <span id="enroll-count-num">0</span> enrollee(s)
-            </span>
+            <span class="enrollee-count-badge"><i class="fa fa-users me-1"></i><span id="enroll-count-num">0</span> enrollee(s)</span>
             <span class="enroll-toolbar-hint">Click a cell to edit • Tab to move between fields</span>
           </div>
           <div class="enroll-toolbar-right">
-            <button class="btn-enroll-clear" onclick="clearAllEnrollees()">
-              <i class="fa fa-trash-can me-1"></i>Clear all
-            </button>
-            <button class="btn-enroll-add" onclick="addEnrolleeRow()">
-              <i class="fa fa-plus"></i> Add enrollee
-            </button>
+            <button class="btn-enroll-clear" onclick="clearAllEnrollees()"><i class="fa fa-trash-can me-1"></i>Clear all</button>
+            <button class="btn-enroll-add" onclick="addEnrolleeRow()"><i class="fa fa-plus"></i> Add enrollee</button>
           </div>
         </div>
-
-        <!-- Table -->
         <div class="enroll-table-wrap">
           <div style="overflow-x:auto;">
             <table class="enroll-table">
               <thead>
                 <tr>
-                  <th class="col-no"  style="text-align:center;">#</th>
+                  <th class="col-no" style="text-align:center;">#</th>
                   <th class="col-empid"><i class="fa fa-id-badge th-icon"></i>Emp. ID <span style="opacity:0.55;font-weight:400">(opt)</span></th>
                   <th class="col-last"><i class="fa fa-user th-icon"></i>Last Name</th>
                   <th class="col-first">Given Name</th>
@@ -816,32 +718,18 @@ let selectedGroupPlan = { name: '', period: '', price: '' };
               </tbody>
             </table>
           </div>
-
-          <!-- Table footer bar -->
           <div class="enroll-table-foot">
-            <span>
-              Total enrollees:&nbsp;<span class="foot-count" id="enroll-foot-count">0</span>
-            </span>
+            <span>Total enrollees:&nbsp;<span class="foot-count" id="enroll-foot-count">0</span></span>
             <span>Maximum 200 enrollees per submission</span>
           </div>
         </div>
-
-        <!-- Bottom note -->
         <div class="mt-3 d-flex align-items-start gap-2" style="background:var(--accent-light);border:1.5px solid rgba(244,121,32,0.3);border-radius:10px;padding:12px 14px;">
           <i class="fa fa-circle-info" style="color:var(--orange);margin-top:2px;flex-shrink:0;"></i>
-          <span style="font-size:0.8rem;color:#8a5520;">
-            All enrollees share the same plan and payment period. Pre-existing conditions declared here may affect individual coverage terms. Ensure all birthdates and names match valid government IDs.
-          </span>
+          <span style="font-size:0.8rem;color:#8a5520;">All enrollees share the same plan and payment period. Pre-existing conditions declared here may affect individual coverage terms. Ensure all birthdates and names match valid government IDs.</span>
         </div>
-
-      </div><!-- end modal-body -->
-
-      <!-- Footer -->
+      </div>
       <div class="modal-footer d-flex align-items-center justify-content-between flex-wrap gap-2">
-        <div class="group-footer-note">
-          <i class="fa fa-shield-halved"></i>
-          Data is kept confidential and used solely for enrollment processing.
-        </div>
+        <div class="group-footer-note"><i class="fa fa-shield-halved"></i>Data is kept confidential and used solely for enrollment processing.</div>
         <div class="d-flex gap-2">
           <button class="btn-cancel-custom btn" data-bs-dismiss="modal">Cancel</button>
           <button class="btn-proceed btn" id="group-submit-btn" onclick="extractGroupEnrollmentData()">
@@ -849,31 +737,16 @@ let selectedGroupPlan = { name: '', period: '', price: '' };
           </button>
         </div>
       </div>
-
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     SCRIPTS
-═══════════════════════════════════════════ -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-const PLAN_ICONS = {
-  Individual: 'fa-user',
-  Family: 'fa-people-roof',
-  Senior: 'fa-heart-pulse',
-  Group: 'fa-building'
-};
+const PLAN_ICONS = { Individual:'fa-user', Family:'fa-people-roof', Senior:'fa-heart-pulse', Group:'fa-building' };
+const PLAN_SUBTITLES = { Individual:'Single coverage · Tailored for you', Family:'Coverage for the whole family', Senior:'Specialized senior care', Group:'Ideal for businesses & organizations' };
 
-const PLAN_SUBTITLES = {
-  Individual: 'Single coverage · Tailored for you',
-  Family: 'Coverage for the whole family',
-  Senior: 'Specialized senior care',
-  Group: 'Ideal for businesses & organizations'
-};
-
-// ── Build all plan modals ──────────────────────────────────────────
+// ── Build plan modals ──────────────────────────────────────────────
 function buildPlanModals() {
   const container = document.getElementById('plan-modals-container');
   let html = '';
@@ -892,12 +765,15 @@ function buildPlanModals() {
         </div>
         <div class="row g-3 mb-1">
       `;
-      tiers[tier].forEach(plan => {
-        const benefits = BENEFITS.map(b => `<li><i class="fa fa-circle-check"></i>${b}</li>`).join('');
-        const isGroup  = planType === 'Group';
-
-        // For Group plans, buttons open groupEnrollModal; others open modernConfirmationModal
+      tiers[tier].forEach((plan, planIdx) => {
+        const benefits  = BENEFITS.map(b => `<li><i class="fa fa-circle-check"></i>${b}</li>`).join('');
+        const isGroup   = planType === 'Group';
         const targetModal = isGroup ? '#groupEnrollModal' : '#modernConfirmationModal';
+
+        // Age restriction attrs (Senior only)
+        const ageAttrs = (plan.ageMax !== undefined)
+          ? `data-age-max="${plan.ageMax}" data-upgrade-to="${plan.upgradeTo || ''}"`
+          : '';
 
         const monthlyBtn = plan.monthly ? `
           <button class="btn-period select-plan-btn"
@@ -905,6 +781,7 @@ function buildPlanModals() {
             data-plan-type="${planType}"
             data-period="Monthly"
             data-price="${plan.monthly}"
+            ${ageAttrs}
             data-bs-toggle="modal" data-bs-target="${targetModal}">
             <span class="period-label">Monthly</span>
             <span class="period-price">₱${plan.monthly}</span>
@@ -914,12 +791,23 @@ function buildPlanModals() {
           ? `<span class="room-badge"><i class="fa fa-bed me-1"></i>${plan.room}</span>`
           : '';
 
+        // Age badge for Senior plans
+        const ageBadge = (plan.ageMax !== undefined && plan.ageMax < 999)
+          ? `<span style="background:rgba(244,121,32,0.18);color:#f47920;font-size:0.7rem;padding:3px 10px;border-radius:50px;border:1px solid rgba(244,121,32,0.4);margin-left:6px;font-weight:700;">
+               <i class="fa fa-user-clock me-1"></i>Ages 0–${plan.ageMax}
+             </span>`
+          : (plan.ageMin !== undefined
+              ? `<span style="background:rgba(15,30,61,0.12);color:#1a3260;font-size:0.7rem;padding:3px 10px;border-radius:50px;border:1px solid rgba(15,30,61,0.2);margin-left:6px;font-weight:700;">
+                   <i class="fa fa-users me-1"></i>All Ages
+                 </span>`
+              : '');
+
         cardsHtml += `
           <div class="col-md-6">
             <div class="plan-card">
               <div class="plan-card-header">
                 <div>
-                  <h6>${plan.name}</h6>
+                  <h6>${plan.name} ${ageBadge}</h6>
                   ${roomBadge}
                 </div>
               </div>
@@ -932,6 +820,7 @@ function buildPlanModals() {
                     data-plan-type="${planType}"
                     data-period="Quarterly"
                     data-price="${plan.quarterly}"
+                    ${ageAttrs}
                     data-bs-toggle="modal" data-bs-target="${targetModal}">
                     <span class="period-label">Quarterly</span>
                     <span class="period-price">₱${plan.quarterly}</span>
@@ -941,6 +830,7 @@ function buildPlanModals() {
                     data-plan-type="${planType}"
                     data-period="Semi-Annually"
                     data-price="${plan.semi}"
+                    ${ageAttrs}
                     data-bs-toggle="modal" data-bs-target="${targetModal}">
                     <span class="period-label">Semi-Annual</span>
                     <span class="period-price">₱${plan.semi}</span>
@@ -950,6 +840,7 @@ function buildPlanModals() {
                     data-plan-type="${planType}"
                     data-period="Annually"
                     data-price="${plan.annual}"
+                    ${ageAttrs}
                     data-bs-toggle="modal" data-bs-target="${targetModal}">
                     <span class="period-label">Annually</span>
                     <span class="period-price">₱${plan.annual}</span>
@@ -989,7 +880,7 @@ function buildPlanModals() {
   bindPlanButtons();
 }
 
-// ── Bind plan selection buttons ────────────────────────────────────
+// ── Bind plan buttons ──────────────────────────────────────────────
 function bindPlanButtons() {
   document.querySelectorAll('.select-plan-btn').forEach(btn => {
     btn.addEventListener('click', e => {
@@ -997,22 +888,18 @@ function bindPlanButtons() {
       currentPlanType = b.dataset.planType;
 
       if (currentPlanType === 'Group') {
-        // Populate the Group enrollment banner
-        selectedGroupPlan = {
-          name:   b.dataset.plan,
-          period: b.dataset.period,
-          price:  b.dataset.price
-        };
-        document.getElementById('group-banner-detail').textContent =
-          `${b.dataset.plan} · Inpatient + Outpatient + APE + Emergency`;
-        document.getElementById('group-banner-price').textContent =
-          `₱${b.dataset.price} / ${b.dataset.period.toLowerCase()} per head`;
+        selectedGroupPlan = { name: b.dataset.plan, period: b.dataset.period, price: b.dataset.price };
+        document.getElementById('group-banner-detail').textContent = `${b.dataset.plan} · Inpatient + Outpatient + APE + Emergency`;
+        document.getElementById('group-banner-price').textContent  = `₱${b.dataset.price} / ${b.dataset.period.toLowerCase()} per head`;
       } else {
-        // Populate confirmation modal for other plan types
         document.getElementById('conf-plan-name').textContent   = b.dataset.plan;
         document.getElementById('conf-plan-type').textContent   = b.dataset.planType;
         document.getElementById('conf-plan-price').textContent  = '₱' + b.dataset.price;
         document.getElementById('conf-plan-period').textContent = b.dataset.period;
+
+        // ── Store age restriction for this plan ──────────────────
+        selectedSeniorAgeMax  = b.dataset.ageMax   ? parseInt(b.dataset.ageMax)  : 999;
+        selectedSeniorUpgradeTo = b.dataset.upgradeTo || null;
 
         const paymentSel = document.getElementById('payment-option');
         paymentSel.innerHTML = '';
@@ -1021,8 +908,7 @@ function bindPlanButtons() {
           : ['Quarterly', 'Semi-Annually', 'Annually'];
         periods.forEach(type => {
           const opt = document.createElement('option');
-          opt.value = type;
-          opt.textContent = type;
+          opt.value = type; opt.textContent = type;
           if (type === b.dataset.period) opt.selected = true;
           paymentSel.appendChild(opt);
         });
@@ -1031,19 +917,127 @@ function bindPlanButtons() {
   });
 }
 
-// ── Toggle Family-specific fields ────────────────────────────────
+// ══════════════════════════════════════════════════════════════════
+//  AGE RESTRICTION LOGIC
+// ══════════════════════════════════════════════════════════════════
+
+/** Calculate age in full years from a date string (YYYY-MM-DD). */
+function calcAge(birthdateStr) {
+  if (!birthdateStr) return null;
+  const today = new Date();
+  const bday  = new Date(birthdateStr);
+  if (isNaN(bday)) return null;
+  let age = today.getFullYear() - bday.getFullYear();
+  const m = today.getMonth() - bday.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < bday.getDate())) age--;
+  return age;
+}
+
+/** Refresh age chip + warning banner whenever birthdate changes (Senior only). */
+function checkSeniorAge() {
+  const isSenior = currentPlanType === 'Senior';
+  const ageChip  = document.getElementById('age-chip');
+  const banner   = document.getElementById('age-warning-banner');
+  const submitBtn = document.getElementById('user-info');
+
+  if (!isSenior) {
+    ageChip.style.display = 'none';
+    banner.style.display  = 'none';
+    submitBtn.disabled    = false;
+    return;
+  }
+
+  const age = calcAge(document.getElementById('bday').value);
+
+  if (age === null) {
+    ageChip.style.display = 'none';
+    banner.style.display  = 'none';
+    submitBtn.disabled    = false;
+    return;
+  }
+
+  // Show age chip
+  ageChip.style.display = 'block';
+  ageChip.textContent   = `Age: ${age} years old`;
+
+  if (selectedSeniorAgeMax < 999 && age > selectedSeniorAgeMax) {
+    // Over the limit
+    ageChip.className = 'over';
+    ageChip.innerHTML = `<i class="fa fa-triangle-exclamation me-1"></i>Age: ${age} yrs — exceeds plan limit (0–${selectedSeniorAgeMax})`;
+
+    // Populate and show warning banner
+    document.getElementById('age-warn-years').textContent = age;
+    banner.style.display = 'block';
+
+    // Disable submit until resolved
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.5';
+    submitBtn.style.cursor  = 'not-allowed';
+  } else {
+    ageChip.className = 'ok';
+    ageChip.innerHTML = `<i class="fa fa-circle-check me-1"></i>Age: ${age} yrs — eligible`;
+    banner.style.display = 'none';
+    submitBtn.disabled   = false;
+    submitBtn.style.opacity = '1';
+    submitBtn.style.cursor  = '';
+  }
+}
+
+/** Switch to the ₱1,599 plan when "Switch Plan" button is clicked. */
+document.getElementById('btn-switch-senior-plan').addEventListener('click', () => {
+  // Find the matching ₱1,599 Senior plan data
+  const upgradePlan = PLAN_DATA.Senior.find(p => p.room === '1,599');
+  if (!upgradePlan) return;
+
+  // Update confirmation modal fields
+  document.getElementById('conf-plan-name').textContent   = `${upgradePlan.name} – ${upgradePlan.room}`;
+  document.getElementById('conf-plan-type').textContent   = 'Senior';
+  document.getElementById('conf-plan-price').textContent  = `₱${upgradePlan.annual}`;
+  document.getElementById('conf-plan-period').textContent = 'Annually';
+
+  // Clear age restriction — 1,599 has no upper limit
+  selectedSeniorAgeMax   = 999;
+  selectedSeniorUpgradeTo = null;
+
+  // Update payment options
+  const paymentSel = document.getElementById('payment-option');
+  paymentSel.innerHTML = '';
+  ['Quarterly', 'Semi-Annually', 'Annually'].forEach(type => {
+    const opt = document.createElement('option');
+    opt.value = type; opt.textContent = type;
+    if (type === 'Annually') opt.selected = true;
+    paymentSel.appendChild(opt);
+  });
+
+  // Re-run age check — will now pass
+  checkSeniorAge();
+});
+
+// Attach live age check to the birthdate field
+document.getElementById('bday').addEventListener('change', checkSeniorAge);
+
+// ── Reset banner & chip when clientDetailsModal opens ─────────────
 document.getElementById('clientDetailsModal').addEventListener('show.bs.modal', () => {
   const isFamily = currentPlanType === 'Family';
-  document.getElementById('principalLabel').style.display = isFamily ? 'flex' : 'none';
+  document.getElementById('principalLabel').style.display   = isFamily ? 'flex'  : 'none';
   document.getElementById('familyMembersSection').style.display = isFamily ? 'block' : 'none';
   if (isFamily) {
     document.getElementById('dependentsContainer').innerHTML = '';
     dependentCount = 0;
     addDependent();
   }
+
+  // Reset age UI
+  document.getElementById('bday').value       = '';
+  document.getElementById('age-chip').style.display   = 'none';
+  document.getElementById('age-warning-banner').style.display = 'none';
+  const submitBtn = document.getElementById('user-info');
+  submitBtn.disabled    = false;
+  submitBtn.style.opacity = '1';
+  submitBtn.style.cursor  = '';
 });
 
-// ── Dependents logic ──────────────────────────────────────────────
+// ── Dependents ────────────────────────────────────────────────────
 let dependentCount = 0;
 
 function updateAddButton() {
@@ -1052,13 +1046,11 @@ function updateAddButton() {
   if (current >= 5) {
     btn.disabled = true;
     btn.innerHTML = '<i class="fa fa-ban me-1"></i> Maximum 5 Dependents Reached';
-    btn.style.opacity = '0.5';
-    btn.style.cursor = 'not-allowed';
+    btn.style.opacity = '0.5'; btn.style.cursor = 'not-allowed';
   } else {
     btn.disabled = false;
     btn.innerHTML = '<i class="fa fa-plus me-1"></i> Add Dependent';
-    btn.style.opacity = '1';
-    btn.style.cursor = 'pointer';
+    btn.style.opacity = '1'; btn.style.cursor = 'pointer';
   }
 }
 
@@ -1068,16 +1060,13 @@ function addDependent() {
   dependentCount++;
   const idx = dependentCount;
   const container = document.getElementById('dependentsContainer');
-
   const block = document.createElement('div');
   block.className = 'member-block';
   block.id = `dependent-${idx}`;
   block.innerHTML = `
     <div class="dependent-header">
       <div class="member-block-label"><i class="fa fa-user-plus"></i> Dependent ${idx}</div>
-      <button type="button" class="btn-remove-dependent" onclick="removeDependent(${idx})">
-        <i class="fa fa-times me-1"></i> Remove
-      </button>
+      <button type="button" class="btn-remove-dependent" onclick="removeDependent(${idx})"><i class="fa fa-times me-1"></i> Remove</button>
     </div>
     <div class="row g-2 mb-2">
       <div class="col-md-5"><input type="text" class="form-control" placeholder="Last Name" id="dep${idx}_last" required /></div>
@@ -1119,25 +1108,24 @@ function removeDependent(idx) {
 
 document.getElementById('addDependentBtn').addEventListener('click', addDependent);
 
-// ── Pre-existing condition toggle ──────────────────────────────────
+// Pre-existing condition toggle
 document.querySelectorAll('input[name="conditionType"]').forEach(radio => {
   radio.addEventListener('change', () => {
     document.getElementById('conditionChecklist').classList.toggle('d-none', radio.value !== 'with');
   });
 });
-
 document.getElementById('otherCondition').addEventListener('change', function () {
   document.getElementById('otherText').style.display = this.checked ? 'block' : 'none';
 });
 
 // ══════════════════════════════════════════════════════════════════
-//  GROUP ENROLLMENT TABLE LOGIC
+//  GROUP TABLE LOGIC
 // ══════════════════════════════════════════════════════════════════
 let enrollRowCount = 0;
 
 function updateEnrollCount() {
   const n = document.querySelectorAll('#enrollee-tbody tr[data-erow]').length;
-  document.getElementById('enroll-count-num').textContent = n;
+  document.getElementById('enroll-count-num').textContent  = n;
   document.getElementById('enroll-foot-count').textContent = n;
   const empty = document.getElementById('empty-enroll-msg');
   if (empty) empty.style.display = n > 0 ? 'none' : '';
@@ -1147,7 +1135,6 @@ function addEnrolleeRow() {
   enrollRowCount++;
   const idx = enrollRowCount;
   const tbody = document.getElementById('enrollee-tbody');
-
   const empty = document.getElementById('empty-enroll-msg');
   if (empty) empty.style.display = 'none';
 
@@ -1157,157 +1144,50 @@ function addEnrolleeRow() {
 
   const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   const monthOpts = months.map((m,i) => `<option value="${i+1}">${m}</option>`).join('');
-  const dayOpts   = Array.from({length:31},(_,i)=>`<option value="${i+1}">${i+1}</option>`).join('');
+  const dayOpts   = Array.from({length:31},(_,i) => `<option value="${i+1}">${i+1}</option>`).join('');
 
   tr.innerHTML = `
     <td class="row-num">${idx}</td>
-
-    <!-- Employee ID (optional) -->
     <td><input class="cell-inp" type="text" placeholder="—" /></td>
-
-    <!-- Last Name (required) -->
     <td><input class="cell-inp" type="text" placeholder="Last name" data-req="1" /></td>
-
-    <!-- Given Name (required) -->
     <td><input class="cell-inp" type="text" placeholder="Given name" data-req="1" /></td>
-
-    <!-- Middle Name (optional) -->
     <td><input class="cell-inp" type="text" placeholder="—" /></td>
-
-    <!-- Suffix (optional) -->
-    <td>
-      <select class="cell-inp">
-        <option value="">—</option>
-        <option>Jr.</option><option>Sr.</option><option>II</option><option>III</option><option>IV</option>
-      </select>
-    </td>
-
-    <!-- Nickname (optional) -->
+    <td><select class="cell-inp"><option value="">—</option><option>Jr.</option><option>Sr.</option><option>II</option><option>III</option><option>IV</option></select></td>
     <td><input class="cell-inp" type="text" placeholder="—" /></td>
-
-    <!-- Birth Year (required) -->
     <td><input class="cell-inp" type="number" placeholder="YYYY" min="1900" max="2099" style="width:100%;text-align:center;" data-req="1" /></td>
-
-    <!-- Birth Month (required) -->
-    <td>
-      <select class="cell-inp" data-req="1">
-        <option value="">—</option>
-        ${monthOpts}
-      </select>
-    </td>
-
-    <!-- Birth Day (required) -->
-    <td>
-      <select class="cell-inp" data-req="1">
-        <option value="">—</option>
-        ${dayOpts}
-      </select>
-    </td>
-
-    <!-- Gender (required) -->
-    <td>
-      <select class="cell-inp" data-req="1">
-        <option value="">—</option>
-        <option>Male</option><option>Female</option>
-      </select>
-    </td>
-
-    <!-- Civil Status (required) -->
-    <td>
-      <select class="cell-inp" data-req="1">
-        <option value="">—</option>
-        <option>Single</option><option>Married</option><option>Widowed</option>
-        <option>Divorced</option><option>Separated</option>
-      </select>
-    </td>
-
-    <!-- Nationality (required) -->
+    <td><select class="cell-inp" data-req="1"><option value="">—</option>${monthOpts}</select></td>
+    <td><select class="cell-inp" data-req="1"><option value="">—</option>${dayOpts}</select></td>
+    <td><select class="cell-inp" data-req="1"><option value="">—</option><option>Male</option><option>Female</option></select></td>
+    <td><select class="cell-inp" data-req="1"><option value="">—</option><option>Single</option><option>Married</option><option>Widowed</option><option>Divorced</option><option>Separated</option></select></td>
     <td><input class="cell-inp" type="text" placeholder="Filipino" data-req="1" /></td>
-
-    <!-- PhilHealth (required) -->
-    <td>
-      <select class="cell-inp" data-req="1">
-        <option value="">—</option>
-        <option>Yes</option><option>No</option>
-      </select>
-    </td>
-
-    <!-- PhilHealth ID (required) -->
+    <td><select class="cell-inp" data-req="1"><option value="">—</option><option>Yes</option><option>No</option></select></td>
     <td><input class="cell-inp" type="text" placeholder="PhilHealth ID" data-req="1" /></td>
-
-    <!-- Phone Number (required) -->
     <td><input class="cell-inp" type="tel" placeholder="+63 9XX XXX XXXX" data-req="1" /></td>
-
-    <!-- Department (optional) -->
     <td><input class="cell-inp" type="text" placeholder="—" /></td>
-
-    <!-- Resignation (required) -->
-    <td>
-      <select class="cell-inp" data-req="1">
-        <option value="">—</option>
-        <option>Active</option><option>Resigned</option><option>Terminated</option><option>Retired</option>
-      </select>
-    </td>
-
-    <!-- Employment Date (required) -->
+    <td><select class="cell-inp" data-req="1"><option value="">—</option><option>Active</option><option>Resigned</option><option>Terminated</option><option>Retired</option></select></td>
     <td><input class="cell-inp" type="date" data-req="1" /></td>
-
-    <!-- Plan (required) -->
     <td><input class="cell-inp" type="text" placeholder="Plan name" data-req="1" /></td>
-
-    <!-- Member Type (required) — controls ID Name -->
-    <td>
-      <select class="cell-inp mtype-sel" data-req="1">
-        <option value="">—</option>
-        <option value="Principal">Principal</option>
-        <option value="Dependent">Dependent</option>
-      </select>
-    </td>
-
-    <!-- ID Name — dependent only; disabled when Principal -->
-    <td>
-      <input class="cell-inp idname-inp" type="text" placeholder="Principal's name"
-             disabled
-             style="background:#f0f3fa;color:var(--muted);cursor:not-allowed;"
-             title="Only filled in for Dependent members" />
-    </td>
-
-    <!-- Activation Date (optional) -->
+    <td><select class="cell-inp mtype-sel" data-req="1"><option value="">—</option><option value="Principal">Principal</option><option value="Dependent">Dependent</option></select></td>
+    <td><input class="cell-inp idname-inp" type="text" placeholder="Principal's name" disabled style="background:#f0f3fa;color:var(--muted);cursor:not-allowed;" title="Only filled in for Dependent members" /></td>
     <td><input class="cell-inp" type="date" /></td>
-
-    <!-- Email (required) -->
     <td><input class="cell-inp" type="email" placeholder="email@domain.com" data-req="1" /></td>
-
-    <!-- Expiration Date (optional) -->
     <td><input class="cell-inp" type="date" /></td>
-
-    <!-- Remarks (optional) -->
     <td><input class="cell-inp" type="text" placeholder="—" /></td>
-
-    <!-- AMAPHIL ID (optional) -->
     <td><input class="cell-inp" type="text" placeholder="—" /></td>
-
-    <!-- Delete -->
-    <td>
-      <button class="btn-del-row" onclick="removeEnrolleeRow(this)" title="Remove this enrollee">
-        <i class="fa fa-times"></i>
-      </button>
-    </td>
+    <td><button class="btn-del-row" onclick="removeEnrolleeRow(this)" title="Remove this enrollee"><i class="fa fa-times"></i></button></td>
   `;
 
   tbody.appendChild(tr);
 
-  // ── Member type → ID Name interlock ─────────────────────────────
   const mtypeSel  = tr.querySelector('.mtype-sel');
   const idNameInp = tr.querySelector('.idname-inp');
-
   mtypeSel.addEventListener('change', () => {
     const isDependent = mtypeSel.value === 'Dependent';
     idNameInp.disabled    = !isDependent;
     idNameInp.placeholder = isDependent ? "Principal's name" : '—';
-    idNameInp.style.background  = isDependent ? '' : '#f0f3fa';
-    idNameInp.style.color       = isDependent ? '' : 'var(--muted)';
-    idNameInp.style.cursor      = isDependent ? '' : 'not-allowed';
+    idNameInp.style.background = isDependent ? '' : '#f0f3fa';
+    idNameInp.style.color      = isDependent ? '' : 'var(--muted)';
+    idNameInp.style.cursor     = isDependent ? '' : 'not-allowed';
     if (!isDependent) idNameInp.value = '';
   });
 
@@ -1316,8 +1196,7 @@ function addEnrolleeRow() {
 }
 
 function removeEnrolleeRow(btn) {
-  const tr = btn.closest('tr');
-  tr.remove();
+  btn.closest('tr').remove();
   reNumberEnrollRows();
   updateEnrollCount();
 }
@@ -1337,51 +1216,29 @@ function clearAllEnrollees() {
   if (empty) empty.style.display = '';
 }
 
-function submitGroupEnrollment() {
+function extractGroupEnrollmentData() {
   const rows = document.querySelectorAll('#enrollee-tbody tr[data-erow]');
-  if (rows.length === 0) {
-    alert('Please add at least one enrollee before submitting.');
-    return;
-  }
-
-  // Validate only required fields (data-req="1"), skip optional ones
+  if (rows.length === 0) { alert('Please add at least one enrollee before submitting.'); return; }
   let firstInvalid = null;
   rows.forEach(tr => {
     tr.querySelectorAll('[data-req="1"]').forEach(el => {
       el.style.borderColor = '';
-      if (!el.value.trim()) {
-        el.style.borderColor = 'var(--danger)';
-        if (!firstInvalid) firstInvalid = el;
-      }
+      if (!el.value.trim()) { el.style.borderColor = 'var(--danger)'; if (!firstInvalid) firstInvalid = el; }
     });
   });
-
   if (firstInvalid) {
     firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
     firstInvalid.focus();
     alert('Please fill in all required fields (highlighted in red) before submitting.');
     return;
   }
-
-  // Placeholder — replace with your actual submission logic (e.g. enroll.js handler)
   alert(`Group enrollment submitted for ${rows.length} enrollee(s)!\n\nPlan: ${selectedGroupPlan.name}\nPayment: ${selectedGroupPlan.period}`);
 }
 
-// Auto-open Group enrollment table when the Group plans modal opens
-document.getElementById('groupEnrollModal').addEventListener('show.bs.modal', () => {
-  // Reset table each time it's opened fresh (optional — remove if persistence preferred)
-  // updateEnrollCount() just refreshes count display
-  updateEnrollCount();
-});
+document.getElementById('groupEnrollModal').addEventListener('show.bs.modal', () => { updateEnrollCount(); });
 
-// Row slide-in animation
 const rowStyle = document.createElement('style');
-rowStyle.textContent = `
-  @keyframes rowSlideIn {
-    from { opacity: 0; transform: translateY(-6px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-`;
+rowStyle.textContent = `@keyframes rowSlideIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}`;
 document.head.appendChild(rowStyle);
 
 buildPlanModals();
