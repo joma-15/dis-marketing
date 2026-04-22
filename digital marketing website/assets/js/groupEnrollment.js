@@ -36,7 +36,27 @@ function extractGroupEnrollmentData() {
   });
   console.log('the button was being clicked');
   console.log(enrollees);
-  localStorage.setItem("enrollees", enrollees);
+  localStorage.setItem("enrollees", JSON.stringify(enrollees));
 }
 
+const button = document.getElementById("gmail"); 
+const enrollees = JSON.parse(localStorage.getItem(enrollees)); 
+
+const entries = {
+  
+}
+
+async function sendData(){
+  try {
+    
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+if(enrollees != null){
+  button = button.addEventListener('click', {
+    
+  });
+}
 
