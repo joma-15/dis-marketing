@@ -128,34 +128,30 @@ function extractGroupEnrollmentData() {
     });
   });
 
-  // ⚠️  localStorage is NOT available in Claude artifacts but works in your
-  //     own hosted environment — keep this for local use only
   localStorage.setItem("enrollees", JSON.stringify(enrollees));
-  return enrollees;   // always return so callers can use the data directly
+  return enrollees;
 }
 
 // ── Send ONE enrollee to Google Forms ───────────────────────────────
 async function sendSingleEnrollee(enrollee) {
   const params = buildFormParams(enrollee);
 
-  // Google Forms blocks fetch() with CORS — no-cors lets the request
-  // through but you won't get a readable response (that's expected)
   await fetch(FORM_URL, {
-    method: "POST",
-    mode:   "no-cors",               // required for Google Forms
+    method:  "POST",
+    mode:    "no-cors",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body:   params.toString(),
+    body:    params.toString(),
   });
 }
 
 // ── Send ALL enrollees, one at a time ───────────────────────────────
-async function sendAllEnrollees(enrollees) {
-  const btn     = document.getElementById("gmail");
+async function sendAllEnrollees(enrollees, btn) {
   const results = { success: 0, failed: [] };
 
-  // Disable button + show progress while submitting
-  btn.disabled     = true;
-  btn.innerHTML    = `<i class="fa fa-spinner fa-spin me-1"></i> Submitting…`;
+  if (btn) {
+    btn.disabled  = true;
+    btn.innerHTML = `<i class="fa fa-spinner fa-spin me-1"></i> Submitting…`;
+  }
 
   for (const enrollee of enrollees) {
     try {
@@ -167,16 +163,18 @@ async function sendAllEnrollees(enrollees) {
     }
   }
 
-  // Restore button
-  btn.disabled  = false;
-  btn.innerHTML = `<i class="fa fa-paper-plane me-1"></i> Submit to Google Forms`;
+  if (btn) {
+    btn.disabled  = false;
+    btn.innerHTML = `<i class="fa fa-paper-plane me-1"></i> Submit Enrollment`;
+  }
 
   return results;
 }
 
 // ── Main submit handler ──────────────────────────────────────────────
 async function submitToGoogleForms() {
-  // 1. Pull data straight from the DOM (source of truth)
+  const btn = document.getElementById("group-submit-btn");
+
   const enrollees = extractGroupEnrollmentData();
 
   if (enrollees.length === 0) {
@@ -189,10 +187,8 @@ async function submitToGoogleForms() {
   );
   if (!confirmed) return;
 
-  // 2. Send each row as a separate form response
-  const results = await sendAllEnrollees(enrollees);
+  const results = await sendAllEnrollees(enrollees, btn);
 
-  // 3. Report outcome
   if (results.failed.length === 0) {
     alert(`✅ All ${results.success} enrollee(s) submitted successfully!`);
   } else {
@@ -206,10 +202,13 @@ async function submitToGoogleForms() {
 
 // ── Wire up the button ───────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("gmail");
+  const btn = document.getElementById("group-submit-btn");
+
   if (btn) {
+    btn.removeAttribute("onclick");
     btn.addEventListener("click", submitToGoogleForms);
+    console.log("✅ Group submit button wired successfully.");
   } else {
-    console.warn('groupEnrollment.js: No element with id="gmail" found.');
+    console.warn("⚠️ group-submit-btn not found on DOMContentLoaded.");
   }
 });
