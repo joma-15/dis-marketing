@@ -37,16 +37,20 @@ const ENTRIES = {
   amaPhilId:            "entry.1182240530",
 };
 
-// ── Helpers ─────────────────────────────────────────────────────────
+// ── Helpers ──────────────────────────────────────────────────────────
 
-// Split "YYYY-MM-DD" into { year, month, day }
+// Split "YYYY-MM-DD" → { year, month, day } with integer month/day (no leading zeros)
 function splitDate(dateStr) {
   if (!dateStr) return { year: "", month: "", day: "" };
   const [year, month, day] = dateStr.split("-");
-  return { year: year || "", month: month || "", day: day || "" };
+  return {
+    year:  year  || "",
+    month: month ? String(parseInt(month, 10)) : "",
+    day:   day   ? String(parseInt(day,   10)) : "",
+  };
 }
 
-// Build a URLSearchParams for one enrollee object
+// Build URLSearchParams for one enrollee
 function buildFormParams(enrollee) {
   const empDate = splitDate(enrollee.employmentDate);
   const actDate = splitDate(enrollee.activationDate);
@@ -132,19 +136,44 @@ function extractGroupEnrollmentData() {
   return enrollees;
 }
 
-// ── Send ONE enrollee to Google Forms ───────────────────────────────
+// ── Validate required fields, highlight errors ───────────────────────
+function validateEnrollees() {
+  const rows = document.querySelectorAll('#enrollee-tbody tr[data-erow]');
+  let firstInvalid = null;
+
+  rows.forEach(tr => {
+    tr.querySelectorAll('[data-req="1"]').forEach(el => {
+      el.style.borderColor = '';
+      if (!el.value.trim()) {
+        el.style.borderColor = '#e05252';
+        if (!firstInvalid) firstInvalid = el;
+      }
+    });
+  });
+
+  if (firstInvalid) {
+    firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    firstInvalid.focus();
+    return false;
+  }
+  return true;
+}
+
+// ── Send ONE enrollee to Google Forms ────────────────────────────────
 async function sendSingleEnrollee(enrollee) {
   const params = buildFormParams(enrollee);
+  console.log(`Sending row ${enrollee.no}:`, params.toString());
 
+  // no-cors is required for Google Forms — response will be opaque (that's expected)
   await fetch(FORM_URL, {
-    method:  "POST",
-    mode:    "no-cors",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body:    params.toString(),
+    method: "POST",
+    mode:   "no-cors",
+    body:   params.toString(),
+    // ⚠️ Do NOT set Content-Type header with no-cors — browser handles it
   });
 }
 
-// ── Send ALL enrollees, one at a time ───────────────────────────────
+// ── Send ALL enrollees one at a time ─────────────────────────────────
 async function sendAllEnrollees(enrollees, btn) {
   const results = { success: 0, failed: [] };
 
@@ -158,7 +187,7 @@ async function sendAllEnrollees(enrollees, btn) {
       await sendSingleEnrollee(enrollee);
       results.success++;
     } catch (err) {
-      console.error(`Failed for row ${enrollee.no}:`, err);
+      console.error(`Row ${enrollee.no} failed:`, err);
       results.failed.push(enrollee.no);
     }
   }
@@ -171,10 +200,18 @@ async function sendAllEnrollees(enrollees, btn) {
   return results;
 }
 
-// ── Main submit handler ──────────────────────────────────────────────
+// ── Main submit handler ───────────────────────────────────────────────
 async function submitToGoogleForms() {
+  // Grab the button here — single source of truth, passed down to sendAllEnrollees
   const btn = document.getElementById("group-submit-btn");
 
+  // 1. Validate first
+  if (!validateEnrollees()) {
+    alert("Please fill in all required fields (highlighted in red) before submitting.");
+    return;
+  }
+
+  // 2. Extract data
   const enrollees = extractGroupEnrollmentData();
 
   if (enrollees.length === 0) {
@@ -182,13 +219,16 @@ async function submitToGoogleForms() {
     return;
   }
 
+  // 3. Confirm
   const confirmed = confirm(
     `You are about to submit ${enrollees.length} enrollee(s) to Google Forms.\n\nContinue?`
   );
   if (!confirmed) return;
 
+  // 4. Send — pass btn so sendAllEnrollees never needs to query the DOM itself
   const results = await sendAllEnrollees(enrollees, btn);
 
+  // 5. Report
   if (results.failed.length === 0) {
     alert(`✅ All ${results.success} enrollee(s) submitted successfully!`);
   } else {
@@ -200,15 +240,15 @@ async function submitToGoogleForms() {
   }
 }
 
-// ── Wire up the button ───────────────────────────────────────────────
+// ── Wire up the button after DOM is ready ────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
   const btn = document.getElementById("group-submit-btn");
 
   if (btn) {
-    btn.removeAttribute("onclick");
+    btn.removeAttribute("onclick");   // remove the inline onclick from HTML
     btn.addEventListener("click", submitToGoogleForms);
-    console.log("✅ Group submit button wired successfully.");
+    console.log("✅ group-submit-btn wired to submitToGoogleForms");
   } else {
-    console.warn("⚠️ group-submit-btn not found on DOMContentLoaded.");
+    console.warn("⚠️ group-submit-btn not found.");
   }
 });
