@@ -43,11 +43,12 @@ const button = document.getElementById("gmail");
 const enrollees = JSON.parse(localStorage.getItem(enrollees)); 
 
 const entries = {
-  
+
 }
 
 async function sendData(){
   try {
+    
     
   } catch (error) {
     console.log(error)
@@ -55,8 +56,8 @@ async function sendData(){
 }
 
 if(enrollees != null){
-  button = button.addEventListener('click', {
-    
+  button = button.addEventListener('click', () => {
+    sendData();
   });
 }
 
