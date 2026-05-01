@@ -1,678 +1,126 @@
-  <!doctype html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>AMAPHIL - Health Plans</title>
-      <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-      />
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap"
-        rel="stylesheet"
-      />
-      <style>
-        :root {
-          --primary: #0f1e3d;
-          --primary-mid: #1a3260;
-          --accent: #f47920;
-          --accent-light: #fff0e6;
-          --accent-dark: #d4630a;
-          --dark: #080f1e;
-          --soft-bg: #f5f7fb;
-          --card-bg: #ffffff;
-          --text: #1a2340;
-          --muted: #6b7a9a;
-          --border: #d0d8ec;
-          --danger: #e05252;
-          --navy: #0f1e3d;
-          --orange: #f47920;
-        }
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AMAPHIL - Health Plans</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --primary: #0f1e3d;
+        --primary-mid: #1a3260;
+        --accent: #f47920;
+        --accent-light: #fff0e6;
+        --accent-dark: #d4630a;
+        --dark: #080f1e;
+        --soft-bg: #f5f7fb;
+        --card-bg: #ffffff;
+        --text: #1a2340;
+        --muted: #6b7a9a;
+        --border: #d0d8ec;
+        --danger: #e05252;
+        --navy: #0f1e3d;
+        --orange: #f47920;
+      }
+      * { box-sizing: border-box; }
+      body { font-family: "Plus Jakarta Sans", sans-serif; background: var(--soft-bg); color: var(--text); min-height: 100vh; }
+      body::before { content: ""; position: fixed; inset: 0; background: radial-gradient(ellipse at 80% 20%, rgba(244,121,32,0.08) 0%, transparent 50%), radial-gradient(ellipse at 20% 80%, rgba(15,30,61,0.06) 0%, transparent 50%); pointer-events: none; z-index: 0; }
 
-        * {
-          box-sizing: border-box;
-        }
+      /* ── Header ── */
+      header { background: linear-gradient(135deg, var(--navy) 0%, var(--primary-mid) 100%); padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 24px rgba(15,30,61,0.4); position: sticky; top: 0; z-index: 1000; }
+      header .brand { display: flex; align-items: center; gap: 14px; }
+      header .brand-logo { height: 52px; width: auto; filter: drop-shadow(0 0 6px rgba(255,255,255,0.3)); object-fit: contain; }
+      header .brand-text h1 { font-family: "Montserrat", sans-serif; font-size: 1.6rem; color: white; margin: 0; letter-spacing: 2px; font-weight: 900; }
+      header .brand-text p { color: rgba(255,255,255,0.7); margin: 0; font-size: 0.75rem; letter-spacing: 0.5px; }
+      header .brand-text h1 span { color: var(--orange); }
+      .btn-back { background: rgba(255,255,255,0.12); border: 1.5px solid rgba(255,255,255,0.25); color: white; font-weight: 600; border-radius: 50px; padding: 9px 22px; font-size: 0.88rem; transition: all 0.2s; backdrop-filter: blur(6px); }
+      .btn-back:hover { background: rgba(244,121,32,0.3); border-color: var(--orange); color: white; }
 
-        body {
-          font-family: "Plus Jakarta Sans", sans-serif;
-          background: var(--soft-bg);
-          color: var(--text);
-          min-height: 100vh;
-        }
+      /* ── Hero ── */
+      .hero-section { padding: 60px 0 40px; position: relative; z-index: 1; }
+      .logo-display-card { background: linear-gradient(135deg,#e8edf8 0%,#f5f7fb 60%,#eef1fa 100%); border-radius: 24px; padding: 40px; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 60px rgba(15,30,61,0.18), 0 0 0 3px #1a3260; position: relative; overflow: hidden; min-height: 280px; border: 3px solid #1a3260; transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); cursor: pointer; }
+      .logo-display-card::before { content: ""; position: absolute; top: -60px; right: -60px; width: 220px; height: 220px; border-radius: 50%; background: rgba(244,121,32,0.12); transition: all 0.4s ease; }
+      .logo-display-card::after { content: ""; position: absolute; bottom: -40px; left: -40px; width: 160px; height: 160px; border-radius: 50%; background: rgba(15,30,61,0.06); transition: all 0.4s ease; }
+      .logo-display-card .shine { position: absolute; inset: 0; background: linear-gradient(120deg,transparent 0%,rgba(255,255,255,0) 30%,rgba(255,255,255,0.55) 50%,rgba(255,255,255,0) 70%,transparent 100%); transform: translateX(-100%); transition: transform 0s; z-index: 2; pointer-events: none; }
+      .logo-display-card:hover { border-color: #4a7fd4; box-shadow: 0 0 0 4px rgba(26,50,96,0.15), 0 0 24px 6px rgba(74,127,212,0.45), 0 0 60px 16px rgba(74,127,212,0.2), 0 30px 80px rgba(15,30,61,0.25); transform: translateY(-6px) scale(1.02); animation: pulseRing 1.2s ease-out infinite; }
+      .logo-display-card:hover::before { top: -30px; right: -30px; width: 280px; height: 280px; background: rgba(244,121,32,0.18); }
+      .logo-display-card:hover::after { bottom: -20px; left: -20px; width: 200px; height: 200px; background: rgba(74,127,212,0.1); }
+      .logo-display-card:hover .shine { transform: translateX(200%); transition: transform 0.65s ease; }
+      .logo-display-card img { max-width: 360px; width: 100%; position: relative; z-index: 3; filter: drop-shadow(0 4px 16px rgba(15,30,61,0.12)); transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); }
+      .logo-display-card:hover img { filter: drop-shadow(0 8px 28px rgba(26,50,96,0.3)) drop-shadow(0 0 12px rgba(74,127,212,0.25)); transform: scale(1.05); }
+      @keyframes pulseRing { 0% { box-shadow: 0 0 0 0 rgba(74,127,212,0.5),0 0 0 4px rgba(26,50,96,0.15),0 0 24px 6px rgba(74,127,212,0.45),0 30px 80px rgba(15,30,61,0.25); } 70% { box-shadow: 0 0 0 16px rgba(74,127,212,0),0 0 0 4px rgba(26,50,96,0.15),0 0 24px 6px rgba(74,127,212,0.45),0 30px 80px rgba(15,30,61,0.25); } 100% { box-shadow: 0 0 0 0 rgba(74,127,212,0),0 0 0 4px rgba(26,50,96,0.15),0 0 24px 6px rgba(74,127,212,0.45),0 30px 80px rgba(15,30,61,0.25); } }
+      .hero-right h2 { font-family: "Montserrat", sans-serif; font-size: 2.4rem; color: var(--navy); font-weight: 800; line-height: 1.2; }
+      .hero-right h2 span { color: var(--orange); }
+      .hero-right p { color: var(--muted); font-size: 1rem; }
+      .step-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-light); color: var(--orange); font-weight: 800; font-size: 0.78rem; letter-spacing: 1.5px; padding: 5px 14px; border-radius: 50px; border: 1.5px solid rgba(244,121,32,0.3); margin-bottom: 14px; }
+      .step-badge::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--orange); }
 
-        body::before {
-          content: "";
-          position: fixed;
-          inset: 0;
-          background:
-            radial-gradient(
-              ellipse at 80% 20%,
-              rgba(244, 121, 32, 0.08) 0%,
-              transparent 50%
-            ),
-            radial-gradient(
-              ellipse at 20% 80%,
-              rgba(15, 30, 61, 0.06) 0%,
-              transparent 50%
-            );
-          pointer-events: none;
-          z-index: 0;
-        }
+      /* ── Plan type cards ── */
+      .plan-type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      .plan-type-card { background: white; border: 2px solid var(--border); border-radius: 18px; padding: 22px 20px; cursor: pointer; transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1); position: relative; overflow: hidden; text-align: center; }
+      .plan-type-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg,rgba(244,121,32,0.06),transparent); opacity: 0; transition: opacity 0.25s; }
+      .plan-type-card:hover { border-color: var(--orange); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(244,121,32,0.2); }
+      .plan-type-card:hover::before { opacity: 1; }
+      .plan-type-card .icon-wrap { width: 52px; height: 52px; border-radius: 14px; background: var(--accent-light); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 1.4rem; color: var(--orange); transition: all 0.25s; }
+      .plan-type-card:hover .icon-wrap { background: var(--orange); color: white; }
+      .plan-type-card .type-label { font-weight: 800; font-size: 1rem; color: var(--navy); display: block; }
+      .plan-type-card .type-desc { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
+      .plan-type-card .arrow-badge { position: absolute; top: 10px; right: 10px; background: var(--orange); color: white; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; opacity: 0; transition: opacity 0.2s; }
+      .plan-type-card:hover .arrow-badge { opacity: 1; }
 
-        /* ── Header ── */
-        header {
-          background: linear-gradient(
-            135deg,
-            var(--navy) 0%,
-            var(--primary-mid) 100%
-          );
-          padding: 14px 32px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          box-shadow: 0 4px 24px rgba(15, 30, 61, 0.4);
-          position: sticky;
-          top: 0;
-          z-index: 1000;
-        }
-        header .brand {
-          display: flex;
-          align-items: center;
-          gap: 14px;
-        }
-        header .brand-logo {
-          height: 52px;
-          width: auto;
-          filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.3));
-          object-fit: contain;
-        }
-        header .brand-text h1 {
-          font-family: "Montserrat", sans-serif;
-          font-size: 1.6rem;
-          color: white;
-          margin: 0;
-          letter-spacing: 2px;
-          font-weight: 900;
-        }
-        header .brand-text p {
-          color: rgba(255, 255, 255, 0.7);
-          margin: 0;
-          font-size: 0.75rem;
-          letter-spacing: 0.5px;
-        }
-        header .brand-text h1 span {
-          color: var(--orange);
-        }
+      /* ── Plan modals ── */
+      .plans-modal .modal-dialog { max-width: 940px; }
+      .plans-modal .modal-content { border: none; border-radius: 20px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.2); }
+      .plans-modal .modal-header { background: linear-gradient(135deg,var(--navy) 0%,var(--primary-mid) 100%); padding: 20px 28px; border: none; }
+      .plans-modal .modal-title { font-family: "Montserrat", sans-serif; font-size: 1.3rem; color: white; }
+      .plans-modal .modal-title small { font-family: "Plus Jakarta Sans", sans-serif; font-size: 0.8rem; opacity: 0.75; display: block; font-weight: 400; }
+      .plans-modal .modal-body { background: #f0f3fa; padding: 28px; max-height: 75vh; overflow-y: auto; }
+      .plans-modal .modal-body::-webkit-scrollbar { width: 6px; }
+      .plans-modal .modal-body::-webkit-scrollbar-track { background: #dde3f0; border-radius: 3px; }
+      .plans-modal .modal-body::-webkit-scrollbar-thumb { background: var(--primary-mid); border-radius: 3px; }
 
-        .btn-back {
-          background: rgba(255, 255, 255, 0.12);
-          border: 1.5px solid rgba(255, 255, 255, 0.25);
-          color: white;
-          font-weight: 600;
-          border-radius: 50px;
-          padding: 9px 22px;
-          font-size: 0.88rem;
-          transition: all 0.2s;
-          backdrop-filter: blur(6px);
-        }
-        .btn-back:hover {
-          background: rgba(244, 121, 32, 0.3);
-          border-color: var(--orange);
-          color: white;
-        }
+      .section-divider { display: flex; align-items: center; gap: 12px; margin: 28px 0 16px; }
+      .section-divider:first-child { margin-top: 0; }
+      .section-divider .divider-badge { background: linear-gradient(135deg,var(--navy),var(--primary-mid)); color: white; font-weight: 800; font-size: 0.82rem; padding: 5px 14px; border-radius: 50px; white-space: nowrap; letter-spacing: 0.5px; }
+      .section-divider .divider-line { flex: 1; height: 2px; background: linear-gradient(to right,var(--border),transparent); }
 
-        /* ── Hero ── */
-        .hero-section {
-          padding: 60px 0 40px;
-          position: relative;
-          z-index: 1;
-        }
+      .plan-card { background: white; border-radius: 16px; border: 1.5px solid var(--border); overflow: hidden; height: 100%; transition: all 0.25s; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+      .plan-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(15,30,61,0.14); border-color: var(--orange); }
+      .plan-card-header { background: linear-gradient(135deg,var(--navy) 0%,var(--primary-mid) 100%); padding: 14px 18px; display: flex; align-items: center; gap: 10px; }
+      .plan-card-header .room-badge { background: rgba(244,121,32,0.3); color: #ffd4a8; font-size: 0.72rem; padding: 3px 10px; border-radius: 50px; border: 1px solid rgba(244,121,32,0.5); }
+      .plan-card-header h6 { color: white; font-weight: 700; margin: 0; font-size: 0.95rem; }
+      .plan-card-body { padding: 16px 18px; }
+      .plan-card-body .benefit-list { list-style: none; padding: 0; margin: 0 0 16px; }
+      .plan-card-body .benefit-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 0.82rem; color: var(--muted); padding: 4px 0; }
+      .plan-card-body .benefit-list li i { color: var(--orange); font-size: 0.75rem; margin-top: 3px; flex-shrink: 0; }
 
-        .logo-display-card {
-          background: linear-gradient(
-            135deg,
-            #e8edf8 0%,
-            #f5f7fb 60%,
-            #eef1fa 100%
-          );
-          border-radius: 24px;
-          padding: 40px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-shadow:
-            0 20px 60px rgba(15, 30, 61, 0.18),
-            0 0 0 3px #1a3260;
-          position: relative;
-          overflow: hidden;
-          min-height: 280px;
-          border: 3px solid #1a3260;
-          transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-          cursor: pointer;
-        }
-        .logo-display-card::before {
-          content: "";
-          position: absolute;
-          top: -60px;
-          right: -60px;
-          width: 220px;
-          height: 220px;
-          border-radius: 50%;
-          background: rgba(244, 121, 32, 0.12);
-          transition: all 0.4s ease;
-        }
-        .logo-display-card::after {
-          content: "";
-          position: absolute;
-          bottom: -40px;
-          left: -40px;
-          width: 160px;
-          height: 160px;
-          border-radius: 50%;
-          background: rgba(15, 30, 61, 0.06);
-          transition: all 0.4s ease;
-        }
-        .logo-display-card .shine {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(
-            120deg,
-            transparent 0%,
-            rgba(255, 255, 255, 0) 30%,
-            rgba(255, 255, 255, 0.55) 50%,
-            rgba(255, 255, 255, 0) 70%,
-            transparent 100%
-          );
-          transform: translateX(-100%);
-          transition: transform 0s;
-          z-index: 2;
-          pointer-events: none;
-        }
-        .logo-display-card:hover {
-          border-color: #4a7fd4;
-          box-shadow:
-            0 0 0 4px rgba(26, 50, 96, 0.15),
-            0 0 24px 6px rgba(74, 127, 212, 0.45),
-            0 0 60px 16px rgba(74, 127, 212, 0.2),
-            0 30px 80px rgba(15, 30, 61, 0.25);
-          transform: translateY(-6px) scale(1.02);
-          background: linear-gradient(
-            135deg,
-            #dde6f8 0%,
-            #eef2fc 60%,
-            #e4eaf8 100%
-          );
-          animation: pulseRing 1.2s ease-out infinite;
-        }
-        .logo-display-card:hover::before {
-          top: -30px;
-          right: -30px;
-          width: 280px;
-          height: 280px;
-          background: rgba(244, 121, 32, 0.18);
-        }
-        .logo-display-card:hover::after {
-          bottom: -20px;
-          left: -20px;
-          width: 200px;
-          height: 200px;
-          background: rgba(74, 127, 212, 0.1);
-        }
-        .logo-display-card:hover .shine {
-          transform: translateX(200%);
-          transition: transform 0.65s ease;
-        }
-        .logo-display-card img {
-          max-width: 360px;
-          width: 100%;
-          position: relative;
-          z-index: 3;
-          filter: drop-shadow(0 4px 16px rgba(15, 30, 61, 0.12));
-          transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .logo-display-card:hover img {
-          filter: drop-shadow(0 8px 28px rgba(26, 50, 96, 0.3))
-            drop-shadow(0 0 12px rgba(74, 127, 212, 0.25));
-          transform: scale(1.05);
-        }
+      .period-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+      .btn-period { flex: 1; min-width: 0; background: white; border: 2px solid var(--border); border-radius: 10px; padding: 8px 6px; font-size: 0.76rem; font-weight: 700; color: var(--navy); cursor: pointer; transition: all 0.2s; text-align: center; }
+      .btn-period:hover { background: var(--orange); border-color: var(--orange); color: white; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(244,121,32,0.35); }
+      .btn-period .period-label { display: block; font-size: 0.72rem; font-weight: 600; }
+      .btn-period .period-price { display: block; font-size: 0.88rem; font-weight: 800; color: var(--navy); margin-top: 2px; }
+      .btn-period:hover .period-price { color: white; }
 
-        @keyframes pulseRing {
-          0% {
-            box-shadow:
-              0 0 0 0 rgba(74, 127, 212, 0.5),
-              0 0 0 4px rgba(26, 50, 96, 0.15),
-              0 0 24px 6px rgba(74, 127, 212, 0.45),
-              0 30px 80px rgba(15, 30, 61, 0.25);
-          }
-          70% {
-            box-shadow:
-              0 0 0 16px rgba(74, 127, 212, 0),
-              0 0 0 4px rgba(26, 50, 96, 0.15),
-              0 0 24px 6px rgba(74, 127, 212, 0.45),
-              0 30px 80px rgba(15, 30, 61, 0.25);
-          }
-          100% {
-            box-shadow:
-              0 0 0 0 rgba(74, 127, 212, 0),
-              0 0 0 4px rgba(26, 50, 96, 0.15),
-              0 0 24px 6px rgba(74, 127, 212, 0.45),
-              0 30px 80px rgba(15, 30, 61, 0.25);
-          }
-        }
+      /* ── Shared modal base styles ── */
+      #modernConfirmationModal .modal-content, #conditionModal .modal-content, #clientDetailsModal .modal-content, #groupEnrollModal .modal-content { border: none; border-radius: 20px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.2); }
+      #modernConfirmationModal .modal-header, #conditionModal .modal-header, #clientDetailsModal .modal-header, #groupEnrollModal .modal-header { background: linear-gradient(135deg,var(--navy),var(--primary-mid)); border: none; padding: 18px 24px; }
+      #modernConfirmationModal .modal-title, #conditionModal .modal-title, #clientDetailsModal .modal-title, #groupEnrollModal .modal-title { color: white; font-weight: 700; font-size: 1.1rem; }
 
-        .hero-right h2 {
-          font-family: "Montserrat", sans-serif;
-          font-size: 2.4rem;
-          color: var(--navy);
-          font-weight: 800;
-          line-height: 1.2;
-        }
-        .hero-right h2 span {
-          color: var(--orange);
-        }
-        .hero-right p {
-          color: var(--muted);
-          font-size: 1rem;
-        }
+      .confirm-summary { background: var(--accent-light); border: 1.5px solid rgba(244,121,32,0.4); border-radius: 14px; padding: 18px 20px; margin: 8px 0 16px; }
+      .confirm-summary .plan-name { font-weight: 800; font-size: 1.05rem; color: var(--navy); }
+      .confirm-summary .plan-price { font-weight: 800; font-size: 1.6rem; color: var(--orange); }
+      .confirm-summary .plan-type-tag { display: inline-block; background: var(--navy); color: white; font-size: 0.72rem; padding: 3px 12px; border-radius: 50px; margin-bottom: 8px; font-weight: 600; }
+      .btn-proceed { background: linear-gradient(135deg,var(--orange),var(--accent-dark)); color: white; border: none; border-radius: 50px; padding: 10px 28px; font-weight: 700; transition: all 0.2s; }
+      .btn-proceed:hover { background: linear-gradient(135deg,#e06a10,#bf550a); color: white; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(244,121,32,0.4); }
+      .btn-cancel-custom { border: 2px solid var(--border); background: white; color: var(--muted); border-radius: 50px; padding: 10px 28px; font-weight: 600; transition: all 0.2s; }
+      .btn-cancel-custom:hover { border-color: var(--muted); color: var(--text); }
 
-        .step-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          background: var(--accent-light);
-          color: var(--orange);
-          font-weight: 800;
-          font-size: 0.78rem;
-          letter-spacing: 1.5px;
-          padding: 5px 14px;
-          border-radius: 50px;
-          border: 1.5px solid rgba(244, 121, 32, 0.3);
-          margin-bottom: 14px;
-        }
-        .step-badge::before {
-          content: "";
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          background: var(--orange);
-        }
-
-        /* ── Plan type cards ── */
-        .plan-type-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 16px;
-        }
-        .plan-type-card {
-          background: white;
-          border: 2px solid var(--border);
-          border-radius: 18px;
-          padding: 22px 20px;
-          cursor: pointer;
-          transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-          position: relative;
-          overflow: hidden;
-          text-align: center;
-        }
-        .plan-type-card::before {
-          content: "";
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(
-            135deg,
-            rgba(244, 121, 32, 0.06),
-            transparent
-          );
-          opacity: 0;
-          transition: opacity 0.25s;
-        }
-        .plan-type-card:hover {
-          border-color: var(--orange);
-          transform: translateY(-4px);
-          box-shadow: 0 12px 32px rgba(244, 121, 32, 0.2);
-        }
-        .plan-type-card:hover::before {
-          opacity: 1;
-        }
-        .plan-type-card .icon-wrap {
-          width: 52px;
-          height: 52px;
-          border-radius: 14px;
-          background: var(--accent-light);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 0 auto 12px;
-          font-size: 1.4rem;
-          color: var(--orange);
-          transition: all 0.25s;
-        }
-        .plan-type-card:hover .icon-wrap {
-          background: var(--orange);
-          color: white;
-        }
-        .plan-type-card .type-label {
-          font-weight: 800;
-          font-size: 1rem;
-          color: var(--navy);
-          display: block;
-        }
-        .plan-type-card .type-desc {
-          font-size: 0.78rem;
-          color: var(--muted);
-          margin-top: 4px;
-        }
-        .plan-type-card .arrow-badge {
-          position: absolute;
-          top: 10px;
-          right: 10px;
-          background: var(--orange);
-          color: white;
-          border-radius: 50%;
-          width: 24px;
-          height: 24px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 0.65rem;
-          opacity: 0;
-          transition: opacity 0.2s;
-        }
-        .plan-type-card:hover .arrow-badge {
-          opacity: 1;
-        }
-
-        /* ── Plan modals (Individual / Family / Senior) ── */
-        .plans-modal .modal-dialog {
-          max-width: 940px;
-        }
-        .plans-modal .modal-content {
-          border: none;
-          border-radius: 20px;
-          overflow: hidden;
-          box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
-        }
-        .plans-modal .modal-header {
-          background: linear-gradient(
-            135deg,
-            var(--navy) 0%,
-            var(--primary-mid) 100%
-          );
-          padding: 20px 28px;
-          border: none;
-        }
-        .plans-modal .modal-title {
-          font-family: "Montserrat", sans-serif;
-          font-size: 1.3rem;
-          color: white;
-        }
-        .plans-modal .modal-title small {
-          font-family: "Plus Jakarta Sans", sans-serif;
-          font-size: 0.8rem;
-          opacity: 0.75;
-          display: block;
-          font-weight: 400;
-        }
-        .plans-modal .modal-body {
-          background: #f0f3fa;
-          padding: 28px;
-          max-height: 75vh;
-          overflow-y: auto;
-        }
-        .plans-modal .modal-body::-webkit-scrollbar {
-          width: 6px;
-        }
-        .plans-modal .modal-body::-webkit-scrollbar-track {
-          background: #dde3f0;
-          border-radius: 3px;
-        }
-        .plans-modal .modal-body::-webkit-scrollbar-thumb {
-          background: var(--primary-mid);
-          border-radius: 3px;
-        }
-
-        .section-divider {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          margin: 28px 0 16px;
-        }
-        .section-divider:first-child {
-          margin-top: 0;
-        }
-        .section-divider .divider-badge {
-          background: linear-gradient(135deg, var(--navy), var(--primary-mid));
-          color: white;
-          font-weight: 800;
-          font-size: 0.82rem;
-          padding: 5px 14px;
-          border-radius: 50px;
-          white-space: nowrap;
-          letter-spacing: 0.5px;
-        }
-        .section-divider .divider-line {
-          flex: 1;
-          height: 2px;
-          background: linear-gradient(to right, var(--border), transparent);
-        }
-
-        .plan-card {
-          background: white;
-          border-radius: 16px;
-          border: 1.5px solid var(--border);
-          overflow: hidden;
-          height: 100%;
-          transition: all 0.25s;
-          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-        }
-        .plan-card:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 12px 32px rgba(15, 30, 61, 0.14);
-          border-color: var(--orange);
-        }
-        .plan-card-header {
-          background: linear-gradient(
-            135deg,
-            var(--navy) 0%,
-            var(--primary-mid) 100%
-          );
-          padding: 14px 18px;
-          display: flex;
-          align-items: center;
-          gap: 10px;
-        }
-        .plan-card-header .room-badge {
-          background: rgba(244, 121, 32, 0.3);
-          color: #ffd4a8;
-          font-size: 0.72rem;
-          padding: 3px 10px;
-          border-radius: 50px;
-          border: 1px solid rgba(244, 121, 32, 0.5);
-        }
-        .plan-card-header h6 {
-          color: white;
-          font-weight: 700;
-          margin: 0;
-          font-size: 0.95rem;
-        }
-        .plan-card-body {
-          padding: 16px 18px;
-        }
-        .plan-card-body .benefit-list {
-          list-style: none;
-          padding: 0;
-          margin: 0 0 16px;
-        }
-        .plan-card-body .benefit-list li {
-          display: flex;
-          align-items: flex-start;
-          gap: 8px;
-          font-size: 0.82rem;
-          color: var(--muted);
-          padding: 4px 0;
-        }
-        .plan-card-body .benefit-list li i {
-          color: var(--orange);
-          font-size: 0.75rem;
-          margin-top: 3px;
-          flex-shrink: 0;
-        }
-
-        .period-buttons {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 8px;
-        }
-        .btn-period {
-          flex: 1;
-          min-width: 0;
-          background: white;
-          border: 2px solid var(--border);
-          border-radius: 10px;
-          padding: 8px 6px;
-          font-size: 0.76rem;
-          font-weight: 700;
-          color: var(--navy);
-          cursor: pointer;
-          transition: all 0.2s;
-          text-align: center;
-        }
-        .btn-period:hover {
-          background: var(--orange);
-          border-color: var(--orange);
-          color: white;
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(244, 121, 32, 0.35);
-        }
-        .btn-period .period-label {
-          display: block;
-          font-size: 0.72rem;
-          font-weight: 600;
-        }
-        .btn-period .period-price {
-          display: block;
-          font-size: 0.88rem;
-          font-weight: 800;
-          color: var(--navy);
-          margin-top: 2px;
-        }
-        .btn-period:hover .period-price {
-          color: white;
-        }
-
-        /* ── Shared modal base styles ── */
-        #modernConfirmationModal .modal-content,
-        #conditionModal .modal-content,
-        #clientDetailsModal .modal-content,
-        #groupEnrollModal .modal-content {
-          border: none;
-          border-radius: 20px;
-          overflow: hidden;
-          box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
-        }
-        #modernConfirmationModal .modal-header,
-        #conditionModal .modal-header,
-        #clientDetailsModal .modal-header,
-        #groupEnrollModal .modal-header {
-          background: linear-gradient(135deg, var(--navy), var(--primary-mid));
-          border: none;
-          padding: 18px 24px;
-        }
-        #modernConfirmationModal .modal-title,
-        #conditionModal .modal-title,
-        #clientDetailsModal .modal-title,
-        #groupEnrollModal .modal-title {
-          color: white;
-          font-weight: 700;
-          font-size: 1.1rem;
-        }
-
-        .confirm-summary {
-          background: var(--accent-light);
-          border: 1.5px solid rgba(244, 121, 32, 0.4);
-          border-radius: 14px;
-          padding: 18px 20px;
-          margin: 8px 0 16px;
-        }
-        .confirm-summary .plan-name {
-          font-weight: 800;
-          font-size: 1.05rem;
-          color: var(--navy);
-        }
-        .confirm-summary .plan-price {
-          font-weight: 800;
-          font-size: 1.6rem;
-          color: var(--orange);
-        }
-        .confirm-summary .plan-type-tag {
-          display: inline-block;
-          background: var(--navy);
-          color: white;
-          font-size: 0.72rem;
-          padding: 3px 12px;
-          border-radius: 50px;
-          margin-bottom: 8px;
-          font-weight: 600;
-        }
-
-        .btn-proceed {
-          background: linear-gradient(135deg, var(--orange), var(--accent-dark));
-          color: white;
-          border: none;
-          border-radius: 50px;
-          padding: 10px 28px;
-          font-weight: 700;
-          transition: all 0.2s;
-        }
-        .btn-proceed:hover {
-          background: linear-gradient(135deg, #e06a10, #bf550a);
-          color: white;
-          transform: translateY(-2px);
-          box-shadow: 0 6px 20px rgba(244, 121, 32, 0.4);
-        }
-        .btn-cancel-custom {
-          border: 2px solid var(--border);
-          background: white;
-          color: var(--muted);
-          border-radius: 50px;
-          padding: 10px 28px;
-          font-weight: 600;
-          transition: all 0.2s;
-        }
-        .btn-cancel-custom:hover {
-          border-color: var(--muted);
-          color: var(--text);
-        }
-
-        .form-control,
-        .form-select {
-          border: 2px solid var(--border);
-          border-radius: 10px;
-          font-size: 0.9rem;
-          padding: 9px 14px;
-          color: var(--text);
-          transition: border-color 0.2s;
-        }
-        .form-control:focus,
-        .form-select:focus {
-          border-color: var(--orange);
-          box-shadow: 0 0 0 3px rgba(244, 121, 32, 0.15);
-        }
-        .form-label {
-          font-weight: 600;
-          font-size: 0.88rem;
-          color: var(--navy);
-          margin-bottom: 6px;
-        }
-        .form-check-input:checked {
-          background-color: var(--orange);
-          border-color: var(--orange);
-        }
+      .form-control, .form-select { border: 2px solid var(--border); border-radius: 10px; font-size: 0.9rem; padding: 9px 14px; color: var(--text); transition: border-color 0.2s; }
+      .form-control:focus, .form-select:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(244,121,32,0.15); }
+      .form-label { font-weight: 600; font-size: 0.88rem; color: var(--navy); margin-bottom: 6px; }
+      .form-check-input:checked { background-color: var(--orange); border-color: var(--orange); }
 
       .members-section { background: #f0f3fa; border-radius: 14px; padding: 18px; border: 1.5px dashed var(--border); }
       .members-section-title { font-weight: 800; font-size: 0.9rem; color: var(--navy); display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
@@ -687,77 +135,42 @@
       .dependent-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
 
       /* ── Age Warning Banner ── */
-      #age-warning-banner {
-        display: none;
-        background: linear-gradient(135deg, #fff3e0, #ffe0b2);
-        border: 2px solid #f47920;
-        border-radius: 14px;
-        padding: 16px 18px;
-        margin-bottom: 16px;
-        animation: warnPulse 0.4s ease;
-      }
-      @keyframes warnPulse {
-        0%   { transform: scale(0.97); opacity: 0; }
-        60%  { transform: scale(1.01); }
-        100% { transform: scale(1);    opacity: 1; }
-      }
-      .age-warn-title {
-        font-weight: 800;
-        font-size: 0.95rem;
-        color: #b34d00;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 6px;
-      }
-      .age-warn-title i { color: var(--orange); font-size: 1rem; }
-      .age-warn-body {
-        font-size: 0.84rem;
-        color: #7a3800;
-        line-height: 1.55;
-      }
-      .age-warn-suggest {
-        margin-top: 10px;
-        background: var(--navy);
-        color: white;
-        border-radius: 8px;
-        padding: 10px 14px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px;
-        flex-wrap: wrap;
-      }
-      .age-warn-suggest span { font-size: 0.82rem; font-weight: 600; }
-      .btn-switch-plan {
-        background: var(--orange);
-        border: none;
-        color: white;
-        font-weight: 700;
-        font-size: 0.8rem;
-        border-radius: 8px;
-        padding: 7px 16px;
-        cursor: pointer;
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        transition: all 0.2s;
-        white-space: nowrap;
-        flex-shrink: 0;
-      }
-      .btn-switch-plan:hover { background: var(--accent-dark); transform: translateY(-1px); }
+      #age-warning-banner { display: none; border-radius: 14px; padding: 16px 18px; margin-bottom: 16px; animation: warnPulse 0.4s ease; }
+      #age-warning-banner.warn-upgrade { background: linear-gradient(135deg,#fff3e0,#ffe0b2); border: 2px solid #f47920; }
+      #age-warning-banner.warn-downgrade { background: linear-gradient(135deg,#e8f4fd,#cce5ff); border: 2px solid #2196f3; }
+      @keyframes warnPulse { 0% { transform: scale(0.97); opacity: 0; } 60% { transform: scale(1.01); } 100% { transform: scale(1); opacity: 1; } }
+      .age-warn-title { font-weight: 800; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+      .warn-upgrade .age-warn-title { color: #b34d00; }
+      .warn-downgrade .age-warn-title { color: #0d47a1; }
+      .age-warn-title i { font-size: 1rem; }
+      .warn-upgrade .age-warn-title i { color: var(--orange); }
+      .warn-downgrade .age-warn-title i { color: #2196f3; }
+      .age-warn-body { font-size: 0.84rem; line-height: 1.55; }
+      .warn-upgrade .age-warn-body { color: #7a3800; }
+      .warn-downgrade .age-warn-body { color: #1a237e; }
+      .age-warn-suggest { margin-top: 10px; border-radius: 8px; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+      .warn-upgrade .age-warn-suggest { background: var(--navy); }
+      .warn-downgrade .age-warn-suggest { background: #1565c0; }
+      .age-warn-suggest span { font-size: 0.82rem; font-weight: 600; color: white; }
+      .btn-switch-plan { border: none; color: white; font-weight: 700; font-size: 0.8rem; border-radius: 8px; padding: 7px 16px; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.2s; white-space: nowrap; flex-shrink: 0; }
+      .warn-upgrade .btn-switch-plan { background: var(--orange); }
+      .warn-upgrade .btn-switch-plan:hover { background: var(--accent-dark); transform: translateY(-1px); }
+      .warn-downgrade .btn-switch-plan { background: #42a5f5; }
+      .warn-downgrade .btn-switch-plan:hover { background: #1e88e5; transform: translateY(-1px); }
 
-      /* ── Age indicator chip on bday field ── */
-      #age-chip {
-        display: none;
-        font-size: 0.78rem;
-        font-weight: 700;
-        padding: 3px 12px;
-        border-radius: 50px;
-        margin-top: 6px;
-        width: fit-content;
-      }
+      /* ── Accidental Insurance checkbox ── */
+      #accidental-insurance-row { display: none; background: linear-gradient(135deg,#e8f4fd,#cce5ff); border: 1.5px solid rgba(33,150,243,0.4); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; }
+      .accidental-label { font-weight: 700; font-size: 0.88rem; color: #0d47a1; display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+      .accidental-label i { color: #2196f3; }
+      .accidental-desc { font-size: 0.8rem; color: #1a237e; margin-bottom: 10px; }
+      .accidental-age-note { font-size: 0.76rem; color: #1565c0; background: rgba(33,150,243,0.1); border-radius: 6px; padding: 6px 10px; margin-top: 8px; }
+
+      /* ── Age indicator chip ── */
+      #age-chip { display: none; font-size: 0.78rem; font-weight: 700; padding: 3px 12px; border-radius: 50px; margin-top: 6px; width: fit-content; }
       #age-chip.ok   { background: #e6f7ee; color: #1a7a46; border: 1.5px solid #a8dfc0; }
       #age-chip.warn { background: #fff0e0; color: #b34d00; border: 1.5px solid #f4b27a; }
       #age-chip.over { background: #ffeaea; color: #c0392b; border: 1.5px solid #f4a0a0; }
+      #age-chip.blue { background: #e3f2fd; color: #0d47a1; border: 1.5px solid #90caf9; }
 
       /* ── Group Modal ── */
       #groupEnrollModal .modal-dialog { max-width: 1100px; }
@@ -775,13 +188,13 @@
       .enrollee-count-badge { background: var(--navy); color: white; font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 50px; }
       .enroll-toolbar-hint { font-size: 0.78rem; color: var(--muted); }
       .enroll-toolbar-right { display: flex; gap: 8px; }
-      .btn-enroll-add { background: linear-gradient(135deg, var(--orange), var(--accent-dark)); color: white; border: none; border-radius: 8px; padding: 8px 16px; font-size: 0.82rem; font-weight: 700; font-family: 'Plus Jakarta Sans', sans-serif; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
-      .btn-enroll-add:hover { background: linear-gradient(135deg, #e06a10, #bf550a); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(244,121,32,0.4); }
+      .btn-enroll-add { background: linear-gradient(135deg,var(--orange),var(--accent-dark)); color: white; border: none; border-radius: 8px; padding: 8px 16px; font-size: 0.82rem; font-weight: 700; font-family: 'Plus Jakarta Sans', sans-serif; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+      .btn-enroll-add:hover { background: linear-gradient(135deg,#e06a10,#bf550a); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(244,121,32,0.4); }
       .btn-enroll-clear { background: white; border: 2px solid var(--border); color: var(--muted); border-radius: 8px; padding: 8px 14px; font-size: 0.82rem; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif; cursor: pointer; transition: all 0.2s; }
       .btn-enroll-clear:hover { border-color: var(--danger); color: var(--danger); background: #fff5f5; }
       .enroll-table-wrap { border-radius: 14px; overflow: hidden; border: 1.5px solid var(--border); box-shadow: 0 4px 16px rgba(15,30,61,0.08); }
       .enroll-table { width: 100%; border-collapse: collapse; min-width: 860px; font-size: 0.8rem; font-family: 'Plus Jakarta Sans', sans-serif; }
-      .enroll-table thead tr { background: linear-gradient(135deg, var(--navy) 0%, var(--primary-mid) 100%); }
+      .enroll-table thead tr { background: linear-gradient(135deg,var(--navy) 0%,var(--primary-mid) 100%); }
       .enroll-table thead th { color: rgba(255,255,255,0.9); font-weight: 700; font-size: 0.72rem; padding: 11px 10px; text-align: left; border-right: 1px solid rgba(255,255,255,0.1); white-space: nowrap; letter-spacing: 0.3px; }
       .enroll-table thead th:last-child { border-right: none; text-align: center; }
       .enroll-table thead th .th-icon { color: var(--orange); margin-right: 5px; font-size: 0.68rem; }
@@ -804,7 +217,7 @@
       .empty-enroll-icon { font-size: 2.4rem; color: #c8cedf; margin-bottom: 10px; }
       .empty-enroll-text { font-size: 0.88rem; font-weight: 600; color: var(--muted); }
       .empty-enroll-sub { font-size: 0.77rem; color: #a0acc8; margin-top: 4px; }
-      .enroll-table-foot { background: linear-gradient(135deg, var(--navy) 0%, var(--primary-mid) 100%); padding: 9px 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
+      .enroll-table-foot { background: linear-gradient(135deg,var(--navy) 0%,var(--primary-mid) 100%); padding: 9px 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
       .enroll-table-foot span { font-size: 0.76rem; color: rgba(255,255,255,0.7); }
       .enroll-table-foot .foot-count { color: white; font-weight: 700; }
       #groupEnrollModal .modal-footer { border-top: 1.5px solid var(--border); background: white; padding: 14px 24px; }
@@ -828,86 +241,62 @@
     <div style="width:120px"></div>
   </header>
 
-      <section class="hero-section">
-        <div class="container">
-          <div class="row align-items-center g-5">
-            <div class="col-lg-6 text-center hero-left">
-              <div class="logo-display-card">
-                <div class="shine"></div>
-                <img
-                  src="assets/images/amaphil-logo.png"
-                  alt="AMAPHIL - Advanced Medical Access Philippines, Inc."
-                  onerror="
-                    this.src =
-                      'https://placehold.co/340x160/0f1e3d/f47920?text=AMAPHIL'
-                  "
-                />
-              </div>
+  <section class="hero-section">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 text-center hero-left">
+          <div class="logo-display-card">
+            <div class="shine"></div>
+            <img src="assets/images/amaphil-logo.png" alt="AMAPHIL - Advanced Medical Access Philippines, Inc."
+              onerror="this.src='https://placehold.co/340x160/0f1e3d/f47920?text=AMAPHIL'" />
+          </div>
+        </div>
+        <div class="col-lg-6 hero-right">
+          <div class="step-badge">STEP 1 OF 4</div>
+          <h2>Choose Your<br /><span>Coverage Plan</span></h2>
+          <p class="mb-4">Select the plan type that fits your needs. Each category offers tailored benefits and pricing.</p>
+          <div class="plan-type-grid">
+            <div class="plan-type-card" data-bs-toggle="modal" data-bs-target="#plansModal_Individual">
+              <div class="arrow-badge"><i class="fa fa-arrow-right"></i></div>
+              <div class="icon-wrap"><i class="fa fa-user"></i></div>
+              <span class="type-label">Individual</span>
+              <span class="type-desc">Perfect for single coverage</span>
             </div>
-            <div class="col-lg-6 hero-right">
-              <div class="step-badge">STEP 1 OF 4</div>
-              <h2>Choose Your<br /><span>Coverage Plan</span></h2>
-              <p class="mb-4">
-                Select the plan type that fits your needs. Each category offers
-                tailored benefits and pricing.
-              </p>
-              <div class="plan-type-grid">
-                <div
-                  class="plan-type-card"
-                  data-bs-toggle="modal"
-                  data-bs-target="#plansModal_Individual"
-                >
-                  <div class="arrow-badge"><i class="fa fa-arrow-right"></i></div>
-                  <div class="icon-wrap"><i class="fa fa-user"></i></div>
-                  <span class="type-label">Individual</span>
-                  <span class="type-desc">Perfect for single coverage</span>
-                </div>
-                <div
-                  class="plan-type-card"
-                  data-bs-toggle="modal"
-                  data-bs-target="#plansModal_Family"
-                >
-                  <div class="arrow-badge"><i class="fa fa-arrow-right"></i></div>
-                  <div class="icon-wrap"><i class="fa fa-people-roof"></i></div>
-                  <span class="type-label">Family</span>
-                  <span class="type-desc">Coverage for your whole family</span>
-                </div>
-                <div
-                  class="plan-type-card"
-                  data-bs-toggle="modal"
-                  data-bs-target="#plansModal_Senior"
-                >
-                  <div class="arrow-badge"><i class="fa fa-arrow-right"></i></div>
-                  <div class="icon-wrap"><i class="fa fa-heart-pulse"></i></div>
-                  <span class="type-label">Senior</span>
-                  <span class="type-desc">Specialized care for seniors</span>
-                </div>
-                <div
-                  class="plan-type-card"
-                  data-bs-toggle="modal"
-                  data-bs-target="#plansModal_Group"
-                >
-                  <div class="arrow-badge"><i class="fa fa-arrow-right"></i></div>
-                  <div class="icon-wrap"><i class="fa fa-building"></i></div>
-                  <span class="type-label">Group</span>
-                  <span class="type-desc">Ideal for organizations</span>
-                </div>
-              </div>
+            <div class="plan-type-card" data-bs-toggle="modal" data-bs-target="#plansModal_Family">
+              <div class="arrow-badge"><i class="fa fa-arrow-right"></i></div>
+              <div class="icon-wrap"><i class="fa fa-people-roof"></i></div>
+              <span class="type-label">Family</span>
+              <span class="type-desc">Coverage for your whole family</span>
+            </div>
+            <div class="plan-type-card" data-bs-toggle="modal" data-bs-target="#plansModal_Senior">
+              <div class="arrow-badge"><i class="fa fa-arrow-right"></i></div>
+              <div class="icon-wrap"><i class="fa fa-heart-pulse"></i></div>
+              <span class="type-label">Senior</span>
+              <span class="type-desc">Specialized care for seniors</span>
+            </div>
+            <div class="plan-type-card" data-bs-toggle="modal" data-bs-target="#plansModal_Group">
+              <div class="arrow-badge"><i class="fa fa-arrow-right"></i></div>
+              <div class="icon-wrap"><i class="fa fa-building"></i></div>
+              <span class="type-label">Group</span>
+              <span class="type-desc">Ideal for organizations</span>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
 
-      <!-- ═══════════════════════════════════════════
-      PLAN DATA & BENEFITS
+  <!-- ═══════════════════════════════════════════
+    PLAN DATA & BENEFITS
   ═══════════════════════════════════════════ -->
   <script>
+  // ── Plan data ──────────────────────────────────────────────────────
   const PLAN_DATA = {
     Individual: [
-      { tier: '60,000 Health Plans', name: '60K ABL', room: '6 Months PEC', monthly: '1,140', quarterly: '3,340', semi: '6,240',  annual: '12,000' },
-      { tier: '60,000 Health Plans', name: '60K ABL', room: '2 Months PEC', monthly: '1,197', quarterly: '3,402', semi: '6,678',  annual: '12,600' },
+      { tier: '60,000 Health Plans',  name: '60K ABL',  room: '6 Months PEC', monthly: '1,140', quarterly: '3,340', semi: '6,240',  annual: '12,000' },
+      { tier: '60,000 Health Plans',  name: '60K ABL',  room: '2 Months PEC', monthly: '1,197', quarterly: '3,402', semi: '6,678',  annual: '12,600' },
       { tier: '100,000 Health Plans', name: '100K ABL', room: '6 Months PEC', monthly: '1,140', quarterly: '4,860', semi: '9,360',  annual: '18,000' },
-      { tier: '100,000 Health Plans', name: '100K MBL', room: '2 Months PEC', monthly: '1,197', quarterly: '4,860', semi: '9,360', annual: '18,600' },
+      { tier: '100,000 Health Plans', name: '100K MBL', room: '2 Months PEC', monthly: '1,197', quarterly: '4,860', semi: '9,360',  annual: '18,600' },
       { tier: '120,000 Health Plans', name: '120K ABL', room: '6 Months PEC', monthly: '1,140', quarterly: '5,832', semi: '11,232', annual: '21,600' },
       { tier: '120,000 Health Plans', name: '120K MBL', room: '2 Months PEC', monthly: '1,197', quarterly: '5,994', semi: '11,766', annual: '22,200' },
     ],
@@ -915,21 +304,37 @@
       { tier: 'Family Plan', name: 'Family Guard Plan', room: '', quarterly: '1,500', semi: '3,600', annual: '7,200' },
     ],
     Senior: [
+      /**
+       * Plan 1499 — "Kaagapay Emergency Access Plan ₱1,499"
+       *   • Normal eligibility : ages 0 (3 months+) to 59
+       *   • With Accidental Insurance exception: ages 7 to 70 are also eligible
+       *   • If client is 60–70 (no accidental) → recommend ₱1,599
+       *   • hasAccidentalInsurance: true  ← used by buildPlanModals to show benefit
+       */
       {
         tier: 'Senior Plan',
         name: 'Kaagapay Emergency Access Plan',
         room: '1,499',
         quarterly: '3,340', semi: '6,240', annual: '12,000',
-        // Age restriction: only ages 0–59
         ageMin: 0, ageMax: 59,
-        upgradeTo: '1,599'  // name of sibling plan to suggest
+        accidentalAgeMin: 7, accidentalAgeMax: 70,
+        hasAccidentalInsurance: true,
+        planKey: '1499'
       },
+      /**
+       * Plan 1599 — "Kaagapay Emergency Access Plan ₱1,599"
+       *   • Normal eligibility : ages 60 to 70
+       *   • If client is 3 months–59 → recommend ₱1,499
+       *   • hasAccidentalInsurance: false  ← Accidental Insurance NOT shown
+       */
       {
         tier: 'Senior Plan',
         name: 'Kaagapay Emergency Access Plan',
         room: '1,599',
         quarterly: '3,402', semi: '6,678', annual: '12,600',
-        ageMin: 0, ageMax: 999  // no upper restriction
+        ageMin: 60, ageMax: 70,
+        hasAccidentalInsurance: false,
+        planKey: '1599'
       },
     ],
     Group: [
@@ -937,253 +342,103 @@
     ],
   };
 
-        const BENEFITS = [
-          "Inpatient Coverage",
-          "Outpatient Coverage",
-          "Emergency Care",
-          "Annual Physical Exam (APE)",
-          "Mental Health Care",
-          "Accidental Insurance",
-        ];
+  // ── Benefits list — Accidental Insurance included by default; removed for ₱1,599 at render time ──
+  const BENEFITS_WITH_ACCIDENTAL    = ["Inpatient Coverage","Outpatient Coverage","Emergency Care","Annual Physical Exam (APE)","Mental Health Care","Accidental Insurance"];
+  const BENEFITS_WITHOUT_ACCIDENTAL = ["Inpatient Coverage","Outpatient Coverage","Emergency Care","Annual Physical Exam (APE)","Mental Health Care"];
 
-  let currentPlanType  = '';
-  let selectedGroupPlan = { name: '', period: '', price: '' };
+  let currentPlanType       = '';
+  let selectedGroupPlan     = { name: '', period: '', price: '' };
+  let selectedSeniorPlanKey = null;   // '1499' or '1599'
 
-  // ── Tracks the selected senior plan's age limits ──────────────────
-  let selectedSeniorAgeMax = 999; // default = no restriction
-  let selectedSeniorUpgradeTo = null;
+  // State tracked for Senior age-check
+  let currentSeniorPlan = null;       // reference to the selected PLAN_DATA.Senior[x] object
   </script>
 
-      <!-- Plan modal container -->
-      <div id="plan-modals-container"></div>
+  <!-- Plan modal container -->
+  <div id="plan-modals-container"></div>
 
   <!-- ═══════════════════════════════════════════
-      MODAL: Confirmation
+    MODAL: Confirmation
   ═══════════════════════════════════════════ -->
-      <div
-        class="modal fade"
-        id="modernConfirmationModal"
-        tabindex="-1"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-      >
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">
-                <i class="fa fa-circle-check me-2"></i>Confirm Your Selection
-              </h5>
-              <button
-                type="button"
-                class="btn-close btn-close-white"
-                data-bs-dismiss="modal"
-              ></button>
+  <div class="modal fade" id="modernConfirmationModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="fa fa-circle-check me-2"></i>Confirm Your Selection</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <p class="text-muted mb-3" style="font-size:0.9rem">Review your selected plan before continuing.</p>
+          <div class="confirm-summary">
+            <span class="plan-type-tag" id="conf-plan-type">Individual</span>
+            <div class="plan-name" id="conf-plan-name">60K ABL – Ward</div>
+            <div class="plan-price" id="conf-plan-price">₱4,000</div>
+            <div style="font-size:0.82rem;color:var(--muted);margin-top:4px" id="conf-plan-period">Quarterly</div>
+          </div>
+          <p style="font-size:0.85rem;color:var(--muted)">
+            <i class="fa fa-info-circle me-1 text-warning"></i>Pre-existing conditions may affect your coverage terms.
+          </p>
+        </div>
+        <div class="modal-footer border-0 pb-4 gap-2 justify-content-center">
+          <button class="btn-cancel-custom btn" data-bs-dismiss="modal">Cancel</button>
+          <button class="btn-proceed btn" data-bs-toggle="modal" data-bs-target="#conditionModal">
+            Proceed <i class="fa fa-arrow-right ms-1"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+    MODAL: Pre-existing Condition
+  ═══════════════════════════════════════════ -->
+  <div class="modal fade" id="conditionModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="fa fa-heart-pulse me-2"></i>Pre-existing Condition</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="mb-3">
+            <label class="form-label">Do you have a pre-existing condition?</label>
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="radio" name="conditionType" id="withCondition" value="with" />
+              <label class="form-check-label" for="withCondition">Yes, I have a pre-existing condition</label>
             </div>
-            <div class="modal-body p-4">
-              <p class="text-muted mb-3" style="font-size: 0.9rem">
-                Review your selected plan before continuing.
-              </p>
-              <div class="confirm-summary">
-                <span class="plan-type-tag" id="conf-plan-type">Individual</span>
-                <div class="plan-name" id="conf-plan-name">60K ABL – Ward</div>
-                <div class="plan-price" id="conf-plan-price">₱4,000</div>
-                <div
-                  style="font-size: 0.82rem; color: var(--muted); margin-top: 4px"
-                  id="conf-plan-period"
-                >
-                  Quarterly
-                </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="conditionType" id="withoutCondition" value="without" checked />
+              <label class="form-check-label" for="withoutCondition">No pre-existing conditions</label>
+            </div>
+          </div>
+          <div id="conditionChecklist" class="d-none" style="background:var(--soft-bg);border-radius:12px;padding:16px;">
+            <label class="form-label">Select applicable conditions:</label>
+            <div class="row g-2">
+              <div class="col-6"><div class="form-check"><input class="form-check-input" type="checkbox" id="condAsthma" /><label class="form-check-label" for="condAsthma">Asthma</label></div></div>
+              <div class="col-6"><div class="form-check"><input class="form-check-input" type="checkbox" id="condDiabetes" /><label class="form-check-label" for="condDiabetes">Diabetes</label></div></div>
+              <div class="col-6"><div class="form-check"><input class="form-check-input" type="checkbox" id="condHypertension" /><label class="form-check-label" for="condHypertension">Hypertension</label></div></div>
+              <div class="col-6"><div class="form-check"><input class="form-check-input" type="checkbox" id="condHeart" /><label class="form-check-label" for="condHeart">Heart Condition</label></div></div>
+              <div class="col-6"><div class="form-check"><input class="form-check-input" type="checkbox" id="condCongenital" /><label class="form-check-label" for="condCongenital">Congenital Disease</label></div></div>
+              <div class="col-6"><div class="form-check"><input class="form-check-input" type="checkbox" id="condKidney" /><label class="form-check-label" for="condKidney">Kidney Disease</label></div></div>
+              <div class="col-12 mt-1">
+                <div class="form-check"><input class="form-check-input" type="checkbox" id="otherCondition" /><label class="form-check-label" for="otherCondition">Others</label></div>
+                <input type="text" class="form-control mt-2" id="otherText" placeholder="Please specify..." style="display:none" />
               </div>
-              <p style="font-size: 0.85rem; color: var(--muted)">
-                <i class="fa fa-info-circle me-1 text-warning"></i>Pre-existing
-                conditions may affect your coverage terms.
-              </p>
-            </div>
-            <div class="modal-footer border-0 pb-4 gap-2 justify-content-center">
-              <button class="btn-cancel-custom btn" data-bs-dismiss="modal">
-                Cancel
-              </button>
-              <button
-                class="btn-proceed btn"
-                data-bs-toggle="modal"
-                data-bs-target="#conditionModal"
-              >
-                Proceed <i class="fa fa-arrow-right ms-1"></i>
-              </button>
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- ═══════════════════════════════════════════
-      MODAL: Pre-existing Condition
-  ═══════════════════════════════════════════ -->
-      <div
-        class="modal fade"
-        id="conditionModal"
-        tabindex="-1"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-      >
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">
-                <i class="fa fa-heart-pulse me-2"></i>Pre-existing Condition
-              </h5>
-              <button
-                type="button"
-                class="btn-close btn-close-white"
-                data-bs-dismiss="modal"
-              ></button>
-            </div>
-            <div class="modal-body p-4">
-              <div class="mb-3">
-                <label class="form-label"
-                  >Do you have a pre-existing condition?</label
-                >
-                <div class="form-check mb-2">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="conditionType"
-                    id="withCondition"
-                    value="with"
-                  />
-                  <label class="form-check-label" for="withCondition"
-                    >Yes, I have a pre-existing condition</label
-                  >
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="conditionType"
-                    id="withoutCondition"
-                    value="without"
-                    checked
-                  />
-                  <label class="form-check-label" for="withoutCondition"
-                    >No pre-existing conditions</label
-                  >
-                </div>
-              </div>
-              <div
-                id="conditionChecklist"
-                class="d-none"
-                style="
-                  background: var(--soft-bg);
-                  border-radius: 12px;
-                  padding: 16px;
-                "
-              >
-                <label class="form-label">Select applicable conditions:</label>
-                <div class="row g-2">
-                  <div class="col-6">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        id="condAsthma"
-                      /><label class="form-check-label" for="condAsthma"
-                        >Asthma</label
-                      >
-                    </div>
-                  </div>
-                  <div class="col-6">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        id="condDiabetes"
-                      /><label class="form-check-label" for="condDiabetes"
-                        >Diabetes</label
-                      >
-                    </div>
-                  </div>
-                  <div class="col-6">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        id="condHypertension"
-                      /><label class="form-check-label" for="condHypertension"
-                        >Hypertension</label
-                      >
-                    </div>
-                  </div>
-                  <div class="col-6">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        id="condHeart"
-                      /><label class="form-check-label" for="condHeart"
-                        >Heart Condition</label
-                      >
-                    </div>
-                  </div>
-                  <div class="col-6">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        id="condCongenital"
-                      /><label class="form-check-label" for="condCongenital"
-                        >Congenital Disease</label
-                      >
-                    </div>
-                  </div>
-                  <div class="col-6">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        id="condKidney"
-                      /><label class="form-check-label" for="condKidney"
-                        >Kidney Disease</label
-                      >
-                    </div>
-                  </div>
-                  <div class="col-12 mt-1">
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        id="otherCondition"
-                      /><label class="form-check-label" for="otherCondition"
-                        >Others</label
-                      >
-                    </div>
-                    <input
-                      type="text"
-                      class="form-control mt-2"
-                      id="otherText"
-                      placeholder="Please specify..."
-                      style="display: none"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer border-0 pb-4 gap-2 justify-content-center">
-              <button class="btn-cancel-custom btn" data-bs-dismiss="modal">
-                Cancel
-              </button>
-              <button
-                class="btn-proceed btn"
-                data-bs-toggle="modal"
-                data-bs-target="#clientDetailsModal"
-              >
-                Next <i class="fa fa-arrow-right ms-1"></i>
-              </button>
-            </div>
-          </div>
+        <div class="modal-footer border-0 pb-4 gap-2 justify-content-center">
+          <button class="btn-cancel-custom btn" data-bs-dismiss="modal">Cancel</button>
+          <button class="btn-proceed btn" data-bs-toggle="modal" data-bs-target="#clientDetailsModal">
+            Next <i class="fa fa-arrow-right ms-1"></i>
+          </button>
         </div>
       </div>
+    </div>
+  </div>
 
   <!-- ═══════════════════════════════════════════
-      MODAL: Client Details
+    MODAL: Client Details
   ═══════════════════════════════════════════ -->
   <div class="modal fade" id="clientDetailsModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered">
@@ -1197,24 +452,32 @@
           <!-- ══ AGE WARNING BANNER (Senior only) ══ -->
           <div id="age-warning-banner">
             <div class="age-warn-title">
-              <i class="fa fa-triangle-exclamation"></i>
-              Age Restriction Notice
+              <i class="fa fa-triangle-exclamation" id="age-warn-icon"></i>
+              <span id="age-warn-title-text">Age Restriction Notice</span>
             </div>
-            <div class="age-warn-body" id="age-warn-text">
-              Based on your birthdate, you are <strong id="age-warn-years">—</strong> years old.
-              The <strong>Kaagapay Emergency Access Plan ₱1,499</strong> is only available for
-              individuals <strong>59 years old and below</strong>.
-            </div>
+            <div class="age-warn-body" id="age-warn-text"></div>
             <div class="age-warn-suggest">
-              <span>
-                <i class="fa fa-arrow-right me-1" style="color:var(--orange)"></i>
-                We recommend switching to the
-                <strong style="color:white"> ₱1,599 Plan</strong>
-                which covers all ages.
-              </span>
-              <button class="btn-switch-plan" id="btn-switch-senior-plan">
-                <i class="fa fa-rotate me-1"></i>Switch to ₱1,599 Plan
-              </button>
+              <span id="age-warn-suggest-text"></span>
+              <button class="btn-switch-plan" id="btn-switch-senior-plan" onclick="switchSeniorPlan()"></button>
+            </div>
+          </div>
+
+          <!-- ══ ACCIDENTAL INSURANCE OPT-IN (Senior ₱1,499 / age 60–70 only) ══ -->
+          <div id="accidental-insurance-row">
+            <div class="accidental-label"><i class="fa fa-shield-halved"></i> Accidental Insurance Option</div>
+            <div class="accidental-desc">
+              The ₱1,499 plan includes <strong>Accidental Insurance</strong>. Clients aged 60–70 may enroll
+              in this plan <em>only</em> if they opt in to Accidental Insurance coverage.
+            </div>
+            <div class="form-check mt-2">
+              <input class="form-check-input" type="checkbox" id="accidental-insurance-check" />
+              <label class="form-check-label fw-bold" for="accidental-insurance-check" style="color:#0d47a1;">
+                Yes, I want to include Accidental Insurance
+              </label>
+            </div>
+            <div class="accidental-age-note">
+              <i class="fa fa-circle-info me-1"></i>
+              Accidental Insurance is available for ages 7–70. By opting in, you qualify for the ₱1,499 plan.
             </div>
           </div>
 
@@ -1263,67 +526,45 @@
               </div>
             </div>
 
-                <div id="familyMembersSection" style="display: none" class="mb-3">
-                  <hr class="my-3" />
-                  <div class="members-section">
-                    <div class="members-section-title">
-                      <i class="fa fa-people-roof"></i> Dependents
-                    </div>
-                    <div id="dependentsContainer"></div>
-                    <button
-                      type="button"
-                      class="btn-add-dependent"
-                      id="addDependentBtn"
-                    >
-                      <i class="fa fa-plus me-1"></i> Add Dependent
-                    </button>
-                  </div>
-                </div>
+            <div id="familyMembersSection" style="display:none" class="mb-3">
+              <hr class="my-3" />
+              <div class="members-section">
+                <div class="members-section-title"><i class="fa fa-people-roof"></i> Dependents</div>
+                <div id="dependentsContainer"></div>
+                <button type="button" class="btn-add-dependent" id="addDependentBtn">
+                  <i class="fa fa-plus me-1"></i> Add Dependent
+                </button>
+              </div>
+            </div>
 
-                <div class="mb-3">
-                  <label class="form-label">Payment Option</label>
-                  <select
-                    class="form-select"
-                    id="payment-option"
-                    required
-                  ></select>
-                </div>
-                <div class="mb-3">
-                  <label class="form-label"
-                    >Referred By
-                    <small class="text-muted fw-normal">(optional)</small></label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Name of person or source"
-                    id="referredBy"
-                  />
-                </div>
-              </form>
+            <div class="mb-3">
+              <label class="form-label">Payment Option</label>
+              <select class="form-select" id="payment-option" required></select>
             </div>
-            <div class="modal-footer border-0 pb-4 gap-2 justify-content-center">
-              <button class="btn-cancel-custom btn" data-bs-dismiss="modal">
-                Cancel
-              </button>
-              <button class="btn-proceed btn" id="user-info">
-                Submit <i class="fa fa-check ms-1"></i>
-              </button>
+            <div class="mb-3">
+              <label class="form-label">Referred By <small class="text-muted fw-normal">(optional)</small></label>
+              <input type="text" class="form-control" placeholder="Name of person or source" id="referredBy" />
             </div>
-          </div>
+          </form>
+        </div>
+        <div class="modal-footer border-0 pb-4 gap-2 justify-content-center">
+          <button class="btn-cancel-custom btn" data-bs-dismiss="modal">Cancel</button>
+          <button class="btn-proceed btn" id="user-info">Submit <i class="fa fa-check ms-1"></i></button>
         </div>
       </div>
+    </div>
+  </div>
 
-  <!-- Group Enrollment Modal (unchanged) -->
+  <!-- ═══════════════════════════════════════════
+    Group Enrollment Modal
+  ═══════════════════════════════════════════ -->
   <div class="modal fade" id="groupEnrollModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered modal-xl">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">
             <i class="fa fa-building me-2"></i>Group Enrollment Form
-            <small style="font-family:'Plus Jakarta Sans',sans-serif;font-size:0.78rem;opacity:0.7;display:block;font-weight:400;margin-top:2px;">
-              Add all enrollees below — one row per person
-            </small>
+            <small style="font-family:'Plus Jakarta Sans',sans-serif;font-size:0.78rem;opacity:0.7;display:block;font-weight:400;margin-top:2px;">Add all enrollees below — one row per person</small>
           </h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
@@ -1405,7 +646,7 @@
           <div class="group-footer-note"><i class="fa fa-shield-halved"></i>Data is kept confidential and used solely for enrollment processing.</div>
           <div class="d-flex gap-2">
             <button class="btn-cancel-custom btn" data-bs-dismiss="modal">Cancel</button>
-            <button class="btn-proceed btn" id="group-submit-btn" onclick="extractGroupEnrollmentData()">
+            <button class="btn-proceed btn" id="group-submit-btn">
               <i class="fa fa-paper-plane me-1"></i>Submit Enrollment
             </button>
           </div>
@@ -1416,40 +657,57 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-  const PLAN_ICONS = { Individual:'fa-user', Family:'fa-people-roof', Senior:'fa-heart-pulse', Group:'fa-building' };
+  // ══════════════════════════════════════════════════════════════════
+  //  PLAN MODAL BUILDER
+  // ══════════════════════════════════════════════════════════════════
+  const PLAN_ICONS    = { Individual:'fa-user', Family:'fa-people-roof', Senior:'fa-heart-pulse', Group:'fa-building' };
   const PLAN_SUBTITLES = { Individual:'Single coverage · Tailored for you', Family:'Coverage for the whole family', Senior:'Specialized senior care', Group:'Ideal for businesses & organizations' };
 
-  // ── Build plan modals ──────────────────────────────────────────────
   function buildPlanModals() {
     const container = document.getElementById('plan-modals-container');
     let html = '';
 
-          Object.keys(PLAN_DATA).forEach((planType) => {
-            const plans = PLAN_DATA[planType];
-            const tiers = {};
-            plans.forEach((p) => {
-              if (!tiers[p.tier]) tiers[p.tier] = [];
-              tiers[p.tier].push(p);
-            });
+    Object.keys(PLAN_DATA).forEach(planType => {
+      const plans = PLAN_DATA[planType];
+      const tiers = {};
+      plans.forEach(p => { if (!tiers[p.tier]) tiers[p.tier] = []; tiers[p.tier].push(p); });
 
-            let cardsHtml = "";
-            Object.keys(tiers).forEach((tier) => {
-              cardsHtml += `
+      let cardsHtml = '';
+      Object.keys(tiers).forEach(tier => {
+        cardsHtml += `
           <div class="section-divider">
             <span class="divider-badge"><i class="fa fa-shield-halved me-1"></i>${tier}</span>
             <div class="divider-line"></div>
           </div>
-          <div class="row g-3 mb-1">
-        `;
-        tiers[tier].forEach((plan, planIdx) => {
-          const benefits  = BENEFITS.map(b => `<li><i class="fa fa-circle-check"></i>${b}</li>`).join('');
-          const isGroup   = planType === 'Group';
-          const targetModal = isGroup ? '#groupEnrollModal' : '#modernConfirmationModal';
+          <div class="row g-3 mb-1">`;
 
-          // Age restriction attrs (Senior only)
-          const ageAttrs = (plan.ageMax !== undefined)
-            ? `data-age-max="${plan.ageMax}" data-upgrade-to="${plan.upgradeTo || ''}"`
+        tiers[tier].forEach(plan => {
+          const isGroup      = planType === 'Group';
+          const isSenior     = planType === 'Senior';
+          const targetModal  = isGroup ? '#groupEnrollModal' : '#modernConfirmationModal';
+
+          // ── Benefit list: exclude Accidental Insurance from ₱1,599 plan ──
+          const benefitsList = (isSenior && plan.hasAccidentalInsurance === false)
+            ? BENEFITS_WITHOUT_ACCIDENTAL
+            : BENEFITS_WITH_ACCIDENTAL;
+          const benefitsHtml = benefitsList.map(b => `<li><i class="fa fa-circle-check"></i>${b}</li>`).join('');
+
+          // ── Senior plan-specific data attributes ──
+          const seniorAttrs = isSenior
+            ? `data-plan-key="${plan.planKey}" data-age-min="${plan.ageMin}" data-age-max="${plan.ageMax}" data-accidental-age-min="${plan.accidentalAgeMin || ''}" data-accidental-age-max="${plan.accidentalAgeMax || ''}" data-has-accidental="${plan.hasAccidentalInsurance}"`
             : '';
+
+          // ── Age eligibility badge ──
+          let ageBadge = '';
+          if (isSenior) {
+            if (plan.ageMax < 999 && plan.ageMax <= 59) {
+              ageBadge = `<span style="background:rgba(244,121,32,0.18);color:#f47920;font-size:0.7rem;padding:3px 10px;border-radius:50px;border:1px solid rgba(244,121,32,0.4);margin-left:6px;font-weight:700;"><i class="fa fa-user-clock me-1"></i>Ages 0–${plan.ageMax} <span style="opacity:0.8;font-weight:400">(or 7–${plan.accidentalAgeMax} w/ Accidental)</span></span>`;
+            } else if (plan.ageMin >= 60) {
+              ageBadge = `<span style="background:rgba(15,30,61,0.12);color:#1a3260;font-size:0.7rem;padding:3px 10px;border-radius:50px;border:1px solid rgba(15,30,61,0.2);margin-left:6px;font-weight:700;"><i class="fa fa-users me-1"></i>Ages ${plan.ageMin}–${plan.ageMax}</span>`;
+            }
+          }
+
+          const roomBadge = plan.room ? `<span class="room-badge"><i class="fa fa-bed me-1"></i>${plan.room}</span>` : '';
 
           const monthlyBtn = plan.monthly ? `
             <button class="btn-period select-plan-btn"
@@ -1457,27 +715,11 @@
               data-plan-type="${planType}"
               data-period="Monthly"
               data-price="${plan.monthly}"
-              ${ageAttrs}
+              ${seniorAttrs}
               data-bs-toggle="modal" data-bs-target="${targetModal}">
               <span class="period-label">Monthly</span>
               <span class="period-price">₱${plan.monthly}</span>
-            </button>`
-                  : "";
-
-                const roomBadge = plan.room
-                  ? `<span class="room-badge"><i class="fa fa-bed me-1"></i>${plan.room}</span>`
-                  : "";
-
-          // Age badge for Senior plans
-          const ageBadge = (plan.ageMax !== undefined && plan.ageMax < 999)
-            ? `<span style="background:rgba(244,121,32,0.18);color:#f47920;font-size:0.7rem;padding:3px 10px;border-radius:50px;border:1px solid rgba(244,121,32,0.4);margin-left:6px;font-weight:700;">
-                <i class="fa fa-user-clock me-1"></i>Ages 0–${plan.ageMax}
-              </span>`
-            : (plan.ageMin !== undefined
-                ? `<span style="background:rgba(15,30,61,0.12);color:#1a3260;font-size:0.7rem;padding:3px 10px;border-radius:50px;border:1px solid rgba(15,30,61,0.2);margin-left:6px;font-weight:700;">
-                    <i class="fa fa-users me-1"></i>All Ages
-                  </span>`
-                : '');
+            </button>` : '';
 
           cardsHtml += `
             <div class="col-md-6">
@@ -1489,35 +731,35 @@
                   </div>
                 </div>
                 <div class="plan-card-body">
-                  <ul class="benefit-list">${benefits}</ul>
+                  <ul class="benefit-list">${benefitsHtml}</ul>
                   <div class="period-buttons">
                     ${monthlyBtn}
                     <button class="btn-period select-plan-btn"
-                      data-plan="${plan.name}${plan.room ? " – " + plan.room : ""}"
+                      data-plan="${plan.name}${plan.room ? ' – ' + plan.room : ''}"
                       data-plan-type="${planType}"
                       data-period="Quarterly"
                       data-price="${plan.quarterly}"
-                      ${ageAttrs}
+                      ${seniorAttrs}
                       data-bs-toggle="modal" data-bs-target="${targetModal}">
                       <span class="period-label">Quarterly</span>
                       <span class="period-price">₱${plan.quarterly}</span>
                     </button>
                     <button class="btn-period select-plan-btn"
-                      data-plan="${plan.name}${plan.room ? " – " + plan.room : ""}"
+                      data-plan="${plan.name}${plan.room ? ' – ' + plan.room : ''}"
                       data-plan-type="${planType}"
                       data-period="Semi-Annually"
                       data-price="${plan.semi}"
-                      ${ageAttrs}
+                      ${seniorAttrs}
                       data-bs-toggle="modal" data-bs-target="${targetModal}">
                       <span class="period-label">Semi-Annual</span>
                       <span class="period-price">₱${plan.semi}</span>
                     </button>
                     <button class="btn-period select-plan-btn"
-                      data-plan="${plan.name}${plan.room ? " – " + plan.room : ""}"
+                      data-plan="${plan.name}${plan.room ? ' – ' + plan.room : ''}"
                       data-plan-type="${planType}"
                       data-period="Annually"
                       data-price="${plan.annual}"
-                      ${ageAttrs}
+                      ${seniorAttrs}
                       data-bs-toggle="modal" data-bs-target="${targetModal}">
                       <span class="period-label">Annually</span>
                       <span class="period-price">₱${plan.annual}</span>
@@ -1525,13 +767,12 @@
                   </div>
                 </div>
               </div>
-            </div>
-          `;
-              });
-              cardsHtml += `</div>`;
-            });
+            </div>`;
+        });
+        cardsHtml += `</div>`;
+      });
 
-            html += `
+      html += `
         <div class="modal fade plans-modal" id="plansModal_${planType}" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
           <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
@@ -1544,18 +785,15 @@
                 </div>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
               </div>
-              <div class="modal-body">
-                ${cardsHtml}
-              </div>
+              <div class="modal-body">${cardsHtml}</div>
             </div>
           </div>
-        </div>
-      `;
-          });
+        </div>`;
+    });
 
-          container.innerHTML = html;
-          bindPlanButtons();
-        }
+    container.innerHTML = html;
+    bindPlanButtons();
+  }
 
   // ── Bind plan buttons ──────────────────────────────────────────────
   function bindPlanButtons() {
@@ -1574,10 +812,17 @@
           document.getElementById('conf-plan-price').textContent  = '₱' + b.dataset.price;
           document.getElementById('conf-plan-period').textContent = b.dataset.period;
 
-          // ── Store age restriction for this plan ──────────────────
-          selectedSeniorAgeMax  = b.dataset.ageMax   ? parseInt(b.dataset.ageMax)  : 999;
-          selectedSeniorUpgradeTo = b.dataset.upgradeTo || null;
+          // ── Store Senior plan state ──
+          if (currentPlanType === 'Senior') {
+            selectedSeniorPlanKey = b.dataset.planKey || null;
+            // Lookup the full plan object for reference
+            currentSeniorPlan = PLAN_DATA.Senior.find(p => p.planKey === selectedSeniorPlanKey) || null;
+          } else {
+            selectedSeniorPlanKey = null;
+            currentSeniorPlan = null;
+          }
 
+          // ── Build payment option dropdown ──
           const paymentSel = document.getElementById('payment-option');
           paymentSel.innerHTML = '';
           const periods = b.dataset.period === 'Monthly'
@@ -1595,86 +840,234 @@
   }
 
   // ══════════════════════════════════════════════════════════════════
-  //  AGE RESTRICTION LOGIC
+  //  SENIOR AGE RESTRICTION LOGIC
+  //
+  //  ₱1,499 Plan  →  Normal: ages 0–59 (3 months minimum)
+  //                  With Accidental Insurance: ages 7–70
+  //                  If 60–70 without accidental → recommend ₱1,599
+  //                  If <3 months → ineligible
+  //
+  //  ₱1,599 Plan  →  Normal: ages 60–70
+  //                  If 0–59 → recommend ₱1,499
+  //                  If >70  → ineligible
   // ══════════════════════════════════════════════════════════════════
 
-  /** Calculate age in full years from a date string (YYYY-MM-DD). */
+  /** Calculate age in full years. Returns { years, months } */
   function calcAge(birthdateStr) {
     if (!birthdateStr) return null;
     const today = new Date();
     const bday  = new Date(birthdateStr);
     if (isNaN(bday)) return null;
-    let age = today.getFullYear() - bday.getFullYear();
-    const m = today.getMonth() - bday.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < bday.getDate())) age--;
-    return age;
+    let years  = today.getFullYear() - bday.getFullYear();
+    let months = today.getMonth() - bday.getMonth();
+    if (months < 0 || (months === 0 && today.getDate() < bday.getDate())) { years--; months += 12; }
+    if (today.getDate() < bday.getDate() && months > 0) months--;
+    // Adjust if birthday hasn't occurred this year yet
+    const totalMonths = years * 12 + (today.getMonth() - bday.getMonth() + (today.getDate() >= bday.getDate() ? 0 : -1) + 12) % 12;
+    return { years, totalMonths };
   }
 
-  /** Refresh age chip + warning banner whenever birthdate changes (Senior only). */
+  /** Get current accidental insurance checkbox state */
+  function isAccidentalChecked() {
+    const chk = document.getElementById('accidental-insurance-check');
+    return chk ? chk.checked : false;
+  }
+
+  /**
+   * Central age-check runner — updates chip, warning banner, accidental row, submit button.
+   * Called on birthdate change AND on accidental checkbox change.
+   */
   function checkSeniorAge() {
-    const isSenior = currentPlanType === 'Senior';
-    const ageChip  = document.getElementById('age-chip');
-    const banner   = document.getElementById('age-warning-banner');
+    const isSenior  = currentPlanType === 'Senior';
+    const ageChip   = document.getElementById('age-chip');
+    const banner    = document.getElementById('age-warning-banner');
+    const accRow    = document.getElementById('accidental-insurance-row');
     const submitBtn = document.getElementById('user-info');
+
+    // Reset accidental check when NOT the 1499 plan
+    if (!isSenior || selectedSeniorPlanKey !== '1499') {
+      document.getElementById('accidental-insurance-check').checked = false;
+    }
 
     if (!isSenior) {
       ageChip.style.display = 'none';
       banner.style.display  = 'none';
-      submitBtn.disabled    = false;
+      accRow.style.display  = 'none';
+      enableSubmit(submitBtn);
       return;
     }
 
-    const age = calcAge(document.getElementById('bday').value);
+    const bdayVal = document.getElementById('bday').value;
+    const ageData = calcAge(bdayVal);
 
-    if (age === null) {
+    if (ageData === null) {
       ageChip.style.display = 'none';
       banner.style.display  = 'none';
-      submitBtn.disabled    = false;
+      accRow.style.display  = 'none';
+      enableSubmit(submitBtn);
       return;
     }
 
-    // Show age chip
+    const { years, totalMonths } = ageData;
+    const withAccidental = isAccidentalChecked();
+
+    // ── Show age chip ──
     ageChip.style.display = 'block';
-    ageChip.textContent   = `Age: ${age} years old`;
 
-    if (selectedSeniorAgeMax < 999 && age > selectedSeniorAgeMax) {
-      // Over the limit
-      ageChip.className = 'over';
-      ageChip.innerHTML = `<i class="fa fa-triangle-exclamation me-1"></i>Age: ${age} yrs — exceeds plan limit (0–${selectedSeniorAgeMax})`;
-
-      // Populate and show warning banner
-      document.getElementById('age-warn-years').textContent = age;
-      banner.style.display = 'block';
-
-      // Disable submit until resolved
-      submitBtn.disabled = true;
-      submitBtn.style.opacity = '0.5';
-      submitBtn.style.cursor  = 'not-allowed';
-    } else {
-      ageChip.className = 'ok';
-      ageChip.innerHTML = `<i class="fa fa-circle-check me-1"></i>Age: ${age} yrs — eligible`;
-      banner.style.display = 'none';
-      submitBtn.disabled   = false;
-      submitBtn.style.opacity = '1';
-      submitBtn.style.cursor  = '';
+    if (selectedSeniorPlanKey === '1499') {
+      handle1499AgeCheck(years, totalMonths, withAccidental, ageChip, banner, accRow, submitBtn);
+    } else if (selectedSeniorPlanKey === '1599') {
+      handle1599AgeCheck(years, totalMonths, ageChip, banner, accRow, submitBtn);
     }
   }
 
-  /** Switch to the ₱1,599 plan when "Switch Plan" button is clicked. */
-  document.getElementById('btn-switch-senior-plan').addEventListener('click', () => {
-    // Find the matching ₱1,599 Senior plan data
-    const upgradePlan = PLAN_DATA.Senior.find(p => p.room === '1,599');
-    if (!upgradePlan) return;
+  /** Handle ₱1,499 plan age checks */
+  function handle1499AgeCheck(years, totalMonths, withAccidental, ageChip, banner, accRow, submitBtn) {
+    // ── Minimum age: 3 months (no exception) ──
+    if (totalMonths < 3) {
+      ageChip.className = 'over';
+      ageChip.innerHTML = `<i class="fa fa-times-circle me-1"></i>Age: ${totalMonths} month(s) — minimum is 3 months`;
+      banner.className  = 'warn-upgrade';
+      banner.style.display = 'block';
+      accRow.style.display = 'none';
+      document.getElementById('age-warn-icon').className     = 'fa fa-triangle-exclamation';
+      document.getElementById('age-warn-title-text').textContent = 'Age Restriction Notice';
+      document.getElementById('age-warn-text').innerHTML = `Your child is <strong>${totalMonths} month(s)</strong> old. The minimum age for the ₱1,499 plan is <strong>3 months</strong>.`;
+      document.getElementById('age-warn-suggest-text').innerHTML = `Please wait until your child is at least 3 months old to enroll.`;
+      document.getElementById('btn-switch-senior-plan').style.display = 'none';
+      disableSubmit(submitBtn);
+      return;
+    }
 
-    // Update confirmation modal fields
-    document.getElementById('conf-plan-name').textContent   = `${upgradePlan.name} – ${upgradePlan.room}`;
+    // ── Age 0–59: fully eligible (normal) ──
+    if (years <= 59) {
+      ageChip.className = 'ok';
+      ageChip.innerHTML = `<i class="fa fa-circle-check me-1"></i>Age: ${years} yr${years !== 1 ? 's' : ''} — eligible`;
+      banner.style.display = 'none';
+      accRow.style.display = 'none';
+      enableSubmit(submitBtn);
+      return;
+    }
+
+    // ── Age 60–70: eligible ONLY with Accidental Insurance ──
+    if (years >= 60 && years <= 70) {
+      accRow.style.display = 'block';   // show the opt-in checkbox
+
+      if (withAccidental) {
+        // Client opted in → eligible
+        ageChip.className = 'ok';
+        ageChip.innerHTML = `<i class="fa fa-circle-check me-1"></i>Age: ${years} yrs — eligible with Accidental Insurance`;
+        banner.style.display = 'none';
+        enableSubmit(submitBtn);
+      } else {
+        // Not opted in → show warning + recommend ₱1,599
+        ageChip.className = 'warn';
+        ageChip.innerHTML = `<i class="fa fa-triangle-exclamation me-1"></i>Age: ${years} yrs — opt in to Accidental Insurance OR switch to ₱1,599`;
+        banner.className  = 'warn-upgrade';
+        banner.style.display = 'block';
+        document.getElementById('age-warn-icon').className     = 'fa fa-triangle-exclamation';
+        document.getElementById('age-warn-title-text').textContent = 'Age Restriction Notice';
+        document.getElementById('age-warn-text').innerHTML =
+          `You are <strong>${years} years old</strong>. The ₱1,499 plan's standard eligibility is ages <strong>0–59</strong>.<br><br>
+           You may still enroll in the ₱1,499 plan by opting in to <strong>Accidental Insurance</strong> (available for ages 7–70),
+           <em>or</em> switch to the ₱1,599 plan which covers ages 60–70.`;
+        document.getElementById('age-warn-suggest-text').innerHTML = `<i class="fa fa-arrow-right me-1" style="color:var(--orange)"></i> We recommend switching to the <strong>₱1,599 Plan</strong> (ages 60–70).`;
+        document.getElementById('btn-switch-senior-plan').style.display = '';
+        document.getElementById('btn-switch-senior-plan').innerHTML = '<i class="fa fa-rotate me-1"></i>Switch to ₱1,599 Plan';
+        disableSubmit(submitBtn);
+      }
+      return;
+    }
+
+    // ── Age > 70: ineligible for ₱1,499 ──
+    ageChip.className = 'over';
+    ageChip.innerHTML = `<i class="fa fa-times-circle me-1"></i>Age: ${years} yrs — exceeds maximum (70)`;
+    banner.className  = 'warn-upgrade';
+    banner.style.display = 'block';
+    accRow.style.display = 'none';
+    document.getElementById('age-warn-icon').className     = 'fa fa-times-circle';
+    document.getElementById('age-warn-title-text').textContent = 'Age Limit Exceeded';
+    document.getElementById('age-warn-text').innerHTML = `You are <strong>${years} years old</strong>. The ₱1,499 plan covers ages up to <strong>70 years</strong> (with Accidental Insurance). You exceed the maximum age for this plan.`;
+    document.getElementById('age-warn-suggest-text').innerHTML = `Unfortunately, neither Senior plan covers individuals over 70. Please contact our office for assistance.`;
+    document.getElementById('btn-switch-senior-plan').style.display = 'none';
+    disableSubmit(submitBtn);
+  }
+
+  /** Handle ₱1,599 plan age checks */
+  function handle1599AgeCheck(years, totalMonths, ageChip, banner, accRow, submitBtn) {
+    accRow.style.display = 'none';  // ₱1,599 has no Accidental Insurance option
+
+    // ── Age 60–70: eligible ──
+    if (years >= 60 && years <= 70) {
+      ageChip.className = 'ok';
+      ageChip.innerHTML = `<i class="fa fa-circle-check me-1"></i>Age: ${years} yrs — eligible`;
+      banner.style.display = 'none';
+      enableSubmit(submitBtn);
+      return;
+    }
+
+    // ── Age 0–59: recommend ₱1,499 instead ──
+    if (years < 60) {
+      const ageDisplay = totalMonths < 24 ? `${totalMonths} month(s)` : `${years} year(s)`;
+      ageChip.className = 'blue';
+      ageChip.innerHTML = `<i class="fa fa-info-circle me-1"></i>Age: ${ageDisplay} — recommended plan is ₱1,499`;
+      banner.className  = 'warn-downgrade';
+      banner.style.display = 'block';
+      document.getElementById('age-warn-icon').className     = 'fa fa-info-circle';
+      document.getElementById('age-warn-title-text').textContent = 'Better Plan Available';
+      document.getElementById('age-warn-text').innerHTML =
+        `You are <strong>${ageDisplay} old</strong>. The ₱1,599 plan is designed for individuals aged <strong>60–70 years</strong>.<br><br>
+         The <strong>₱1,499 plan</strong> is a better fit for your age range (0–59 years) and also includes <strong>Accidental Insurance</strong> coverage.`;
+      document.getElementById('age-warn-suggest-text').innerHTML = `<i class="fa fa-arrow-right me-1"></i> We recommend the <strong>₱1,499 Plan</strong> — better suited for your age.`;
+      document.getElementById('btn-switch-senior-plan').style.display = '';
+      document.getElementById('btn-switch-senior-plan').innerHTML = '<i class="fa fa-rotate me-1"></i>Switch to ₱1,499 Plan';
+      disableSubmit(submitBtn);
+      return;
+    }
+
+    // ── Age > 70: ineligible ──
+    ageChip.className = 'over';
+    ageChip.innerHTML = `<i class="fa fa-times-circle me-1"></i>Age: ${years} yrs — exceeds maximum (70)`;
+    banner.className  = 'warn-upgrade';
+    banner.style.display = 'block';
+    document.getElementById('age-warn-icon').className     = 'fa fa-times-circle';
+    document.getElementById('age-warn-title-text').textContent = 'Age Limit Exceeded';
+    document.getElementById('age-warn-text').innerHTML = `You are <strong>${years} years old</strong>. The ₱1,599 plan covers ages <strong>60–70 years</strong>. You exceed the maximum age for both Senior plans.`;
+    document.getElementById('age-warn-suggest-text').innerHTML = `Please contact our office for assistance with enrollment options.`;
+    document.getElementById('btn-switch-senior-plan').style.display = 'none';
+    accRow.style.display = 'none';
+    disableSubmit(submitBtn);
+  }
+
+  function enableSubmit(btn) {
+    btn.disabled = false;
+    btn.style.opacity = '1';
+    btn.style.cursor  = '';
+  }
+  function disableSubmit(btn) {
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+    btn.style.cursor  = 'not-allowed';
+  }
+
+  /**
+   * Switch between ₱1,499 and ₱1,599 plans when the banner button is clicked.
+   * Swaps the target plan details in the confirmation modal and re-runs age check.
+   */
+  function switchSeniorPlan() {
+    const targetKey = selectedSeniorPlanKey === '1499' ? '1599' : '1499';
+    const targetPlan = PLAN_DATA.Senior.find(p => p.planKey === targetKey);
+    if (!targetPlan) return;
+
+    // Update confirmation modal display
+    document.getElementById('conf-plan-name').textContent   = `${targetPlan.name} – ${targetPlan.room}`;
     document.getElementById('conf-plan-type').textContent   = 'Senior';
-    document.getElementById('conf-plan-price').textContent  = `₱${upgradePlan.annual}`;
+    document.getElementById('conf-plan-price').textContent  = `₱${targetPlan.annual}`;
     document.getElementById('conf-plan-period').textContent = 'Annually';
 
-    // Clear age restriction — 1,599 has no upper limit
-    selectedSeniorAgeMax   = 999;
-    selectedSeniorUpgradeTo = null;
+    // Update state
+    selectedSeniorPlanKey = targetKey;
+    currentSeniorPlan     = targetPlan;
 
     // Update payment options
     const paymentSel = document.getElementById('payment-option');
@@ -1686,17 +1079,20 @@
       paymentSel.appendChild(opt);
     });
 
-    // Re-run age check — will now pass
+    // Re-run age check with new plan context
     checkSeniorAge();
-  });
+  }
 
-  // Attach live age check to the birthdate field
+  // ── Wire up live age check ─────────────────────────────────────────
   document.getElementById('bday').addEventListener('change', checkSeniorAge);
+
+  // ── Wire up accidental insurance checkbox ──────────────────────────
+  document.getElementById('accidental-insurance-check').addEventListener('change', checkSeniorAge);
 
   // ── Reset banner & chip when clientDetailsModal opens ─────────────
   document.getElementById('clientDetailsModal').addEventListener('show.bs.modal', () => {
     const isFamily = currentPlanType === 'Family';
-    document.getElementById('principalLabel').style.display   = isFamily ? 'flex'  : 'none';
+    document.getElementById('principalLabel').style.display      = isFamily ? 'flex'  : 'none';
     document.getElementById('familyMembersSection').style.display = isFamily ? 'block' : 'none';
     if (isFamily) {
       document.getElementById('dependentsContainer').innerHTML = '';
@@ -1705,13 +1101,13 @@
     }
 
     // Reset age UI
-    document.getElementById('bday').value       = '';
-    document.getElementById('age-chip').style.display   = 'none';
-    document.getElementById('age-warning-banner').style.display = 'none';
+    document.getElementById('bday').value                            = '';
+    document.getElementById('age-chip').style.display               = 'none';
+    document.getElementById('age-warning-banner').style.display     = 'none';
+    document.getElementById('accidental-insurance-row').style.display = 'none';
+    document.getElementById('accidental-insurance-check').checked   = false;
     const submitBtn = document.getElementById('user-info');
-    submitBtn.disabled    = false;
-    submitBtn.style.opacity = '1';
-    submitBtn.style.cursor  = '';
+    enableSubmit(submitBtn);
   });
 
   // ── Dependents ────────────────────────────────────────────────────
@@ -1771,29 +1167,26 @@
             <div class="form-check"><input class="form-check-input" type="radio" name="dep${idx}_gender" id="dep${idx}_female" value="Female" /><label class="form-check-label" for="dep${idx}_female">Female</label></div>
           </div>
         </div>
-      </div>
-    `;
-          container.appendChild(block);
-          updateAddButton();
-        }
+      </div>`;
+    container.appendChild(block);
+    updateAddButton();
+  }
 
-        function removeDependent(idx) {
-          const block = document.getElementById(`dependent-${idx}`);
-          if (block) block.remove();
-          updateAddButton();
-        }
+  function removeDependent(idx) {
+    const block = document.getElementById(`dependent-${idx}`);
+    if (block) block.remove();
+    updateAddButton();
+  }
 
-        document
-          .getElementById("addDependentBtn")
-          .addEventListener("click", addDependent);
+  document.getElementById('addDependentBtn').addEventListener('click', addDependent);
 
-  // Pre-existing condition toggle
+  // ── Pre-existing condition toggle ──────────────────────────────────
   document.querySelectorAll('input[name="conditionType"]').forEach(radio => {
     radio.addEventListener('change', () => {
       document.getElementById('conditionChecklist').classList.toggle('d-none', radio.value !== 'with');
     });
   });
-  document.getElementById('otherCondition').addEventListener('change', function () {
+  document.getElementById('otherCondition').addEventListener('change', function() {
     document.getElementById('otherText').style.display = this.checked ? 'block' : 'none';
   });
 
@@ -1817,15 +1210,14 @@
     const empty = document.getElementById('empty-enroll-msg');
     if (empty) empty.style.display = 'none';
 
-          const tr = document.createElement("tr");
-          tr.setAttribute("data-erow", idx);
-          tr.style.animation = "rowSlideIn 0.2s ease";
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-erow', idx);
 
-    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const months  = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     const monthOpts = months.map((m,i) => `<option value="${i+1}">${m}</option>`).join('');
     const dayOpts   = Array.from({length:31},(_,i) => `<option value="${i+1}">${i+1}</option>`).join('');
 
-          tr.innerHTML = `
+    tr.innerHTML = `
       <td class="row-num">${idx}</td>
       <td><input class="cell-inp" type="text" placeholder="—" /></td>
       <td><input class="cell-inp" type="text" placeholder="Last name" data-req="1" /></td>
@@ -1853,10 +1245,9 @@
       <td><input class="cell-inp" type="date" /></td>
       <td><input class="cell-inp" type="text" placeholder="—" /></td>
       <td><input class="cell-inp" type="text" placeholder="—" /></td>
-      <td><button class="btn-del-row" onclick="removeEnrolleeRow(this)" title="Remove this enrollee"><i class="fa fa-times"></i></button></td>
-    `;
+      <td><button class="btn-del-row" onclick="removeEnrolleeRow(this)" title="Remove this enrollee"><i class="fa fa-times"></i></button></td>`;
 
-          tbody.appendChild(tr);
+    tbody.appendChild(tr);
 
     const mtypeSel  = tr.querySelector('.mtype-sel');
     const idNameInp = tr.querySelector('.idname-inp');
@@ -1870,9 +1261,9 @@
       if (!isDependent) idNameInp.value = '';
     });
 
-          updateEnrollCount();
-          tr.querySelector("input").focus();
-        }
+    updateEnrollCount();
+    tr.querySelector('input').focus();
+  }
 
   function removeEnrolleeRow(btn) {
     btn.closest('tr').remove();
@@ -1880,54 +1271,34 @@
     updateEnrollCount();
   }
 
-        function reNumberEnrollRows() {
-          document
-            .querySelectorAll("#enrollee-tbody tr[data-erow]")
-            .forEach((tr, i) => {
-              tr.querySelector(".row-num").textContent = i + 1;
-            });
-        }
-
-        function clearAllEnrollees() {
-          if (!confirm("Clear all enrollee rows? This cannot be undone.")) return;
-          document
-            .querySelectorAll("#enrollee-tbody tr[data-erow]")
-            .forEach((r) => r.remove());
-          enrollRowCount = 0;
-          updateEnrollCount();
-          const empty = document.getElementById("empty-enroll-msg");
-          if (empty) empty.style.display = "";
-        }
-
-  function extractGroupEnrollmentData() {
-    const rows = document.querySelectorAll('#enrollee-tbody tr[data-erow]');
-    if (rows.length === 0) { alert('Please add at least one enrollee before submitting.'); return; }
-    let firstInvalid = null;
-    rows.forEach(tr => {
-      tr.querySelectorAll('[data-req="1"]').forEach(el => {
-        el.style.borderColor = '';
-        if (!el.value.trim()) { el.style.borderColor = 'var(--danger)'; if (!firstInvalid) firstInvalid = el; }
-      });
+  function reNumberEnrollRows() {
+    document.querySelectorAll('#enrollee-tbody tr[data-erow]').forEach((tr, i) => {
+      tr.querySelector('.row-num').textContent = i + 1;
     });
-    if (firstInvalid) {
-      firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      firstInvalid.focus();
-      alert('Please fill in all required fields (highlighted in red) before submitting.');
-      return;
-    }
-    alert(`Group enrollment submitted for ${rows.length} enrollee(s)!\n\nPlan: ${selectedGroupPlan.name}\nPayment: ${selectedGroupPlan.period}`);
+  }
+
+  function clearAllEnrollees() {
+    if (!confirm('Clear all enrollee rows? This cannot be undone.')) return;
+    document.querySelectorAll('#enrollee-tbody tr[data-erow]').forEach(r => r.remove());
+    enrollRowCount = 0;
+    updateEnrollCount();
+    const empty = document.getElementById('empty-enroll-msg');
+    if (empty) empty.style.display = '';
   }
 
   document.getElementById('groupEnrollModal').addEventListener('show.bs.modal', () => { updateEnrollCount(); });
 
+  // ── Row slide-in animation ─────────────────────────────────────────
   const rowStyle = document.createElement('style');
   rowStyle.textContent = `@keyframes rowSlideIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}`;
   document.head.appendChild(rowStyle);
 
-        buildPlanModals();
-      </script>
+  // ── Initialize ─────────────────────────────────────────────────────
+  buildPlanModals();
+  </script>
 
-      <script src="assets/js/enroll.js" type="module"></script>
-      <script src="assets/js/groupEnrollment.js"></script>
-    </body>
-  </html>
+  <!-- External JS files -->
+  <script src="assets/js/enroll.js" type="module"></script>
+  <script src="assets/js/groupEnrollment.js"></script>
+  </body>
+</html>

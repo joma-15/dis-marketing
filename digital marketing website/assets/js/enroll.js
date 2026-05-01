@@ -1,3 +1,5 @@
+// ── enroll.js ───────────────────────────────────────────────────────
+
 function getAllDependents() {
   const dependents = [];
 
@@ -68,29 +70,39 @@ function checkedConditions() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-//  FIX 1: Read plan name + plan type from the confirmation modal fields,
-//          not from `.card-title` (which never existed in this page).
+//  extractData — reads the client details form and saves to localStorage,
+//  then redirects to payment.html.
+//
+//  Also captures:
+//    • seniorPlanKey       — '1499' or '1599' (null for non-Senior plans)
+//    • accidentalInsurance — true if the client opted in to Accidental Insurance
+//                           (only relevant for the ₱1,499 Senior plan)
 // ─────────────────────────────────────────────────────────────────────────────
 function extractData() {
   const btn = document.getElementById("user-info");
   if (!btn) return;
 
   btn.addEventListener("click", () => {
-    const lastName   = document.getElementById("LastName")?.value.trim();
-    const firstName  = document.getElementById("FirstName")?.value.trim();
-    const middleName = document.getElementById("MiddleName")?.value.trim();
-    const birthDate  = document.getElementById("bday")?.value;
-    const address    = document.getElementById("address")?.value.trim();
-    const email      = document.getElementById("email")?.value.trim();
-    const gender     = document.querySelector('input[name="gender"]:checked')?.value;
+    const lastName    = document.getElementById("LastName")?.value.trim();
+    const firstName   = document.getElementById("FirstName")?.value.trim();
+    const middleName  = document.getElementById("MiddleName")?.value.trim();
+    const birthDate   = document.getElementById("bday")?.value;
+    const address     = document.getElementById("address")?.value.trim();
+    const email       = document.getElementById("email")?.value.trim();
+    const gender      = document.querySelector('input[name="gender"]:checked')?.value;
     const civilStatus = document.getElementById("civil-status")?.value;
-    const paymentSel = document.getElementById("payment-option");
-    const payment    = paymentSel?.options[paymentSel.selectedIndex]?.text ?? '';
+    const paymentSel  = document.getElementById("payment-option");
+    const payment     = paymentSel?.options[paymentSel.selectedIndex]?.text ?? '';
 
-    // ── FIX: read plan from the confirmation modal, not from .card-title ──
-    const planName   = document.getElementById("conf-plan-name")?.textContent.trim()  ?? '';
-    const planType   = document.getElementById("conf-plan-type")?.textContent.trim()  ?? '';
-    const plan       = planType ? `${planType} – ${planName}` : planName;
+    // ── Read plan details from confirmation modal ──
+    const planName = document.getElementById("conf-plan-name")?.textContent.trim()  ?? '';
+    const planType = document.getElementById("conf-plan-type")?.textContent.trim()  ?? '';
+    const plan     = planType ? `${planType} – ${planName}` : planName;
+
+    // ── Senior-specific state ──
+    // selectedSeniorPlanKey is a global set in Plans.html inline script
+    const seniorPlanKey       = (typeof selectedSeniorPlanKey !== 'undefined') ? selectedSeniorPlanKey : null;
+    const accidentalInsurance = document.getElementById("accidental-insurance-check")?.checked ?? false;
 
     const condition = checkedConditions();
     const referral  = document.getElementById("referredBy")?.value.trim() || "DIS";
@@ -106,7 +118,7 @@ function extractData() {
       return;
     }
 
-    // ── Also save planType key so the form config lookup works ──
+    // ── Save planType key so the form config lookup works ──
     if (planType) {
       localStorage.setItem("PlanType", planType);
     }
@@ -126,6 +138,8 @@ function extractData() {
       civilStatus,
       payment,
       referral,
+      seniorPlanKey,
+      accidentalInsurance,
     };
 
     localStorage.setItem("data", JSON.stringify(data));
@@ -144,7 +158,7 @@ function extractData() {
 document.addEventListener("DOMContentLoaded", extractData);
 
 // ─────────────────────────────────────────────────────────────────────────────
-//  Google Forms config (unchanged)
+//  Google Forms config
 // ─────────────────────────────────────────────────────────────────────────────
 const formsConfig = {
   "shop.html": {
@@ -202,77 +216,68 @@ async function sendIntoExcel(data) {
 
   const params = new URLSearchParams();
   const formFields = {
-    [fields.planType]:           localStorage.getItem("PlanType") || "no selected plan",
-    [fields.fullName]:           data.fullName,
-    [fields.address]:            data.address,
-    [fields.email]:              data.email,
-    [fields.gender]:             data.gender,
-    [fields.civilStatus]:        data.civilStatus,
-    [fields.condition]:          data.condition,
-    [fields.plan]:               data.plan,
-    [fields.birthYear]:          data.birthDate.year,
-    [fields.birthMonth]:         data.birthDate.month,
-    [fields.birthDay]:           data.birthDate.day,
-    [fields.status]:             "Pending",
-    [fields.payment]:            data.payment,
-    [fields.referral]:           data.referral,
-    [fields.PrincipalDependent]: "Principal",
-    [fields.relationship]:       "Principal Applicant",
+    [fields.planType]:            localStorage.getItem("PlanType") || "no selected plan",
+    [fields.fullName]:            data.fullName,
+    [fields.address]:             data.address,
+    [fields.email]:               data.email,
+    [fields.gender]:              data.gender,
+    [fields.civilStatus]:         data.civilStatus,
+    [fields.condition]:           data.condition,
+    [fields.plan]:                data.plan,
+    [fields.birthYear]:           data.birthDate.year,
+    [fields.birthMonth]:          data.birthDate.month,
+    [fields.birthDay]:            data.birthDate.day,
+    [fields.status]:              "Pending",
+    [fields.payment]:             data.payment,
+    [fields.referral]:            data.referral,
   };
 
-  for (const [key, value] of Object.entries(formFields)) {
-    if (key) params.append(key, value);
-  }
+  Object.entries(formFields).forEach(([key, value]) => {
+    if (key && value !== undefined && value !== null) {
+      params.append(key, value);
+    }
+  });
 
-  try {
-    await fetch(link, { method: "POST", mode: "no-cors", body: params });
-  } catch (error) {
-    alert("An error occurred sending the data");
-    console.error(error);
-  }
+  await fetch(link, {
+    method: "POST",
+    mode:   "no-cors",
+    body:   params.toString(),
+  });
 }
 
-async function sendDependentsData(data) {
-  const dependentsData = JSON.parse(localStorage.getItem("dependentsData"));
-  if (!dependentsData || !link || !fields) return;
+async function sendDependentsData(principalData) {
+  const dependentsData = JSON.parse(localStorage.getItem("dependentsData") || "[]");
+  if (!dependentsData.length) return;
 
-  for (const dependent of Object.values(dependentsData)) {
-    if (!dependent) continue;
-
+  for (const dep of dependentsData) {
     const params = new URLSearchParams();
-    const formFields = {
-      [fields.planType]:           localStorage.getItem("PlanType") || "no selected plan",
-      [fields.fullName]:           dependent.fullName,
-      [fields.address]:            data.address,
-      [fields.email]:              data.email,
-      [fields.gender]:             dependent.gender,
-      [fields.civilStatus]:        'n/a',
-      [fields.condition]:          'n/a',
-      [fields.plan]:               data.plan,
-      [fields.birthYear]:          dependent.birthDate?.year,
-      [fields.birthMonth]:         dependent.birthDate?.month,
-      [fields.birthDay]:           dependent.birthDate?.day,
-      [fields.status]:             "Pending",
-      [fields.payment]:            data.payment,
-      [fields.PrincipalDependent]: "Dependent",
-      [fields.referral]:           data.referral,
-      [fields.relationship]:       dependent.rel,
-    };
 
-    for (const [key, value] of Object.entries(formFields)) {
-      if (key && value != null) params.append(key, value);
-    }
+    if (fields?.fullName)           params.append(fields.fullName,           dep.fullName);
+    if (fields?.birthYear)          params.append(fields.birthYear,          dep.birthDate.year);
+    if (fields?.birthMonth)         params.append(fields.birthMonth,         dep.birthDate.month);
+    if (fields?.birthDay)           params.append(fields.birthDay,           dep.birthDate.day);
+    if (fields?.gender)             params.append(fields.gender,             dep.gender);
+    if (fields?.relationship)       params.append(fields.relationship,       dep.rel);
+    if (fields?.PrincipalDependent) params.append(fields.PrincipalDependent, "Dependent");
+    if (fields?.planType)           params.append(fields.planType,           localStorage.getItem("PlanType") || "");
+    if (fields?.plan)               params.append(fields.plan,               principalData.plan);
+    if (fields?.status)             params.append(fields.status,             "Pending");
 
     try {
-      await fetch(link, { method: "POST", mode: "no-cors", body: params });
-    } catch (error) {
-      console.error("Error sending dependent:", error);
+      await fetch(link, { method: "POST", mode: "no-cors", body: params.toString() });
+    } catch (err) {
+      console.error("Failed to send dependent:", dep.fullName, err);
     }
   }
 }
 
-async function sendData() {
-  const btn = document.getElementById("gmail");
+function sendProofPaymentGmail() {
+  // Placeholder — implement Gmail/email proof-of-payment logic here
+  console.log("sendProofPaymentGmail called");
+}
+
+function sendData() {
+  const btn = document.getElementById("confirm-payment-btn");
   if (!btn) return;
 
   btn.addEventListener("click", async () => {
@@ -294,21 +299,11 @@ async function sendData() {
 }
 document.addEventListener("DOMContentLoaded", sendData);
 
-
 // ─────────────────────────────────────────────────────────────────────────────
-//  FIX 2: Group / Masterlist enrollment — collect table rows, save to
-//          localStorage, and submit each row to the Group Google Form.
-//
-//  NOTE: Add your actual Group Google Form URL + entry IDs below.
-//        The field names below match the column headers in the enrollment table.
+//  Group / Masterlist enrollment
 // ─────────────────────────────────────────────────────────────────────────────
+const GROUP_FORM_URL = formsConfig["amaphilshop.html"]?.url;
 
-const GROUP_FORM_URL = formsConfig["amaphilshop.html"]?.url;  // reuse or replace with your group form URL
-// If you have a separate Group form, replace the line above with:
-// const GROUP_FORM_URL = "https://docs.google.com/forms/u/0/d/e/YOUR_GROUP_FORM_ID/formResponse";
-
-// Map table column order (0-indexed) → Google Form entry IDs.
-// Update these entry IDs to match your actual Group Google Form.
 const GROUP_FIELDS = [
   null,                   // 0  – row number (skip)
   "entry.empId",          // 1  – Employee ID
@@ -340,11 +335,6 @@ const GROUP_FIELDS = [
   null,                   // 27 – action button (skip)
 ];
 
-/**
- * Reads all enrollee rows from the group table, validates required fields,
- * stores them in localStorage, and submits each row to the Google Form.
- * Called by the "Submit Enrollment" button in groupEnrollModal.
- */
 async function extractGroupEnrollmentData() {
   const rows = document.querySelectorAll('#enrollee-tbody tr[data-erow]');
 
@@ -379,7 +369,6 @@ async function extractGroupEnrollmentData() {
     const cells = tr.querySelectorAll('td');
     const row   = {};
 
-    // Map each cell's input/select value to a named key
     const colNames = [
       null, 'empId', 'lastName', 'firstName', 'middleName', 'suffix',
       'nickname', 'birthYear', 'birthMonth', 'birthDay', 'gender',
@@ -395,7 +384,7 @@ async function extractGroupEnrollmentData() {
       row[colNames[i]] = inp ? inp.value.trim() : '';
     });
 
-    // Add the shared group plan details
+    // Attach shared group plan details
     row.groupPlanName   = selectedGroupPlan.name;
     row.groupPlanPeriod = selectedGroupPlan.period;
     row.groupPlanPrice  = selectedGroupPlan.price;
@@ -403,11 +392,10 @@ async function extractGroupEnrollmentData() {
     enrollees.push(row);
   });
 
-  // ── Persist to localStorage ──────────────────────────────────────
   localStorage.setItem('groupEnrollmentData', JSON.stringify(enrollees));
   localStorage.setItem('PlanType', 'Group');
 
-  // ── Submit each row to Google Form ──────────────────────────────
+  // ── Submit each row ──────────────────────────────────────────────
   const submitBtn = document.getElementById('group-submit-btn');
   if (submitBtn) {
     submitBtn.disabled    = true;
@@ -419,36 +407,17 @@ async function extractGroupEnrollmentData() {
   for (const enrollee of enrollees) {
     const params = new URLSearchParams();
 
-    // Build the field map using GROUP_FIELDS entry IDs
     const colValues = [
-      null,                           // 0  row #
-      enrollee.empId,                 // 1
-      enrollee.lastName,              // 2
-      enrollee.firstName,             // 3
-      enrollee.middleName,            // 4
-      enrollee.suffix,                // 5
-      enrollee.nickname,              // 6
-      enrollee.birthYear,             // 7
-      enrollee.birthMonth,            // 8
-      enrollee.birthDay,              // 9
-      enrollee.gender,                // 10
-      enrollee.civilStatus,           // 11
-      enrollee.nationality,           // 12
-      enrollee.philHealth,            // 13
-      enrollee.philHealthId,          // 14
-      enrollee.phone,                 // 15
-      enrollee.department,            // 16
-      enrollee.resignation,           // 17
-      enrollee.empDate,               // 18
-      enrollee.plan || enrollee.groupPlanName, // 19 – prefer cell value, fall back to banner
-      enrollee.memberType,            // 20
-      enrollee.idName,                // 21
-      enrollee.activationDate,        // 22
-      enrollee.email,                 // 23
-      enrollee.expirationDate,        // 24
-      enrollee.remarks,               // 25
-      enrollee.amaPhilId,             // 26
-      null,                           // 27
+      null,
+      enrollee.empId, enrollee.lastName, enrollee.firstName, enrollee.middleName,
+      enrollee.suffix, enrollee.nickname, enrollee.birthYear, enrollee.birthMonth,
+      enrollee.birthDay, enrollee.gender, enrollee.civilStatus, enrollee.nationality,
+      enrollee.philHealth, enrollee.philHealthId, enrollee.phone, enrollee.department,
+      enrollee.resignation, enrollee.empDate,
+      enrollee.plan || enrollee.groupPlanName,
+      enrollee.memberType, enrollee.idName, enrollee.activationDate, enrollee.email,
+      enrollee.expirationDate, enrollee.remarks, enrollee.amaPhilId,
+      null,
     ];
 
     GROUP_FIELDS.forEach((entryId, i) => {
@@ -456,7 +425,6 @@ async function extractGroupEnrollmentData() {
       params.append(entryId, colValues[i]);
     });
 
-    // Always append the shared plan period + price
     if (fields?.payment)  params.append(fields.payment,  enrollee.groupPlanPeriod);
     if (fields?.planType) params.append(fields.planType, 'Group');
     if (fields?.status)   params.append(fields.status,   'Pending');
@@ -470,8 +438,8 @@ async function extractGroupEnrollmentData() {
   }
 
   if (submitBtn) {
-    submitBtn.disabled    = false;
-    submitBtn.innerHTML   = '<i class="fa fa-paper-plane me-1"></i>Submit Enrollment';
+    submitBtn.disabled  = false;
+    submitBtn.innerHTML = '<i class="fa fa-paper-plane me-1"></i>Submit Enrollment';
   }
 
   alert(
@@ -482,5 +450,5 @@ async function extractGroupEnrollmentData() {
   );
 }
 
-// Expose globally so the inline onclick="extractGroupEnrollmentData()" works
+// Expose globally so inline onclick still works as fallback
 window.extractGroupEnrollmentData = extractGroupEnrollmentData;
