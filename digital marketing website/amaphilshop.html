@@ -28,36 +28,32 @@
       body { font-family: "Plus Jakarta Sans", sans-serif; background: var(--soft-bg); color: var(--text); min-height: 100vh; }
       body::before { content: ""; position: fixed; inset: 0; background: radial-gradient(ellipse at 80% 20%, rgba(244,121,32,0.08) 0%, transparent 50%), radial-gradient(ellipse at 20% 80%, rgba(15,30,61,0.06) 0%, transparent 50%); pointer-events: none; z-index: 0; }
 
-      /* ── Header ── */
       header { background: linear-gradient(135deg, var(--navy) 0%, var(--primary-mid) 100%); padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 24px rgba(15,30,61,0.4); position: sticky; top: 0; z-index: 1000; }
       header .brand { display: flex; align-items: center; gap: 14px; }
       header .brand-logo { height: 52px; width: auto; filter: drop-shadow(0 0 6px rgba(255,255,255,0.3)); object-fit: contain; }
       header .brand-text h1 { font-family: "Montserrat", sans-serif; font-size: 1.6rem; color: white; margin: 0; letter-spacing: 2px; font-weight: 900; }
       header .brand-text p { color: rgba(255,255,255,0.7); margin: 0; font-size: 0.75rem; letter-spacing: 0.5px; }
       header .brand-text h1 span { color: var(--orange); }
-      .btn-back { background: rgba(255,255,255,0.12); border: 1.5px solid rgba(255,255,255,0.25); color: white; font-weight: 600; border-radius: 50px; padding: 9px 22px; font-size: 0.88rem; transition: all 0.2s; backdrop-filter: blur(6px); }
+      .btn-back { background: rgba(255,255,255,0.12); border: 1.5px solid rgba(255,255,255,0.25); color: white; font-weight: 600; border-radius: 50px; padding: 9px 22px; font-size: 0.88rem; transition: all 0.2s; backdrop-filter: blur(6px); text-decoration: none; display: inline-flex; align-items: center; }
       .btn-back:hover { background: rgba(244,121,32,0.3); border-color: var(--orange); color: white; }
 
-      /* ── Hero ── */
       .hero-section { padding: 60px 0 40px; position: relative; z-index: 1; }
       .logo-display-card { background: linear-gradient(135deg,#e8edf8 0%,#f5f7fb 60%,#eef1fa 100%); border-radius: 24px; padding: 40px; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 60px rgba(15,30,61,0.18), 0 0 0 3px #1a3260; position: relative; overflow: hidden; min-height: 280px; border: 3px solid #1a3260; transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); cursor: pointer; }
       .logo-display-card::before { content: ""; position: absolute; top: -60px; right: -60px; width: 220px; height: 220px; border-radius: 50%; background: rgba(244,121,32,0.12); transition: all 0.4s ease; }
       .logo-display-card::after { content: ""; position: absolute; bottom: -40px; left: -40px; width: 160px; height: 160px; border-radius: 50%; background: rgba(15,30,61,0.06); transition: all 0.4s ease; }
       .logo-display-card .shine { position: absolute; inset: 0; background: linear-gradient(120deg,transparent 0%,rgba(255,255,255,0) 30%,rgba(255,255,255,0.55) 50%,rgba(255,255,255,0) 70%,transparent 100%); transform: translateX(-100%); transition: transform 0s; z-index: 2; pointer-events: none; }
-      .logo-display-card:hover { border-color: #4a7fd4; box-shadow: 0 0 0 4px rgba(26,50,96,0.15), 0 0 24px 6px rgba(74,127,212,0.45), 0 0 60px 16px rgba(74,127,212,0.2), 0 30px 80px rgba(15,30,61,0.25); transform: translateY(-6px) scale(1.02); animation: pulseRing 1.2s ease-out infinite; }
+      .logo-display-card:hover { border-color: #4a7fd4; box-shadow: 0 0 0 4px rgba(26,50,96,0.15), 0 0 24px 6px rgba(74,127,212,0.45), 0 0 60px 16px rgba(74,127,212,0.2), 0 30px 80px rgba(15,30,61,0.25); transform: translateY(-6px) scale(1.02); }
       .logo-display-card:hover::before { top: -30px; right: -30px; width: 280px; height: 280px; background: rgba(244,121,32,0.18); }
-      .logo-display-card:hover::after { bottom: -20px; left: -20px; width: 200px; height: 200px; background: rgba(74,127,212,0.1); }
       .logo-display-card:hover .shine { transform: translateX(200%); transition: transform 0.65s ease; }
       .logo-display-card img { max-width: 360px; width: 100%; position: relative; z-index: 3; filter: drop-shadow(0 4px 16px rgba(15,30,61,0.12)); transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); }
       .logo-display-card:hover img { filter: drop-shadow(0 8px 28px rgba(26,50,96,0.3)) drop-shadow(0 0 12px rgba(74,127,212,0.25)); transform: scale(1.05); }
-      @keyframes pulseRing { 0% { box-shadow: 0 0 0 0 rgba(74,127,212,0.5),0 0 0 4px rgba(26,50,96,0.15),0 0 24px 6px rgba(74,127,212,0.45),0 30px 80px rgba(15,30,61,0.25); } 70% { box-shadow: 0 0 0 16px rgba(74,127,212,0),0 0 0 4px rgba(26,50,96,0.15),0 0 24px 6px rgba(74,127,212,0.45),0 30px 80px rgba(15,30,61,0.25); } 100% { box-shadow: 0 0 0 0 rgba(74,127,212,0),0 0 0 4px rgba(26,50,96,0.15),0 0 24px 6px rgba(74,127,212,0.45),0 30px 80px rgba(15,30,61,0.25); } }
+
       .hero-right h2 { font-family: "Montserrat", sans-serif; font-size: 2.4rem; color: var(--navy); font-weight: 800; line-height: 1.2; }
       .hero-right h2 span { color: var(--orange); }
       .hero-right p { color: var(--muted); font-size: 1rem; }
       .step-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-light); color: var(--orange); font-weight: 800; font-size: 0.78rem; letter-spacing: 1.5px; padding: 5px 14px; border-radius: 50px; border: 1.5px solid rgba(244,121,32,0.3); margin-bottom: 14px; }
       .step-badge::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--orange); }
 
-      /* ── Plan type cards ── */
       .plan-type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
       .plan-type-card { background: white; border: 2px solid var(--border); border-radius: 18px; padding: 22px 20px; cursor: pointer; transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1); position: relative; overflow: hidden; text-align: center; }
       .plan-type-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg,rgba(244,121,32,0.06),transparent); opacity: 0; transition: opacity 0.25s; }
@@ -70,7 +66,6 @@
       .plan-type-card .arrow-badge { position: absolute; top: 10px; right: 10px; background: var(--orange); color: white; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; opacity: 0; transition: opacity 0.2s; }
       .plan-type-card:hover .arrow-badge { opacity: 1; }
 
-      /* ── Plan modals ── */
       .plans-modal .modal-dialog { max-width: 940px; }
       .plans-modal .modal-content { border: none; border-radius: 20px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.2); }
       .plans-modal .modal-header { background: linear-gradient(135deg,var(--navy) 0%,var(--primary-mid) 100%); padding: 20px 28px; border: none; }
@@ -103,10 +98,9 @@
       .btn-period .period-price { display: block; font-size: 0.88rem; font-weight: 800; color: var(--navy); margin-top: 2px; }
       .btn-period:hover .period-price { color: white; }
 
-      /* ── Shared modal base styles ── */
-      #modernConfirmationModal .modal-content, #conditionModal .modal-content, #clientDetailsModal .modal-content, #groupEnrollModal .modal-content { border: none; border-radius: 20px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.2); }
-      #modernConfirmationModal .modal-header, #conditionModal .modal-header, #clientDetailsModal .modal-header, #groupEnrollModal .modal-header { background: linear-gradient(135deg,var(--navy),var(--primary-mid)); border: none; padding: 18px 24px; }
-      #modernConfirmationModal .modal-title, #conditionModal .modal-title, #clientDetailsModal .modal-title, #groupEnrollModal .modal-title { color: white; font-weight: 700; font-size: 1.1rem; }
+      #modernConfirmationModal .modal-content, #conditionModal .modal-content, #clientDetailsModal .modal-content { border: none; border-radius: 20px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.2); }
+      #modernConfirmationModal .modal-header, #conditionModal .modal-header, #clientDetailsModal .modal-header { background: linear-gradient(135deg,var(--navy),var(--primary-mid)); border: none; padding: 18px 24px; }
+      #modernConfirmationModal .modal-title, #conditionModal .modal-title, #clientDetailsModal .modal-title { color: white; font-weight: 700; font-size: 1.1rem; }
 
       .confirm-summary { background: var(--accent-light); border: 1.5px solid rgba(244,121,32,0.4); border-radius: 14px; padding: 18px 20px; margin: 8px 0 16px; }
       .confirm-summary .plan-name { font-weight: 800; font-size: 1.05rem; color: var(--navy); }
@@ -134,7 +128,6 @@
       .btn-remove-dependent:hover { background: #ffeaea; }
       .dependent-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
 
-      /* ── Age Warning Banner ── */
       #age-warning-banner { display: none; border-radius: 14px; padding: 16px 18px; margin-bottom: 16px; animation: warnPulse 0.4s ease; }
       #age-warning-banner.warn-upgrade { background: linear-gradient(135deg,#fff3e0,#ffe0b2); border: 2px solid #f47920; }
       #age-warning-banner.warn-downgrade { background: linear-gradient(135deg,#e8f4fd,#cce5ff); border: 2px solid #2196f3; }
@@ -158,14 +151,12 @@
       .warn-downgrade .btn-switch-plan { background: #42a5f5; }
       .warn-downgrade .btn-switch-plan:hover { background: #1e88e5; transform: translateY(-1px); }
 
-      /* ── Accidental Insurance checkbox ── */
       #accidental-insurance-row { display: none; background: linear-gradient(135deg,#e8f4fd,#cce5ff); border: 1.5px solid rgba(33,150,243,0.4); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; }
       .accidental-label { font-weight: 700; font-size: 0.88rem; color: #0d47a1; display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
       .accidental-label i { color: #2196f3; }
       .accidental-desc { font-size: 0.8rem; color: #1a237e; margin-bottom: 10px; }
       .accidental-age-note { font-size: 0.76rem; color: #1565c0; background: rgba(33,150,243,0.1); border-radius: 6px; padding: 6px 10px; margin-top: 8px; }
 
-      /* ── Age indicator chip ── */
       #age-chip { display: none; font-size: 0.78rem; font-weight: 700; padding: 3px 12px; border-radius: 50px; margin-top: 6px; width: fit-content; }
       #age-chip.ok   { background: #e6f7ee; color: #1a7a46; border: 1.5px solid #a8dfc0; }
       #age-chip.warn { background: #fff0e0; color: #b34d00; border: 1.5px solid #f4b27a; }
@@ -173,132 +164,127 @@
       #age-chip.blue { background: #e3f2fd; color: #0d47a1; border: 1.5px solid #90caf9; }
 
       /* ══════════════════════════════════════════
-         GROUP ENROLLMENT TABLE — Redesigned
+         GROUP ENROLLMENT MODAL — Upload Flow
       ══════════════════════════════════════════ */
-      #groupEnrollModal .modal-dialog { max-width: 1200px; }
+      #groupEnrollModal .modal-dialog { max-width: 720px; }
+      #groupEnrollModal .modal-content { border: none; border-radius: 24px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.22); }
+      #groupEnrollModal .modal-header { background: linear-gradient(135deg, var(--navy) 0%, var(--primary-mid) 100%); border: none; padding: 20px 28px; }
+      #groupEnrollModal .modal-title { color: white; font-weight: 800; font-size: 1.15rem; font-family: "Montserrat", sans-serif; }
+      #groupEnrollModal .modal-title small { font-family: "Plus Jakarta Sans", sans-serif; font-size: 0.78rem; font-weight: 400; opacity: 0.7; display: block; margin-top: 2px; }
+      #groupEnrollModal .modal-body { background: #f0f3fa; padding: 0; max-height: 80vh; overflow-y: auto; }
+      #groupEnrollModal .modal-footer { background: white; border-top: 1.5px solid var(--border); padding: 14px 24px; }
 
-      .group-plan-banner { background: var(--accent-light); border-bottom: 2px solid rgba(244,121,32,0.25); padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
-      .group-plan-banner .banner-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-      .group-plan-tag { background: var(--navy); color: white; font-size: 0.72rem; font-weight: 700; padding: 4px 13px; border-radius: 50px; letter-spacing: 0.5px; }
-      .group-plan-detail { font-size: 0.82rem; color: #8a5520; font-weight: 500; }
-      .group-plan-price { font-size: 1.15rem; font-weight: 800; color: var(--orange); }
+      /* Selected Plan Banner */
+      .group-plan-banner { background: linear-gradient(135deg, var(--accent-light) 0%, #fde8d0 100%); border-bottom: 2px solid rgba(244,121,32,0.2); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+      .group-plan-tag { background: var(--navy); color: white; font-size: 0.7rem; font-weight: 700; padding: 3px 12px; border-radius: 50px; letter-spacing: 0.5px; }
+      .group-plan-detail { font-size: 0.8rem; color: #7a4010; font-weight: 500; margin-top: 4px; }
+      .group-plan-price { font-size: 1.1rem; font-weight: 800; color: var(--orange); }
 
-      #groupEnrollModal .modal-body { background: #f0f3fa; padding: 20px 24px; max-height: 72vh; overflow-y: auto; }
-      #groupEnrollModal .modal-body::-webkit-scrollbar { width: 6px; }
-      #groupEnrollModal .modal-body::-webkit-scrollbar-track { background: #dde3f0; border-radius: 3px; }
-      #groupEnrollModal .modal-body::-webkit-scrollbar-thumb { background: var(--primary-mid); border-radius: 3px; }
+      /* Steps container */
+      .group-steps { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
 
-      /* Toolbar */
-      .enroll-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
-      .enroll-toolbar-left { display: flex; align-items: center; gap: 10px; }
-      .enrollee-count-badge { background: var(--navy); color: white; font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 50px; }
-      .enroll-toolbar-hint { font-size: 0.78rem; color: var(--muted); }
-      .enroll-toolbar-right { display: flex; gap: 8px; }
+      /* Step progress bar */
+      .step-progress { display: flex; align-items: center; gap: 0; margin-bottom: 8px; }
+      .step-pip { display: flex; flex-direction: column; align-items: center; flex: 1; position: relative; }
+      .step-pip-circle { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem; border: 2.5px solid var(--border); background: white; color: var(--muted); transition: all 0.3s; z-index: 1; }
+      .step-pip.active .step-pip-circle { background: var(--orange); border-color: var(--orange); color: white; box-shadow: 0 4px 14px rgba(244,121,32,0.4); }
+      .step-pip.done .step-pip-circle { background: #22c55e; border-color: #22c55e; color: white; }
+      .step-pip-label { font-size: 0.68rem; font-weight: 700; margin-top: 6px; color: var(--muted); text-align: center; white-space: nowrap; }
+      .step-pip.active .step-pip-label { color: var(--orange); }
+      .step-pip.done .step-pip-label { color: #22c55e; }
+      .step-connector { flex: 1; height: 2.5px; background: var(--border); margin: 0 -2px; margin-bottom: 22px; transition: background 0.3s; }
+      .step-connector.done { background: #22c55e; }
 
-      .btn-enroll-add { background: linear-gradient(135deg,var(--orange),var(--accent-dark)); color: white; border: none; border-radius: 8px; padding: 8px 16px; font-size: 0.82rem; font-weight: 700; font-family: 'Plus Jakarta Sans', sans-serif; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
-      .btn-enroll-add:hover { background: linear-gradient(135deg,#e06a10,#bf550a); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(244,121,32,0.4); }
-      .btn-enroll-clear { background: white; border: 2px solid var(--border); color: var(--muted); border-radius: 8px; padding: 8px 14px; font-size: 0.82rem; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif; cursor: pointer; transition: all 0.2s; }
-      .btn-enroll-clear:hover { border-color: var(--danger); color: var(--danger); background: #fff5f5; }
+      /* Step panels */
+      .step-panel { display: none; animation: fadeInUp 0.3s ease; }
+      .step-panel.active { display: block; }
+      @keyframes fadeInUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-      /* Table wrapper */
-      .enroll-table-wrap { border-radius: 14px; overflow: hidden; border: 1.5px solid var(--border); box-shadow: 0 4px 16px rgba(15,30,61,0.08); }
+      /* Step 1 — Download */
+      .download-card { background: white; border-radius: 18px; border: 2px solid var(--border); padding: 28px; text-align: center; transition: border-color 0.2s; }
+      .download-card:hover { border-color: var(--orange); }
+      .download-icon { width: 72px; height: 72px; background: linear-gradient(135deg, #e8edf8, var(--accent-light)); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 2rem; color: var(--orange); }
+      .download-card h5 { font-weight: 800; color: var(--navy); font-size: 1.05rem; margin-bottom: 8px; }
+      .download-card p { font-size: 0.84rem; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
+      .btn-download-tpl { background: linear-gradient(135deg, var(--navy), var(--primary-mid)); color: white; border: none; border-radius: 50px; padding: 11px 28px; font-weight: 700; font-size: 0.9rem; font-family: 'Plus Jakarta Sans', sans-serif; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+      .btn-download-tpl:hover { background: linear-gradient(135deg, var(--orange), var(--accent-dark)); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(244,121,32,0.35); }
+      .template-features { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 20px; text-align: left; }
+      .template-feature { background: var(--soft-bg); border-radius: 10px; padding: 10px 14px; display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--navy); font-weight: 600; }
+      .template-feature i { color: var(--orange); font-size: 0.8rem; }
 
-      /* Table core */
-      .enroll-table { width: 100%; border-collapse: collapse; min-width: 1100px; font-size: 0.79rem; font-family: 'Plus Jakarta Sans', sans-serif; }
+      /* Step 2 — Upload */
+      .upload-zone { background: white; border-radius: 18px; border: 2.5px dashed #b8c4e0; padding: 36px 24px; text-align: center; cursor: pointer; transition: all 0.25s; position: relative; }
+      .upload-zone:hover, .upload-zone.drag-over { border-color: var(--orange); background: var(--accent-light); }
+      .upload-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+      .upload-zone .upload-icon { font-size: 2.4rem; color: #b8c4e0; margin-bottom: 12px; transition: color 0.2s; }
+      .upload-zone:hover .upload-icon, .upload-zone.drag-over .upload-icon { color: var(--orange); }
+      .upload-zone h6 { font-weight: 800; color: var(--navy); margin-bottom: 6px; font-size: 1rem; }
+      .upload-zone p { font-size: 0.82rem; color: var(--muted); margin: 0; }
+      .upload-zone .upload-formats { display: inline-flex; gap: 6px; margin-top: 10px; }
+      .upload-format-badge { background: var(--soft-bg); border: 1.5px solid var(--border); border-radius: 6px; font-size: 0.72rem; font-weight: 700; color: var(--navy); padding: 3px 10px; }
 
-      /* Header */
-      .enroll-table thead tr { background: linear-gradient(135deg, var(--navy) 0%, var(--primary-mid) 100%); }
-      .enroll-table thead th { color: rgba(255,255,255,0.88); font-weight: 600; font-size: 0.71rem; padding: 10px 8px; text-align: left; border-right: 1px solid rgba(255,255,255,0.08); white-space: nowrap; letter-spacing: 0.3px; }
-      .enroll-table thead th:last-child { border-right: none; text-align: center; width: 36px; }
-      .enroll-table thead th .th-req { color: #f47920; margin-left: 2px; font-size: 0.65rem; }
-      .enroll-table thead th .th-opt { color: rgba(255,255,255,0.4); font-weight: 400; font-size: 0.65rem; margin-left: 2px; }
+      .file-selected-card { background: white; border-radius: 14px; border: 2px solid #22c55e; padding: 14px 18px; display: flex; align-items: center; gap: 14px; margin-top: 14px; display: none; }
+      .file-selected-card .file-icon { width: 42px; height: 42px; background: #e8fdf1; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #22c55e; font-size: 1.2rem; flex-shrink: 0; }
+      .file-selected-card .file-info { flex: 1; min-width: 0; }
+      .file-selected-card .file-name { font-weight: 700; font-size: 0.88rem; color: var(--navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .file-selected-card .file-size { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+      .btn-remove-file { background: none; border: none; color: var(--muted); cursor: pointer; padding: 4px; border-radius: 6px; font-size: 0.85rem; transition: all 0.2s; flex-shrink: 0; }
+      .btn-remove-file:hover { background: #ffeaea; color: var(--danger); }
 
-      /* Column widths — tighter, proportional */
-      .col-no    { width: 34px; }
-      .col-empid { width: 76px; }
-      .col-last  { width: 100px; }
-      .col-first { width: 100px; }
-      .col-mid   { width: 82px; }
-      .col-sfx   { width: 60px; }
-      .col-bdate { width: 116px; }
-      .col-gen   { width: 74px; }
-      .col-civil { width: 86px; }
-      .col-nat   { width: 82px; }
-      .col-ph    { width: 72px; }
-      .col-phid  { width: 106px; }
-      .col-phone { width: 116px; }
-      .col-dept  { width: 84px; }
-      .col-edate { width: 106px; }
-      .col-stat  { width: 90px; }
-      .col-plan  { width: 86px; }
-      .col-mtype { width: 90px; }
-      .col-idnm  { width: 108px; }
-      .col-act   { width: 100px; }
-      .col-email { width: 140px; }
-      .col-exp   { width: 100px; }
-      .col-rmk   { width: 90px; }
-      .col-amid  { width: 96px; }
-      .col-del   { width: 36px; }
+      .upload-error { background: #ffeaea; border: 1.5px solid #f4a0a0; border-radius: 10px; padding: 10px 14px; font-size: 0.82rem; color: #c0392b; display: none; margin-top: 10px; }
+      .upload-error i { margin-right: 6px; }
 
-      /* Body rows */
-      .enroll-table tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
-      .enroll-table tbody tr:last-child { border-bottom: none; }
-      .enroll-table tbody tr:nth-child(odd)  { background: #ffffff; }
-      .enroll-table tbody tr:nth-child(even) { background: #f8f9fd; }
-      .enroll-table tbody tr:hover { background: rgba(244,121,32,0.05); }
+      /* Step 3 — Review */
+      .review-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 8px; }
+      .review-stats { display: flex; gap: 10px; flex-wrap: wrap; }
+      .review-stat { background: white; border: 1.5px solid var(--border); border-radius: 10px; padding: 8px 14px; text-align: center; min-width: 80px; }
+      .review-stat .rs-num { font-size: 1.3rem; font-weight: 800; color: var(--navy); display: block; }
+      .review-stat .rs-label { font-size: 0.7rem; color: var(--muted); font-weight: 600; }
+      .review-stat.ok .rs-num { color: #22c55e; }
+      .review-stat.warn .rs-num { color: var(--orange); }
+      .review-stat.err .rs-num { color: var(--danger); }
 
-      /* Row number */
-      .row-num { text-align: center; font-size: 0.68rem; font-weight: 700; color: var(--orange); padding: 0 4px; user-select: none; }
+      .review-table-wrap { border-radius: 14px; overflow: hidden; border: 1.5px solid var(--border); max-height: 320px; overflow-y: auto; }
+      .review-table-wrap::-webkit-scrollbar { width: 5px; height: 5px; }
+      .review-table-wrap::-webkit-scrollbar-thumb { background: #b8c4e0; border-radius: 3px; }
+      .review-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; font-family: 'Plus Jakarta Sans', sans-serif; }
+      .review-table thead tr { background: linear-gradient(135deg, var(--navy), var(--primary-mid)); }
+      .review-table thead th { color: rgba(255,255,255,0.85); font-weight: 600; font-size: 0.7rem; padding: 9px 10px; white-space: nowrap; border-right: 1px solid rgba(255,255,255,0.07); }
+      .review-table thead th:last-child { border-right: none; }
+      .review-table tbody tr:nth-child(odd) { background: #fff; }
+      .review-table tbody tr:nth-child(even) { background: #f8f9fd; }
+      .review-table tbody tr:hover { background: rgba(244,121,32,0.05); }
+      .review-table tbody td { padding: 7px 10px; border-bottom: 1px solid #edf0f8; vertical-align: middle; }
+      .review-table tbody tr:last-child td { border-bottom: none; }
+      .row-status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+      .row-status-dot.ok { background: #22c55e; }
+      .row-status-dot.warn { background: var(--orange); }
+      .row-status-dot.err { background: var(--danger); }
 
-      /* Cell */
-      .enroll-table td { padding: 3px 4px; vertical-align: middle; }
+      .review-validation-banner { border-radius: 10px; padding: 10px 14px; font-size: 0.82rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+      .review-validation-banner.all-ok { background: #e8fdf1; border: 1.5px solid #a8dfc0; color: #1a7a46; }
+      .review-validation-banner.has-errors { background: #ffeaea; border: 1.5px solid #f4a0a0; color: #c0392b; }
+      .review-validation-banner.has-warnings { background: var(--accent-light); border: 1.5px solid rgba(244,121,32,0.4); color: #7a3800; }
 
-      /* Cell input */
-      .cell-inp {
-        width: 100%;
-        background: transparent;
-        border: 1.5px solid transparent;
-        border-radius: 6px;
-        padding: 5px 7px;
-        font-size: 0.78rem;
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        color: var(--text);
-        outline: none;
-        transition: border-color 0.12s, background 0.12s, box-shadow 0.12s;
-      }
-      .cell-inp:hover  { border-color: var(--border); background: #fff; }
-      .cell-inp:focus  { border-color: var(--orange); background: #fff; box-shadow: 0 0 0 3px rgba(244,121,32,0.1); }
-      .cell-inp::placeholder { color: var(--muted); font-size: 0.74rem; opacity: 0.7; }
-      select.cell-inp  { cursor: pointer; -webkit-appearance: auto; }
+      /* Buttons */
+      .btn-group-nav { border: none; border-radius: 50px; padding: 9px 22px; font-weight: 700; font-size: 0.88rem; font-family: 'Plus Jakarta Sans', sans-serif; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 7px; }
+      .btn-group-next { background: linear-gradient(135deg, var(--orange), var(--accent-dark)); color: white; }
+      .btn-group-next:hover { background: linear-gradient(135deg, #e06a10, #bf550a); transform: translateY(-2px); box-shadow: 0 5px 16px rgba(244,121,32,0.35); }
+      .btn-group-next:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+      .btn-group-back { background: white; border: 2px solid var(--border); color: var(--muted); }
+      .btn-group-back:hover { border-color: var(--muted); color: var(--text); }
+      .btn-group-submit { background: linear-gradient(135deg, #22c55e, #16a34a); color: white; }
+      .btn-group-submit:hover { background: linear-gradient(135deg, #16a34a, #15803d); transform: translateY(-2px); box-shadow: 0 5px 16px rgba(34,197,94,0.35); }
+      .btn-group-submit:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
 
-      /* Date inputs slightly smaller text to fit */
-      input[type="date"].cell-inp { font-size: 0.74rem; }
-
-      /* Disabled ID name cell */
-      .cell-inp:disabled { background: #f0f3fa; color: var(--muted); cursor: not-allowed; border-color: transparent !important; box-shadow: none !important; }
-
-      /* Delete button */
-      .btn-del-row { background: none; border: none; color: #c8cedf; font-size: 0.78rem; cursor: pointer; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; transition: all 0.15s; }
-      .btn-del-row:hover { background: #ffeaea; color: var(--danger); }
-
-      /* Empty state */
-      .empty-enroll-row td { text-align: center; padding: 44px 20px; color: var(--muted); }
-      .empty-enroll-icon { font-size: 2.2rem; color: #c8cedf; margin-bottom: 10px; }
-      .empty-enroll-text { font-size: 0.88rem; font-weight: 600; color: var(--muted); }
-      .empty-enroll-sub  { font-size: 0.76rem; color: #a0acc8; margin-top: 4px; }
-
-      /* Table footer */
-      .enroll-table-foot { background: linear-gradient(135deg,var(--navy) 0%,var(--primary-mid) 100%); padding: 9px 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
-      .enroll-table-foot span { font-size: 0.75rem; color: rgba(255,255,255,0.65); }
-      .enroll-table-foot .foot-count { color: white; font-weight: 700; }
-
-      /* Modal footer */
-      #groupEnrollModal .modal-footer { border-top: 1.5px solid var(--border); background: white; padding: 14px 24px; }
-      .group-footer-note { font-size: 0.78rem; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+      .group-footer-note { font-size: 0.76rem; color: var(--muted); display: flex; align-items: center; gap: 5px; }
       .group-footer-note i { color: var(--orange); }
 
-      /* Row slide-in */
-      @keyframes rowSlideIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+      /* Success */
+      .group-success-panel { text-align: center; padding: 36px 24px; display: none; }
+      .success-circle { width: 80px; height: 80px; background: linear-gradient(135deg, #e8fdf1, #d1fae5); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 2.2rem; color: #22c55e; }
+      .group-success-panel h5 { font-weight: 800; color: var(--navy); font-size: 1.1rem; margin-bottom: 8px; }
+      .group-success-panel p { font-size: 0.85rem; color: var(--muted); max-width: 380px; margin: 0 auto; line-height: 1.6; }
     </style>
   </head>
   <body>
@@ -362,9 +348,6 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════
-    PLAN DATA & BENEFITS
-  ═══════════════════════════════════════════ -->
   <script>
   const PLAN_DATA = {
     Individual: [
@@ -379,25 +362,8 @@
       { tier: 'Family Plan', name: 'Family Guard Plan', room: '', quarterly: '1,500', semi: '3,600', annual: '7,200' },
     ],
     Senior: [
-      {
-        tier: 'Senior Plan',
-        name: 'Kaagapay Emergency Access Plan',
-        room: '1,499',
-        quarterly: '3,340', semi: '6,240', annual: '12,000',
-        ageMin: 0, ageMax: 59,
-        accidentalAgeMin: 7, accidentalAgeMax: 70,
-        hasAccidentalInsurance: true,
-        planKey: '1499'
-      },
-      {
-        tier: 'Senior Plan',
-        name: 'Kaagapay Emergency Access Plan',
-        room: '1,599',
-        quarterly: '3,402', semi: '6,678', annual: '12,600',
-        ageMin: 60, ageMax: 70,
-        hasAccidentalInsurance: false,
-        planKey: '1599'
-      },
+      { tier: 'Senior Plan', name: 'Kaagapay Emergency Access Plan', room: '1,499', quarterly: '3,340', semi: '6,240', annual: '12,000', ageMin: 0, ageMax: 59, accidentalAgeMin: 7, accidentalAgeMax: 70, hasAccidentalInsurance: true, planKey: '1499' },
+      { tier: 'Senior Plan', name: 'Kaagapay Emergency Access Plan', room: '1,599', quarterly: '3,402', semi: '6,678', annual: '12,600', ageMin: 60, ageMax: 70, hasAccidentalInsurance: false, planKey: '1599' },
     ],
     Group: [
       { tier: 'Group Plan', name: 'Bureau Health Plan', room: '', quarterly: '1,800', semi: '3,600', annual: '7,200' },
@@ -506,7 +472,6 @@
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body p-4" style="max-height:70vh;overflow-y:auto;">
-
           <div id="age-warning-banner">
             <div class="age-warn-title">
               <i class="fa fa-triangle-exclamation" id="age-warn-icon"></i>
@@ -518,30 +483,18 @@
               <button class="btn-switch-plan" id="btn-switch-senior-plan" onclick="switchSeniorPlan()"></button>
             </div>
           </div>
-
           <div id="accidental-insurance-row">
             <div class="accidental-label"><i class="fa fa-shield-halved"></i> Accidental Insurance Option</div>
-            <div class="accidental-desc">
-              The ₱1,499 plan includes <strong>Accidental Insurance</strong>. Clients aged 60–70 may enroll
-              in this plan <em>only</em> if they opt in to Accidental Insurance coverage.
-            </div>
+            <div class="accidental-desc">The ₱1,499 plan includes <strong>Accidental Insurance</strong>. Clients aged 60–70 may enroll in this plan <em>only</em> if they opt in to Accidental Insurance coverage.</div>
             <div class="form-check mt-2">
               <input class="form-check-input" type="checkbox" id="accidental-insurance-check" />
-              <label class="form-check-label fw-bold" for="accidental-insurance-check" style="color:#0d47a1;">
-                Yes, I want to include Accidental Insurance
-              </label>
+              <label class="form-check-label fw-bold" for="accidental-insurance-check" style="color:#0d47a1;">Yes, I want to include Accidental Insurance</label>
             </div>
-            <div class="accidental-age-note">
-              <i class="fa fa-circle-info me-1"></i>
-              Accidental Insurance is available for ages 7–70. By opting in, you qualify for the ₱1,499 plan.
-            </div>
+            <div class="accidental-age-note"><i class="fa fa-circle-info me-1"></i>Accidental Insurance is available for ages 7–70. By opting in, you qualify for the ₱1,499 plan.</div>
           </div>
-
           <form id="clientForm">
             <div id="principalSection">
-              <div id="principalLabel" class="members-section-title mb-3" style="display:none;">
-                <i class="fa fa-crown"></i> Principal Member
-              </div>
+              <div id="principalLabel" class="members-section-title mb-3" style="display:none;"><i class="fa fa-crown"></i> Principal Member</div>
               <div class="mb-3">
                 <label class="form-label">Full Name</label>
                 <div class="row g-2">
@@ -578,18 +531,14 @@
                 </select>
               </div>
             </div>
-
             <div id="familyMembersSection" style="display:none" class="mb-3">
               <hr class="my-3" />
               <div class="members-section">
                 <div class="members-section-title"><i class="fa fa-people-roof"></i> Dependents</div>
                 <div id="dependentsContainer"></div>
-                <button type="button" class="btn-add-dependent" id="addDependentBtn">
-                  <i class="fa fa-plus me-1"></i> Add Dependent
-                </button>
+                <button type="button" class="btn-add-dependent" id="addDependentBtn"><i class="fa fa-plus me-1"></i> Add Dependent</button>
               </div>
             </div>
-
             <div class="mb-3">
               <label class="form-label">Payment Option</label>
               <select class="form-select" id="payment-option" required></select>
@@ -609,114 +558,174 @@
   </div>
 
   <!-- ═══════════════════════════════════════════
-    MODAL: Group Enrollment — Redesigned Table
+    MODAL: Group Enrollment — Upload Flow
   ═══════════════════════════════════════════ -->
   <div class="modal fade" id="groupEnrollModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">
-            <i class="fa fa-building me-2"></i>Group Enrollment Form
-            <small style="font-family:'Plus Jakarta Sans',sans-serif;font-size:0.78rem;opacity:0.7;display:block;font-weight:400;margin-top:2px;">Add all enrollees below — one row per person</small>
-          </h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          <div>
+            <div class="modal-title">
+              <i class="fa fa-building me-2"></i>Group Enrollment
+              <small>Bureau Health Plan · Batch member upload</small>
+            </div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" onclick="resetGroupModal()"></button>
         </div>
 
+        <!-- Selected plan banner -->
         <div class="group-plan-banner">
-          <div class="banner-left">
-            <span class="group-plan-tag"><i class="fa fa-building me-1"></i>Group Plan</span>
-            <span class="group-plan-detail" id="group-banner-detail">Bureau Health Plan · Inpatient + Outpatient + APE + Emergency</span>
+          <div>
+            <span class="group-plan-tag">GROUP PLAN</span>
+            <div class="group-plan-detail" id="group-banner-detail">Bureau Health Plan · Inpatient + Outpatient + APE + Emergency</div>
           </div>
-          <span class="group-plan-price" id="group-banner-price">₱7,200 / year per head</span>
+          <div class="group-plan-price" id="group-banner-price">—</div>
         </div>
 
         <div class="modal-body">
-          <!-- Toolbar -->
-          <div class="enroll-toolbar">
-            <div class="enroll-toolbar-left">
-              <span class="enrollee-count-badge">
-                <i class="fa fa-users me-1"></i><span id="enroll-count-num">0</span> enrollee(s)
-              </span>
-              <span class="enroll-toolbar-hint">Click a cell to edit · Tab to move between fields</span>
-            </div>
-            <div class="enroll-toolbar-right">
-              <button class="btn-enroll-clear" onclick="clearAllEnrollees()">
-                <i class="fa fa-trash-can me-1"></i>Clear all
-              </button>
-              <button class="btn-enroll-add" onclick="addEnrolleeRow()">
-                <i class="fa fa-plus"></i> Add enrollee
-              </button>
-            </div>
+          <!-- Success panel (hidden by default) -->
+          <div class="group-success-panel" id="group-success-panel">
+            <div class="success-circle"><i class="fa fa-check"></i></div>
+            <h5>Enrollment Submitted!</h5>
+            <p>Your group enrollment has been received. Our team will review and process the records. You'll receive a confirmation email shortly.</p>
+            <button class="btn-group-nav btn-group-next mt-4" onclick="resetGroupModal(); bootstrap.Modal.getInstance(document.getElementById('groupEnrollModal')).hide();">
+              <i class="fa fa-check me-1"></i> Done
+            </button>
           </div>
 
-          <!-- Table -->
-          <div class="enroll-table-wrap">
-            <div style="overflow-x:auto;">
-              <table class="enroll-table">
-                <thead>
-                  <tr>
-                    <th class="col-no"  style="text-align:center;">#</th>
-                    <th class="col-empid">Emp. ID<span class="th-opt">(opt)</span></th>
-                    <th class="col-last">Last name<span class="th-req">*</span></th>
-                    <th class="col-first">Given name<span class="th-req">*</span></th>
-                    <th class="col-mid">Middle name<span class="th-opt">(opt)</span></th>
-                    <th class="col-sfx">Suffix<span class="th-opt">(opt)</span></th>
-                    <th class="col-bdate">Birthdate<span class="th-req">*</span></th>
-                    <th class="col-gen">Gender<span class="th-req">*</span></th>
-                    <th class="col-civil">Civil status<span class="th-req">*</span></th>
-                    <th class="col-nat">Nationality<span class="th-req">*</span></th>
-                    <th class="col-ph">PhilHealth<span class="th-req">*</span></th>
-                    <th class="col-phid">PhilHealth ID<span class="th-req">*</span></th>
-                    <th class="col-phone">Phone no.<span class="th-req">*</span></th>
-                    <th class="col-dept">Department<span class="th-opt">(opt)</span></th>
-                    <th class="col-edate">Employ. date<span class="th-req">*</span></th>
-                    <th class="col-stat">Status<span class="th-req">*</span></th>
-                    <th class="col-plan">Plan<span class="th-req">*</span></th>
-                    <th class="col-mtype">Member type<span class="th-req">*</span></th>
-                    <th class="col-idnm">ID name<span class="th-opt">(dep.)</span></th>
-                    <th class="col-act">Activation<span class="th-opt">(opt)</span></th>
-                    <th class="col-email">Email<span class="th-req">*</span></th>
-                    <th class="col-exp">Expiration<span class="th-opt">(opt)</span></th>
-                    <th class="col-rmk">Remarks<span class="th-opt">(opt)</span></th>
-                    <th class="col-amid">AMAPHIL ID<span class="th-opt">(opt)</span></th>
-                    <th class="col-del"></th>
-                  </tr>
-                </thead>
-                <tbody id="enrollee-tbody">
-                  <tr class="empty-enroll-row" id="empty-enroll-msg">
-                    <td colspan="25">
-                      <div class="empty-enroll-icon"><i class="fa fa-table-list"></i></div>
-                      <div class="empty-enroll-text">No enrollees added yet</div>
-                      <div class="empty-enroll-sub">Click "+ Add enrollee" to start filling out the enrollment table</div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+          <!-- Main flow (hidden when success shown) -->
+          <div id="group-main-flow">
+            <!-- Step progress -->
+            <div style="padding: 20px 24px 0;">
+              <div class="step-progress">
+                <div class="step-pip" id="gpip-1">
+                  <div class="step-pip-circle"><i class="fa fa-download"></i></div>
+                  <div class="step-pip-label">Download<br>Template</div>
+                </div>
+                <div class="step-connector" id="gconn-1"></div>
+                <div class="step-pip" id="gpip-2">
+                  <div class="step-pip-circle"><i class="fa fa-upload"></i></div>
+                  <div class="step-pip-label">Upload<br>Filled File</div>
+                </div>
+                <div class="step-connector" id="gconn-2"></div>
+                <div class="step-pip" id="gpip-3">
+                  <div class="step-pip-circle"><i class="fa fa-table"></i></div>
+                  <div class="step-pip-label">Review<br>& Submit</div>
+                </div>
+              </div>
             </div>
-            <div class="enroll-table-foot">
-              <span>Total enrollees: <span class="foot-count" id="enroll-foot-count">0</span></span>
-              <span>Maximum 200 enrollees per submission</span>
-            </div>
-          </div>
 
-          <!-- Info note -->
-          <div class="mt-3 d-flex align-items-start gap-2" style="background:var(--accent-light);border:1.5px solid rgba(244,121,32,0.3);border-radius:10px;padding:12px 14px;">
-            <i class="fa fa-circle-info" style="color:var(--orange);margin-top:2px;flex-shrink:0;"></i>
-            <span style="font-size:0.8rem;color:#8a5520;">
-              All enrollees share the same plan and payment period. Pre-existing conditions declared here may affect individual coverage terms.
-              Ensure all birthdates and names match valid government IDs.
-            </span>
-          </div>
-        </div>
+            <div class="group-steps">
+              <!-- ── STEP 1: DOWNLOAD ── -->
+              <div class="step-panel active" id="gpanel-1">
+                <div class="download-card">
+                  <div class="download-icon"><i class="fa fa-file-excel"></i></div>
+                  <h5>Download Enrollment Template</h5>
+                  <p>Start by downloading our pre-formatted Excel template. Fill in your employees' details — one row per enrollee — then come back to upload the completed file.</p>
+                  <button class="btn-download-tpl" onclick="downloadTemplate()">
+                    <i class="fa fa-download"></i> Download Excel Template
+                  </button>
+                  <div class="template-features">
+                    <div class="template-feature"><i class="fa fa-circle-check"></i> 23 data fields included</div>
+                    <div class="template-feature"><i class="fa fa-circle-check"></i> Instructions sheet</div>
+                    <div class="template-feature"><i class="fa fa-circle-check"></i> Sample rows provided</div>
+                    <div class="template-feature"><i class="fa fa-circle-check"></i> Principal + Dependent rows</div>
+                  </div>
+                </div>
+              </div>
 
-        <div class="modal-footer d-flex align-items-center justify-content-between flex-wrap gap-2">
+              <!-- ── STEP 2: UPLOAD ── -->
+              <div class="step-panel" id="gpanel-2">
+                <div class="upload-zone" id="upload-zone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+                  <input type="file" id="group-file-input" accept=".xlsx,.xls,.csv" onchange="handleFileSelect(event)" />
+                  <div class="upload-icon"><i class="fa fa-cloud-arrow-up"></i></div>
+                  <h6>Drag & drop your filled template here</h6>
+                  <p>or click to browse your files</p>
+                  <div class="upload-formats">
+                    <span class="upload-format-badge">.xlsx</span>
+                    <span class="upload-format-badge">.xls</span>
+                    <span class="upload-format-badge">.csv</span>
+                  </div>
+                </div>
+                <div class="file-selected-card" id="file-selected-card">
+                  <div class="file-icon"><i class="fa fa-file-excel"></i></div>
+                  <div class="file-info">
+                    <div class="file-name" id="file-selected-name">filename.xlsx</div>
+                    <div class="file-size" id="file-selected-size">—</div>
+                  </div>
+                  <button class="btn-remove-file" onclick="removeFile()" title="Remove file"><i class="fa fa-times"></i></button>
+                </div>
+                <div class="upload-error" id="upload-error">
+                  <i class="fa fa-circle-exclamation"></i><span id="upload-error-text">Invalid file format.</span>
+                </div>
+              </div>
+
+              <!-- ── STEP 3: REVIEW ── -->
+              <div class="step-panel" id="gpanel-3">
+                <div id="review-validation-banner" class="review-validation-banner all-ok" style="display:none;"></div>
+                <div class="review-header">
+                  <div class="review-stats">
+                    <div class="review-stat ok">
+                      <span class="rs-num" id="rs-total">0</span>
+                      <span class="rs-label">Total Rows</span>
+                    </div>
+                    <div class="review-stat ok">
+                      <span class="rs-num" id="rs-valid">0</span>
+                      <span class="rs-label">Valid</span>
+                    </div>
+                    <div class="review-stat warn">
+                      <span class="rs-num" id="rs-warn">0</span>
+                      <span class="rs-label">Warnings</span>
+                    </div>
+                    <div class="review-stat err">
+                      <span class="rs-num" id="rs-err">0</span>
+                      <span class="rs-label">Errors</span>
+                    </div>
+                  </div>
+                  <button class="btn-group-nav" style="background:white;border:2px solid var(--border);color:var(--muted);font-size:0.8rem;padding:7px 14px;" onclick="goGroupStep(2)">
+                    <i class="fa fa-rotate-left me-1"></i> Re-upload
+                  </button>
+                </div>
+                <div class="review-table-wrap">
+                  <table class="review-table">
+                    <thead>
+                      <tr>
+                        <th style="width:32px;">#</th>
+                        <th>Status</th>
+                        <th>Last Name</th>
+                        <th>First Name</th>
+                        <th>Birthdate</th>
+                        <th>Gender</th>
+                        <th>Plan</th>
+                        <th>Type</th>
+                        <th>Contact</th>
+                        <th>Note</th>
+                      </tr>
+                    </thead>
+                    <tbody id="review-tbody">
+                      <tr><td colspan="10" style="text-align:center;padding:28px;color:var(--muted);font-size:0.82rem;">No data loaded</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div><!-- /group-steps -->
+          </div><!-- /group-main-flow -->
+        </div><!-- /modal-body -->
+
+        <div class="modal-footer" id="group-modal-footer">
           <div class="group-footer-note">
-            <i class="fa fa-shield-halved"></i>Data is kept confidential and used solely for enrollment processing.
+            <i class="fa fa-lock"></i>
+            <span>Your data is encrypted and securely processed.</span>
           </div>
           <div class="d-flex gap-2">
-            <button class="btn-cancel-custom btn" data-bs-dismiss="modal">Cancel</button>
-            <button class="btn-proceed btn" id="group-submit-btn">
-              <i class="fa fa-paper-plane me-1"></i>Submit Enrollment
+            <button class="btn-group-nav btn-group-back" id="group-btn-back" style="display:none;" onclick="groupNavBack()">
+              <i class="fa fa-arrow-left"></i> Back
+            </button>
+            <button class="btn-group-nav btn-group-next" id="group-btn-next" onclick="groupNavNext()">
+              Next <i class="fa fa-arrow-right"></i>
+            </button>
+            <button class="btn-group-nav btn-group-submit" id="group-btn-submit" style="display:none;" onclick="submitGroupEnrollment()" disabled>
+              <i class="fa fa-paper-plane"></i> Submit Enrollment
             </button>
           </div>
         </div>
@@ -725,6 +734,7 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script>
   // ══════════════════════════════════════════════════════════════════
   //  PLAN MODAL BUILDER
@@ -735,35 +745,20 @@
   function buildPlanModals() {
     const container = document.getElementById('plan-modals-container');
     let html = '';
-
     Object.keys(PLAN_DATA).forEach(planType => {
       const plans = PLAN_DATA[planType];
       const tiers = {};
       plans.forEach(p => { if (!tiers[p.tier]) tiers[p.tier] = []; tiers[p.tier].push(p); });
-
       let cardsHtml = '';
       Object.keys(tiers).forEach(tier => {
-        cardsHtml += `
-          <div class="section-divider">
-            <span class="divider-badge"><i class="fa fa-shield-halved me-1"></i>${tier}</span>
-            <div class="divider-line"></div>
-          </div>
-          <div class="row g-3 mb-1">`;
-
+        cardsHtml += `<div class="section-divider"><span class="divider-badge"><i class="fa fa-shield-halved me-1"></i>${tier}</span><div class="divider-line"></div></div><div class="row g-3 mb-1">`;
         tiers[tier].forEach(plan => {
           const isGroup     = planType === 'Group';
           const isSenior    = planType === 'Senior';
           const targetModal = isGroup ? '#groupEnrollModal' : '#modernConfirmationModal';
-
-          const benefitsList = (isSenior && plan.hasAccidentalInsurance === false)
-            ? BENEFITS_WITHOUT_ACCIDENTAL
-            : BENEFITS_WITH_ACCIDENTAL;
+          const benefitsList = (isSenior && plan.hasAccidentalInsurance === false) ? BENEFITS_WITHOUT_ACCIDENTAL : BENEFITS_WITH_ACCIDENTAL;
           const benefitsHtml = benefitsList.map(b => `<li><i class="fa fa-circle-check"></i>${b}</li>`).join('');
-
-          const seniorAttrs = isSenior
-            ? `data-plan-key="${plan.planKey}" data-age-min="${plan.ageMin}" data-age-max="${plan.ageMax}" data-accidental-age-min="${plan.accidentalAgeMin || ''}" data-accidental-age-max="${plan.accidentalAgeMax || ''}" data-has-accidental="${plan.hasAccidentalInsurance}"`
-            : '';
-
+          const seniorAttrs = isSenior ? `data-plan-key="${plan.planKey}" data-age-min="${plan.ageMin}" data-age-max="${plan.ageMax}" data-accidental-age-min="${plan.accidentalAgeMin || ''}" data-accidental-age-max="${plan.accidentalAgeMax || ''}" data-has-accidental="${plan.hasAccidentalInsurance}"` : '';
           let ageBadge = '';
           if (isSenior) {
             if (plan.ageMax < 999 && plan.ageMax <= 59) {
@@ -772,90 +767,14 @@
               ageBadge = `<span style="background:rgba(15,30,61,0.12);color:#1a3260;font-size:0.7rem;padding:3px 10px;border-radius:50px;border:1px solid rgba(15,30,61,0.2);margin-left:6px;font-weight:700;"><i class="fa fa-users me-1"></i>Ages ${plan.ageMin}–${plan.ageMax}</span>`;
             }
           }
-
           const roomBadge  = plan.room ? `<span class="room-badge"><i class="fa fa-bed me-1"></i>${plan.room}</span>` : '';
-          const monthlyBtn = plan.monthly ? `
-            <button class="btn-period select-plan-btn"
-              data-plan="${plan.name} – ${plan.room}"
-              data-plan-type="${planType}"
-              data-period="Monthly"
-              data-price="${plan.monthly}"
-              ${seniorAttrs}
-              data-bs-toggle="modal" data-bs-target="${targetModal}">
-              <span class="period-label">Monthly</span>
-              <span class="period-price">₱${plan.monthly}</span>
-            </button>` : '';
-
-          cardsHtml += `
-            <div class="col-md-6">
-              <div class="plan-card">
-                <div class="plan-card-header">
-                  <div>
-                    <h6>${plan.name} ${ageBadge}</h6>
-                    ${roomBadge}
-                  </div>
-                </div>
-                <div class="plan-card-body">
-                  <ul class="benefit-list">${benefitsHtml}</ul>
-                  <div class="period-buttons">
-                    ${monthlyBtn}
-                    <button class="btn-period select-plan-btn"
-                      data-plan="${plan.name}${plan.room ? ' – ' + plan.room : ''}"
-                      data-plan-type="${planType}"
-                      data-period="Quarterly"
-                      data-price="${plan.quarterly}"
-                      ${seniorAttrs}
-                      data-bs-toggle="modal" data-bs-target="${targetModal}">
-                      <span class="period-label">Quarterly</span>
-                      <span class="period-price">₱${plan.quarterly}</span>
-                    </button>
-                    <button class="btn-period select-plan-btn"
-                      data-plan="${plan.name}${plan.room ? ' – ' + plan.room : ''}"
-                      data-plan-type="${planType}"
-                      data-period="Semi-Annually"
-                      data-price="${plan.semi}"
-                      ${seniorAttrs}
-                      data-bs-toggle="modal" data-bs-target="${targetModal}">
-                      <span class="period-label">Semi-Annual</span>
-                      <span class="period-price">₱${plan.semi}</span>
-                    </button>
-                    <button class="btn-period select-plan-btn"
-                      data-plan="${plan.name}${plan.room ? ' – ' + plan.room : ''}"
-                      data-plan-type="${planType}"
-                      data-period="Annually"
-                      data-price="${plan.annual}"
-                      ${seniorAttrs}
-                      data-bs-toggle="modal" data-bs-target="${targetModal}">
-                      <span class="period-label">Annually</span>
-                      <span class="period-price">₱${plan.annual}</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>`;
+          const monthlyBtn = plan.monthly ? `<button class="btn-period select-plan-btn" data-plan="${plan.name} – ${plan.room}" data-plan-type="${planType}" data-period="Monthly" data-price="${plan.monthly}" ${seniorAttrs} data-bs-toggle="modal" data-bs-target="${targetModal}"><span class="period-label">Monthly</span><span class="period-price">₱${plan.monthly}</span></button>` : '';
+          cardsHtml += `<div class="col-md-6"><div class="plan-card"><div class="plan-card-header"><div><h6>${plan.name} ${ageBadge}</h6>${roomBadge}</div></div><div class="plan-card-body"><ul class="benefit-list">${benefitsHtml}</ul><div class="period-buttons">${monthlyBtn}<button class="btn-period select-plan-btn" data-plan="${plan.name}${plan.room ? ' – ' + plan.room : ''}" data-plan-type="${planType}" data-period="Quarterly" data-price="${plan.quarterly}" ${seniorAttrs} data-bs-toggle="modal" data-bs-target="${targetModal}"><span class="period-label">Quarterly</span><span class="period-price">₱${plan.quarterly}</span></button><button class="btn-period select-plan-btn" data-plan="${plan.name}${plan.room ? ' – ' + plan.room : ''}" data-plan-type="${planType}" data-period="Semi-Annually" data-price="${plan.semi}" ${seniorAttrs} data-bs-toggle="modal" data-bs-target="${targetModal}"><span class="period-label">Semi-Annual</span><span class="period-price">₱${plan.semi}</span></button><button class="btn-period select-plan-btn" data-plan="${plan.name}${plan.room ? ' – ' + plan.room : ''}" data-plan-type="${planType}" data-period="Annually" data-price="${plan.annual}" ${seniorAttrs} data-bs-toggle="modal" data-bs-target="${targetModal}"><span class="period-label">Annually</span><span class="period-price">₱${plan.annual}</span></button></div></div></div></div>`;
         });
         cardsHtml += `</div>`;
       });
-
-      html += `
-        <div class="modal fade plans-modal" id="plansModal_${planType}" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
-          <div class="modal-dialog modal-dialog-centered modal-xl">
-            <div class="modal-content">
-              <div class="modal-header">
-                <div>
-                  <div class="modal-title">
-                    <i class="fa ${PLAN_ICONS[planType]} me-2"></i>${planType} Health Plans
-                    <small>${PLAN_SUBTITLES[planType]}</small>
-                  </div>
-                </div>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-              </div>
-              <div class="modal-body">${cardsHtml}</div>
-            </div>
-          </div>
-        </div>`;
+      html += `<div class="modal fade plans-modal" id="plansModal_${planType}" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"><div class="modal-dialog modal-dialog-centered modal-xl"><div class="modal-content"><div class="modal-header"><div><div class="modal-title"><i class="fa ${PLAN_ICONS[planType]} me-2"></i>${planType} Health Plans<small>${PLAN_SUBTITLES[planType]}</small></div></div><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div><div class="modal-body">${cardsHtml}</div></div></div></div>`;
     });
-
     container.innerHTML = html;
     bindPlanButtons();
   }
@@ -865,17 +784,16 @@
       btn.addEventListener('click', e => {
         const b = e.currentTarget;
         currentPlanType = b.dataset.planType;
-
         if (currentPlanType === 'Group') {
           selectedGroupPlan = { name: b.dataset.plan, period: b.dataset.period, price: b.dataset.price };
           document.getElementById('group-banner-detail').textContent = `${b.dataset.plan} · Inpatient + Outpatient + APE + Emergency`;
           document.getElementById('group-banner-price').textContent  = `₱${b.dataset.price} / ${b.dataset.period.toLowerCase()} per head`;
+          resetGroupModal();
         } else {
           document.getElementById('conf-plan-name').textContent   = b.dataset.plan;
           document.getElementById('conf-plan-type').textContent   = b.dataset.planType;
           document.getElementById('conf-plan-price').textContent  = '₱' + b.dataset.price;
           document.getElementById('conf-plan-period').textContent = b.dataset.period;
-
           if (currentPlanType === 'Senior') {
             selectedSeniorPlanKey = b.dataset.planKey || null;
             currentSeniorPlan = PLAN_DATA.Senior.find(p => p.planKey === selectedSeniorPlanKey) || null;
@@ -883,12 +801,9 @@
             selectedSeniorPlanKey = null;
             currentSeniorPlan = null;
           }
-
           const paymentSel = document.getElementById('payment-option');
           paymentSel.innerHTML = '';
-          const periods = b.dataset.period === 'Monthly'
-            ? ['Monthly', 'Quarterly', 'Semi-Annually', 'Annually']
-            : ['Quarterly', 'Semi-Annually', 'Annually'];
+          const periods = b.dataset.period === 'Monthly' ? ['Monthly','Quarterly','Semi-Annually','Annually'] : ['Quarterly','Semi-Annually','Annually'];
           periods.forEach(type => {
             const opt = document.createElement('option');
             opt.value = type; opt.textContent = type;
@@ -901,199 +816,392 @@
   }
 
   // ══════════════════════════════════════════════════════════════════
-  //  SENIOR AGE RESTRICTION LOGIC
+  //  GROUP ENROLLMENT — STEP FLOW
+  // ══════════════════════════════════════════════════════════════════
+  let groupCurrentStep = 1;
+  let groupUploadedFile = null;
+  let groupParsedData   = [];
+
+  function resetGroupModal() {
+    groupCurrentStep  = 1;
+    groupUploadedFile = null;
+    groupParsedData   = [];
+    goGroupStep(1);
+    removeFile();
+    document.getElementById('group-success-panel').style.display = 'none';
+    document.getElementById('group-main-flow').style.display     = 'block';
+    document.getElementById('group-modal-footer').style.display  = '';
+  }
+
+  function goGroupStep(step) {
+    groupCurrentStep = step;
+    [1,2,3].forEach(i => {
+      document.getElementById(`gpanel-${i}`).classList.toggle('active', i === step);
+      const pip = document.getElementById(`gpip-${i}`);
+      pip.classList.remove('active','done');
+      if (i === step) pip.classList.add('active');
+      if (i < step)   pip.classList.add('done');
+    });
+    [1,2].forEach(i => {
+      document.getElementById(`gconn-${i}`).classList.toggle('done', i < step);
+    });
+    // Back button
+    document.getElementById('group-btn-back').style.display   = step > 1 ? '' : 'none';
+    document.getElementById('group-btn-next').style.display   = step < 3 ? '' : 'none';
+    document.getElementById('group-btn-submit').style.display = step === 3 ? '' : 'none';
+    // Next enable
+    if (step === 2) {
+      document.getElementById('group-btn-next').disabled = !groupUploadedFile;
+    } else {
+      document.getElementById('group-btn-next').disabled = false;
+    }
+    if (step === 3) updateSubmitButton();
+  }
+
+  function groupNavNext() {
+    if (groupCurrentStep === 1) { goGroupStep(2); return; }
+    if (groupCurrentStep === 2) {
+      if (!groupUploadedFile) return;
+      parseUploadedFile();
+    }
+  }
+
+  function groupNavBack() {
+    if (groupCurrentStep > 1) goGroupStep(groupCurrentStep - 1);
+  }
+
+  // ── Template download ──────────────────────────────────────────────
+  function downloadTemplate() {
+    // Build a simple CSV template since we can't serve the binary xlsx here
+    // In production, link to the actual xlsx file
+    const headers = [
+      'Employee ID','Last Name *','First Name *','Middle Name','Suffix',
+      'Birthdate *','Gender *','Civil Status *','Nationality *',
+      'PhilHealth Member','PhilHealth ID','Contact Number *','Email Address *',
+      'Department','Employment Date *','Status *','Plan Name *','Member Type *',
+      'ID Name (Dep.)','Activation Date','Expiration Date','Remarks','AMAPHIL ID'
+    ];
+    const sample1 = ['EMP-001','Dela Cruz','Juan','Santos','Jr.','01/15/1990','Male','Married','Filipino','Yes','12-345678901','09171234567','juan@company.com','IT Department','03/01/2020','Active','Bureau Health Plan','Principal','','04/01/2025','03/31/2026','',''];
+    const sample2 = ['EMP-001','Dela Cruz','Maria','Reyes','','06/20/1993','Female','Married','Filipino','Yes','12-345678902','09181234567','maria@email.com','','03/01/2020','Active','Bureau Health Plan','Dependent','Juan Santos Dela Cruz','04/01/2025','03/31/2026','Spouse',''];
+
+    if (typeof XLSX !== 'undefined') {
+      const wb = XLSX.utils.book_new();
+      const wsData = [headers, sample1, sample2];
+      const ws = XLSX.utils.aoa_to_sheet(wsData);
+      // Column widths
+      ws['!cols'] = headers.map(() => ({ wch: 18 }));
+      XLSX.utils.book_append_sheet(wb, ws, 'Group Enrollment');
+
+      // Instructions
+      const instData = [
+        ['AMAPHIL Group Enrollment Template'],
+        [''],
+        ['INSTRUCTIONS:'],
+        ['1. Fill in all required fields (marked with *)'],
+        ['2. Do not modify column headers'],
+        ['3. One row per enrollee'],
+        ['4. For dependents, enter principal full name in "ID Name (Dep.)" column'],
+        ['5. Save the file and upload it on the portal'],
+        [''],
+        ['ACCEPTED FORMATS: .xlsx, .xls, .csv'],
+      ];
+      const wsInst = XLSX.utils.aoa_to_sheet(instData);
+      wsInst['!cols'] = [{ wch: 60 }];
+      XLSX.utils.book_append_sheet(wb, wsInst, 'Instructions');
+
+      XLSX.writeFile(wb, 'AMAPHIL_Group_Enrollment_Template.xlsx');
+    } else {
+      // Fallback CSV download
+      const rows = [headers, sample1, sample2];
+      const csv  = rows.map(r => r.map(c => `"${c}"`).join(',')).join('\n');
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const a    = document.createElement('a');
+      a.href     = URL.createObjectURL(blob);
+      a.download = 'AMAPHIL_Group_Enrollment_Template.csv';
+      a.click();
+    }
+  }
+
+  // ── File handling ──────────────────────────────────────────────────
+  function handleDragOver(e) { e.preventDefault(); document.getElementById('upload-zone').classList.add('drag-over'); }
+  function handleDragLeave()  { document.getElementById('upload-zone').classList.remove('drag-over'); }
+  function handleDrop(e) {
+    e.preventDefault();
+    document.getElementById('upload-zone').classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file) processFile(file);
+  }
+  function handleFileSelect(e) { const file = e.target.files[0]; if (file) processFile(file); }
+
+  function processFile(file) {
+    const allowed = ['xlsx','xls','csv'];
+    const ext     = file.name.split('.').pop().toLowerCase();
+    if (!allowed.includes(ext)) {
+      showUploadError('Invalid file format. Please upload an .xlsx, .xls, or .csv file.');
+      return;
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      showUploadError('File size exceeds 10MB limit.');
+      return;
+    }
+    hideUploadError();
+    groupUploadedFile = file;
+    document.getElementById('file-selected-card').style.display  = 'flex';
+    document.getElementById('file-selected-name').textContent    = file.name;
+    document.getElementById('file-selected-size').textContent    = formatFileSize(file.size);
+    document.getElementById('group-btn-next').disabled = false;
+  }
+
+  function removeFile() {
+    groupUploadedFile = null;
+    document.getElementById('file-selected-card').style.display = 'none';
+    document.getElementById('group-file-input').value = '';
+    hideUploadError();
+    if (groupCurrentStep === 2) document.getElementById('group-btn-next').disabled = true;
+  }
+
+  function showUploadError(msg) {
+    const el = document.getElementById('upload-error');
+    document.getElementById('upload-error-text').textContent = msg;
+    el.style.display = 'block';
+  }
+  function hideUploadError() { document.getElementById('upload-error').style.display = 'none'; }
+
+  function formatFileSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
+    return (bytes/(1024*1024)).toFixed(1) + ' MB';
+  }
+
+  // ── Parse file and go to review ────────────────────────────────────
+  function parseUploadedFile() {
+    const file = groupUploadedFile;
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        let rows = [];
+        if (typeof XLSX !== 'undefined') {
+          const wb   = XLSX.read(e.target.result, { type: 'binary' });
+          const ws   = wb.Sheets[wb.SheetNames[0]];
+          const data = XLSX.utils.sheet_to_json(ws, { defval: '' });
+          rows = data;
+        }
+        if (!rows.length) {
+          showUploadError('The file appears empty or could not be read. Please check the format.');
+          return;
+        }
+        groupParsedData = rows;
+        buildReviewTable(rows);
+        goGroupStep(3);
+      } catch(err) {
+        showUploadError('Could not read the file. Ensure it is a valid Excel or CSV file.');
+      }
+    };
+    reader.readAsBinaryString(file);
+  }
+
+  // ── Build review table ─────────────────────────────────────────────
+  const REQUIRED_COLS = ['Last Name *','First Name *','Birthdate *','Gender *','Nationality *','Contact Number *','Email Address *','Employment Date *','Status *','Plan Name *','Member Type *'];
+
+  function buildReviewTable(rows) {
+    const tbody  = document.getElementById('review-tbody');
+    tbody.innerHTML = '';
+    let validCount = 0, warnCount = 0, errCount = 0;
+    const maxPreview = 200;
+
+    rows.slice(0, maxPreview).forEach((row, idx) => {
+      const errors   = [];
+      const warnings = [];
+
+      REQUIRED_COLS.forEach(col => {
+        const val = (row[col] || '').toString().trim();
+        if (!val) errors.push(`Missing: ${col.replace(' *','')}`);
+      });
+
+      // Type-specific checks
+      const memberType = (row['Member Type *'] || '').toString().trim();
+      if (memberType === 'Dependent' && !(row['ID Name (Dep.)'] || '').toString().trim()) {
+        warnings.push('ID Name required for Dependent');
+      }
+      const bday = (row['Birthdate *'] || '').toString().trim();
+      if (bday && isNaN(Date.parse(bday))) warnings.push('Birthdate format may be incorrect');
+
+      const status = errors.length ? 'err' : warnings.length ? 'warn' : 'ok';
+      if (status === 'ok')   validCount++;
+      if (status === 'warn') warnCount++;
+      if (status === 'err')  errCount++;
+
+      const note = errors[0] || warnings[0] || '✓ OK';
+      const tr   = document.createElement('tr');
+      tr.innerHTML = `
+        <td style="color:var(--muted);font-size:0.72rem;">${idx+1}</td>
+        <td><span class="row-status-dot ${status}"></span></td>
+        <td>${esc(row['Last Name *'] || '—')}</td>
+        <td>${esc(row['First Name *'] || '—')}</td>
+        <td style="font-size:0.72rem;">${esc(row['Birthdate *'] || '—')}</td>
+        <td>${esc(row['Gender *'] || '—')}</td>
+        <td style="font-size:0.72rem;">${esc(row['Plan Name *'] || '—')}</td>
+        <td><span style="background:${memberType==='Dependent'?'var(--accent-light)':'#e8edf8'};color:${memberType==='Dependent'?'var(--orange)':'var(--navy)'};font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:50px;">${esc(memberType||'—')}</span></td>
+        <td style="font-size:0.72rem;">${esc(row['Contact Number *'] || '—')}</td>
+        <td style="font-size:0.72rem;color:${status==='err'?'var(--danger)':status==='warn'?'var(--orange)':'#22c55e'};">${esc(note)}</td>`;
+      tbody.appendChild(tr);
+    });
+
+    if (rows.length > maxPreview) {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td colspan="10" style="text-align:center;padding:10px;font-size:0.75rem;color:var(--muted);">… and ${rows.length - maxPreview} more rows (showing first ${maxPreview})</td>`;
+      tbody.appendChild(tr);
+    }
+
+    document.getElementById('rs-total').textContent = rows.length;
+    document.getElementById('rs-valid').textContent = validCount;
+    document.getElementById('rs-warn').textContent  = warnCount;
+    document.getElementById('rs-err').textContent   = errCount;
+
+    // Validation banner
+    const banner = document.getElementById('review-validation-banner');
+    banner.style.display = 'flex';
+    if (errCount > 0) {
+      banner.className = 'review-validation-banner has-errors';
+      banner.innerHTML = `<i class="fa fa-circle-exclamation"></i> <strong>${errCount} row(s) have errors</strong> — please fix them in the file and re-upload before submitting.`;
+    } else if (warnCount > 0) {
+      banner.className = 'review-validation-banner has-warnings';
+      banner.innerHTML = `<i class="fa fa-triangle-exclamation"></i> <strong>${warnCount} row(s) have warnings</strong> — review carefully. You may still submit.`;
+    } else {
+      banner.className = 'review-validation-banner all-ok';
+      banner.innerHTML = `<i class="fa fa-circle-check"></i> <strong>All ${rows.length} rows look good!</strong> Ready to submit.`;
+    }
+
+    updateSubmitButton();
+  }
+
+  function updateSubmitButton() {
+    const errCount = parseInt(document.getElementById('rs-err').textContent) || 0;
+    document.getElementById('group-btn-submit').disabled = errCount > 0;
+  }
+
+  function esc(str) {
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function submitGroupEnrollment() {
+    document.getElementById('group-main-flow').style.display    = 'none';
+    document.getElementById('group-modal-footer').style.display = 'none';
+    document.getElementById('group-success-panel').style.display = 'block';
+  }
+
+  // ══════════════════════════════════════════════════════════════════
+  //  SENIOR AGE LOGIC
   // ══════════════════════════════════════════════════════════════════
   function calcAge(birthdateStr) {
     if (!birthdateStr) return null;
-    const today = new Date();
-    const bday  = new Date(birthdateStr);
+    const today = new Date(), bday = new Date(birthdateStr);
     if (isNaN(bday)) return null;
-    let years  = today.getFullYear() - bday.getFullYear();
-    let months = today.getMonth() - bday.getMonth();
-    if (months < 0 || (months === 0 && today.getDate() < bday.getDate())) { years--; months += 12; }
-    if (today.getDate() < bday.getDate() && months > 0) months--;
+    let years = today.getFullYear() - bday.getFullYear();
+    const m = today.getMonth() - bday.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < bday.getDate())) years--;
     const totalMonths = years * 12 + (today.getMonth() - bday.getMonth() + (today.getDate() >= bday.getDate() ? 0 : -1) + 12) % 12;
     return { years, totalMonths };
   }
-
-  function isAccidentalChecked() {
-    const chk = document.getElementById('accidental-insurance-check');
-    return chk ? chk.checked : false;
-  }
+  function isAccidentalChecked() { const c = document.getElementById('accidental-insurance-check'); return c ? c.checked : false; }
+  function enableSubmit(btn)  { btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = ''; }
+  function disableSubmit(btn) { btn.disabled = true;  btn.style.opacity = '0.5'; btn.style.cursor = 'not-allowed'; }
 
   function checkSeniorAge() {
-    const isSenior  = currentPlanType === 'Senior';
-    const ageChip   = document.getElementById('age-chip');
-    const banner    = document.getElementById('age-warning-banner');
-    const accRow    = document.getElementById('accidental-insurance-row');
-    const submitBtn = document.getElementById('user-info');
-
-    if (!isSenior || selectedSeniorPlanKey !== '1499') {
-      document.getElementById('accidental-insurance-check').checked = false;
-    }
-
-    if (!isSenior) {
-      ageChip.style.display = 'none';
-      banner.style.display  = 'none';
-      accRow.style.display  = 'none';
-      enableSubmit(submitBtn);
-      return;
-    }
-
-    const bdayVal = document.getElementById('bday').value;
-    const ageData = calcAge(bdayVal);
-
-    if (ageData === null) {
-      ageChip.style.display = 'none';
-      banner.style.display  = 'none';
-      accRow.style.display  = 'none';
-      enableSubmit(submitBtn);
-      return;
-    }
-
+    const isSenior = currentPlanType === 'Senior';
+    const ageChip  = document.getElementById('age-chip');
+    const banner   = document.getElementById('age-warning-banner');
+    const accRow   = document.getElementById('accidental-insurance-row');
+    const submitBtn= document.getElementById('user-info');
+    if (!isSenior || selectedSeniorPlanKey !== '1499') document.getElementById('accidental-insurance-check').checked = false;
+    if (!isSenior) { ageChip.style.display='none'; banner.style.display='none'; accRow.style.display='none'; enableSubmit(submitBtn); return; }
+    const ageData = calcAge(document.getElementById('bday').value);
+    if (!ageData) { ageChip.style.display='none'; banner.style.display='none'; accRow.style.display='none'; enableSubmit(submitBtn); return; }
     const { years, totalMonths } = ageData;
-    const withAccidental = isAccidentalChecked();
-
     ageChip.style.display = 'block';
-
-    if (selectedSeniorPlanKey === '1499') {
-      handle1499AgeCheck(years, totalMonths, withAccidental, ageChip, banner, accRow, submitBtn);
-    } else if (selectedSeniorPlanKey === '1599') {
-      handle1599AgeCheck(years, totalMonths, ageChip, banner, accRow, submitBtn);
-    }
+    if (selectedSeniorPlanKey === '1499') handle1499AgeCheck(years, totalMonths, isAccidentalChecked(), ageChip, banner, accRow, submitBtn);
+    else if (selectedSeniorPlanKey === '1599') handle1599AgeCheck(years, totalMonths, ageChip, banner, accRow, submitBtn);
   }
 
   function handle1499AgeCheck(years, totalMonths, withAccidental, ageChip, banner, accRow, submitBtn) {
     if (totalMonths < 3) {
-      ageChip.className = 'over';
-      ageChip.innerHTML = `<i class="fa fa-times-circle me-1"></i>Age: ${totalMonths} month(s) — minimum is 3 months`;
-      banner.className  = 'warn-upgrade';
-      banner.style.display = 'block';
-      accRow.style.display = 'none';
-      document.getElementById('age-warn-icon').className     = 'fa fa-triangle-exclamation';
-      document.getElementById('age-warn-title-text').textContent = 'Age Restriction Notice';
-      document.getElementById('age-warn-text').innerHTML = `Your child is <strong>${totalMonths} month(s)</strong> old. The minimum age for the ₱1,499 plan is <strong>3 months</strong>.`;
-      document.getElementById('age-warn-suggest-text').innerHTML = `Please wait until your child is at least 3 months old to enroll.`;
-      document.getElementById('btn-switch-senior-plan').style.display = 'none';
-      disableSubmit(submitBtn);
-      return;
+      ageChip.className='over'; ageChip.innerHTML=`<i class="fa fa-times-circle me-1"></i>Age: ${totalMonths} month(s) — minimum is 3 months`;
+      banner.className='warn-upgrade'; banner.style.display='block'; accRow.style.display='none';
+      document.getElementById('age-warn-icon').className='fa fa-triangle-exclamation';
+      document.getElementById('age-warn-title-text').textContent='Age Restriction Notice';
+      document.getElementById('age-warn-text').innerHTML=`Your child is <strong>${totalMonths} month(s)</strong> old. Minimum age is <strong>3 months</strong>.`;
+      document.getElementById('age-warn-suggest-text').innerHTML='Please wait until your child is at least 3 months old.';
+      document.getElementById('btn-switch-senior-plan').style.display='none';
+      disableSubmit(submitBtn); return;
     }
-
-    if (years <= 59) {
-      ageChip.className = 'ok';
-      ageChip.innerHTML = `<i class="fa fa-circle-check me-1"></i>Age: ${years} yr${years !== 1 ? 's' : ''} — eligible`;
-      banner.style.display = 'none';
-      accRow.style.display = 'none';
-      enableSubmit(submitBtn);
-      return;
-    }
-
+    if (years <= 59) { ageChip.className='ok'; ageChip.innerHTML=`<i class="fa fa-circle-check me-1"></i>Age: ${years} yr${years!==1?'s':''} — eligible`; banner.style.display='none'; accRow.style.display='none'; enableSubmit(submitBtn); return; }
     if (years >= 60 && years <= 70) {
-      accRow.style.display = 'block';
-      if (withAccidental) {
-        ageChip.className = 'ok';
-        ageChip.innerHTML = `<i class="fa fa-circle-check me-1"></i>Age: ${years} yrs — eligible with Accidental Insurance`;
-        banner.style.display = 'none';
-        enableSubmit(submitBtn);
-      } else {
-        ageChip.className = 'warn';
-        ageChip.innerHTML = `<i class="fa fa-triangle-exclamation me-1"></i>Age: ${years} yrs — opt in to Accidental Insurance OR switch to ₱1,599`;
-        banner.className  = 'warn-upgrade';
-        banner.style.display = 'block';
-        document.getElementById('age-warn-icon').className     = 'fa fa-triangle-exclamation';
-        document.getElementById('age-warn-title-text').textContent = 'Age Restriction Notice';
-        document.getElementById('age-warn-text').innerHTML =
-          `You are <strong>${years} years old</strong>. The ₱1,499 plan's standard eligibility is ages <strong>0–59</strong>.<br><br>
-           You may still enroll in the ₱1,499 plan by opting in to <strong>Accidental Insurance</strong> (available for ages 7–70),
-           <em>or</em> switch to the ₱1,599 plan which covers ages 60–70.`;
-        document.getElementById('age-warn-suggest-text').innerHTML = `<i class="fa fa-arrow-right me-1" style="color:var(--orange)"></i> We recommend switching to the <strong>₱1,599 Plan</strong> (ages 60–70).`;
-        document.getElementById('btn-switch-senior-plan').style.display = '';
-        document.getElementById('btn-switch-senior-plan').innerHTML = '<i class="fa fa-rotate me-1"></i>Switch to ₱1,599 Plan';
+      accRow.style.display='block';
+      if (withAccidental) { ageChip.className='ok'; ageChip.innerHTML=`<i class="fa fa-circle-check me-1"></i>Age: ${years} yrs — eligible with Accidental Insurance`; banner.style.display='none'; enableSubmit(submitBtn); }
+      else {
+        ageChip.className='warn'; ageChip.innerHTML=`<i class="fa fa-triangle-exclamation me-1"></i>Age: ${years} yrs — opt in to Accidental Insurance OR switch to ₱1,599`;
+        banner.className='warn-upgrade'; banner.style.display='block';
+        document.getElementById('age-warn-icon').className='fa fa-triangle-exclamation';
+        document.getElementById('age-warn-title-text').textContent='Age Restriction Notice';
+        document.getElementById('age-warn-text').innerHTML=`You are <strong>${years} years old</strong>. Standard eligibility is ages <strong>0–59</strong>. You may opt in to <strong>Accidental Insurance</strong> or switch to ₱1,599.`;
+        document.getElementById('age-warn-suggest-text').innerHTML=`<i class="fa fa-arrow-right me-1" style="color:var(--orange)"></i> Recommended: <strong>₱1,599 Plan</strong> (ages 60–70).`;
+        document.getElementById('btn-switch-senior-plan').style.display=''; document.getElementById('btn-switch-senior-plan').innerHTML='<i class="fa fa-rotate me-1"></i>Switch to ₱1,599 Plan';
         disableSubmit(submitBtn);
       }
       return;
     }
-
-    ageChip.className = 'over';
-    ageChip.innerHTML = `<i class="fa fa-times-circle me-1"></i>Age: ${years} yrs — exceeds maximum (70)`;
-    banner.className  = 'warn-upgrade';
-    banner.style.display = 'block';
-    accRow.style.display = 'none';
-    document.getElementById('age-warn-icon').className     = 'fa fa-times-circle';
-    document.getElementById('age-warn-title-text').textContent = 'Age Limit Exceeded';
-    document.getElementById('age-warn-text').innerHTML = `You are <strong>${years} years old</strong>. The ₱1,499 plan covers ages up to <strong>70 years</strong> (with Accidental Insurance). You exceed the maximum age for this plan.`;
-    document.getElementById('age-warn-suggest-text').innerHTML = `Unfortunately, neither Senior plan covers individuals over 70. Please contact our office for assistance.`;
-    document.getElementById('btn-switch-senior-plan').style.display = 'none';
+    ageChip.className='over'; ageChip.innerHTML=`<i class="fa fa-times-circle me-1"></i>Age: ${years} yrs — exceeds maximum (70)`;
+    banner.className='warn-upgrade'; banner.style.display='block'; accRow.style.display='none';
+    document.getElementById('age-warn-icon').className='fa fa-times-circle';
+    document.getElementById('age-warn-title-text').textContent='Age Limit Exceeded';
+    document.getElementById('age-warn-text').innerHTML=`You are <strong>${years} years old</strong>. The ₱1,499 plan covers up to <strong>70 years</strong> (with Accidental Insurance).`;
+    document.getElementById('age-warn-suggest-text').innerHTML='Please contact our office for assistance.';
+    document.getElementById('btn-switch-senior-plan').style.display='none';
     disableSubmit(submitBtn);
   }
 
   function handle1599AgeCheck(years, totalMonths, ageChip, banner, accRow, submitBtn) {
-    accRow.style.display = 'none';
-
-    if (years >= 60 && years <= 70) {
-      ageChip.className = 'ok';
-      ageChip.innerHTML = `<i class="fa fa-circle-check me-1"></i>Age: ${years} yrs — eligible`;
-      banner.style.display = 'none';
-      enableSubmit(submitBtn);
-      return;
-    }
-
+    accRow.style.display='none';
+    if (years >= 60 && years <= 70) { ageChip.className='ok'; ageChip.innerHTML=`<i class="fa fa-circle-check me-1"></i>Age: ${years} yrs — eligible`; banner.style.display='none'; enableSubmit(submitBtn); return; }
     if (years < 60) {
       const ageDisplay = totalMonths < 24 ? `${totalMonths} month(s)` : `${years} year(s)`;
-      ageChip.className = 'blue';
-      ageChip.innerHTML = `<i class="fa fa-info-circle me-1"></i>Age: ${ageDisplay} — recommended plan is ₱1,499`;
-      banner.className  = 'warn-downgrade';
-      banner.style.display = 'block';
-      document.getElementById('age-warn-icon').className     = 'fa fa-info-circle';
-      document.getElementById('age-warn-title-text').textContent = 'Better Plan Available';
-      document.getElementById('age-warn-text').innerHTML =
-        `You are <strong>${ageDisplay} old</strong>. The ₱1,599 plan is designed for individuals aged <strong>60–70 years</strong>.<br><br>
-         The <strong>₱1,499 plan</strong> is a better fit for your age range (0–59 years) and also includes <strong>Accidental Insurance</strong> coverage.`;
-      document.getElementById('age-warn-suggest-text').innerHTML = `<i class="fa fa-arrow-right me-1"></i> We recommend the <strong>₱1,499 Plan</strong> — better suited for your age.`;
-      document.getElementById('btn-switch-senior-plan').style.display = '';
-      document.getElementById('btn-switch-senior-plan').innerHTML = '<i class="fa fa-rotate me-1"></i>Switch to ₱1,499 Plan';
-      disableSubmit(submitBtn);
-      return;
+      ageChip.className='blue'; ageChip.innerHTML=`<i class="fa fa-info-circle me-1"></i>Age: ${ageDisplay} — recommended plan is ₱1,499`;
+      banner.className='warn-downgrade'; banner.style.display='block';
+      document.getElementById('age-warn-icon').className='fa fa-info-circle';
+      document.getElementById('age-warn-title-text').textContent='Better Plan Available';
+      document.getElementById('age-warn-text').innerHTML=`You are <strong>${ageDisplay} old</strong>. The ₱1,599 plan is for ages <strong>60–70</strong>. The <strong>₱1,499 plan</strong> is a better fit (0–59) and includes Accidental Insurance.`;
+      document.getElementById('age-warn-suggest-text').innerHTML=`<i class="fa fa-arrow-right me-1"></i> Recommended: <strong>₱1,499 Plan</strong>.`;
+      document.getElementById('btn-switch-senior-plan').style.display=''; document.getElementById('btn-switch-senior-plan').innerHTML='<i class="fa fa-rotate me-1"></i>Switch to ₱1,499 Plan';
+      disableSubmit(submitBtn); return;
     }
-
-    ageChip.className = 'over';
-    ageChip.innerHTML = `<i class="fa fa-times-circle me-1"></i>Age: ${years} yrs — exceeds maximum (70)`;
-    banner.className  = 'warn-upgrade';
-    banner.style.display = 'block';
-    document.getElementById('age-warn-icon').className     = 'fa fa-times-circle';
-    document.getElementById('age-warn-title-text').textContent = 'Age Limit Exceeded';
-    document.getElementById('age-warn-text').innerHTML = `You are <strong>${years} years old</strong>. The ₱1,599 plan covers ages <strong>60–70 years</strong>. You exceed the maximum age for both Senior plans.`;
-    document.getElementById('age-warn-suggest-text').innerHTML = `Please contact our office for assistance with enrollment options.`;
-    document.getElementById('btn-switch-senior-plan').style.display = 'none';
-    accRow.style.display = 'none';
+    ageChip.className='over'; ageChip.innerHTML=`<i class="fa fa-times-circle me-1"></i>Age: ${years} yrs — exceeds maximum (70)`;
+    banner.className='warn-upgrade'; banner.style.display='block';
+    document.getElementById('age-warn-icon').className='fa fa-times-circle';
+    document.getElementById('age-warn-title-text').textContent='Age Limit Exceeded';
+    document.getElementById('age-warn-text').innerHTML=`You are <strong>${years} years old</strong>. The ₱1,599 plan covers ages <strong>60–70</strong>.`;
+    document.getElementById('age-warn-suggest-text').innerHTML='Please contact our office for assistance.';
+    document.getElementById('btn-switch-senior-plan').style.display='none';
     disableSubmit(submitBtn);
   }
-
-  function enableSubmit(btn)  { btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = ''; }
-  function disableSubmit(btn) { btn.disabled = true;  btn.style.opacity = '0.5'; btn.style.cursor = 'not-allowed'; }
 
   function switchSeniorPlan() {
     const targetKey  = selectedSeniorPlanKey === '1499' ? '1599' : '1499';
     const targetPlan = PLAN_DATA.Senior.find(p => p.planKey === targetKey);
     if (!targetPlan) return;
-
     document.getElementById('conf-plan-name').textContent   = `${targetPlan.name} – ${targetPlan.room}`;
     document.getElementById('conf-plan-type').textContent   = 'Senior';
     document.getElementById('conf-plan-price').textContent  = `₱${targetPlan.annual}`;
     document.getElementById('conf-plan-period').textContent = 'Annually';
-
-    selectedSeniorPlanKey = targetKey;
-    currentSeniorPlan     = targetPlan;
-
+    selectedSeniorPlanKey = targetKey; currentSeniorPlan = targetPlan;
     const paymentSel = document.getElementById('payment-option');
     paymentSel.innerHTML = '';
-    ['Quarterly', 'Semi-Annually', 'Annually'].forEach(type => {
+    ['Quarterly','Semi-Annually','Annually'].forEach(type => {
       const opt = document.createElement('option');
       opt.value = type; opt.textContent = type;
       if (type === 'Annually') opt.selected = true;
       paymentSel.appendChild(opt);
     });
-
     checkSeniorAge();
   }
 
@@ -1102,14 +1210,10 @@
 
   document.getElementById('clientDetailsModal').addEventListener('show.bs.modal', () => {
     const isFamily = currentPlanType === 'Family';
-    document.getElementById('principalLabel').style.display      = isFamily ? 'flex'  : 'none';
-    document.getElementById('familyMembersSection').style.display = isFamily ? 'block' : 'none';
-    if (isFamily) {
-      document.getElementById('dependentsContainer').innerHTML = '';
-      dependentCount = 0;
-      addDependent();
-    }
-    document.getElementById('bday').value                              = '';
+    document.getElementById('principalLabel').style.display       = isFamily ? 'flex'  : 'none';
+    document.getElementById('familyMembersSection').style.display  = isFamily ? 'block' : 'none';
+    if (isFamily) { document.getElementById('dependentsContainer').innerHTML = ''; dependentCount = 0; addDependent(); }
+    document.getElementById('bday').value = '';
     document.getElementById('age-chip').style.display                 = 'none';
     document.getElementById('age-warning-banner').style.display       = 'none';
     document.getElementById('accidental-insurance-row').style.display = 'none';
@@ -1117,216 +1221,36 @@
     enableSubmit(document.getElementById('user-info'));
   });
 
-  // ── Dependents ────────────────────────────────────────────────────
+  // ── Dependents ─────────────────────────────────────────────────────
   let dependentCount = 0;
-
   function updateAddButton() {
     const current = document.querySelectorAll('#dependentsContainer .member-block').length;
     const btn = document.getElementById('addDependentBtn');
-    if (current >= 5) {
-      btn.disabled = true;
-      btn.innerHTML = '<i class="fa fa-ban me-1"></i> Maximum 5 Dependents Reached';
-      btn.style.opacity = '0.5'; btn.style.cursor = 'not-allowed';
-    } else {
-      btn.disabled = false;
-      btn.innerHTML = '<i class="fa fa-plus me-1"></i> Add Dependent';
-      btn.style.opacity = '1'; btn.style.cursor = 'pointer';
-    }
+    if (current >= 5) { btn.disabled=true; btn.innerHTML='<i class="fa fa-ban me-1"></i> Maximum 5 Dependents'; btn.style.opacity='0.5'; btn.style.cursor='not-allowed'; }
+    else { btn.disabled=false; btn.innerHTML='<i class="fa fa-plus me-1"></i> Add Dependent'; btn.style.opacity='1'; btn.style.cursor='pointer'; }
   }
-
   function addDependent() {
-    const current = document.querySelectorAll('#dependentsContainer .member-block').length;
-    if (current >= 5) return;
+    if (document.querySelectorAll('#dependentsContainer .member-block').length >= 5) return;
     dependentCount++;
     const idx = dependentCount;
-    const container = document.getElementById('dependentsContainer');
     const block = document.createElement('div');
-    block.className = 'member-block';
-    block.id = `dependent-${idx}`;
-    block.innerHTML = `
-      <div class="dependent-header">
-        <div class="member-block-label"><i class="fa fa-user-plus"></i> Dependent ${idx}</div>
-        <button type="button" class="btn-remove-dependent" onclick="removeDependent(${idx})"><i class="fa fa-times me-1"></i> Remove</button>
-      </div>
-      <div class="row g-2 mb-2">
-        <div class="col-md-5"><input type="text" class="form-control" placeholder="Last Name" id="dep${idx}_last" required /></div>
-        <div class="col-md-5"><input type="text" class="form-control" placeholder="First Name" id="dep${idx}_first" required /></div>
-        <div class="col-md-2"><input type="text" class="form-control" placeholder="M.I." id="dep${idx}_mi" maxlength="1" /></div>
-      </div>
-      <div class="row g-2 mb-2">
-        <div class="col-md-6">
-          <label class="form-label" style="font-size:0.8rem;">Birthdate</label>
-          <input type="date" class="form-control" id="dep${idx}_bday" required />
-        </div>
-        <div class="col-md-6">
-          <label class="form-label" style="font-size:0.8rem;">Relationship</label>
-          <select class="form-select" id="dep${idx}_rel" required>
-            <option value="" disabled selected>Select</option>
-            <option>Spouse</option><option>Child</option><option>Parent</option><option>Sibling</option><option>Other</option>
-          </select>
-        </div>
-      </div>
-      <div class="row g-2">
-        <div class="col-md-6">
-          <label class="form-label" style="font-size:0.8rem;">Gender</label>
-          <div class="d-flex gap-3 mt-1">
-            <div class="form-check"><input class="form-check-input" type="radio" name="dep${idx}_gender" id="dep${idx}_male" value="Male" /><label class="form-check-label" for="dep${idx}_male">Male</label></div>
-            <div class="form-check"><input class="form-check-input" type="radio" name="dep${idx}_gender" id="dep${idx}_female" value="Female" /><label class="form-check-label" for="dep${idx}_female">Female</label></div>
-          </div>
-        </div>
-      </div>`;
-    container.appendChild(block);
+    block.className = 'member-block'; block.id = `dependent-${idx}`;
+    block.innerHTML = `<div class="dependent-header"><div class="member-block-label"><i class="fa fa-user-plus"></i> Dependent ${idx}</div><button type="button" class="btn-remove-dependent" onclick="removeDependent(${idx})"><i class="fa fa-times me-1"></i> Remove</button></div><div class="row g-2 mb-2"><div class="col-md-5"><input type="text" class="form-control" placeholder="Last Name" id="dep${idx}_last" required /></div><div class="col-md-5"><input type="text" class="form-control" placeholder="First Name" id="dep${idx}_first" required /></div><div class="col-md-2"><input type="text" class="form-control" placeholder="M.I." id="dep${idx}_mi" maxlength="1" /></div></div><div class="row g-2 mb-2"><div class="col-md-6"><label class="form-label" style="font-size:0.8rem;">Birthdate</label><input type="date" class="form-control" id="dep${idx}_bday" required /></div><div class="col-md-6"><label class="form-label" style="font-size:0.8rem;">Relationship</label><select class="form-select" id="dep${idx}_rel" required><option value="" disabled selected>Select</option><option>Spouse</option><option>Child</option><option>Parent</option><option>Sibling</option><option>Other</option></select></div></div><div class="row g-2"><div class="col-md-6"><label class="form-label" style="font-size:0.8rem;">Gender</label><div class="d-flex gap-3 mt-1"><div class="form-check"><input class="form-check-input" type="radio" name="dep${idx}_gender" id="dep${idx}_male" value="Male" /><label class="form-check-label" for="dep${idx}_male">Male</label></div><div class="form-check"><input class="form-check-input" type="radio" name="dep${idx}_gender" id="dep${idx}_female" value="Female" /><label class="form-check-label" for="dep${idx}_female">Female</label></div></div></div></div>`;
+    document.getElementById('dependentsContainer').appendChild(block);
     updateAddButton();
   }
-
-  function removeDependent(idx) {
-    const block = document.getElementById(`dependent-${idx}`);
-    if (block) block.remove();
-    updateAddButton();
-  }
-
+  function removeDependent(idx) { const b = document.getElementById(`dependent-${idx}`); if(b) b.remove(); updateAddButton(); }
   document.getElementById('addDependentBtn').addEventListener('click', addDependent);
 
   // ── Pre-existing condition toggle ──────────────────────────────────
   document.querySelectorAll('input[name="conditionType"]').forEach(radio => {
-    radio.addEventListener('change', () => {
-      document.getElementById('conditionChecklist').classList.toggle('d-none', radio.value !== 'with');
-    });
+    radio.addEventListener('change', () => { document.getElementById('conditionChecklist').classList.toggle('d-none', radio.value !== 'with'); });
   });
-  document.getElementById('otherCondition').addEventListener('change', function() {
-    document.getElementById('otherText').style.display = this.checked ? 'block' : 'none';
-  });
+  document.getElementById('otherCondition').addEventListener('change', function() { document.getElementById('otherText').style.display = this.checked ? 'block' : 'none'; });
 
-  // ══════════════════════════════════════════════════════════════════
-  //  GROUP ENROLLMENT TABLE — Redesigned
-  //  Changes: single <input type="date"> for birthdate (replaces the
-  //  3-column year/month/day approach); cleaner columns; improved UX.
-  // ══════════════════════════════════════════════════════════════════
-  let enrollRowCount = 0;
-
-  function updateEnrollCount() {
-    const n = document.querySelectorAll('#enrollee-tbody tr[data-erow]').length;
-    document.getElementById('enroll-count-num').textContent  = n;
-    document.getElementById('enroll-foot-count').textContent = n;
-    const empty = document.getElementById('empty-enroll-msg');
-    if (empty) empty.style.display = n > 0 ? 'none' : '';
-  }
-
-  function addEnrolleeRow() {
-    enrollRowCount++;
-    const idx   = enrollRowCount;
-    const tbody = document.getElementById('enrollee-tbody');
-    const empty = document.getElementById('empty-enroll-msg');
-    if (empty) empty.style.display = 'none';
-
-    // Option helpers
-    const mkSel = (opts) =>
-      `<select class="cell-inp">${opts.map(o => `<option value="${o === '—' ? '' : o}">${o}</option>`).join('')}</select>`;
-
-    const tr = document.createElement('tr');
-    tr.setAttribute('data-erow', idx);
-    tr.style.animation = 'rowSlideIn 0.18s ease';
-
-    tr.innerHTML = `
-      <td class="row-num">${idx}</td>
-      <!-- Emp. ID (optional) -->
-      <td><input class="cell-inp" type="text" placeholder="—" /></td>
-      <!-- Last name -->
-      <td><input class="cell-inp" type="text" placeholder="Last name" data-req="1" /></td>
-      <!-- Given name -->
-      <td><input class="cell-inp" type="text" placeholder="Given name" data-req="1" /></td>
-      <!-- Middle name -->
-      <td><input class="cell-inp" type="text" placeholder="—" /></td>
-      <!-- Suffix -->
-      <td>${mkSel(['—','Jr.','Sr.','II','III','IV'])}</td>
-      <!-- Birthdate — single date picker -->
-      <td><input class="cell-inp" type="date" data-req="1" style="font-size:0.74rem;min-width:104px;" /></td>
-      <!-- Gender -->
-      <td>${mkSel(['—','Male','Female'])}</td>
-      <!-- Civil status -->
-      <td>${mkSel(['—','Single','Married','Widowed','Divorced','Separated'])}</td>
-      <!-- Nationality -->
-      <td><input class="cell-inp" type="text" placeholder="Filipino" data-req="1" /></td>
-      <!-- PhilHealth -->
-      <td>${mkSel(['—','Yes','No'])}</td>
-      <!-- PhilHealth ID -->
-      <td><input class="cell-inp" type="text" placeholder="PhilHealth ID" /></td>
-      <!-- Phone -->
-      <td><input class="cell-inp" type="tel" placeholder="+63 9XX XXX XXXX" data-req="1" /></td>
-      <!-- Department (optional) -->
-      <td><input class="cell-inp" type="text" placeholder="—" /></td>
-      <!-- Employment date -->
-      <td><input class="cell-inp" type="date" data-req="1" style="font-size:0.74rem;" /></td>
-      <!-- Status -->
-      <td>${mkSel(['—','Active','Resigned','Terminated','Retired'])}</td>
-      <!-- Plan -->
-      <td><input class="cell-inp" type="text" placeholder="Plan name" data-req="1" /></td>
-      <!-- Member type -->
-      <td>${mkSel(['—','Principal','Dependent']).replace('<select ', '<select class="cell-inp mtype-sel" ')}</td>
-      <!-- ID name (dep. only) -->
-      <td><input class="cell-inp idname-inp" type="text" placeholder="—" disabled /></td>
-      <!-- Activation date (optional) -->
-      <td><input class="cell-inp" type="date" style="font-size:0.74rem;" /></td>
-      <!-- Email -->
-      <td><input class="cell-inp" type="email" placeholder="email@domain.com" data-req="1" /></td>
-      <!-- Expiration date (optional) -->
-      <td><input class="cell-inp" type="date" style="font-size:0.74rem;" /></td>
-      <!-- Remarks (optional) -->
-      <td><input class="cell-inp" type="text" placeholder="—" /></td>
-      <!-- AMAPHIL ID (optional) -->
-      <td><input class="cell-inp" type="text" placeholder="—" /></td>
-      <!-- Delete -->
-      <td><button class="btn-del-row" onclick="removeEnrolleeRow(this)" title="Remove enrollee"><i class="fa fa-times"></i></button></td>`;
-
-    tbody.appendChild(tr);
-
-    // Member type → enable/disable ID name field
-    const mtypeSel  = tr.querySelector('.mtype-sel');
-    const idNameInp = tr.querySelector('.idname-inp');
-    if (mtypeSel) {
-      mtypeSel.addEventListener('change', () => {
-        const isDep = mtypeSel.value === 'Dependent';
-        idNameInp.disabled    = !isDep;
-        idNameInp.placeholder = isDep ? "Principal's full name" : '—';
-        if (!isDep) idNameInp.value = '';
-      });
-    }
-
-    updateEnrollCount();
-    // Focus first input in new row
-    const firstInput = tr.querySelector('input, select');
-    if (firstInput) firstInput.focus();
-  }
-
-  function removeEnrolleeRow(btn) {
-    btn.closest('tr').remove();
-    reNumberEnrollRows();
-    updateEnrollCount();
-  }
-
-  function reNumberEnrollRows() {
-    document.querySelectorAll('#enrollee-tbody tr[data-erow]').forEach((tr, i) => {
-      tr.querySelector('.row-num').textContent = i + 1;
-    });
-  }
-
-  function clearAllEnrollees() {
-    if (!confirm('Clear all enrollee rows? This cannot be undone.')) return;
-    document.querySelectorAll('#enrollee-tbody tr[data-erow]').forEach(r => r.remove());
-    enrollRowCount = 0;
-    updateEnrollCount();
-    const empty = document.getElementById('empty-enroll-msg');
-    if (empty) empty.style.display = '';
-  }
-
-  document.getElementById('groupEnrollModal').addEventListener('show.bs.modal', () => { updateEnrollCount(); });
-
-  // ── Initialize ─────────────────────────────────────────────────────
+  // ── Init ────────────────────────────────────────────────────────────
   buildPlanModals();
   </script>
 
-  <!-- External JS files -->
-  <script src="assets/js/enroll.js" type="module"></script>
-  <script src="assets/js/groupEnrollment.js"></script>
   </body>
 </html>
